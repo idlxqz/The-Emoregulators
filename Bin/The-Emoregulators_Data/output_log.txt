@@ -1,0 +1,33 @@
+Initialize engine version: 5.0.0f4 (5b98b70ebeb9)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: NVIDIA GeForce GT 650M   (ID=0xfd1)
+    Vendor:   NVIDIA
+    VRAM:     3072 MB
+Begin MonoManager ReloadAssembly
+Platform assembly: C:\Users\Nuno\Documents\The-Emoregulators\Bin\The-Emoregulators_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\Nuno\Documents\The-Emoregulators\Bin\The-Emoregulators_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\Nuno\Documents\The-Emoregulators\Bin\The-Emoregulators_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\Nuno\Documents\The-Emoregulators\Bin\The-Emoregulators_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Users\Nuno\Documents\The-Emoregulators\Bin\The-Emoregulators_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\Users\Nuno\Documents\The-Emoregulators\Bin\The-Emoregulators_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+- Completed reload, in  0.045 seconds
+desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
+<RI> Initializing input.
+<RI> Input initialized.
+<RI> Initialized touch support.
+Platform assembly: C:\Users\Nuno\Documents\The-Emoregulators\Bin\The-Emoregulators_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: C:\Users\Nuno\Documents\The-Emoregulators\Bin\The-Emoregulators_Data\Managed\System.dll (this message is harmless)
+Unloading 2 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 3.766194 ms
+
+Unloading 5 unused Assets to reduce memory usage. Loaded Objects now: 297.
+Total: 0.192864 ms (FindLiveObjects: 0.014539 ms CreateObjectMapping: 0.025230 ms MarkObjects: 0.144113 ms  DeleteObjects: 0.008125 ms)
+
+Unloading 1 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.450728 ms
+
+Unloading 18 unused Assets to reduce memory usage. Loaded Objects now: 293.
+Total: 0.247173 ms (FindLiveObjects: 0.025230 ms CreateObjectMapping: 0.012829 ms MarkObjects: 0.186021 ms  DeleteObjects: 0.022237 ms)
+
