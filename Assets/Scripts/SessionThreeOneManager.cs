@@ -20,7 +20,7 @@ public class SessionThreeOneManager : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-		facilitator.SetActive (false);
+		/*facilitator.SetActive (false);
 		memeter.SetActive (false);
 		ibox.SetActive (false);
 		sensorsIcon.SetActive (false);
@@ -31,20 +31,20 @@ public class SessionThreeOneManager : MonoBehaviour {
 		soundIcon.SetActive (false);
 		isMusicReady = false;
 		candle.SetActive (true);
-		candle.GetComponent<CandleScript>().isHidden = false;
+		candle.GetComponent<CandleScript>().isHidden = false;*/
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (!candle.GetComponent<CandleScript> ().isHidden && candle.GetComponent<CandleScript> ().requireAction) {
+		/*if (!candle.GetComponent<CandleScript> ().isHidden && candle.GetComponent<CandleScript> ().requireAction) {
 			candleToggle();
 		}
 		if (!memeter.GetComponent<MEMeterScript> ().isHidden && memeter.GetComponent<MEMeterScript> ().requireAction) {
 			MEMeterToggle();
-		}
+		}*/
 	}
 
-	public void candleToggle ()
+	/*public void candleToggle ()
 	{
 		candle.GetComponent<CandleScript> ().requireAction = false;
 		candle.GetComponent<CandleScript> ().isHidden = true;
@@ -153,5 +153,5 @@ public class SessionThreeOneManager : MonoBehaviour {
 		candle.SetActive (true);
 		candle.GetComponent<Animator> ().enabled = false;
 		candle.transform.localPosition = new Vector3 (0, -80, 0);
-	}
+	}*/
 }

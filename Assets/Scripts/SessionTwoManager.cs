@@ -20,7 +20,7 @@ public class SessionTwoManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		facilitator.SetActive (false);
+		/*facilitator.SetActive (false);
 		memeter.SetActive (false);
 		ibox.SetActive (false);
 		facilitatorFrame.SetActive (false);
@@ -30,19 +30,19 @@ public class SessionTwoManager : MonoBehaviour {
 		bigibox.SetActive (false);
 		candle.SetActive (true);
 		isCardChosen = false;
-		candle.GetComponent<CandleScript>().isHidden = false;
+		candle.GetComponent<CandleScript>().isHidden = false;*/
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (!candle.GetComponent<CandleScript> ().isHidden && candle.GetComponent<CandleScript> ().requireAction) {
+		/*if (!candle.GetComponent<CandleScript> ().isHidden && candle.GetComponent<CandleScript> ().requireAction) {
 			candleToggle();
 		}
 		if (!memeter.GetComponent<MEMeterScript> ().isHidden && memeter.GetComponent<MEMeterScript> ().requireAction) {
 			MEMeterToggle();
-		}
+		}*/
 	}
-
+	/*
 	public void candleToggle ()
 	{
 		candle.GetComponent<CandleScript> ().requireAction = false;
@@ -171,5 +171,5 @@ public class SessionTwoManager : MonoBehaviour {
 		candle.SetActive (true);
 		candle.GetComponent<Animator> ().enabled = false;
 		candle.transform.localPosition = new Vector3 (0, -80, 0);
-	}
+	}*/
 }

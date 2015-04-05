@@ -1,18 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class IBoxScript : MonoBehaviour {
+public class CustomTextScript : MonoBehaviour {
 
     //logic control
     public bool finished;
     private float finalWaitStart;
     public float secondsToCloseSession;
 
-    //ibox display
-    public Texture2D ibox;
-
     //memeter and instructions text areas definition
-    public Rect iboxArea;
     public Rect instructionsArea;
 
     //centralized logging
@@ -20,13 +16,14 @@ public class IBoxScript : MonoBehaviour {
 
     //instruction control
     public string instructions;
+    public System.Action setupNextPhase;
 
     //instructions format
     public GUIStyle instructionsFormat;
 
 	// Use this for initialization
 	void Start () {
-        finalWaitStart = Time.time;
+        
 	}
 	
 	// Update is called once per frame
@@ -40,7 +37,14 @@ public class IBoxScript : MonoBehaviour {
     {
         //draw the instructions text
         GUI.Label(instructionsArea, instructions, instructionsFormat);
-        //draw the memeter frame
-        GUI.DrawTexture(iboxArea, ibox);
+    }
+
+    public void Setup(System.Action nextPhaseSetup, float timeToDisplay,  string newInstructions)
+    {   
+        finished = false;
+        secondsToCloseSession = timeToDisplay;
+        setupNextPhase = nextPhaseSetup;
+        instructions = newInstructions;
+        finalWaitStart = Time.time;
     }
 }
