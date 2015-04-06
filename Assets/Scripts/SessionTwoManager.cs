@@ -2,35 +2,34 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class SessionThreeOneManager : MonoBehaviour {
+public class SessionTwoManager : MonoBehaviour {
 
 	public GameObject facilitator;
 	public GameObject candle;
 	public GameObject memeter;
 	public GameObject ibox;
-	public GameObject avatar;
 
-	public GameObject bigibox;
-	public GameObject card;
-	public GameObject sensorsIcon;
-	public GameObject soundIcon;
+	public GameObject videoButton;
 	public GameObject facilitatorFrame;
-	
-	bool isMusicReady;
-	
+	public GameObject basicphText;
+	public GameObject basicph;
+	public GameObject card;
+	public GameObject bigibox;
+
+	bool isCardChosen;
+
 	// Use this for initialization
 	void Start () {
 		/*facilitator.SetActive (false);
 		memeter.SetActive (false);
 		ibox.SetActive (false);
-		sensorsIcon.SetActive (false);
-		avatar.SetActive (false);
 		facilitatorFrame.SetActive (false);
+		basicphText.SetActive (false);
+		basicph.SetActive (false);
 		card.SetActive (false);
 		bigibox.SetActive (false);
-		soundIcon.SetActive (false);
-		isMusicReady = false;
 		candle.SetActive (true);
+		isCardChosen = false;
 		candle.GetComponent<CandleScript>().isHidden = false;*/
 	}
 	
@@ -43,8 +42,8 @@ public class SessionThreeOneManager : MonoBehaviour {
 			MEMeterToggle();
 		}*/
 	}
-
-	/*public void candleToggle ()
+	/*
+	public void candleToggle ()
 	{
 		candle.GetComponent<CandleScript> ().requireAction = false;
 		candle.GetComponent<CandleScript> ().isHidden = true;
@@ -58,10 +57,10 @@ public class SessionThreeOneManager : MonoBehaviour {
 			ibox.SetActive(true);
 		}
 		else  {
-			//Application.LoadLevel("SessionThreeTwoScene");
+			Application.LoadLevel("SessionThreeOneScene");
 		}
 	}
-	
+
 	public void MEMeterToggle ()
 	{
 		memeter.GetComponent<MEMeterScript> ().requireAction = false;
@@ -72,60 +71,79 @@ public class SessionThreeOneManager : MonoBehaviour {
 			memeter.SetActive(false);
 			facilitatorFrame.SetActive(false);
 			facilitator.SetActive(true);
-			StartCoroutine(SensorsIntro(4));
+			StartCoroutine(VideoIntro(3));
 		}
 		else  {
 			StartCoroutine(endFacilitatorExplaining(4));
 		}
 	}
 
-	IEnumerator SensorsIntro (float duration)
+	IEnumerator VideoIntro (float duration)
 	{
-		sensorsIcon.SetActive (true);
-		sensorsIcon.GetComponent<Animator> ().Play ("video_button_show_intro");
+		videoButton.SetActive (true);
+		videoButton.GetComponent<Animator> ().Play ("video_button_show_intro");
 		facilitator.GetComponent<Animator> ().enabled = false;
 		facilitator.transform.localPosition = new Vector3 (-140,-130,-40);
 		yield return new WaitForSeconds(duration);
 		facilitator.transform.localPosition = new Vector3 (347, -482, -40);
 		facilitatorFrame.SetActive (true);
-		sensorsIcon.SetActive (false);
-		StartCoroutine (BreathingRegulation (5));
-	}
-
-	IEnumerator BreathingRegulation (float duration){
-		avatar.SetActive (true);
+		videoButton.GetComponent<Animator> ().Play ("video_button_slide_left_intro");
 		yield return new WaitForSeconds(duration);
-		avatar.SetActive (false);
-		StartCoroutine (SafePlaceIntro (4));
+		videoButton.SetActive (false);
+		StartCoroutine (BasicPHIntro (3));
+
 	}
 
-	IEnumerator SafePlaceIntro (float duration){
+	IEnumerator BasicPHIntro (float duration)
+	{
 		facilitatorFrame.SetActive (false);
 		facilitator.transform.localPosition = new Vector3 (-140,-130,-40);
-		soundIcon.SetActive (true);
+		basicphText.SetActive (true);
+		basicphText.GetComponent<Animator> ().Play ("basic_ph_slide_intro");
 		yield return new WaitForSeconds(duration);
+		basicphText.SetActive (false);
 		facilitatorFrame.SetActive (true);
 		facilitator.transform.localPosition = new Vector3 (347, -482, -40);
-		avatar.SetActive (true);
-		yield return new WaitForSeconds(duration);
-		iBoxSafePlace ();
+		basicph.SetActive (true);
+		card.SetActive (true);
+	}
+	
+	public void CardDrag()
+	{
+		// convert the touched screen position to 3D world position
+		// Vector3 touchPos = Camera.main.ScreenToWorldPoint(Input.touches[0].position); // when using touch
+		Vector3 touchPos = Camera.main.ScreenToWorldPoint(Input.mousePosition); // when using mouse
+		
+		// get the current position of the paddle GameObject or whatever you want to move
+		Vector3 originalPaddlePos = card.transform.position;
+		
+		// replace the y coordinate with the y of touched pos.
+		originalPaddlePos.x = touchPos.x;
+		originalPaddlePos.y = touchPos.y;
+		
+		// set the paddle position to the modified one
+		card.transform.position = originalPaddlePos;
 	}
 
-	void iBoxSafePlace(){
-		avatar.SetActive (false);
+	public void CardDrop()
+	{
+		ibox.SetActive (false);
+		card.SetActive (false);
+		basicph.transform.localPosition = new Vector3 (0, -65, 0);
 		bigibox.SetActive (true);
+	}
+
+	public void InsertBasicPH(){
+		basicph.SetActive (false);
 		card.SetActive (true);
-		soundIcon.SetActive (true);
-		card.transform.localPosition = new Vector3 (-84, -190, 0);
-		soundIcon.transform.localPosition = new Vector3 (76, -188, 0);
-		isMusicReady = true;
+		card.transform.localPosition = new Vector3 (0, -190, 0);
+		isCardChosen = true;
 	}
 
 	public void endMEMeter()
 	{
-		if (isMusicReady) {
+		if (isCardChosen) {
 			card.SetActive(false);
-			soundIcon.SetActive(false);
 			bigibox.SetActive(false);
 			memeter.GetComponent<MEMeterScript> ().isHidden = false;
 			memeter.SetActive (true);
