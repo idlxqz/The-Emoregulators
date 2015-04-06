@@ -1045,7 +1045,7 @@ MonoBehaviour:
   - {fileID: 2800000, guid: 8cfa91813770fca458e2de5301845d29, type: 3}
   - {fileID: 2800000, guid: 1cff4382c1960c04da19e4fa357ec343, type: 3}
   - {fileID: 2800000, guid: 9809996dcc0ebf746907cca586b8a4d6, type: 3}
-  frameChangeInterval: .400000006
+  frameChangeInterval: .300000012
   lightinUpSeconds: 5
   animationTime: 20
   frameArea:

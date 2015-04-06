@@ -49,7 +49,7 @@ public class CandleScript : MonoBehaviour {
  			}
 			else if(isLit){
 				//select a random lit frame from the maximum framses
-				selectedFrame = Random.Range(3, 5); //fully lit frames
+				selectedFrame = Random.Range(2, 5); //fully lit frames
 			}
 			else
 				selectedFrame = 0; //unlit frame
