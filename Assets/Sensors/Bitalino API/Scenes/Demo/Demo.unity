@@ -218,7 +218,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GUIB: {fileID: 0}
   scriptSerialPort: {fileID: 988274595}
-  AnalogChannels: 000000000100000002000000030000000400000005000000
+  AnalogChannels: 03000000
   SamplingRate: 1000
   logFile: 0
   logPath: 
