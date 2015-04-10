@@ -399,7 +399,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 523386974}
   m_RootOrder: 0
---- !u!4 &94248146 stripped
+--- !u!4 &94248146
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: c7a6de84866e87549a6ff4d6e06749ee, type: 3}
   m_PrefabInternal: {fileID: 2060811948}
@@ -567,7 +567,7 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 297448840}
---- !u!4 &325241414 stripped
+--- !u!4 &325241414
 Transform:
   m_PrefabParentObject: {fileID: 400006, guid: 2418299fc3f191e4c9b2354f402c3788, type: 3}
   m_PrefabInternal: {fileID: 397002324}
@@ -1040,11 +1040,11 @@ MonoBehaviour:
   isLit: 0
   simpleCandleAnimation: 0
   frames:
-  - {fileID: 2800000, guid: 17874c3563a5cd84ab536270ce5dade5, type: 3}
-  - {fileID: 2800000, guid: bbd310c780ba59a4a98c31835d4e9e29, type: 3}
-  - {fileID: 2800000, guid: 8cfa91813770fca458e2de5301845d29, type: 3}
-  - {fileID: 2800000, guid: 1cff4382c1960c04da19e4fa357ec343, type: 3}
-  - {fileID: 2800000, guid: 9809996dcc0ebf746907cca586b8a4d6, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   frameChangeInterval: .300000012
   lightinUpSeconds: 5
   animationTime: 20
@@ -1238,16 +1238,16 @@ MonoBehaviour:
   showInstructions: 1
   memeterOut: {fileID: 2800000, guid: c741058695f3dc64bbf1b2d29fce6121, type: 3}
   memeterLevels:
-  - {fileID: 2800000, guid: 0a5328bdb0764c745b412f027fd7b3b5, type: 3}
-  - {fileID: 2800000, guid: 80d3c5d21c3679a4d965008856490b73, type: 3}
-  - {fileID: 2800000, guid: 973a2c035ce5a364e8efad6149d2dc25, type: 3}
-  - {fileID: 2800000, guid: b1536438686b29d429b8dcbbb325edc6, type: 3}
-  - {fileID: 2800000, guid: 76d29cf7e687edd4fa28b9942fbe5eff, type: 3}
-  - {fileID: 2800000, guid: 7bdfc9072d1305b42b68e7d631866fba, type: 3}
-  - {fileID: 2800000, guid: 083e0ea050c030e44ac6a34fb0f5202d, type: 3}
-  - {fileID: 2800000, guid: 6c55ad77c6eab3048878ae419f8a20e9, type: 3}
-  - {fileID: 2800000, guid: 9001c4a346ca32548a184fab40d0b1ce, type: 3}
-  - {fileID: 2800000, guid: f2ff560e9f580324eaed7ad368166582, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   memeterSelected: {fileID: 2800000, guid: c741058695f3dc64bbf1b2d29fce6121, type: 3}
   memeterArea:
     serializedVersion: 2
@@ -1421,17 +1421,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 854702300}
   m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48328e0727255ec4b8e95c404a65a280, type: 3}
+  m_Script: {fileID: 11500000, guid: caa09abaffa0a7a479cafeb1c90a5e43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   finished: 0
   secondsToCloseSession: 0
   instructionsArea:
     serializedVersion: 2
-    x: 100
-    y: 200
-    width: 800
-    height: 300
+    x: 0
+    y: 0
+    width: 0
+    height: 0
   instructions: 
   instructionsFormat:
     m_Name: 
@@ -1492,7 +1492,7 @@ MonoBehaviour:
     m_FixedHeight: 0
     m_StretchWidth: 1
     m_StretchHeight: 0
---- !u!1 &942133248 stripped
+--- !u!1 &942133248
 GameObject:
   m_PrefabParentObject: {fileID: 100000, guid: c7a6de84866e87549a6ff4d6e06749ee, type: 3}
   m_PrefabInternal: {fileID: 2060811948}
