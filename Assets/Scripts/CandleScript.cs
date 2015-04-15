@@ -7,6 +7,7 @@ public class CandleScript : MonoBehaviour {
 	public bool finished;
 	public bool isLit;
     public bool simpleCandleAnimation;
+    public bool noInstructions;
 	//candle animation control
 	public Texture2D[] frames;
 	public float frameChangeInterval; //in seconds
@@ -78,14 +79,14 @@ public class CandleScript : MonoBehaviour {
 
 	void OnGUI() {
 		//draw the candle cerimony text
-        if (!simpleCandleAnimation)
+        if (!simpleCandleAnimation && !noInstructions)
 		    GUI.Label(instructionsArea, instructions, instructionsFormat);
 		//draw the candle frame
         GUI.DrawTexture(GetCandleArea(), frames[selectedFrame]);
 	}
 
     private Rect GetCandleArea(){
-        if (simpleCandleAnimation)
+        if (simpleCandleAnimation || noInstructions)
         {
             float width = frameArea.width;
             float height = frameArea.height;

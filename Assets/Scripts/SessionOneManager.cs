@@ -2,89 +2,26 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class SessionOneManager : MonoBehaviour {
-
-	//states of the session
-	public enum SessionState{
-		Start, 
-		CandleCeremony,
-		IntroducingOurselves,
-		MeMeter,
-		IBoxIntroduction,
-        MeMeterReuse,
-        CustomText,
-		CloseSession
-	}
-	public SessionState currentState;
-
-	public GameObject facilitator;
-	public CandleScript candle;
-    public MEMeterScript memeter;
-	public IBoxScript ibox;
-    public InputField nameInputField;
-    public CustomTextScript customText;
-
-	public GameObject facilitatorFrame;
-
-	public GameObject introducingOurselves;
-
-    //cursor
-    public Texture2D originalCursor;
-    public int cursorSizeX = 32; // set to width of your cursor texture 
-    public int cursorSizeY = 32; // set to height of your cursor texture
-    public bool showOriginal = true;
-
-	//activity display formating
-	public Rect activityArea;
-	public GUIStyle activityFormat;
-	public string activityName;
-    
-    //ibox display
-    public bool displayIBox;
-    public Texture2D iboxTexture;
-    public Rect iboxArea;
-
-	//logging
-	private Logger log;
-
-	//hack to reuse the existing setup for the introducing ourselves
-	private bool proceed;
-	private string userName;
-
-    //custom text support
-    private string customTextActivityName;
-    private string customTextContent;
-    private int customTextWaitTime;
+public class SessionOneManager : SessionManager {
 
 	// Use this for initialization
-	void Start () {
-		currentState = SessionState.Start;
-		candle = this.GetComponent<CandleScript>();
-        memeter = this.GetComponent<MEMeterScript>();
-        ibox = this.GetComponent<IBoxScript>();
-        customText = this.GetComponent<CustomTextScript>();
-		activityArea = new Rect(Screen.width - 180, 22, 100, 30);
-        //propagate instructions text formatting
-        customText.instructionsFormat = memeter.instructionsFormat = ibox.instructionsFormat = candle.instructionsFormat;
-        memeter.instructionsArea = ibox.instructionsArea = candle.instructionsArea;
-		//configure all logging
-		log = new Logger();
-		customText.log = candle.log = memeter.log = ibox.log = log;
-        //Cursor.visible = false;
+	protected override void StartLogic () {
+
 	}
 	
 	// Update is called once per frame
-	void Update () {
+    protected override void UpdateLogic()
+    {
 		//coordinate the session state
 		switch (currentState) {
-		case SessionState.Start:
+            case SessionState.Start:
 			//activate the cande cerimony
 			log.LogInformation("Started candle lighting cerimony.");
 			activityName = "Candle Lighting Cerimony";
 			candle.enabled = true;
-			currentState = SessionState.CandleCeremony;	
+            currentState = SessionState.CandleCeremony;	
 			break;
-		case SessionState.CandleCeremony:
+            case SessionState.CandleCeremony:
 			if(candle.finished){
 				log.LogInformation("Ended candle lighting cerimony.");
 				//disable the candle and proceed to the next state
@@ -93,13 +30,13 @@ public class SessionOneManager : MonoBehaviour {
 				log.LogInformation("Started introducing ourselves.");
 				activityName = "Introducing Ourselves";
 				introducingOurselves.SetActive(true);
-				currentState = SessionState.IntroducingOurselves;	
+                currentState = SessionState.IntroducingOurselves;	
 				proceed = false;
                 nameInputField.ActivateInputField();
                 nameInputField.Select();
 			}
 			break;
-		case SessionState.IntroducingOurselves:
+            case SessionState.IntroducingOurselves:
 			if(proceed){
 				log.LogInformation("User name: " + userName);
 				log.LogInformation("Ended introducing ourselves.");
@@ -110,11 +47,11 @@ public class SessionOneManager : MonoBehaviour {
 				log.LogInformation("Started me-meter introduction.");
 				activityName = "Me-Meter introduction";
                 memeter.enabled = true;
-				currentState = SessionState.MeMeter;
+                currentState = SessionState.MeMeter;
                 proceed = false;
 			}
 			break;
-		case SessionState.MeMeter:
+            case SessionState.MeMeter:
             if (memeter.finished)
             {
                 log.LogInformation("Ended me-meter introduction.");
@@ -127,7 +64,7 @@ public class SessionOneManager : MonoBehaviour {
                 currentState = SessionState.IBoxIntroduction;
             }
 			break;
-        case SessionState.IBoxIntroduction:
+            case SessionState.IBoxIntroduction:
             if (ibox.finished)
             {
                 log.LogInformation("Ended ibox introduction.");
@@ -154,14 +91,14 @@ public class SessionOneManager : MonoBehaviour {
                 currentState = SessionState.CustomText;
             }
             break;
-        case SessionState.CustomText:
+            case SessionState.CustomText:
             if (customText.finished)
             {
                 //setup the next phase
                 customText.setupNextPhase();
             }
             break;
-        case SessionState.MeMeterReuse:
+            case SessionState.MeMeterReuse:
             if (memeter.finished)
             {
                 log.LogInformation("Ended memeter reuse.");
@@ -189,7 +126,7 @@ public class SessionOneManager : MonoBehaviour {
                 currentState = SessionState.CustomText;
             }
             break;
-        case SessionState.CloseSession:
+            case SessionState.CloseSession:
             if (candle.finished)
             {
                 log.LogInformation("Ended closing activity.");
@@ -199,22 +136,13 @@ public class SessionOneManager : MonoBehaviour {
             }
             break;
 		default:
-			Debug.LogError("Unknown session state.");
+			Debug.LogError("Unknown/unhandled session state for this session.");
 			break;
 		}
 	}
 
-	void OnGUI() {
-        //draw a custom cursor
-        /*if (showOriginal == true)
-        {
-            GUI.DrawTexture(new Rect(
-                Input.mousePosition.x - cursorSizeX / 2 + cursorSizeX / 2,
-                (Screen.height - Input.mousePosition.y) - cursorSizeY / 2 + cursorSizeY / 2,
-                cursorSizeX,
-                cursorSizeY),
-                originalCursor);
-        }*/
+    protected override void OnGUILogic()
+    {
         //check if enter pressed
         if (currentState == SessionState.IntroducingOurselves)
         {
@@ -226,23 +154,6 @@ public class SessionOneManager : MonoBehaviour {
                     proceed = true;
             }
         }
-        //draw ibox
-        if (displayIBox)
-        {
-            GUI.DrawTexture(iboxArea, iboxTexture);
-        }
-		//draw the name of the activity
-		GUI.Label(activityArea, activityName, activityFormat);
+        
 	}
-
-
-	#region Hack to re-use the existing introducing ourselves logic
-	public void HandleIntroductionOurselvesClick(){
-		proceed = true;
-	}
-
-	public void RegisterUserName(string newName){
-		userName = newName;
-	}
-	#endregion
 }

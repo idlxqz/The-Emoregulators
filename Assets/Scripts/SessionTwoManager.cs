@@ -2,174 +2,138 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class SessionTwoManager : MonoBehaviour {
+public class SessionTwoManager : SessionManager {
 
-	public GameObject facilitator;
-	public GameObject candle;
-	public GameObject memeter;
-	public GameObject ibox;
+    public MindfullnessScript mindfullness;
+    public BasicPhScript basicPh;
 
-	public GameObject videoButton;
-	public GameObject facilitatorFrame;
-	public GameObject basicphText;
-	public GameObject basicph;
-	public GameObject card;
-	public GameObject bigibox;
+    // Use this for initialization
+    protected override void StartLogic()
+    {
+        mindfullness = GameObject.Find("Mindfullness").GetComponent<MindfullnessScript>();
+        //basicPh = GameObject.Find("BasicPh").GetComponent<BasicPhScript>();
+    }
 
-	bool isCardChosen;
+    // Update is called once per frame
+    protected override void UpdateLogic()
+    {
+        //coordinate the session state
+        switch (currentState)
+        {
+            case SessionState.Start:
+                //activate the cande cerimony
+                log.LogInformation("Started candle lighting cerimony.");
+                activityName = "Candle Lighting Cerimony";
+                candle.enabled = true;
+                currentState = SessionState.CandleCeremony;
+                break;
+            case SessionState.CandleCeremony:
+                if (candle.finished)
+                {
+                    log.LogInformation("Ended candle lighting cerimony.");
+                    //disable the candle and proceed to the next state
+                    candle.enabled = false;
+                    //start introducing ourselves
+                    log.LogInformation("Started me-meter interaction.");
+                    activityName = "Me-Meter Interaction";
+                    memeter.enabled = true;
+                    displayIBox = true;
+                    currentState = SessionState.MeMeterReuse;
+                }
+                break;
+            case SessionState.MeMeterReuse:
+                if (memeter.finished)
+                {
+                    log.LogInformation("Ended me-meter interaction.");
+                    //disable the memeter and proceed to the next state
+                    memeter.enabled = false;
+                    //start introducing mindfullness exercise
+                    log.LogInformation("Started mindfullness introduction.");
+                    activityName = "Mindfullness Introduction";
+                    //prepare custom text of introduction
+                    System.Action setupNextPhase = () =>
+                    {
+                        log.LogInformation("Ended mindfullness introduction.");
+                        //disable the custom text and proceed to the next state
+                        customText.enabled = false;
+                        log.LogInformation("Started mindfullness exercise");
+                        activityName = "Mindfullness Exercise";
+                        mindfullness.enabled = true;
+                        currentState = SessionState.Mindfullness;
+                    };
+                    customText.Setup(setupNextPhase, 20, "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book");
+                    customText.enabled = true;
+                    currentState = SessionState.CustomText;
+                }
+                break;
+            case SessionState.Mindfullness:
+                if (mindfullness.finished)
+                {
+                    log.LogInformation("Ended mindfullness exercise.");
+                    //disable the mindfullness and proceed to the next state
+                    mindfullness.enabled = false;
+                    activityName = "BASICPh Introduction";
+                    //prepare custom text of introduction
+                    System.Action setupNextPhase = () =>
+                    {
+                        log.LogInformation("Ended BASICPh introduction.");
+                        //disable the custom text and proceed to the next state
+                        customText.enabled = false;
+                        log.LogInformation("Started BASICPh exercise");
+                        activityName = "BASICPh Exercise";
+                        basicPh.enabled = true;
+                        currentState = SessionState.BasicPH;
+                    };
+                    customText.Setup(setupNextPhase, 20, "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book");
+                    customText.enabled = true;
+                    currentState = SessionState.CustomText;
+                }
+                break;
+            case SessionState.BasicPH:
+                if (basicPh.finished)
+                {
+                    log.LogInformation("Ended BASICPh exercise.");
+                    //disable the basicPH and proceed to the next state
+                    basicPh.enabled = false;
+                    //TODO
+                }
+                break;
+            case SessionState.CustomText:
+                if (customText.finished)
+                {
+                    //setup the next phase
+                    customText.setupNextPhase();
+                }
+                break;
+            case SessionState.CloseSession:
+                if (candle.finished)
+                {
+                    log.LogInformation("Ended closing activity.");
+                    //disable the candle and proceed to the next state
+                    candle.enabled = false;
+                    //TODO: load next session?
+                }
+                break;
+            default:
+                Debug.LogError("Unknown/unhandled session state for this session.");
+                break;
+        }
+    }
 
-	// Use this for initialization
-	void Start () {
-		/*facilitator.SetActive (false);
-		memeter.SetActive (false);
-		ibox.SetActive (false);
-		facilitatorFrame.SetActive (false);
-		basicphText.SetActive (false);
-		basicph.SetActive (false);
-		card.SetActive (false);
-		bigibox.SetActive (false);
-		candle.SetActive (true);
-		isCardChosen = false;
-		candle.GetComponent<CandleScript>().isHidden = false;*/
-	}
+    protected override void OnGUILogic()
+    {
+        //check if enter pressed
+        if (currentState == SessionState.IntroducingOurselves)
+        {
+            //check enter pressed for name input
+            if (userName != "" && userName != null)
+            {
+                Event e = Event.current;
+                if (e.keyCode == KeyCode.Return)
+                    proceed = true;
+            }
+        }
+
+    }
 	
-	// Update is called once per frame
-	void Update () {
-		/*if (!candle.GetComponent<CandleScript> ().isHidden && candle.GetComponent<CandleScript> ().requireAction) {
-			candleToggle();
-		}
-		if (!memeter.GetComponent<MEMeterScript> ().isHidden && memeter.GetComponent<MEMeterScript> ().requireAction) {
-			MEMeterToggle();
-		}*/
-	}
-	/*
-	public void candleToggle ()
-	{
-		candle.GetComponent<CandleScript> ().requireAction = false;
-		candle.GetComponent<CandleScript> ().isHidden = true;
-		
-		if (!candle.GetComponent<CandleScript> ().isActive) {
-			candle.GetComponent<CandleScript> ().isActive = true;
-			candle.SetActive(false);
-			candle.GetComponent<Image>().sprite = candle.GetComponent<CandleScript>().onCandleSprite;
-			memeter.SetActive(true);
-			memeter.GetComponent<MEMeterScript>().isHidden = false;
-			ibox.SetActive(true);
-		}
-		else  {
-			Application.LoadLevel("SessionThreeOneScene");
-		}
-	}
-
-	public void MEMeterToggle ()
-	{
-		memeter.GetComponent<MEMeterScript> ().requireAction = false;
-		memeter.GetComponent<MEMeterScript> ().isHidden = true;
-		
-		if (!memeter.GetComponent<MEMeterScript> ().isActive) {
-			memeter.GetComponent<MEMeterScript> ().isActive = true;
-			memeter.SetActive(false);
-			facilitatorFrame.SetActive(false);
-			facilitator.SetActive(true);
-			StartCoroutine(VideoIntro(3));
-		}
-		else  {
-			StartCoroutine(endFacilitatorExplaining(4));
-		}
-	}
-
-	IEnumerator VideoIntro (float duration)
-	{
-		videoButton.SetActive (true);
-		videoButton.GetComponent<Animator> ().Play ("video_button_show_intro");
-		facilitator.GetComponent<Animator> ().enabled = false;
-		facilitator.transform.localPosition = new Vector3 (-140,-130,-40);
-		yield return new WaitForSeconds(duration);
-		facilitator.transform.localPosition = new Vector3 (347, -482, -40);
-		facilitatorFrame.SetActive (true);
-		videoButton.GetComponent<Animator> ().Play ("video_button_slide_left_intro");
-		yield return new WaitForSeconds(duration);
-		videoButton.SetActive (false);
-		StartCoroutine (BasicPHIntro (3));
-
-	}
-
-	IEnumerator BasicPHIntro (float duration)
-	{
-		facilitatorFrame.SetActive (false);
-		facilitator.transform.localPosition = new Vector3 (-140,-130,-40);
-		basicphText.SetActive (true);
-		basicphText.GetComponent<Animator> ().Play ("basic_ph_slide_intro");
-		yield return new WaitForSeconds(duration);
-		basicphText.SetActive (false);
-		facilitatorFrame.SetActive (true);
-		facilitator.transform.localPosition = new Vector3 (347, -482, -40);
-		basicph.SetActive (true);
-		card.SetActive (true);
-	}
-	
-	public void CardDrag()
-	{
-		// convert the touched screen position to 3D world position
-		// Vector3 touchPos = Camera.main.ScreenToWorldPoint(Input.touches[0].position); // when using touch
-		Vector3 touchPos = Camera.main.ScreenToWorldPoint(Input.mousePosition); // when using mouse
-		
-		// get the current position of the paddle GameObject or whatever you want to move
-		Vector3 originalPaddlePos = card.transform.position;
-		
-		// replace the y coordinate with the y of touched pos.
-		originalPaddlePos.x = touchPos.x;
-		originalPaddlePos.y = touchPos.y;
-		
-		// set the paddle position to the modified one
-		card.transform.position = originalPaddlePos;
-	}
-
-	public void CardDrop()
-	{
-		ibox.SetActive (false);
-		card.SetActive (false);
-		basicph.transform.localPosition = new Vector3 (0, -65, 0);
-		bigibox.SetActive (true);
-	}
-
-	public void InsertBasicPH(){
-		basicph.SetActive (false);
-		card.SetActive (true);
-		card.transform.localPosition = new Vector3 (0, -190, 0);
-		isCardChosen = true;
-	}
-
-	public void endMEMeter()
-	{
-		if (isCardChosen) {
-			card.SetActive(false);
-			bigibox.SetActive(false);
-			memeter.GetComponent<MEMeterScript> ().isHidden = false;
-			memeter.SetActive (true);
-			memeter.GetComponent<Animator> ().enabled = false;
-			memeter.transform.localPosition = new Vector3 (0, -80, 0);
-		}
-	}
-	
-	IEnumerator endFacilitatorExplaining (float duration)
-	{
-		memeter.SetActive (false);
-		facilitatorFrame.SetActive (false);
-		facilitator.SetActive (true);
-		facilitator.GetComponent<Animator> ().enabled = false;
-		facilitator.transform.localPosition = new Vector3 (0, -130, -40);
-		yield return new WaitForSeconds(duration);
-		endCandle ();
-	}
-	
-	public void endCandle()
-	{
-		candle.GetComponent<CandleScript> ().isHidden = false;
-		ibox.SetActive (false);
-		facilitator.SetActive (false);
-		candle.SetActive (true);
-		candle.GetComponent<Animator> ().enabled = false;
-		candle.transform.localPosition = new Vector3 (0, -80, 0);
-	}*/
 }
