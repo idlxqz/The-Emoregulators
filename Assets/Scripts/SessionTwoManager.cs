@@ -7,11 +7,15 @@ public class SessionTwoManager : SessionManager {
     public MindfullnessScript mindfullness;
     public BasicPhScript basicPh;
 
+    private bool firstMeMeterUse;
+
     // Use this for initialization
     protected override void StartLogic()
     {
+        firstMeMeterUse = true;
         mindfullness = GameObject.Find("Mindfullness").GetComponent<MindfullnessScript>();
-        //basicPh = GameObject.Find("BasicPh").GetComponent<BasicPhScript>();
+        basicPh = GameObject.Find("BasicPh").GetComponent<BasicPhScript>();
+        basicPh.log = log;
     }
 
     // Update is called once per frame
@@ -43,27 +47,55 @@ public class SessionTwoManager : SessionManager {
                 break;
             case SessionState.MeMeterReuse:
                 if (memeter.finished)
-                {
+                {   
                     log.LogInformation("Ended me-meter interaction.");
                     //disable the memeter and proceed to the next state
                     memeter.enabled = false;
-                    //start introducing mindfullness exercise
-                    log.LogInformation("Started mindfullness introduction.");
-                    activityName = "Mindfullness Introduction";
-                    //prepare custom text of introduction
-                    System.Action setupNextPhase = () =>
+                    //first memeter use ending logic
+                    if (firstMeMeterUse)
                     {
-                        log.LogInformation("Ended mindfullness introduction.");
-                        //disable the custom text and proceed to the next state
-                        customText.enabled = false;
-                        log.LogInformation("Started mindfullness exercise");
-                        activityName = "Mindfullness Exercise";
-                        mindfullness.enabled = true;
-                        currentState = SessionState.Mindfullness;
-                    };
-                    customText.Setup(setupNextPhase, 20, "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book");
-                    customText.enabled = true;
-                    currentState = SessionState.CustomText;
+                        firstMeMeterUse = false;
+                        //start introducing mindfullness exercise
+                        log.LogInformation("Started mindfullness introduction.");
+                        activityName = "Mindfullness Introduction";
+                        //prepare custom text of introduction
+                        System.Action setupNextPhase = () =>
+                        {
+                            log.LogInformation("Ended mindfullness introduction.");
+                            //disable the custom text and proceed to the next state
+                            customText.enabled = false;
+                            log.LogInformation("Started mindfullness exercise");
+                            activityName = "Mindfullness Exercise";
+                            mindfullness.enabled = true;
+                            currentState = SessionState.Mindfullness;
+                        };
+                        customText.Setup(setupNextPhase, 20, "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book");
+                        customText.enabled = true;
+                        currentState = SessionState.CustomText;
+                    }
+                    else
+                    {
+                        //start closing text 
+                        log.LogInformation("Started closing message.");
+                        activityName = "Closing message";
+                        //prepare custom text of introduction
+                        System.Action setupNextPhase = () =>
+                        {
+                            log.LogInformation("Ended closing message.");
+                            //disable the custom text and proceed to the next state
+                            customText.enabled = false;
+                            displayIBox = false;
+                            log.LogInformation("Started closing activity");
+                            activityName = "Closing Activity";
+                            candle.simpleCandleAnimation = true;
+                            candle.Setup();
+                            candle.enabled = true;
+                            currentState = SessionState.CloseSession;
+                        };
+                        customText.Setup(setupNextPhase, 20, "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book");
+                        customText.enabled = true;
+                        currentState = SessionState.CustomText;
+                    }
                 }
                 break;
             case SessionState.Mindfullness:
@@ -95,7 +127,13 @@ public class SessionTwoManager : SessionManager {
                     log.LogInformation("Ended BASICPh exercise.");
                     //disable the basicPH and proceed to the next state
                     basicPh.enabled = false;
-                    //TODO
+                    //start introducing ourselves
+                    log.LogInformation("Started me-meter reuse");
+                    activityName = "Me-meter reuse";
+                    memeter.showInstructions = false;
+                    memeter.Setup();
+                    memeter.enabled = true;
+                    currentState = SessionState.MeMeterReuse;
                 }
                 break;
             case SessionState.CustomText:

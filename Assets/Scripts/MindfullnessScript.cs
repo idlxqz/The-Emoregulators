@@ -4,7 +4,7 @@ using System.Collections;
 public class MindfullnessScript : MonoBehaviour {
 
     //movie to play
-    public Renderer renderer;
+    public Renderer currentRenderer;
     public MovieTexture movTexture;
     public AudioSource movAudio;
 
@@ -14,24 +14,27 @@ public class MindfullnessScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        renderer = GetComponent<Renderer>();
+        currentRenderer = GetComponent<Renderer>();
         movAudio = GetComponent<AudioSource>();
+        played = false;
+        finished = false;
 	}
 	
 	// Update is called once per frame
 	void Update () {
         if (movTexture.isPlaying)
             return;
-        else if (!movTexture.isPlaying && !finished)
+        else if (!movTexture.isPlaying && !finished && !played)
         {
-            renderer.enabled = true;
-            renderer.material.mainTexture = movTexture;
+            currentRenderer.enabled = true;
+            currentRenderer.material.mainTexture = movTexture;
             movTexture.Play();
             movAudio.Play();
+            played = true;
         }
         else
         {
-            renderer.enabled = false;
+            currentRenderer.enabled = false;
             finished = true;
         }
 	}

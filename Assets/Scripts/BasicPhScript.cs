@@ -1,129 +1,297 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityEngine.UI;
-using UnityEngine.EventSystems;
 
 public class BasicPhScript : MonoBehaviour {
 
+    //logic control
+    private int assignedCards; 
     public bool finished;
+
+    //draw control
+    public Texture2D BCard;
+    public Texture2D ACard;
+    public Texture2D SCard;
+    public Texture2D ICard;
+    public Texture2D CCard;
+    public Texture2D PhCard;
+
+    public Texture2D slotBackground;
+    public GUIStyle slotTextStyle;
+
+    public int cardSlotHeight;
+    public int cardSlotWidth;
     public int lateralOffset;
+    public int cardsYInitialPos;
+    public int slotsYInitialPos;
+    
+    private Rect BCardRect, ACardRect, SCardRect, ICardRect, CCardRect, PhCardRect;
+    private Rect BSlotRect, ASlotRect, SSlotRect, ISlotRect, CSlotRect, PhSlotRect;
+    private int cardWidth, cardHeight;
 
-    public GameObject BCard;
-    public GameObject ACard;
-    public GameObject SCard;
-    public GameObject ICard;
-    public GameObject CCard;
-    public GameObject PhCard;
+    //mouse control
+    private string selected;
+    private Rect selectedRect;
+    private Rect initialRect;
 
-    public int dropYPos;
-    public Texture2D dropBackground;
-    public int dropAreaSize;
-    public GUIStyle textFormat;
-
-    private Rect BDropArea;
-    private Rect ADropArea;
-    private Rect SDropArea;
-    private Rect IDropArea;
-    private Rect CDropArea;
-    private Rect PhDropArea;
-    public GameObject BDrop;
+    //centralized logging
+    public Logger log;
 
 	// Use this for initialization
 	void Start () {
-	    //properly position the child cards
-        int cardWidth = this.GetComponentInChildren<Image>().mainTexture.width;//assume the same for all cards
-        int cardHeight = this.GetComponentInChildren<Image>().mainTexture.height;//assume the same for all cards
-        int totalHorizontalSpace = Screen.width;
-        Transform tmp;
-        //B card
-        tmp = BCard.transform;
-        tmp.Translate(new Vector3(-tmp.position.x + lateralOffset , 0, 0));
-        //BDrop.transform.position = new Vector3(tmp.position.x, dropYPos, 0);
-        BDropArea = new Rect(lateralOffset - dropAreaSize / 2, dropYPos - dropAreaSize / 2, dropAreaSize, dropAreaSize);
-        //A card
-        tmp = ACard.transform;
-        tmp.Translate(new Vector3(-tmp.position.x + lateralOffset + totalHorizontalSpace / 6, 0, 0));
-        ADropArea = new Rect(lateralOffset + totalHorizontalSpace / 6 - dropAreaSize / 2, dropYPos - dropAreaSize / 2, dropAreaSize, dropAreaSize);
-        //S card
-        tmp = SCard.transform;
-        tmp.Translate(new Vector3(-tmp.position.x + lateralOffset + 2 * (totalHorizontalSpace / 6), 0, 0));
-        SDropArea = new Rect(lateralOffset + 2 * (totalHorizontalSpace / 6) - dropAreaSize / 2, dropYPos - dropAreaSize / 2, dropAreaSize, dropAreaSize);
-        //I card
-        tmp = ICard.transform;
-        tmp.Translate(new Vector3(-tmp.position.x + lateralOffset + 3 * (totalHorizontalSpace / 6), 0, 0));
-        IDropArea = new Rect(lateralOffset +3 * (totalHorizontalSpace / 6) - dropAreaSize / 2, dropYPos - dropAreaSize / 2, dropAreaSize, dropAreaSize);
-        //C card
-        tmp = CCard.transform;
-        tmp.Translate(new Vector3(-tmp.position.x + lateralOffset + 4 * (totalHorizontalSpace / 6), 0, 0));
-        CDropArea = new Rect(lateralOffset +4 * (totalHorizontalSpace / 6) - dropAreaSize / 2, dropYPos - dropAreaSize / 2, dropAreaSize, dropAreaSize);
-        //Ph card
-        tmp = PhCard.transform;
-        tmp.Translate(new Vector3(-tmp.position.x + lateralOffset + 5 * (totalHorizontalSpace / 6), 0, 0));
-        PhDropArea = new Rect(lateralOffset +5 * (totalHorizontalSpace / 6) - dropAreaSize / 2, dropYPos - dropAreaSize / 2, dropAreaSize, dropAreaSize);
-    }
+        //logic
+        assignedCards = 0;
+        finished = false;
+
+        //mouse selection
+        selected = "";
+
+        //configure all the positions
+        float spacing = (Screen.width - 2 * lateralOffset - 6 * cardSlotWidth) / 5;
+	    
+        BCardRect = new Rect(lateralOffset, cardsYInitialPos, cardSlotWidth, cardSlotHeight);
+        BSlotRect = new Rect(lateralOffset, slotsYInitialPos, cardSlotWidth, cardSlotHeight);
+
+        ACardRect = new Rect(lateralOffset + cardSlotWidth + spacing, cardsYInitialPos, cardSlotWidth, cardSlotHeight);
+        ASlotRect = new Rect(lateralOffset + cardSlotWidth + spacing, slotsYInitialPos, cardSlotWidth, cardSlotHeight);
+        
+        SCardRect = new Rect(lateralOffset + (cardSlotWidth + spacing) * 2, cardsYInitialPos, cardSlotWidth, cardSlotHeight);
+        SSlotRect = new Rect(lateralOffset + (cardSlotWidth + spacing) * 2, slotsYInitialPos, cardSlotWidth, cardSlotHeight);
+
+        ICardRect = new Rect(lateralOffset + (cardSlotWidth + spacing) * 3, cardsYInitialPos, cardSlotWidth, cardSlotHeight);
+        ISlotRect = new Rect(lateralOffset + (cardSlotWidth + spacing) * 3, slotsYInitialPos, cardSlotWidth, cardSlotHeight);
+        
+        CCardRect = new Rect(lateralOffset + (cardSlotWidth + spacing) * 4, cardsYInitialPos, cardSlotWidth, cardSlotHeight);
+        CSlotRect = new Rect(lateralOffset + (cardSlotWidth + spacing) * 4, slotsYInitialPos, cardSlotWidth, cardSlotHeight);
+        
+        PhCardRect = new Rect(lateralOffset + (cardSlotWidth + spacing) * 5, cardsYInitialPos, cardSlotWidth, cardSlotHeight);
+        PhSlotRect = new Rect(lateralOffset + (cardSlotWidth + spacing) * 5, slotsYInitialPos, cardSlotWidth, cardSlotHeight);
+	}
 	
 	// Update is called once per frame
 	void Update () {
-	    
+        //detect mouse click on cards
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (BCardRect.Contains(new Vector2(Input.mousePosition.x, Screen.height - Input.mousePosition.y)))
+            {
+                selected = "B";
+                initialRect = BCardRect;
+            }
+            else if (ACardRect.Contains(new Vector2(Input.mousePosition.x, Screen.height - Input.mousePosition.y))){
+                selected = "A";
+                initialRect = ACardRect;
+            }
+            else if (SCardRect.Contains(new Vector2(Input.mousePosition.x, Screen.height - Input.mousePosition.y))){
+                selected = "S";
+                initialRect = SCardRect;
+            }
+            else if (ICardRect.Contains(new Vector2(Input.mousePosition.x, Screen.height - Input.mousePosition.y))){
+                selected = "I";
+                initialRect = ICardRect;
+            }
+            else if (CCardRect.Contains(new Vector2(Input.mousePosition.x, Screen.height - Input.mousePosition.y))){
+                selected = "C";
+                initialRect = CCardRect;
+            }
+            else if (PhCardRect.Contains(new Vector2(Input.mousePosition.x, Screen.height - Input.mousePosition.y))){
+                selected = "Ph";
+                initialRect = PhCardRect;
+            }
+        }
+        //detect drag end
+        else if (Input.GetMouseButtonUp(0))
+        {
+            if (selected != "")
+            {
+                Debug.Log("Drop with selection");
+                //check if droped on something
+                Rect selectedRectangle = GetSelected();
 
+                if (RectsOverlap(BSlotRect, selectedRectangle))
+                {
+                    //TODO: attribute points
+                    log.LogInformation("Dropped "+selected+" on B slot.");
+                    MakeSelectedDisappear();
+                }
+                else if (RectsOverlap(ASlotRect, selectedRectangle))
+                {
+                    //TODO: attribute points
+                    log.LogInformation("Dropped " + selected + " on A slot.");
+                    MakeSelectedDisappear();
+                }
+                else if (RectsOverlap(SSlotRect, selectedRectangle))
+                {
+                    //TODO: attribute points
+                    log.LogInformation("Dropped " + selected + " on S slot.");
+                    MakeSelectedDisappear();
+                }
+                else if (RectsOverlap(ISlotRect, selectedRectangle))
+                {
+                    //TODO: attribute points
+                    log.LogInformation("Dropped " + selected + " on I slot.");
+                    MakeSelectedDisappear();
+                }
+                else if (RectsOverlap(CSlotRect, selectedRectangle))
+                {
+                    //TODO: attribute points
+                    log.LogInformation("Dropped " + selected + " on C slot.");
+                    MakeSelectedDisappear();
+                }
+                else if (RectsOverlap(PhSlotRect, selectedRectangle))
+                {
+                    //TODO: attribute points
+                    log.LogInformation("Dropped " + selected + " on Ph slot.");
+                    MakeSelectedDisappear();
+                }
+
+                //if not revert to the original position
+                switch (selected)
+                {
+                    case "B":
+                        BCardRect = initialRect;
+                        break;
+                    case "A":
+                        ACardRect = initialRect;
+                        break;
+                    case "S":
+                        SCardRect = initialRect;
+                        break;
+                    case "I":
+                        ICardRect = initialRect;
+                        break;
+                    case "C":
+                        CCardRect = initialRect;
+                        break;
+                    case "Ph":
+                        PhCardRect = initialRect;
+                        break;
+                }
+            }
+        }
 	}
 
     void OnGUI()
     {
-        GUI.DrawTexture(BDropArea, dropBackground);
-        GUI.Label(BDropArea, "B", textFormat);
+        //update with mouse movements
+        if (selected != "")
+        {
+            switch (selected)
+            {
+                case "B":
+                    BCardRect.x = Input.mousePosition.x - cardSlotWidth / 2;
+                    BCardRect.y = Screen.height - Input.mousePosition.y - cardSlotWidth / 2;
+                    break;
+                case "A":
+                    ACardRect.x = Input.mousePosition.x - cardSlotWidth / 2;
+                    ACardRect.y = Screen.height - Input.mousePosition.y - cardSlotWidth / 2;
+                    break;
+                case "S":
+                    SCardRect.x = Input.mousePosition.x - cardSlotWidth / 2;
+                    SCardRect.y = Screen.height - Input.mousePosition.y - cardSlotWidth / 2;
+                    break;
+                case "I":
+                    ICardRect.x = Input.mousePosition.x - cardSlotWidth / 2;
+                    ICardRect.y = Screen.height - Input.mousePosition.y - cardSlotWidth / 2;
+                    break;
+                case "C":
+                    CCardRect.x = Input.mousePosition.x - cardSlotWidth / 2;
+                    CCardRect.y = Screen.height - Input.mousePosition.y - cardSlotWidth / 2;
+                    break;
+                case "Ph":
+                    PhCardRect.x = Input.mousePosition.x - cardSlotWidth / 2;
+                    PhCardRect.y = Screen.height - Input.mousePosition.y - cardSlotWidth / 2;
+                    break;
+            }
+        }
 
-        GUI.DrawTexture(ADropArea, dropBackground);
-        GUI.Label(ADropArea, "A", textFormat);
+        //Draw the slots
+        GUI.DrawTexture(BSlotRect, slotBackground);
+        GUI.Label(BSlotRect, "B", slotTextStyle);
+        GUI.DrawTexture(ASlotRect, slotBackground);
+        GUI.Label(ASlotRect, "A", slotTextStyle);
+        GUI.DrawTexture(SSlotRect, slotBackground);
+        GUI.Label(SSlotRect, "S", slotTextStyle);
+        GUI.DrawTexture(ISlotRect, slotBackground);
+        GUI.Label(ISlotRect, "I", slotTextStyle);
+        GUI.DrawTexture(CSlotRect, slotBackground);
+        GUI.Label(CSlotRect, "C", slotTextStyle);
+        GUI.DrawTexture(PhSlotRect, slotBackground);
+        GUI.Label(PhSlotRect, "Ph", slotTextStyle);
 
-        GUI.DrawTexture(SDropArea, dropBackground);
-        GUI.Label(SDropArea, "S", textFormat);
-
-        GUI.DrawTexture(IDropArea, dropBackground);
-        GUI.Label(IDropArea, "I", textFormat);
-
-        GUI.DrawTexture(CDropArea, dropBackground);
-        GUI.Label(CDropArea, "C", textFormat);
-
-        GUI.DrawTexture(PhDropArea, dropBackground);
-        GUI.Label(PhDropArea, "Ph", textFormat);
+        //Draw the cards
+        GUI.DrawTexture(BCardRect, BCard);
+        GUI.DrawTexture(ACardRect, ACard);
+        GUI.DrawTexture(SCardRect, SCard);
+        GUI.DrawTexture(ICardRect, ICard);
+        GUI.DrawTexture(CCardRect, CCard);
+        GUI.DrawTexture(PhCardRect, PhCard);
     }
 
-    
-    //Drag and drop handling
-    //Image Drag
-    public void HandleB()
+    private bool RectsOverlap(Rect r1, Rect r2)
     {
-        HandleImageDrag(BCard);
+        var widthOverlap = (r1.xMin >= r2.xMin) && (r1.xMin <= r2.xMax) ||
+                        (r2.xMin >= r1.xMin) && (r2.xMin <= r1.xMax);
+
+        var heightOverlap = (r1.yMin >= r2.yMin) && (r1.yMin <= r2.yMax) ||
+                        (r2.yMin >= r1.yMin) && (r2.yMin <= r1.yMax);
+
+        return widthOverlap && heightOverlap;
     }
 
-    public void HandleA()
+    //gets the selected card area rectangle, if any 
+    private Rect GetSelected()
     {
-        HandleImageDrag(ACard);
+        switch (selected)
+        {
+            case "B":
+                return BCardRect;
+            case "A":
+                return ACardRect;
+            case "S":
+                return SCardRect;
+            case "I":
+                return ICardRect;
+            case "C":
+                return CCardRect;
+            case "Ph":
+                return PhCardRect;
+            default:
+                return new Rect(0,0,0,0);
+        }
     }
 
-    public void HandleS()
+    //move the selected card out of view
+    private void MakeSelectedDisappear()
     {
-        HandleImageDrag(SCard);
-    }
-
-    public void HandleI()
-    {
-        HandleImageDrag(ICard);
-    }
-
-    public void HandleC()
-    {
-        HandleImageDrag(CCard);
-    }
-
-    public void HandleP()
-    {
-        HandleImageDrag(PhCard);
-    }
-
-    public void HandleImageDrag(GameObject toSet)
-    {
-        toSet.transform.position = new Vector3(Input.mousePosition.x, Input.mousePosition.y);
+        if (selected != "")
+        {
+            switch (selected)
+            {
+                case "B":
+                    BCardRect.y = Screen.height + 2000;
+                    break;
+                case "A":
+                    ACardRect.y = Screen.height + 2000;
+                    break;
+                case "S":
+                    SCardRect.y = Screen.height + 2000;
+                    break;
+                case "I":
+                    ICardRect.y = Screen.height + 2000;
+                    break;
+                case "C":
+                    CCardRect.y = Screen.height + 2000;
+                    break;
+                case "Ph":
+                    PhCardRect.y = Screen.height + 2000;
+                    break;
+            }
+            //mark one more card as assigned
+            assignedCards++;
+            if (assignedCards == 6)
+                finished = true; // end of activity
+            //deselect the card
+            selected = "";
+        }
     }
 }
