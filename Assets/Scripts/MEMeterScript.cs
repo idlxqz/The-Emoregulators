@@ -40,6 +40,10 @@ public class MEMeterScript : MonoBehaviour {
 	//instructions format
 	public GUIStyle instructionsFormat;
 
+    //dynimc positioning
+    public int lateralOffset;
+    public int instructionsMeMeterSpacing;
+
 	// Use this for initialization
 	void Start () {
         Setup();
@@ -164,5 +168,12 @@ public class MEMeterScript : MonoBehaviour {
         finalWaitStart = 0;
         isSelected = false;
         finished = false;
+        if (showInstructions)
+        {
+            //dynamic positioning
+            memeterArea.x = Screen.width - lateralOffset - memeterArea.width;
+            instructionsArea.x = lateralOffset;
+            instructionsArea.width = Screen.width - 2 * lateralOffset - memeterArea.width - instructionsMeMeterSpacing;
+        }
     }
 }

@@ -21,9 +21,13 @@ public class CustomTextScript : MonoBehaviour {
     //instructions format
     public GUIStyle instructionsFormat;
 
+    //positioning
+    public int lateralOffset;
+
 	// Use this for initialization
 	void Start () {
-        
+        instructionsArea.x = lateralOffset;
+        instructionsArea.width = Screen.width - 2 * lateralOffset ;
 	}
 	
 	// Update is called once per frame

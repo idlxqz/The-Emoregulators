@@ -272,6 +272,7 @@ MonoBehaviour:
     m_FixedHeight: 0
     m_StretchWidth: 1
     m_StretchHeight: 0
+  lateralOffset: 50
 --- !u!1 &341060320
 GameObject:
   m_ObjectHideFlags: 0
@@ -394,6 +395,8 @@ MonoBehaviour:
     m_FixedHeight: 0
     m_StretchWidth: 1
     m_StretchHeight: 0
+  lateralOffset: 0
+  instructionsIboxSpacing: 0
 --- !u!1 &381334370
 GameObject:
   m_ObjectHideFlags: 0
@@ -949,6 +952,7 @@ MonoBehaviour:
   isLit: 0
   simpleCandleAnimation: 0
   noInstructions: 1
+  waitClickToClose: 0
   frames:
   - {fileID: 2800000, guid: 17874c3563a5cd84ab536270ce5dade5, type: 3}
   - {fileID: 2800000, guid: bbd310c780ba59a4a98c31835d4e9e29, type: 3}
@@ -957,11 +961,14 @@ MonoBehaviour:
   - {fileID: 2800000, guid: 9809996dcc0ebf746907cca586b8a4d6, type: 3}
   frameChangeInterval: .300000012
   lightinUpSeconds: 5
+  lightinDownSeconds: 5
   animationTime: 20
+  lateralOffset: 50
+  textCandleSpacing: 50
   frameArea:
     serializedVersion: 2
     x: 700
-    y: 200
+    y: 150
     width: 127
     height: 270
   instructionsArea:
@@ -1146,7 +1153,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa8f807234481c14bb569fab1a3107e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  renderer: {fileID: 0}
+  currentRenderer: {fileID: 0}
   movTexture: {fileID: 15200000, guid: da5492e4501bb6a4ebafa240f5c978e3, type: 3}
   movAudio: {fileID: 0}
   played: 0
@@ -1430,6 +1437,8 @@ MonoBehaviour:
     m_FixedHeight: 0
     m_StretchWidth: 1
     m_StretchHeight: 0
+  lateralOffset: 0
+  instructionsIboxSpacing: 0
 --- !u!1 &2004168110
 GameObject:
   m_ObjectHideFlags: 0
@@ -1775,6 +1784,8 @@ MonoBehaviour:
     m_FixedHeight: 0
     m_StretchWidth: 1
     m_StretchHeight: 0
+  lateralOffset: 0
+  instructionsMeMeterSpacing: 0
 --- !u!1 &2131541364
 GameObject:
   m_ObjectHideFlags: 0

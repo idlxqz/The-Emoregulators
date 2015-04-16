@@ -768,6 +768,7 @@ MonoBehaviour:
     m_FixedHeight: 0
     m_StretchWidth: 1
     m_StretchHeight: 0
+  lateralOffset: 50
 --- !u!1 &854702300
 GameObject:
   m_ObjectHideFlags: 0
@@ -1199,6 +1200,7 @@ MonoBehaviour:
   isLit: 0
   simpleCandleAnimation: 0
   noInstructions: 0
+  waitClickToClose: 0
   frames:
   - {fileID: 2800000, guid: 17874c3563a5cd84ab536270ce5dade5, type: 3}
   - {fileID: 2800000, guid: bbd310c780ba59a4a98c31835d4e9e29, type: 3}
@@ -1207,11 +1209,14 @@ MonoBehaviour:
   - {fileID: 2800000, guid: 9809996dcc0ebf746907cca586b8a4d6, type: 3}
   frameChangeInterval: .300000012
   lightinUpSeconds: 5
+  lightinDownSeconds: 5
   animationTime: 20
+  lateralOffset: 50
+  textCandleSpacing: 50
   frameArea:
     serializedVersion: 2
     x: 700
-    y: 200
+    y: 150
     width: 127
     height: 270
   instructionsArea:
@@ -1472,6 +1477,8 @@ MonoBehaviour:
     m_FixedHeight: 0
     m_StretchWidth: 1
     m_StretchHeight: 0
+  lateralOffset: 50
+  instructionsIboxSpacing: 50
 --- !u!1 &1190511549
 GameObject:
   m_ObjectHideFlags: 0
@@ -1708,6 +1715,8 @@ MonoBehaviour:
     m_FixedHeight: 0
     m_StretchWidth: 1
     m_StretchHeight: 0
+  lateralOffset: 50
+  instructionsMeMeterSpacing: 50
 --- !u!1 &1459174306
 GameObject:
   m_ObjectHideFlags: 0

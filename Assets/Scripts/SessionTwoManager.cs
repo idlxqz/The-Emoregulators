@@ -87,7 +87,8 @@ public class SessionTwoManager : SessionManager {
                             displayIBox = false;
                             log.LogInformation("Started closing activity");
                             activityName = "Closing Activity";
-                            candle.simpleCandleAnimation = true;
+                            candle.waitClickToClose = true;
+                            candle.noInstructions = true;
                             candle.Setup();
                             candle.enabled = true;
                             currentState = SessionState.CloseSession;

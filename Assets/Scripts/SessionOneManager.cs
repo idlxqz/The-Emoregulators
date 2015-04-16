@@ -41,8 +41,9 @@ public class SessionOneManager : SessionManager {
 				log.LogInformation("User name: " + userName);
 				log.LogInformation("Ended introducing ourselves.");
 				//disable the introducing ourselves object
-				introducingOurselves.SetActive(false);
-                GUIUtility.keyboardControl = 0; //lose focus
+                nameInputField.DeactivateInputField();
+                //GUIUtility.keyboardControl = 0; //ensure lose focus
+                introducingOurselves.SetActive(false);
 				//start memeter introduction
 				log.LogInformation("Started me-meter introduction.");
 				activityName = "Me-Meter introduction";
@@ -116,7 +117,8 @@ public class SessionOneManager : SessionManager {
                     displayIBox = false;
                     log.LogInformation("Started closing activity");
                     activityName = "Closing Activity";
-                    candle.simpleCandleAnimation = true;
+                    candle.waitClickToClose = true;
+                    candle.noInstructions = true;
                     candle.Setup();
                     candle.enabled = true;
                     currentState = SessionState.CloseSession;
@@ -132,7 +134,8 @@ public class SessionOneManager : SessionManager {
                 log.LogInformation("Ended closing activity.");
                 //disable the candle and proceed to the next state
                 candle.enabled = false;
-                //TODO: load next session?
+                //go to session two
+                Application.LoadLevel("SessionTwoScene");
             }
             break;
 		default:

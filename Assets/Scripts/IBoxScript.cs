@@ -24,9 +24,18 @@ public class IBoxScript : MonoBehaviour {
     //instructions format
     public GUIStyle instructionsFormat;
 
+    //dynimc positioning
+    public int lateralOffset;
+    public int instructionsIboxSpacing;
+
 	// Use this for initialization
 	void Start () {
         finalWaitStart = Time.time;
+
+        //dynamic positioning
+        iboxArea.x = Screen.width - lateralOffset - iboxArea.width;
+        instructionsArea.x = lateralOffset;
+        instructionsArea.width = Screen.width - 2 * lateralOffset - iboxArea.width - instructionsIboxSpacing;
 	}
 	
 	// Update is called once per frame
