@@ -10,6 +10,7 @@ public class CandleScript : MonoBehaviour {
     public bool noInstructions;
     public bool waitClickToClose;
     private bool clickedToClose;
+    public bool isClosing;
 	//candle animation control
 	public Texture2D[] frames;
 	public float frameChangeInterval; //in seconds
@@ -21,6 +22,28 @@ public class CandleScript : MonoBehaviour {
 	private bool lightingUp;
 	private float lightingUpStart;
     private float lightingDownStart;
+    public float candleScale;
+    private int emptyCandleTopSpace = 151;
+    private int emptyCandleLeftSpace = 166;
+    private int candleHeadWidth = 40;
+    private int candleHeadHeight = 76;
+
+    //match animation and control
+    public Texture2D[] matchFrames;
+    private bool holdingMatch;
+    private bool matchClicked;
+    private int selectedMatchFrame;
+    private float previousMatchTimestamp;
+    private Rect matchArea;
+    private Rect originalMatchArea;
+    public int bottomPadding;
+    public float matchScale;
+    private int emptyMatchTopSpace = 318;
+    private int emptyMatchLeftSpace = 49;
+    private int matchHeadWidth = 115;
+    private int matchHeadHeight = 128;
+    public int matchVerticalAdjustment;
+    public Texture2D debugText;
 
     //positioning control
     public int lateralOffset;
@@ -43,9 +66,40 @@ public class CandleScript : MonoBehaviour {
 	void Start () {
         Setup();
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
+        //check if match lit the candle
+        if (!isClosing)
+        {
+            if (CanCandleBeLit())
+            {
+                lightingUpStart = Time.time;
+                isLit = true;
+            }
+            //select the current match frame
+            if (matchClicked)
+            {
+                if (isLit)
+                {
+                    //match is out
+                    selectedMatchFrame = 0;
+                }
+                else if ((Time.time - previousMatchTimestamp) >= frameChangeInterval * 2)
+                {
+                    //select a random frame from the match lit ones
+                    selectedMatchFrame = Random.Range(1, 4); //fully lit frames
+                    //update timestamps
+                    previousMatchTimestamp = Time.time;
+                }
+            }
+            else
+            {
+                //match is out
+                selectedMatchFrame = 0;
+            }
+        }
+
 		//select the correct candle frame
 		if((Time.time - previousFrameTimestamp) >= frameChangeInterval){
 			//lighting up phase, show the smaller flames frames
@@ -65,15 +119,30 @@ public class CandleScript : MonoBehaviour {
 			//update timestamp
 			previousFrameTimestamp = Time.time;
 		}
-			
-		//get the lighting action for the candle
-		if (Input.GetMouseButtonDown(0) && !isLit){
+	
+	    //detect mouse click on match
+        if (Input.GetMouseButtonDown(0) && !isLit)
+        {
+            if (matchArea.Contains(new Vector2(Input.mousePosition.x, Screen.height - Input.mousePosition.y)))
+            {
+                matchClicked = true;
+                holdingMatch = true;
+            }
+        }
+        //detect drag end
+        else if (Input.GetMouseButtonUp(0))
+        {
+            holdingMatch = false;
+            SetMatchOriginalRectangle();
+        }
+        //get the lighting action for the candle
+        /*if (Input.GetMouseButtonDown(0) && !isLit){
             if (IsCandleClicked())
             {
                 lightingUpStart = Time.time;
                 isLit = true;
             }
-		}
+        }*/
         else if (Input.GetMouseButtonDown(0) && waitClickToClose)
         {
             if (IsCandleClicked())
@@ -92,11 +161,32 @@ public class CandleScript : MonoBehaviour {
 	}
 
 	void OnGUI() {
+        //draw the match
+        if (holdingMatch)
+        {
+            matchArea.x = Input.mousePosition.x - matchArea.width / 2;
+            matchArea.y = Screen.height - Input.mousePosition.y - matchArea.width / 2 + matchVerticalAdjustment;
+        }
 		//draw the candle cerimony text
         if (!simpleCandleAnimation && !noInstructions)
 		    GUI.Label(instructionsArea, instructions, instructionsFormat);
 		//draw the candle frame
         GUI.DrawTexture(GetCandleArea(), frames[selectedFrame]);
+        //draw the match
+        if (!simpleCandleAnimation && !isClosing)
+        {
+            if (matchFrames != null)
+            {
+                if (matchFrames.Length > 0)
+                {
+                    GUI.DrawTexture(matchArea, matchFrames[selectedMatchFrame]);
+                }
+            }
+        }
+
+        //DEBUG ONLY
+        /*GUI.DrawTexture(GetCandleHeadRect(), debugText);
+        GUI.DrawTexture(GetMatchHeadRect(), debugText);*/
 	}
 
     private bool IsCandleClicked()
@@ -138,6 +228,12 @@ public class CandleScript : MonoBehaviour {
             lightingUp = false;
             lightingUpStart = Time.time;
         }
+
+        matchClicked = false;
+        holdingMatch = false;
+
+        SetCandleOriginalRectangle();
+
         //dynamic positioning
         if (!noInstructions)
         {
@@ -147,6 +243,51 @@ public class CandleScript : MonoBehaviour {
             //candle
             frameArea.x = Screen.width - lateralOffset - frameArea.width;
         }
+
+        SetMatchOriginalRectangle();
     }
 
+    private void SetCandleOriginalRectangle()
+    {
+        frameArea = new Rect(700, 150, frames[0].width * candleScale, frames[0].height * candleScale);
+    }
+
+    private void SetMatchOriginalRectangle()
+    {
+        matchArea = new Rect(Screen.width / 2 - matchArea.width / 2, Screen.height - matchFrames[0].height * matchScale - bottomPadding, matchFrames[0].width * matchScale, matchFrames[0].height * matchScale);
+    }
+
+    private bool CanCandleBeLit()
+    {
+        return RectsOverlap(GetCandleHeadRect(), GetMatchHeadRect());
+    }
+
+    private Rect GetMatchHeadRect() {
+        return new Rect(
+                matchArea.x + emptyMatchLeftSpace * matchScale,
+                matchArea.y + emptyMatchTopSpace * matchScale,
+                matchHeadWidth * matchScale,
+                matchHeadHeight * matchScale);
+    }
+
+    private Rect GetCandleHeadRect()
+    {
+        Rect temp = GetCandleArea();
+        return new Rect(
+            temp.x + emptyCandleLeftSpace * candleScale,
+            temp.y + emptyCandleTopSpace * candleScale,
+            candleHeadWidth * candleScale,
+            candleHeadHeight * candleScale);
+    }
+
+    private bool RectsOverlap(Rect r1, Rect r2)
+    {
+        var widthOverlap = (r1.xMin >= r2.xMin) && (r1.xMin <= r2.xMax) ||
+                        (r2.xMin >= r1.xMin) && (r2.xMin <= r1.xMax);
+
+        var heightOverlap = (r1.yMin >= r2.yMin) && (r1.yMin <= r2.yMax) ||
+                        (r2.yMin >= r1.yMin) && (r2.yMin <= r1.yMax);
+
+        return widthOverlap && heightOverlap;
+    }
 }

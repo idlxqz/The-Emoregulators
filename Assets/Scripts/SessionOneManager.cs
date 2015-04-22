@@ -6,7 +6,9 @@ public class SessionOneManager : SessionManager {
 
 	// Use this for initialization
 	protected override void StartLogic () {
-
+        sessionTitleStart = Time.time;
+        currentState = SessionState.SessionTitle;
+        hideInterface = true;
 	}
 	
 	// Update is called once per frame
@@ -14,6 +16,13 @@ public class SessionOneManager : SessionManager {
     {
 		//coordinate the session state
 		switch (currentState) {
+            case SessionState.SessionTitle:
+                if ((Time.time - sessionTitleStart) >= sessionTitleDuration)
+                {
+                    hideInterface = false;
+                    currentState = SessionState.Start;
+                }
+                break;
             case SessionState.Start:
 			//activate the cande cerimony
 			log.LogInformation("Started candle lighting cerimony.");
@@ -119,6 +128,7 @@ public class SessionOneManager : SessionManager {
                     activityName = "Closing Activity";
                     candle.waitClickToClose = true;
                     candle.noInstructions = true;
+                    candle.isClosing = true;
                     candle.Setup();
                     candle.enabled = true;
                     currentState = SessionState.CloseSession;
@@ -157,6 +167,5 @@ public class SessionOneManager : SessionManager {
                     proceed = true;
             }
         }
-        
 	}
 }

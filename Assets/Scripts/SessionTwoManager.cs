@@ -12,6 +12,10 @@ public class SessionTwoManager : SessionManager {
     // Use this for initialization
     protected override void StartLogic()
     {
+        sessionTitleStart = Time.time;
+        currentState = SessionState.SessionTitle;
+        hideInterface = true;
+
         firstMeMeterUse = true;
         mindfullness = GameObject.Find("Mindfullness").GetComponent<MindfullnessScript>();
         basicPh = GameObject.Find("BasicPh").GetComponent<BasicPhScript>();
@@ -24,6 +28,13 @@ public class SessionTwoManager : SessionManager {
         //coordinate the session state
         switch (currentState)
         {
+            case SessionState.SessionTitle:
+                if ((Time.time - sessionTitleStart) >= sessionTitleDuration)
+                {
+                    hideInterface = false;
+                    currentState = SessionState.Start;
+                }
+                break;
             case SessionState.Start:
                 //activate the cande cerimony
                 log.LogInformation("Started candle lighting cerimony.");
@@ -89,6 +100,7 @@ public class SessionTwoManager : SessionManager {
                             activityName = "Closing Activity";
                             candle.waitClickToClose = true;
                             candle.noInstructions = true;
+                            candle.isClosing = true;
                             candle.Setup();
                             candle.enabled = true;
                             currentState = SessionState.CloseSession;

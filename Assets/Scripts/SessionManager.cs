@@ -7,6 +7,7 @@ public class SessionManager : MonoBehaviour {
     //states of the session
     public enum SessionState
     {
+        SessionTitle,
         Start,
         CandleCeremony,
         IntroducingOurselves,
@@ -18,6 +19,14 @@ public class SessionManager : MonoBehaviour {
         Mindfullness,
         BasicPH
     }
+
+    //title support
+    public bool hideInterface;
+    public int sessionTitleDuration;
+    protected float sessionTitleStart;
+    public GUIStyle sessionTitleFormat;
+    public int titleLateralPadding;
+    public int titleRectHeight;
 
     public SessionState currentState;
 
@@ -37,6 +46,14 @@ public class SessionManager : MonoBehaviour {
     public int cursorSizeX = 32; // set to width of your cursor texture 
     public int cursorSizeY = 32; // set to height of your cursor texture
     public bool showOriginal = true;
+
+    //session display formating
+    private Rect titleArea;
+    private Rect subTitleArea;
+    public GUIStyle titleFormat;
+    public GUIStyle subTitleFormat;
+    public string sessionTitle;
+    public string sessionSubTitle;
 
     //activity display formating
     public Rect activityArea;
@@ -77,6 +94,11 @@ public class SessionManager : MonoBehaviour {
         customText.log = candle.log = memeter.log = ibox.log = log;
         //Cursor.visible = false;
 
+        //set title and subtitle positioning
+        int width = 100;
+        titleArea = new Rect(Screen.width / 2 - width / 2, 10, width, 30);
+        subTitleArea = new Rect(Screen.width / 2 - width / 2, 40, width, 30);
+
         //child specific initializations
         StartLogic();
     }
@@ -101,13 +123,29 @@ public class SessionManager : MonoBehaviour {
                 cursorSizeY),
                 originalCursor);
         }*/
-        //draw ibox
-        if (displayIBox)
+        if (!hideInterface)
         {
-            GUI.DrawTexture(iboxArea, iboxTexture);
+            //draw ibox
+            if (displayIBox)
+            {
+                GUI.DrawTexture(iboxArea, iboxTexture);
+            }
+            //draw title and subtitle of the session
+            GUI.Label(titleArea, sessionTitle, titleFormat);
+            GUI.Label(subTitleArea, sessionSubTitle, subTitleFormat);
+
+            //draw the name of the activity
+            GUI.Label(activityArea, activityName, activityFormat);
         }
-        //draw the name of the activity
-        GUI.Label(activityArea, activityName, activityFormat);
+
+        //drawt title big
+        if (currentState == SessionState.SessionTitle)
+        {
+            GUI.Label(
+                new Rect(titleLateralPadding, Screen.height / 2 - titleRectHeight / 2, Screen.width - titleLateralPadding * 2, titleRectHeight),
+                sessionTitle,
+                sessionTitleFormat);
+        }
 
         //child specific behavior
         OnGUILogic();
