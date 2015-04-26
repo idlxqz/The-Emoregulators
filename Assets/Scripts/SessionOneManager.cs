@@ -118,6 +118,7 @@ public class SessionOneManager : SessionManager {
                 log.LogInformation("Started closing message");
                 activityName = "Closing message";
                 //prepare custom text
+                /*
                 System.Action setupNextPhase = () =>
                 {
                     log.LogInformation("Ended closing message.");
@@ -136,6 +137,9 @@ public class SessionOneManager : SessionManager {
                 customText.Setup(setupNextPhase, Constants.TextTimeToDisplay, "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book");
                 customText.enabled = true;
                 currentState = SessionState.CustomText;
+                */
+                //MAY VERSION
+                currentState = SessionState.CloseSession;
             }
             break;
             case SessionState.CloseSession:
@@ -145,7 +149,7 @@ public class SessionOneManager : SessionManager {
                 //disable the candle and proceed to the next state
                 candle.enabled = false;
                 //go to session two
-                Application.LoadLevel("SessionTwoScene");
+                Application.LoadLevel("SessionFourScene");
             }
             break;
 		default:

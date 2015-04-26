@@ -13,3 +13,5 @@ EditorBuildSettings:
     path: Assets/Scenes/SessionTwoScene.unity
   - enabled: 1
     path: Assets/Scenes/SessionThreeOneScene.unity
+  - enabled: 1
+    path: Assets/Scenes/SessionFourScene.unity

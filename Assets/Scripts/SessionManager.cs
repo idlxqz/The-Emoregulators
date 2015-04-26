@@ -17,7 +17,11 @@ public class SessionManager : MonoBehaviour {
         CustomText,
         CloseSession,
         Mindfullness,
-        BasicPH
+        BasicPH,
+        BreathingRegulation,
+        ActiveShakingMeditation,
+        ProgressiveMuscleRelaxation,
+        InnerSensations
     }
 
     //title support
@@ -85,7 +89,9 @@ public class SessionManager : MonoBehaviour {
         memeter = GameObject.Find("MeMeter").GetComponent<MEMeterScript>();
         ibox = GameObject.Find("IBox").GetComponent<IBoxScript>();
         customText = GameObject.Find("CustomText").GetComponent<CustomTextScript>();
-        activityArea = new Rect(Screen.width - 180, 22, 100, 30);
+        activityArea = new Rect(Screen.width - 180, 22, 150, 50);
+        activityFormat.wordWrap = true;
+        activityFormat.alignment = TextAnchor.MiddleCenter;
         //propagate instructions text formatting
         customText.instructionsFormat = memeter.instructionsFormat = ibox.instructionsFormat = candle.instructionsFormat;
         memeter.instructionsArea = ibox.instructionsArea = candle.instructionsArea;
