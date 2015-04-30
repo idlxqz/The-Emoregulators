@@ -172,4 +172,34 @@ public class SessionOneManager : SessionManager {
             }
         }
 	}
+
+    public override void Continue()
+    {
+        //coordinate the session state
+        switch (currentState)
+        {
+
+            case SessionState.CandleCeremony:
+                candle.finished = true;
+                break;
+            case SessionState.IntroducingOurselves:
+                proceed = true;
+                break;
+            case SessionState.MeMeter:
+                memeter.finished = true;
+                break;
+            case SessionState.IBoxIntroduction:
+                ibox.finished = true;
+                break;
+            case SessionState.CustomText:
+                customText.finished = true;
+                break;
+            case SessionState.MeMeterReuse:
+                memeter.finished = true;
+                break;
+            case SessionState.CloseSession:
+                candle.finished = true;
+                break;
+        }
+    }
 }
