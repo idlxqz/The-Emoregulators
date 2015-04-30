@@ -201,7 +201,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 284918178}
   m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 062a075fc2c461d438ea75151b9c359c, type: 3}
+  m_Script: {fileID: 11500000, guid: a12317aa7395e3040b2c2253d0fdae9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   finished: 0
@@ -246,17 +246,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 303922266}
   m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48328e0727255ec4b8e95c404a65a280, type: 3}
+  m_Script: {fileID: 11500000, guid: caa09abaffa0a7a479cafeb1c90a5e43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   finished: 0
   secondsToCloseSession: 0
   instructionsArea:
     serializedVersion: 2
-    x: 100
-    y: 200
-    width: 800
-    height: 300
+    x: 0
+    y: 0
+    width: 0
+    height: 0
   instructions: 
   instructionsFormat:
     m_Name: 
@@ -317,7 +317,7 @@ MonoBehaviour:
     m_FixedHeight: 0
     m_StretchWidth: 1
     m_StretchHeight: 0
-  lateralOffset: 50
+  lateralOffset: 0
 --- !u!1 &341060320
 GameObject:
   m_ObjectHideFlags: 0
@@ -364,7 +364,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   finished: 0
   secondsToCloseSession: 20
-  ibox: {fileID: 2800000, guid: 82407ebc9eb238d488211a1d0f9818d7, type: 3}
+  ibox: {fileID: 2800000, guid: 2a344188fcc809f48b8eda2d169fe9a0, type: 3}
   iboxArea:
     serializedVersion: 2
     x: 700
@@ -628,7 +628,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 693590935}
   m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8bd9c25cdbfe0a349b3141d4621c6980, type: 3}
+  m_Script: {fileID: 11500000, guid: 12872fe843bbbc64bb4a0c2b04406789, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   finished: 0
@@ -642,7 +642,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 2b6f7d03105232042b2cf99a1996427c, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 83547834342813e42aeb7b3fba463014, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -917,22 +917,22 @@ MonoBehaviour:
   waitClickToClose: 0
   isClosing: 0
   frames:
-  - {fileID: 2800000, guid: 17874c3563a5cd84ab536270ce5dade5, type: 3}
-  - {fileID: 2800000, guid: bbd310c780ba59a4a98c31835d4e9e29, type: 3}
-  - {fileID: 2800000, guid: 8cfa91813770fca458e2de5301845d29, type: 3}
-  - {fileID: 2800000, guid: 1cff4382c1960c04da19e4fa357ec343, type: 3}
-  - {fileID: 2800000, guid: 9809996dcc0ebf746907cca586b8a4d6, type: 3}
+  - {fileID: 2800000, guid: baf6a6ed0b3cefe4884abd94fdb44b3a, type: 3}
+  - {fileID: 2800000, guid: ac78663dada537a43846c8d308dbb2a4, type: 3}
+  - {fileID: 2800000, guid: 328bf4e47d020a44790785bd21809c65, type: 3}
+  - {fileID: 2800000, guid: 23a6979c59e3ba6468f2b9eddcabaab5, type: 3}
+  - {fileID: 2800000, guid: 2b80faa2a7a0a03498471392556ca216, type: 3}
   frameChangeInterval: .300000012
   lightinUpSeconds: 5
   lightinDownSeconds: 5
   animationTime: 20
   candleScale: .400000006
   matchFrames:
-  - {fileID: 2800000, guid: df5d20c877617c145a03e86fb46e1e7f, type: 3}
-  - {fileID: 2800000, guid: 77d8a09d640a8474d9c81aeaa6aef96d, type: 3}
-  - {fileID: 2800000, guid: 37708356c61b6564592dc17b0d108217, type: 3}
-  - {fileID: 2800000, guid: 26877cab70fac57438dae5d413d3f8f0, type: 3}
-  - {fileID: 2800000, guid: e011aac506e3a3f48ae1548ef6c7e5bf, type: 3}
+  - {fileID: 2800000, guid: 626342b0407d3f845bbcb2976abfecd6, type: 3}
+  - {fileID: 2800000, guid: 82b101dd7361605418ad9dacaf4f28d2, type: 3}
+  - {fileID: 2800000, guid: 5de79953618e5f44f9c912c16bc8934e, type: 3}
+  - {fileID: 2800000, guid: 994145656bab1d0459deecea8b2f8127, type: 3}
+  - {fileID: 2800000, guid: 9bb4b981fc828fb44bc9f9790d8be9e6, type: 3}
   bottomPadding: 80
   matchScale: .200000003
   matchVerticalAdjustment: -65
@@ -1080,7 +1080,7 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c7a6de84866e87549a6ff4d6e06749ee, type: 3}
   m_IsPrefabParent: 0
---- !u!4 &1619101442 stripped
+--- !u!4 &1619101442
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: c7a6de84866e87549a6ff4d6e06749ee, type: 3}
   m_PrefabInternal: {fileID: 1619101441}
@@ -1125,7 +1125,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1995764827}
   m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19e83792f23dfd846b7dc2a18943db61, type: 3}
+  m_Script: {fileID: 11500000, guid: 8fa2af85f9ca9894bbf5eae8d2cd324f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   finished: 0
@@ -1171,11 +1171,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2004168110}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94730dbf91d6a2f4eb1fb49ffb2ce6ba, type: 3}
+  m_Script: {fileID: 11500000, guid: 597be77338e2f444d9f0b0d53cdf90c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   hideInterface: 0
-  sessionTitleDuration: 5
+  sessionTitleDuration: 0
   sessionTitleFormat:
     m_Name: 
     m_Normal:
@@ -1222,10 +1222,10 @@ MonoBehaviour:
       m_Right: 0
       m_Top: 0
       m_Bottom: 0
-    m_Font: {fileID: 12800000, guid: 4f8cd725ef834ce43afe570aa1623a8c, type: 3}
-    m_FontSize: 100
+    m_Font: {fileID: 0}
+    m_FontSize: 0
     m_FontStyle: 0
-    m_Alignment: 4
+    m_Alignment: 0
     m_WordWrap: 0
     m_RichText: 1
     m_TextClipping: 0
@@ -1235,8 +1235,8 @@ MonoBehaviour:
     m_FixedHeight: 0
     m_StretchWidth: 1
     m_StretchHeight: 0
-  titleLateralPadding: 100
-  titleRectHeight: 300
+  titleLateralPadding: 0
+  titleRectHeight: 0
   currentState: 0
   facilitator: {fileID: 0}
   candle: {fileID: 0}
@@ -1296,10 +1296,10 @@ MonoBehaviour:
       m_Right: 0
       m_Top: 0
       m_Bottom: 0
-    m_Font: {fileID: 12800000, guid: 4f8cd725ef834ce43afe570aa1623a8c, type: 3}
-    m_FontSize: 25
+    m_Font: {fileID: 0}
+    m_FontSize: 0
     m_FontStyle: 0
-    m_Alignment: 4
+    m_Alignment: 0
     m_WordWrap: 0
     m_RichText: 1
     m_TextClipping: 0
@@ -1355,10 +1355,10 @@ MonoBehaviour:
       m_Right: 0
       m_Top: 0
       m_Bottom: 0
-    m_Font: {fileID: 12800000, guid: 4f8cd725ef834ce43afe570aa1623a8c, type: 3}
-    m_FontSize: 21
+    m_Font: {fileID: 0}
+    m_FontSize: 0
     m_FontStyle: 0
-    m_Alignment: 4
+    m_Alignment: 0
     m_WordWrap: 0
     m_RichText: 1
     m_TextClipping: 0
@@ -1368,12 +1368,12 @@ MonoBehaviour:
     m_FixedHeight: 0
     m_StretchWidth: 1
     m_StretchHeight: 0
-  sessionTitle: Session 4
-  sessionSubTitle: Physical Regulation
+  sessionTitle: 
+  sessionSubTitle: 
   activityArea:
     serializedVersion: 2
-    x: 50
-    y: 50
+    x: 0
+    y: 0
     width: 0
     height: 0
   activityFormat:
@@ -1422,7 +1422,7 @@ MonoBehaviour:
       m_Right: 0
       m_Top: 0
       m_Bottom: 0
-    m_Font: {fileID: 12800000, guid: 4f8cd725ef834ce43afe570aa1623a8c, type: 3}
+    m_Font: {fileID: 0}
     m_FontSize: 0
     m_FontStyle: 0
     m_Alignment: 0
@@ -1437,18 +1437,18 @@ MonoBehaviour:
     m_StretchHeight: 0
   activityName: 
   displayIBox: 0
-  iboxTexture: {fileID: 2800000, guid: 8fe0cfd5f28c1924f9b5ebada7ee2d2c, type: 3}
+  iboxTexture: {fileID: 0}
   iboxArea:
     serializedVersion: 2
-    x: 30
-    y: 15
-    width: 70
-    height: 70
-  breathingRegulation: {fileID: 0}
-  activeShakingMeditation: {fileID: 0}
-  progressiveMuscleRelaxation: {fileID: 0}
-  innerSensations: {fileID: 0}
---- !u!1 &2013681751 stripped
+    x: 0
+    y: 0
+    width: 0
+    height: 0
+  breathingRegulation: {fileID: 284918180}
+  activeShakingMeditation: {fileID: 693590937}
+  progressiveMuscleRelaxation: {fileID: 1995764829}
+  innerSensations: {fileID: 2028700826}
+--- !u!1 &2013681751
 GameObject:
   m_PrefabParentObject: {fileID: 100000, guid: c7a6de84866e87549a6ff4d6e06749ee, type: 3}
   m_PrefabInternal: {fileID: 1619101441}
@@ -1504,33 +1504,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 2028700824}
   m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ad241793fa588e4d944c0242df6d3bd, type: 3}
+  m_Script: {fileID: 11500000, guid: 643b5d71aef9e734cb22e1fb6d2a4603, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   finished: 0
   selectedOne: 0
-  swatches:
-  - {fileID: 2800000, guid: d8397a3c21276ea4d8dd1ac23c39d72e, type: 3}
-  - {fileID: 2800000, guid: ee0b5cea249aa8343815ed6374ea912a, type: 3}
-  - {fileID: 2800000, guid: 5f11951109b8e2441b2499d9b3649c34, type: 3}
-  - {fileID: 2800000, guid: 1be45ce06185c25448c26b3c3e277e46, type: 3}
-  - {fileID: 2800000, guid: 8da70ad4fbcbdf74bb0d00372a6d0a13, type: 3}
-  - {fileID: 2800000, guid: 38e06b3dc477ed440a6f97c853f12976, type: 3}
-  - {fileID: 2800000, guid: d3c785c607b8f25488e92425f79a6445, type: 3}
-  iboxes:
-  - {fileID: 2800000, guid: 9f53dcac96e6f2342a92dea237458ae4, type: 3}
-  - {fileID: 2800000, guid: 5848d1d5416195d469dc6af7657f5e33, type: 3}
-  - {fileID: 2800000, guid: 1143cf79056f98e4da45f44f129dc822, type: 3}
-  - {fileID: 2800000, guid: 3c02485a738830b4c98c4353af5a0b4d, type: 3}
-  - {fileID: 2800000, guid: 2080097d3939b244990c8b0b1375f387, type: 3}
-  - {fileID: 2800000, guid: 5101ad40703468a4199b93c274e2ef0d, type: 3}
-  - {fileID: 2800000, guid: 665bedcc88fd36d40b710cf037651cf7, type: 3}
-  selectedIbox: {fileID: 2800000, guid: 82407ebc9eb238d488211a1d0f9818d7, type: 3}
-  lateralOffset: 50
-  selectedIboxY: 200
-  selectedIboxHeight: 130
-  swatchBottomSpacing: 100
-  swatchSpacing: 30
+  swatches: []
+  iboxes: []
+  selectedIbox: {fileID: 2800000, guid: 2a344188fcc809f48b8eda2d169fe9a0, type: 3}
+  lateralOffset: 0
+  selectedIboxY: 0
+  selectedIboxHeight: 0
+  swatchBottomSpacing: 0
+  swatchSpacing: 0
 --- !u!1 &2032770360
 GameObject:
   m_ObjectHideFlags: 0
@@ -1640,19 +1626,19 @@ MonoBehaviour:
   isSelected: 0
   secondsToCloseSession: 20
   showInstructions: 0
-  memeterOut: {fileID: 2800000, guid: c741058695f3dc64bbf1b2d29fce6121, type: 3}
+  memeterOut: {fileID: 2800000, guid: 8ab6c8a472296a44ba63e3921eca2912, type: 3}
   memeterLevels:
-  - {fileID: 2800000, guid: 0a5328bdb0764c745b412f027fd7b3b5, type: 3}
-  - {fileID: 2800000, guid: 80d3c5d21c3679a4d965008856490b73, type: 3}
-  - {fileID: 2800000, guid: 973a2c035ce5a364e8efad6149d2dc25, type: 3}
-  - {fileID: 2800000, guid: b1536438686b29d429b8dcbbb325edc6, type: 3}
-  - {fileID: 2800000, guid: 76d29cf7e687edd4fa28b9942fbe5eff, type: 3}
-  - {fileID: 2800000, guid: 7bdfc9072d1305b42b68e7d631866fba, type: 3}
-  - {fileID: 2800000, guid: 083e0ea050c030e44ac6a34fb0f5202d, type: 3}
-  - {fileID: 2800000, guid: 6c55ad77c6eab3048878ae419f8a20e9, type: 3}
-  - {fileID: 2800000, guid: 9001c4a346ca32548a184fab40d0b1ce, type: 3}
-  - {fileID: 2800000, guid: f2ff560e9f580324eaed7ad368166582, type: 3}
-  memeterSelected: {fileID: 2800000, guid: c741058695f3dc64bbf1b2d29fce6121, type: 3}
+  - {fileID: 2800000, guid: 2d69b468149638144a34bba421a453f0, type: 3}
+  - {fileID: 2800000, guid: 8baceeeb888dddb42a249155dccbd202, type: 3}
+  - {fileID: 2800000, guid: 55e1815d61ef96e48a6834d952464ead, type: 3}
+  - {fileID: 2800000, guid: 109945722ea000a44acc73fc4e7f0d23, type: 3}
+  - {fileID: 2800000, guid: a72e8c05702e96c49846234097f36aa2, type: 3}
+  - {fileID: 2800000, guid: b4e5091b857ccef459bfb7f993ef49b9, type: 3}
+  - {fileID: 2800000, guid: f94c7f989e3a0e24d8ec6f823561ead8, type: 3}
+  - {fileID: 2800000, guid: 31ca12f0b3e29ec40ad0137a96e787b6, type: 3}
+  - {fileID: 2800000, guid: 5f335e456a071a841960ef3184f7cde6, type: 3}
+  - {fileID: 2800000, guid: 8d96f9010679d674686472b715a3734f, type: 3}
+  memeterSelected: {fileID: 2800000, guid: c1910b1bfbd271043be4ad952b838df7, type: 3}
   memeterArea:
     serializedVersion: 2
     x: 700
