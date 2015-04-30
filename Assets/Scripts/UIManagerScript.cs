@@ -20,4 +20,13 @@ public class UIManagerScript : MonoBehaviour {
 	public void QuitButton () {
 		Application.Quit ();
 	}
+
+    public void ContinueButton()
+    {
+        SessionManager sessionManager = GameObject.Find("SessionManager").GetComponent<SessionManager>();
+        if (sessionManager != null)
+        {
+            sessionManager.Continue();
+        }
+    }
 }

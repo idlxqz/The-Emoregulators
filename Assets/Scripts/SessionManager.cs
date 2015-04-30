@@ -151,6 +151,10 @@ public class SessionManager : MonoBehaviour {
         OnGUILogic();
     }
 
+    public virtual void Continue()
+    {
+    }
+
     
     protected virtual void StartLogic() {
         //to be implemented by child classes
