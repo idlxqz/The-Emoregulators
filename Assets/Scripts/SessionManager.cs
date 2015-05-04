@@ -81,6 +81,15 @@ public class SessionManager : MonoBehaviour {
     protected string customTextContent;
     protected int customTextWaitTime;
 
+    //user gender
+    public enum Gender
+    {
+        Male,
+        Female
+    }
+
+    public Gender userGender;
+
     // Use this for initialization
     void Start()
     {
@@ -187,6 +196,16 @@ public class SessionManager : MonoBehaviour {
     public void RegisterUserName(string newName)
     {
         userName = newName;
+    }
+
+    public void HandleSelectFemaleGender()
+    {
+        userGender = Gender.Female;
+    }
+
+    public void HandleSelectMaleGender()
+    {
+        userGender = Gender.Male;
     }
     #endregion
 }

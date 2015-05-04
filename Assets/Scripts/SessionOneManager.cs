@@ -4,6 +4,9 @@ using UnityEngine.UI;
 
 public class SessionOneManager : SessionManager {
 
+    public GameObject maleAvatar;
+    public GameObject femaleAvatar;
+
 	// Use this for initialization
 	protected override void StartLogic () {
         sessionTitleStart = Time.time;
@@ -46,20 +49,35 @@ public class SessionOneManager : SessionManager {
 			}
 			break;
             case SessionState.IntroducingOurselves:
-			if(proceed){
-				log.LogInformation("User name: " + userName);
-				log.LogInformation("Ended introducing ourselves.");
-				//disable the introducing ourselves object
+            if (proceed)
+            {
+                log.LogInformation("User name: " + userName);
+                log.LogInformation("Ended introducing ourselves.");
+                //disable the introducing ourselves object
                 nameInputField.DeactivateInputField();
                 //GUIUtility.keyboardControl = 0; //ensure lose focus
                 introducingOurselves.SetActive(false);
-				//start memeter introduction
-				log.LogInformation("Started me-meter introduction.");
-				activityName = "Me-Meter introduction";
+                //start memeter introduction
+                log.LogInformation("Started me-meter introduction.");
+                activityName = "Me-Meter introduction";
                 memeter.enabled = true;
                 currentState = SessionState.MeMeter;
                 proceed = false;
-			}
+            }
+            else
+            {
+                //set the gender specific avatar
+                if (userGender == Gender.Male)
+                {
+                    maleAvatar.SetActive(true);
+                    femaleAvatar.SetActive(false);
+                }
+                else
+                {
+                    maleAvatar.SetActive(false);
+                    femaleAvatar.SetActive(true);
+                }
+            }
 			break;
             case SessionState.MeMeter:
             if (memeter.finished)

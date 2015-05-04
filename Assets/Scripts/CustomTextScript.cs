@@ -9,7 +9,7 @@ public class CustomTextScript : MonoBehaviour {
     public float secondsToCloseSession;
 
     //memeter and instructions text areas definition
-    public Rect instructionsArea;
+    Rect instructionsArea;
 
     //centralized logging
     public Logger log;
@@ -27,7 +27,9 @@ public class CustomTextScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         instructionsArea.x = lateralOffset;
+        instructionsArea.y = Screen.height / 3;
         instructionsArea.width = Screen.width - 2 * lateralOffset ;
+        instructionsArea.height = (Screen.height * 2) / 3;
 	}
 	
 	// Update is called once per frame
