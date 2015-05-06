@@ -1,19 +1,31 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEditor.Animations;
+using UnityEngine;
 using System.Collections;
 
 public class BreathingRegulationScript : MonoBehaviour {
 
     public bool finished;
+    protected GameObject Avatar;
+    protected AnimatorController Animator;
+
 
 	// Use this for initialization
 	void Start () {
-	    
+        //this.Avatar = GameObject.Find("jason");
+	    //this.Animator = this.Avatar.GetComponent<AnimatorController>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 	    //TODO: play breathing regulation animations and finish
-        
+        //this.Avatar.SetActive(true);
+        //var breathingParameter = this.Animator.parameters.FirstOrDefault(p => p.name.Equals("BreathingRegulation"));
+        //this.Animator.S
+        ////check if the waiting time is elapsed
+        //if ((Time.time - finalWaitStart) >= secondsToCloseSession)
+        //    finished = true;
+
 	}
 
     void OnGUI()

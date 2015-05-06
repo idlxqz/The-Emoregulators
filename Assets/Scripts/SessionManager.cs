@@ -9,9 +9,20 @@ public class SessionManager : MonoBehaviour {
     {
         SessionTitle,
         Start,
+        OpeningA,
+        OpeningB,
+        OpeningC,
+        OpeningD,
         CandleCeremony,
         IntroducingOurselves,
+        MinuteForMyselfA,
+        MinuteForMyselfB,
+        MinuteForMyselfC,
+        MinuteForMyselfD,
         MeMeter,
+        FacialMindfulnessA,
+        FacialMindfulnessB,
+        FacialMindfulnessC,
         IBoxIntroduction,
         MeMeterReuse,
         CustomText,
@@ -101,6 +112,7 @@ public class SessionManager : MonoBehaviour {
         activityArea = new Rect(Screen.width - 180, 22, 150, 50);
         activityFormat.wordWrap = true;
         activityFormat.alignment = TextAnchor.MiddleCenter;
+        customTextWaitTime = 5;
         //propagate instructions text formatting
         customText.instructionsFormat = memeter.instructionsFormat = ibox.instructionsFormat = candle.instructionsFormat;
         memeter.instructionsArea = ibox.instructionsArea = candle.instructionsArea;

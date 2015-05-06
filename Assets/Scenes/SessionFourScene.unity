@@ -159,7 +159,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
 --- !u!1 &284918178
 GameObject:
   m_ObjectHideFlags: 0
@@ -696,6 +696,72 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
+--- !u!1001 &1044202933
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 400016, guid: 42565020c4a8cb3439889d18fb93d18e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 998
+      objectReference: {fileID: 0}
+    - target: {fileID: 400016, guid: 42565020c4a8cb3439889d18fb93d18e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 44
+      objectReference: {fileID: 0}
+    - target: {fileID: 400016, guid: 42565020c4a8cb3439889d18fb93d18e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -25
+      objectReference: {fileID: 0}
+    - target: {fileID: 400016, guid: 42565020c4a8cb3439889d18fb93d18e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400016, guid: 42565020c4a8cb3439889d18fb93d18e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -.997895718
+      objectReference: {fileID: 0}
+    - target: {fileID: 400016, guid: 42565020c4a8cb3439889d18fb93d18e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400016, guid: 42565020c4a8cb3439889d18fb93d18e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -.0648399815
+      objectReference: {fileID: 0}
+    - target: {fileID: 400016, guid: 42565020c4a8cb3439889d18fb93d18e, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400016, guid: 42565020c4a8cb3439889d18fb93d18e, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 400016, guid: 42565020c4a8cb3439889d18fb93d18e, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 400016, guid: 42565020c4a8cb3439889d18fb93d18e, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 9500000, guid: 42565020c4a8cb3439889d18fb93d18e, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 01e07f440fc646949a4e246a65f9ab00, type: 2}
+    - target: {fileID: 9500000, guid: 42565020c4a8cb3439889d18fb93d18e, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100016, guid: 42565020c4a8cb3439889d18fb93d18e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 42565020c4a8cb3439889d18fb93d18e, type: 3}
+  m_IsPrefabParent: 0
 --- !u!1 &1209828700
 GameObject:
   m_ObjectHideFlags: 0
@@ -854,7 +920,7 @@ RectTransform:
   - {fileID: 1995764828}
   - {fileID: 2028700825}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
@@ -1169,12 +1235,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hideInterface: 0
-  sessionTitleDuration: 0
+  sessionTitleDuration: 5
   sessionTitleFormat:
     m_Name: 
     m_Normal:
       m_Background: {fileID: 0}
-      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+      m_TextColor: {r: .665079534, g: .786764741, b: .433877617, a: 1}
     m_Hover:
       m_Background: {fileID: 0}
       m_TextColor: {r: 0, g: 0, b: 0, a: 1}
@@ -1217,10 +1283,10 @@ MonoBehaviour:
       m_Top: 0
       m_Bottom: 0
     m_Font: {fileID: 0}
-    m_FontSize: 0
+    m_FontSize: 100
     m_FontStyle: 0
-    m_Alignment: 0
-    m_WordWrap: 0
+    m_Alignment: 4
+    m_WordWrap: 1
     m_RichText: 1
     m_TextClipping: 0
     m_ImagePosition: 0
@@ -1229,8 +1295,8 @@ MonoBehaviour:
     m_FixedHeight: 0
     m_StretchWidth: 1
     m_StretchHeight: 0
-  titleLateralPadding: 0
-  titleRectHeight: 0
+  titleLateralPadding: 100
+  titleRectHeight: 300
   currentState: 0
   facilitator: {fileID: 0}
   candle: {fileID: 1541172519}
@@ -1349,10 +1415,10 @@ MonoBehaviour:
       m_Right: 0
       m_Top: 0
       m_Bottom: 0
-    m_Font: {fileID: 0}
-    m_FontSize: 0
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 21
     m_FontStyle: 0
-    m_Alignment: 0
+    m_Alignment: 4
     m_WordWrap: 0
     m_RichText: 1
     m_TextClipping: 0
@@ -1362,12 +1428,12 @@ MonoBehaviour:
     m_FixedHeight: 0
     m_StretchWidth: 1
     m_StretchHeight: 0
-  sessionTitle: 
-  sessionSubTitle: 
+  sessionTitle: Physical Regulation
+  sessionSubTitle: Session 4
   activityArea:
     serializedVersion: 2
-    x: 0
-    y: 0
+    x: 50
+    y: 50
     width: 0
     height: 0
   activityFormat:
@@ -1656,10 +1722,8 @@ MonoBehaviour:
     y: 200
     width: 470
     height: 300
-  instructions: Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-    Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-    when an unknown printer took a galley of type and scrambled it to make a type
-    specimen book
+  instructions: Now mark on the ME-METER by clicking your level of tension, now, from
+    1 to 10. (1min, 10 max)
   instructionsFormat:
     m_Name: 
     m_Normal:
