@@ -13,6 +13,8 @@ public class SessionManager : MonoBehaviour {
         OpeningB,
         OpeningC,
         OpeningD,
+        OpeningE,
+        OpeningF,
         CandleCeremony,
         IntroducingOurselves,
         MinuteForMyselfA,

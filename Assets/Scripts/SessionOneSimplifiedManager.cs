@@ -39,8 +39,7 @@ public class SessionOneSimplifiedManager : SessionManager {
                     currentState = SessionState.OpeningB;
                 };
 
-		        customText.Setup(setupNextPhase, Constants.TextTimeToDisplay,
-		            "Today we will learn to recognize what happens to our bodies when we are a bit nervous, and together we will see also how to better handle all these sensations.\n\nBut...we will do it having fun, playing!\n\nYes, in fact Emoregulator is a game developed for people of your age. So, today you will do different activities, some directly at the computer, other externally. Soon, you will know your avatar and he will do exactly the same as you do. You will give him the name that you want, in fact, the avatar is yourself.");
+		        customText.Setup(setupNextPhase, Constants.TextTimeToDisplay, GlobalizationService.Instance.Globalize(GlobalizationService.OpeningAText));
                 customText.enabled = true;
                 currentState = SessionState.CustomText;
 				
@@ -57,8 +56,7 @@ public class SessionOneSimplifiedManager : SessionManager {
                     currentState = SessionState.OpeningC;
                 };
 
-                customText.Setup(setupNextPhase, Constants.TextTimeToDisplay,
-                    "Hi! Welcome to Emoregulator, the game to learn how to handle stress and to regulate our emotions.\nOften we have to cope with situations that make us feeling stressed and that put us a little in trouble ...\nMaybe for an important exam, or because we discuss with our parents, or because we have too many things to do all at once!\nSo, we are getting nervous, we don't know what is the best to do ... we feel stomachache, headache and we don't find the solution...");
+                customText.Setup(setupNextPhase, Constants.TextTimeToDisplay, GlobalizationService.Instance.Globalize(GlobalizationService.OpeningBText));
                 customText.enabled = true;
                 currentState = SessionState.CustomText;
 
@@ -75,8 +73,7 @@ public class SessionOneSimplifiedManager : SessionManager {
                     currentState = SessionState.OpeningD;
                 };
 
-                customText.Setup(setupNextPhase, Constants.TextTimeToDisplay,
-                    "Before each level, you will find the written instructions of what you have to do. Also, as you saw, you were equipped with some physiological sensors. We will not do any medical examinations ;-). Through the sensors you  can see how you are improving in your ability to manage anxiety. You will see your heart rate, and more you will be good, more points you'll get!\n\nThe game consists of several levels, to move to the next one, you should always complete the previous one and then click on the continue bottom at the right.");
+                customText.Setup(setupNextPhase, Constants.TextTimeToDisplay, GlobalizationService.Instance.Globalize(GlobalizationService.OpeningCText));
                 customText.enabled = true;
                 currentState = SessionState.CustomText;
 
@@ -90,6 +87,44 @@ public class SessionOneSimplifiedManager : SessionManager {
                     log.LogInformation("Ended Opening Screen D.");
                     //disable the custom text and proceed to the next state
                     customText.enabled = false;
+                    customText.enabled = false;
+                    currentState = SessionState.OpeningE;
+                };
+
+		        customText.Setup(setupNextPhase, Constants.TextTimeToDisplay, GlobalizationService.Instance.Globalize(GlobalizationService.OpeningDText));
+
+                customText.enabled = true;
+                currentState = SessionState.CustomText;
+
+                break;
+            case SessionState.OpeningE:
+                log.LogInformation("Starting Opening Screen E.");
+
+                //prepare custom text
+                setupNextPhase = () =>
+                {
+                    log.LogInformation("Ended Opening Screen E.");
+                    //disable the custom text and proceed to the next state
+                    customText.enabled = false;
+                    customText.enabled = false;
+                    currentState = SessionState.OpeningF;
+                };
+
+                customText.Setup(setupNextPhase, Constants.TextTimeToDisplay, GlobalizationService.Instance.Globalize(GlobalizationService.OpeningEText));
+
+                customText.enabled = true;
+                currentState = SessionState.CustomText;
+
+                break;
+            case SessionState.OpeningF:
+                log.LogInformation("Starting Opening Screen F.");
+
+                //prepare custom text
+                setupNextPhase = () =>
+                {
+                    log.LogInformation("Ended Opening Screen F.");
+                    //disable the custom text and proceed to the next state
+                    customText.enabled = false;
                     currentState = SessionState.IntroducingOurselves;
                     log.LogInformation("Started introducing ourselves.");
                     activityName = "Introducing Ourselves";
@@ -99,8 +134,7 @@ public class SessionOneSimplifiedManager : SessionManager {
                     nameInputField.Select();
                 };
 
-		        customText.Setup(setupNextPhase, Constants.TextTimeToDisplay,
-		            "Each time you will complete an exercise, you'll earn points.\nAt each level the difficulty will increase, so you can earn more and more!\nAt the top left you will see the points that you can achieve and then, those that actually you have received. \nIn this way, your avatar will become stronger and more skilled in dealing with stress and manage emotions!\n\nLast information ...Once you start exercising, you can always click on the question icon in the lower right and read again the instructions.\nNow, it's time to have fun!\nCome on, let's start!");
+                customText.Setup(setupNextPhase, Constants.TextTimeToDisplay, GlobalizationService.Instance.Globalize(GlobalizationService.OpeningFText));
 
                 customText.enabled = true;
                 currentState = SessionState.CustomText;
@@ -155,7 +189,7 @@ public class SessionOneSimplifiedManager : SessionManager {
                         log.LogInformation("Ended ibox introduction Screen B.");
                         Application.LoadLevel("SessionFourScene");
                     };
-                    customText.Setup(setupNextPhase, Constants.TextTimeToDisplay, "Well! We are ready to start having fun!\n\nClick to continue");
+                    customText.Setup(setupNextPhase, Constants.TextTimeToDisplay, GlobalizationService.Instance.Globalize(GlobalizationService.IBoxIntroductionBText));
                     customText.enabled = true;
                     currentState = SessionState.CustomText;
                 }
