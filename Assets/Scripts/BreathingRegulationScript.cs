@@ -7,19 +7,27 @@ public class BreathingRegulationScript : MonoBehaviour {
 
     public bool finished;
     public GameObject Avatar;
-    protected AnimatorController Animator;
+    protected Animator Animator;
+    private AnimatorControlerHashIDs HashIDs;
 
 
 	// Use this for initialization
-	void Start () {
-        
-	    this.Animator = this.Avatar.GetComponent<AnimatorController>();
+	void Start ()
+	{
+	    var sessionManager = GameObject.Find("SessionManager");
+	    this.HashIDs = sessionManager.GetComponent<AnimatorControlerHashIDs>();
+	    this.Animator = this.Avatar.GetComponent<Animator>();
+
+        //TODO: play breathing regulation animations and finish
+        this.Avatar.SetActive(true);
+        this.Animator.SetTrigger(this.HashIDs.BreathingExerciseTrigger);
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	    //TODO: play breathing regulation animations and finish
-        this.Avatar.SetActive(true);
+	    
+        
         //var breathingParameter = this.Animator.parameters.FirstOrDefault(p => p.name.Equals("BreathingRegulation"));
         //this.Animator.S
         ////check if the waiting time is elapsed

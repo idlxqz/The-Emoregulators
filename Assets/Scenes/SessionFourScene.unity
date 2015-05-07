@@ -1200,6 +1200,7 @@ GameObject:
   m_Component:
   - 224: {fileID: 2004168111}
   - 114: {fileID: 2004168112}
+  - 114: {fileID: 2004168113}
   m_Layer: 5
   m_Name: SessionManager
   m_TagString: Untagged
@@ -1510,6 +1511,22 @@ MonoBehaviour:
   activeShakingMeditation: {fileID: 693590937}
   progressiveMuscleRelaxation: {fileID: 1995764829}
   innerSensations: {fileID: 2028700826}
+--- !u!114 &2004168113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2004168110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ee64156080165f47819a95098223e00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IdleState: 0
+  BreathingExerciseState: 0
+  DancingState: 0
+  SqueezingBallState: 0
+  BreathingExerciseTrigger: 0
 --- !u!1 &2013681751 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100000, guid: c7a6de84866e87549a6ff4d6e06749ee, type: 3}
