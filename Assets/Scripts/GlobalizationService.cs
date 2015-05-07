@@ -53,7 +53,7 @@ public class GlobalizationService  {
 
     private GlobalizationService()
     {
-        this.CurrentLanguage = SystemLanguage.English;
+        this.CurrentLanguage = SystemLanguage.Italian;
 
         this.multiLanguageDictionary = new Dictionary<string, Dictionary<SystemLanguage, string>>();
 
