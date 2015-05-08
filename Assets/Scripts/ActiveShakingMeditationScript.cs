@@ -43,16 +43,13 @@ public class ActiveShakingMeditationScript : MonoBehaviour {
         else if (currentStage == SessionStage.UserDancing)
         {
             //TODO: show proper animation
-            if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 25, 200, 50), "Click to proceed"))
-                finished = true;
         }
         
 	}
 
-    void OnGUI() { 
+    void OnGUI() {
         if (currentStage == SessionStage.UserDancing)
-            if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 25, 200, 50), "Click to proceed"))
-                        finished = true;
+            UIManagerScript.EnableSkipping();
     }
 
     private void PlayOneShot()

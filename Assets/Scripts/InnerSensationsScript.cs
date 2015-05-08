@@ -5,7 +5,6 @@ public class InnerSensationsScript : MonoBehaviour {
 
     //game logic
     public bool finished;
-    public bool selectedOne;
 
     //swatches & boxes
     public Texture2D[] swatches;
@@ -40,8 +39,6 @@ public class InnerSensationsScript : MonoBehaviour {
                 swatchWidth,
                 swatchHeight);
         }
-
-        selectedOne = false;
 	}
 	
 	// Update is called once per frame
@@ -54,7 +51,7 @@ public class InnerSensationsScript : MonoBehaviour {
                 {
                     selectedIbox = iboxes[i];
                     log.LogInformation("Selected box: "+selectedIbox.name);
-                    selectedOne = true;
+                    UIManagerScript.EnableSkipping();
                 }
             }
         }
@@ -72,12 +69,6 @@ public class InnerSensationsScript : MonoBehaviour {
         for (int i = 0; i < swatches.Length; i++ )
         {
             GUI.DrawTexture(swatchRects[i], swatches[i]);
-        }
-
-        if (selectedOne)
-        {
-            if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height / 2 + 50, 200, 50), "Click to proceed"))
-                finished = true;
         }
     }
 }

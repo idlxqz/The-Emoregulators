@@ -60,6 +60,7 @@ public class MEMeterScript : MonoBehaviour {
             Rect workingRect = GetMemeterArea();
             if (workingRect.Contains(new Vector2(clickX, clickY)))
             {
+                bool emptySelected = false;
                 //determine the level selected
                 if (clickY < DetermineScreenPositionBoundary(workingRect, LEVEL_9, memeterSelected))
                 {
@@ -111,17 +112,20 @@ public class MEMeterScript : MonoBehaviour {
                     memeterSelected = memeterLevels[0];
                     log.LogInformation("Memeter selection level 0");
                 }
+                //empty level cannot be selected
                 else
                 {
-                    memeterSelected = memeterOut;
+                    emptySelected = true;
+                    //memeterSelected = memeterOut;
                     log.LogInformation("Memeter selection level empty");
                 }
 
                 //start countdown for closing activity
-                if (finalWaitStart == 0)
+                if (finalWaitStart == 0 && !emptySelected)
                 {
                     finalWaitStart = Time.time;
                     isSelected = true;
+                    UIManagerScript.EnableSkipping();
                 }
                 log.LogInformation("Clicked on memeter area.");
             }

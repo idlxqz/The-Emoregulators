@@ -21,7 +21,7 @@ public class BreathingRegulationScript : MonoBehaviour {
         //TODO: play breathing regulation animations and finish
         this.Avatar.SetActive(true);
         this.Animator.SetTrigger(this.HashIDs.BreathingExerciseTrigger);
-
+        UIManagerScript.EnableSkipping();
 	}
 	
 	// Update is called once per frame
@@ -35,10 +35,4 @@ public class BreathingRegulationScript : MonoBehaviour {
         //    finished = true;
 
 	}
-
-    void OnGUI()
-    {
-        if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 25, 200, 50), "Click to proceed"))
-            finished = true;
-    }
 }

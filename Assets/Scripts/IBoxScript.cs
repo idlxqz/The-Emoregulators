@@ -36,6 +36,9 @@ public class IBoxScript : MonoBehaviour {
         iboxArea.x = Screen.width - lateralOffset - iboxArea.width;
         instructionsArea.x = lateralOffset;
         instructionsArea.width = Screen.width - 2 * lateralOffset - iboxArea.width - instructionsIboxSpacing;
+
+        //immediatelly enable the skipping functionality 
+        UIManagerScript.EnableSkipping();
 	}
 	
 	// Update is called once per frame

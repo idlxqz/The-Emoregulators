@@ -76,6 +76,7 @@ public class CandleScript : MonoBehaviour {
             {
                 lightingUpStart = Time.time;
                 isLit = true;
+                UIManagerScript.EnableSkipping();
             }
             //select the current match frame
             if (matchClicked)
@@ -112,7 +113,8 @@ public class CandleScript : MonoBehaviour {
  			}
 			else if(isLit){
 				//select a random lit frame from the maximum framses
-				selectedFrame = Random.Range(2, 5); //fully lit frames
+				//selectedFrame = Random.Range(2, 5); //fully lit frames -> older version to be used with lightingup logic
+                selectedFrame = Random.Range(1, 5); //fully lit frames
 			}
 			else
 				selectedFrame = 0; //unlit frame
@@ -127,6 +129,8 @@ public class CandleScript : MonoBehaviour {
             {
                 matchClicked = true;
                 holdingMatch = true;
+                //play the sound of the match lighting up
+                this.GetComponent<AudioSource>().Play();
             }
         }
         //detect drag end
@@ -254,7 +258,10 @@ public class CandleScript : MonoBehaviour {
 
     private void SetMatchOriginalRectangle()
     {
-        matchArea = new Rect(Screen.width / 2 - matchArea.width / 2, Screen.height - matchFrames[0].height * matchScale - bottomPadding, matchFrames[0].width * matchScale, matchFrames[0].height * matchScale);
+        if(noInstructions)
+            matchArea = new Rect(Screen.width / 2 + frameArea.width, Screen.height - matchFrames[0].height * matchScale - bottomPadding, matchFrames[0].width * matchScale, matchFrames[0].height * matchScale);
+        else
+            matchArea = new Rect(Screen.width / 2 - matchArea.width / 2, Screen.height - matchFrames[0].height * matchScale - bottomPadding, matchFrames[0].width * matchScale, matchFrames[0].height * matchScale);
     }
 
     private bool CanCandleBeLit()

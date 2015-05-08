@@ -29,4 +29,28 @@ public class UIManagerScript : MonoBehaviour {
             sessionManager.Continue();
         }
     }
+
+    public static void EnableSkipping()
+    {
+        GameObject buttonContainer = GameObject.Find("SkipButton");
+
+        //a skipping button was found we can activate it
+        if (buttonContainer != null)
+        {
+            GameObject button = buttonContainer.transform.FindChild("Button").gameObject;
+            button.SetActive(true);
+        }
+    }
+
+    public static void DisableSkipping()
+    {
+        GameObject buttonContainer = GameObject.Find("SkipButton");
+
+        //a skipping button was found we can deactivate it
+        if (buttonContainer != null)
+        {
+            GameObject button = buttonContainer.transform.FindChild("Button").gameObject;
+            button.SetActive(false);
+        }
+    }
 }

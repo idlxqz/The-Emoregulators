@@ -7,7 +7,6 @@ public class SessionManager : MonoBehaviour {
     //states of the session
     public enum SessionState
     {
-        SessionTitle,
         Start,
         OpeningA,
         OpeningB,
@@ -28,6 +27,7 @@ public class SessionManager : MonoBehaviour {
         IBoxIntroduction,
         MeMeterReuse,
         CustomText,
+        CustomTitle,
         CloseSession,
         Mindfullness,
         BasicPH,
@@ -40,10 +40,6 @@ public class SessionManager : MonoBehaviour {
     //title support
     public bool hideInterface;
     public int sessionTitleDuration;
-    protected float sessionTitleStart;
-    public GUIStyle sessionTitleFormat;
-    public int titleLateralPadding;
-    public int titleRectHeight;
 
     public SessionState currentState;
 
@@ -53,6 +49,7 @@ public class SessionManager : MonoBehaviour {
     public IBoxScript ibox;
     public InputField nameInputField;
     public CustomTextScript customText;
+    public CustomTitleScript customTitleScript;
 
     public GameObject facilitatorFrame;
 
@@ -80,7 +77,9 @@ public class SessionManager : MonoBehaviour {
     //ibox display
     public bool displayIBox;
     public Texture2D iboxTexture;
+    public Texture2D heartTexture;
     public Rect iboxArea;
+    public int heartSpacing;
 
     //logging
     protected Logger log;
@@ -94,14 +93,31 @@ public class SessionManager : MonoBehaviour {
     protected string customTextContent;
     protected int customTextWaitTime;
 
-    //user gender
+    //continue button logic
+    protected bool canSkip;
+
+    //user gender, avatar and score
     public enum Gender
     {
         Male,
         Female
     }
 
-    public Gender userGender;
+    public GameObject maleAvatar;
+    public GameObject femaleAvatar;
+    public static Gender userGender; //share it accross scenes 
+    public GameObject GetPlayerAvatar
+    {
+        get
+        {
+            if (userGender == Gender.Female)
+                return femaleAvatar;
+            else
+                return maleAvatar;
+        }
+    }
+    public static int playerScore = 0; //share it accross scenes 
+    public GUIStyle scoreFormat;
 
     // Use this for initialization
     void Start()
@@ -111,6 +127,8 @@ public class SessionManager : MonoBehaviour {
         memeter = GameObject.Find("MeMeter").GetComponent<MEMeterScript>();
         ibox = GameObject.Find("IBox").GetComponent<IBoxScript>();
         customText = GameObject.Find("CustomText").GetComponent<CustomTextScript>();
+        customTitleScript = GameObject.Find("CustomTitle").GetComponent<CustomTitleScript>();
+
         activityArea = new Rect(Screen.width - 180, 22, 150, 50);
         activityFormat.wordWrap = true;
         activityFormat.alignment = TextAnchor.MiddleCenter;
@@ -152,12 +170,14 @@ public class SessionManager : MonoBehaviour {
                 cursorSizeY),
                 originalCursor);
         }*/
-        if (!hideInterface)
+        if (!hideInterface && currentState != SessionState.CustomTitle)
         {
             //draw ibox
             if (displayIBox)
             {
                 GUI.DrawTexture(iboxArea, iboxTexture);
+                GUI.DrawTexture(new Rect(iboxArea.xMin + iboxArea.width + heartSpacing, iboxArea.yMin, iboxArea.width, iboxArea.height), heartTexture);
+                GUI.Label(new Rect(iboxArea.xMin, iboxArea.yMin + iboxArea.height, iboxArea.width * 2 + heartSpacing, 15), ""+playerScore, scoreFormat);
             }
             //draw title and subtitle of the session
             GUI.Label(titleArea, sessionTitle, titleFormat);
@@ -167,23 +187,14 @@ public class SessionManager : MonoBehaviour {
             GUI.Label(activityArea, activityName, activityFormat);
         }
 
-        //drawt title big
-        if (currentState == SessionState.SessionTitle)
-        {
-            GUI.Label(
-                new Rect(titleLateralPadding, Screen.height / 2 - titleRectHeight / 2, Screen.width - titleLateralPadding * 2, titleRectHeight),
-                sessionTitle,
-                sessionTitleFormat);
-        }
-
         //child specific behavior
         OnGUILogic();
     }
 
     public virtual void Continue()
     {
+        canSkip = true;
     }
-
     
     protected virtual void StartLogic() {
         //to be implemented by child classes

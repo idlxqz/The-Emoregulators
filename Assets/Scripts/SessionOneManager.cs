@@ -4,14 +4,16 @@ using UnityEngine.UI;
 
 public class SessionOneManager : SessionManager {
 
-    public GameObject maleAvatar;
-    public GameObject femaleAvatar;
-
 	// Use this for initialization
 	protected override void StartLogic () {
-        sessionTitleStart = Time.time;
-        currentState = SessionState.SessionTitle;
+        System.Action nextPhase = () =>
+        {
+            hideInterface = false;
+            currentState = SessionState.Start;
+        };
+        customTitleScript.Setup(nextPhase, sessionTitle);
         hideInterface = true;
+        currentState = SessionState.CustomTitle;
 	}
 	
 	// Update is called once per frame
@@ -19,13 +21,6 @@ public class SessionOneManager : SessionManager {
     {
 		//coordinate the session state
 		switch (currentState) {
-            case SessionState.SessionTitle:
-                if ((Time.time - sessionTitleStart) >= sessionTitleDuration)
-                {
-                    hideInterface = false;
-                    currentState = SessionState.Start;
-                }
-                break;
             case SessionState.Start:
 			//activate the cande cerimony
 			log.LogInformation("Started candle lighting cerimony.");
