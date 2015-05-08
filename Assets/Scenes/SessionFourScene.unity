@@ -1286,7 +1286,7 @@ MonoBehaviour:
   finished: 0
   isLit: 0
   simpleCandleAnimation: 0
-  noInstructions: 1
+  noInstructions: 0
   waitClickToClose: 0
   isClosing: 0
   frames:
@@ -1377,7 +1377,7 @@ MonoBehaviour:
     m_Font: {fileID: 12800000, guid: 000506834e9342e4f99f74800dfbfc27, type: 3}
     m_FontSize: 25
     m_FontStyle: 0
-    m_Alignment: 1
+    m_Alignment: 0
     m_WordWrap: 1
     m_RichText: 1
     m_TextClipping: 0
@@ -1486,7 +1486,7 @@ RectTransform:
   m_RootOrder: 15
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 0, y: -290}
+  m_AnchoredPosition: {x: 0, y: -250}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: .5, y: .5}
 --- !u!1001 &1619101441
@@ -1835,6 +1835,7 @@ MonoBehaviour:
   customTitleScript: {fileID: 0}
   facilitatorFrame: {fileID: 0}
   introducingOurselves: {fileID: 0}
+  ContinueButtonText: {fileID: 717584570}
   originalCursor: {fileID: 2800000, guid: 212aedcf412007f48947fc37606b7201, type: 3}
   cursorSizeX: 32
   cursorSizeY: 32
@@ -1957,8 +1958,6 @@ MonoBehaviour:
     m_FixedHeight: 0
     m_StretchWidth: 1
     m_StretchHeight: 0
-  sessionTitle: Physical Regulation
-  sessionSubTitle: Session 4
   activityArea:
     serializedVersion: 2
     x: 50

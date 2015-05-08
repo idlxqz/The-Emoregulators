@@ -12,22 +12,26 @@ public class SessionFourManager : SessionManager {
 
     // Use this for initialization
     protected override void StartLogic()
-    {   
-        
-        System.Action nextPhase = () =>
-        {
-            hideInterface = false;
-            currentState = SessionState.Start;
-        };
-        customTitleScript.Setup(nextPhase, sessionTitle);
-        hideInterface = true;
-
+    {
         breathingRegulation = GameObject.Find("BreathingRegulation").GetComponent<BreathingRegulationScript>();
         activeShakingMeditation = GameObject.Find("ActiveShakingMeditation").GetComponent<ActiveShakingMeditationScript>();
         progressiveMuscleRelaxation = GameObject.Find("ProgressiveMuscleRelaxation").GetComponent<ProgressiveMuscleRelaxationScript>();
         innerSensations = GameObject.Find("InnerSensations").GetComponent<InnerSensationsScript>();
 
         innerSensations.log = progressiveMuscleRelaxation.log = log;
+
+        this.sessionTitle = GlobalizationService.Instance.Globalize(GlobalizationService.Session4Title);
+        this.sessionSubTitle = GlobalizationService.Instance.Globalize(GlobalizationService.Session4SubTitle);
+
+        System.Action nextPhase = () =>
+        {
+            hideInterface = false;
+            currentState = SessionState.CandleCeremonyTitle;
+        };
+        customTitleScript.Setup(nextPhase, sessionTitle);
+        hideInterface = true;
+
+        
         currentState = SessionState.CustomTitle;
     }
 
@@ -39,17 +43,20 @@ public class SessionFourManager : SessionManager {
         //coordinate the session state
         switch (currentState)
         {
-            case SessionState.Start:
+            case SessionState.CandleCeremonyTitle:
+                log.LogInformation("Started candle ceremony title");
                 //prepare custom title
                 setupNextPhaseCustomTitle = () =>
                 {
+                    log.LogInformation("Ended candle cermony title");
                     //activate the candle cerimony
                     log.LogInformation("Started candle lighting cerimony.");
-                    activityName = "Candle Lighting Cerimony";
+                    activityName = GlobalizationService.Instance.Globalize(GlobalizationService.CandleCeremonyTitle);
+                    this.candle.instructions = GlobalizationService.Instance.Globalize(GlobalizationService.CandleCeremonyText);
                     candle.enabled = true;
                     currentState = SessionState.CandleCeremony;
                 };
-                customTitleScript.Setup(setupNextPhaseCustomTitle, "Candle Lighting Cerimony");
+                customTitleScript.Setup(setupNextPhaseCustomTitle, GlobalizationService.Instance.Globalize(GlobalizationService.CandleCeremonyTitle));
                 currentState = SessionState.CustomTitle;
                 break;
             case SessionState.CandleCeremony:
@@ -65,7 +72,7 @@ public class SessionFourManager : SessionManager {
                     {
                         //start introducing ourselves
                         log.LogInformation("Started a MinuteForMyselfA.");
-                        activityName = "A Minute for Myself";
+                        activityName = GlobalizationService.Instance.Globalize(GlobalizationService.MinuteForMyselfTitle);
 
                         //prepare custom text of introduction
                         setupNextPhaseCustomText = () =>
@@ -77,11 +84,11 @@ public class SessionFourManager : SessionManager {
                         
                             currentState = SessionState.MinuteForMyselfB;
                         };
-                        customText.Setup(setupNextPhaseCustomText, 3.0f, "Let's start now with the more practical exercises!");
+                        customText.Setup(setupNextPhaseCustomText, 3.0f, GlobalizationService.Instance.Globalize(GlobalizationService.MinuteForMyselfAText));
                         customText.enabled = true;
                         currentState = SessionState.CustomText;
                     };
-                    customTitleScript.Setup(setupNextPhaseCustomTitle, "A Minute for Myself");
+                    customTitleScript.Setup(setupNextPhaseCustomTitle, GlobalizationService.Instance.Globalize(GlobalizationService.MinuteForMyselfTitle));
                     currentState = SessionState.CustomTitle;
                 }
                 break;
@@ -96,7 +103,7 @@ public class SessionFourManager : SessionManager {
 
                     currentState = SessionState.MinuteForMyselfC;
                 };
-                customText.Setup(setupNextPhaseCustomText, customTextWaitTime, "Stage 1: Slow down your body and your thoughts\n\nTake a minute and focus on yourself, try to slow down your thoughts, let your mind and body relax, and pay attention to the natural rhythm of your breathing…\n\nYou may close your eyes if you wish for a few seconds, take a slow deep breath. Just focus on the this natural action you are doing every day: breathing, and notice if it feels different to breath with focuse and attention.");
+                customText.Setup(setupNextPhaseCustomText, customTextWaitTime, GlobalizationService.Instance.Globalize(GlobalizationService.MinuteForMyselfBText));
                 customText.enabled = true;
                 currentState = SessionState.CustomText;
                 break;
@@ -111,7 +118,7 @@ public class SessionFourManager : SessionManager {
 
                     currentState = SessionState.MinuteForMyselfD;
                 };
-                customText.Setup(setupNextPhaseCustomText, customTextWaitTime, "Stage 2: Orient - Focus on yourselves\n\nTry and focus yourselves in space and pay attention to what you feel, what you're doing, on the space, what is around you, and what is in the room … remind yourselves that you are in a safe and protected place");
+                customText.Setup(setupNextPhaseCustomText, customTextWaitTime, GlobalizationService.Instance.Globalize(GlobalizationService.MinuteForMyselfCText));
                 customText.enabled = true;
                 currentState = SessionState.CustomText;
                 break;
@@ -122,18 +129,15 @@ public class SessionFourManager : SessionManager {
                     log.LogInformation("Ended A MinuteForMyselfD message.");
                     //disable the custom text and proceed to the next state
                     customText.enabled = false;
-                    //prepare custom title
-                    setupNextPhaseCustomTitle = () =>
-                    {
-                        log.LogInformation("Started MeMeter activity");
-                        memeter.enabled = true;
-                        currentState = SessionState.MeMeter;
-                        proceed = false;
-                    };
-                    customTitleScript.Setup(setupNextPhaseCustomTitle, "MeMeter");
-                    currentState = SessionState.CustomTitle;
+                   
+                    log.LogInformation("Started MeMeter activity");
+                    memeter.instructions = GlobalizationService.Instance.Globalize(GlobalizationService.MeMeterText);
+                    memeter.showInstructions = true;
+                    memeter.enabled = true;
+                    currentState = SessionState.MeMeter;
+                    proceed = false;
                 };
-                customText.Setup(setupNextPhaseCustomText, customTextWaitTime, "Stage 3: Scan and rate yourselves\n\nTry and evaluate the amount of tension you have in the moment according to the ME-Meter.\nPay attention to how it feels in your body to be tense and what kind of thoughts come to your mind when you are tense");
+                customText.Setup(setupNextPhaseCustomText, customTextWaitTime, GlobalizationService.Instance.Globalize(GlobalizationService.MinuteForMyselfDText));
                 customText.enabled = true;
                 currentState = SessionState.CustomText;
                 break;

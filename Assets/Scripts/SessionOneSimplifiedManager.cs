@@ -1,16 +1,29 @@
-﻿using UnityEngine;
+﻿using System.Diagnostics;
+using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using Debug = UnityEngine.Debug;
 
-public class SessionOneSimplifiedManager : SessionManager {
+public class SessionOneSimplifiedManager : SessionManager
+{
+
+    public Text maleButtonText;
+    public Text femaleButtonText;
 
 	// Use this for initialization
-	protected override void StartLogic () {
+	protected override void StartLogic ()
+	{
+	    this.sessionTitle = GlobalizationService.Instance.Globalize(GlobalizationService.Session1Title);
+	    this.sessionSubTitle = GlobalizationService.Instance.Globalize(GlobalizationService.Session1SubTitle);
+
+        maleButtonText.text = GlobalizationService.Instance.Globalize(GlobalizationService.MaleButton);
+        femaleButtonText.text = GlobalizationService.Instance.Globalize(GlobalizationService.FemaleButton); 
+
         System.Action nextPhase  = () => {
             hideInterface = false;
             currentState = SessionState.OpeningA;
         };
-        customTitleScript.Setup(nextPhase, sessionTitle);
+        customTitleScript.Setup(nextPhase, GlobalizationService.Instance.Globalize(GlobalizationService.OpeningTitle));
 
         hideInterface = true;
         currentState = SessionState.CustomTitle;
@@ -24,7 +37,7 @@ public class SessionOneSimplifiedManager : SessionManager {
 		//coordinate the session state
 		switch (currentState) {
             case SessionState.OpeningA:
-		        activityName = "Opening";
+                activityName = GlobalizationService.Instance.Globalize(GlobalizationService.OpeningTitle);
                 log.LogInformation("Starting Opening Screen A.");
                 
                 //prepare custom text
@@ -35,9 +48,7 @@ public class SessionOneSimplifiedManager : SessionManager {
                     currentState = SessionState.OpeningB;
                 };
 
-		        customText.Setup(setupNextPhaseCustomText, 
-                    Constants.TextTimeToDisplay,
-                    new string[] { GlobalizationService.Instance.Globalize(GlobalizationService.OpeningAText), "\n\nbla bla bla", "\n\nbla bla bla" });
+		        customText.Setup(setupNextPhaseCustomText, Constants.TextTimeToDisplay,GlobalizationService.Instance.Globalize(GlobalizationService.OpeningAText));
                 customText.enabled = true;
                 currentState = SessionState.CustomText;
 				
@@ -104,7 +115,6 @@ public class SessionOneSimplifiedManager : SessionManager {
                     log.LogInformation("Ended Opening Screen E.");
                     //disable the custom text and proceed to the next state
                     customText.enabled = false;
-                    customText.enabled = false;
                     currentState = SessionState.OpeningF;
                 };
 
@@ -116,32 +126,37 @@ public class SessionOneSimplifiedManager : SessionManager {
             case SessionState.OpeningF:
                 log.LogInformation("Starting Opening Screen F.");
 
+                //prepare custom text
+                setupNextPhaseCustomText = () =>
+                {
+                    log.LogInformation("Ended Opening Screen F.");
+                    //disable the custom text and proceed to the next state
+                    customText.enabled = false;
+                    currentState = SessionState.IntroducingOurselvesTitle;
+                };
+
+                customText.Setup(setupNextPhaseCustomText, Constants.TextTimeToDisplay, GlobalizationService.Instance.Globalize(GlobalizationService.OpeningFText));
+
+                customText.enabled = true;
+                currentState = SessionState.CustomText;
+                break;
+            case SessionState.IntroducingOurselvesTitle:
+                log.LogInformation("Starting Introducing Ourselves Title");
+
                 //prepare custom title
                 setupNextPhaseCustomTitle = () =>
                 {
-                    //prepare custom text
-                    setupNextPhaseCustomText = () =>
-                    {
-                        log.LogInformation("Ended Opening Screen F.");
-                        //disable the custom text and proceed to the next state
-                        customText.enabled = false;
-                        currentState = SessionState.IntroducingOurselves;
-                        log.LogInformation("Started introducing ourselves.");
-                        activityName = "Introducing Ourselves";
-                        introducingOurselves.SetActive(true);
-                        proceed = false;
-                        nameInputField.ActivateInputField();
-                        nameInputField.Select();
-                    };
-
-                    customText.Setup(setupNextPhaseCustomText, Constants.TextTimeToDisplay, GlobalizationService.Instance.Globalize(GlobalizationService.OpeningFText));
-
-                    customText.enabled = true;
-                    currentState = SessionState.CustomText;
+                    currentState = SessionState.IntroducingOurselves;
+                    log.LogInformation("Ended introducing ourselves Title.");
+                    activityName = GlobalizationService.Instance.Globalize(GlobalizationService.IntroducingOurselvesTitle);
+                    introducingOurselves.SetActive(true);
+                    proceed = false;
+                    nameInputField.ActivateInputField();
+                    nameInputField.Select();
                 };
-                customTitleScript.Setup(setupNextPhaseCustomTitle, "Introducing Ourselves");
+                customTitleScript.Setup(setupNextPhaseCustomTitle, GlobalizationService.Instance.Globalize(GlobalizationService.IntroducingOurselvesTitle));
                 currentState = SessionState.CustomTitle;
-                break;
+		        break;
             case SessionState.IntroducingOurselves:
                 if (proceed)
                 {
@@ -152,17 +167,7 @@ public class SessionOneSimplifiedManager : SessionManager {
                     //GUIUtility.keyboardControl = 0; //ensure lose focus
                     introducingOurselves.SetActive(false);
                     proceed = false;
-                    //prepare custom title
-                    setupNextPhaseCustomTitle = () =>
-                    {
-                        //start memeter introduction
-                        log.LogInformation("Started IBox introduction.");
-                        activityName = "IBox 1: Introduction";
-                        ibox.enabled = true;
-                        currentState = SessionState.IBoxIntroduction;
-                    };
-                    customTitleScript.Setup(setupNextPhaseCustomTitle, "IBox 1: Introduction");
-                    currentState = SessionState.CustomTitle;
+                    currentState = SessionState.IBoxIntroductionTitle;
                 }
                 else
                 {
@@ -179,6 +184,21 @@ public class SessionOneSimplifiedManager : SessionManager {
                     }
                 }
 			    break;
+            case SessionState.IBoxIntroductionTitle:
+                log.LogInformation("Started IBox Introduction Title");
+                //prepare custom title
+                setupNextPhaseCustomTitle = () =>
+                {
+                    log.LogInformation("Ended IBox Introduction Title");
+                    //start memeter introduction
+                    log.LogInformation("Started IBox introduction.");
+                    activityName = GlobalizationService.Instance.Globalize(GlobalizationService.IBoxIntroductionTitle);
+                    ibox.enabled = true;
+                    currentState = SessionState.IBoxIntroduction;
+                };
+                customTitleScript.Setup(setupNextPhaseCustomTitle, GlobalizationService.Instance.Globalize(GlobalizationService.IBoxIntroductionTitle));
+                currentState = SessionState.CustomTitle;
+		        break;
             case SessionState.IBoxIntroduction:
                 if (ibox.finished || canSkip)
                 {

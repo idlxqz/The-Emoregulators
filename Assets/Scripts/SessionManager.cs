@@ -14,16 +14,21 @@ public class SessionManager : MonoBehaviour {
         OpeningD,
         OpeningE,
         OpeningF,
-        CandleCeremony,
+        IntroducingOurselvesTitle,
         IntroducingOurselves,
+        MinuteForMyselfTitle,
         MinuteForMyselfA,
         MinuteForMyselfB,
         MinuteForMyselfC,
         MinuteForMyselfD,
         MeMeter,
+        CandleCeremonyTitle,
+        CandleCeremony,
+        FacialMindfulnessTitle,
         FacialMindfulnessA,
         FacialMindfulnessB,
         FacialMindfulnessC,
+        IBoxIntroductionTitle,
         IBoxIntroduction,
         MeMeterReuse,
         CustomText,
@@ -55,6 +60,8 @@ public class SessionManager : MonoBehaviour {
 
     public GameObject introducingOurselves;
 
+    public Text ContinueButtonText;
+
     //cursor
     public Texture2D originalCursor;
     public int cursorSizeX = 32; // set to width of your cursor texture 
@@ -66,8 +73,8 @@ public class SessionManager : MonoBehaviour {
     private Rect subTitleArea;
     public GUIStyle titleFormat;
     public GUIStyle subTitleFormat;
-    public string sessionTitle;
-    public string sessionSubTitle;
+    protected string sessionTitle;
+    protected string sessionSubTitle;
 
     //activity display formating
     public Rect activityArea;
@@ -145,6 +152,8 @@ public class SessionManager : MonoBehaviour {
         int width = 100;
         titleArea = new Rect(Screen.width / 2 - width / 2, 10, width, 30);
         subTitleArea = new Rect(Screen.width / 2 - width / 2, 40, width, 30);
+
+        this.ContinueButtonText.text = GlobalizationService.Instance.Globalize(GlobalizationService.ContinueButton);
 
         //child specific initializations
         StartLogic();

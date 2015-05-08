@@ -24,6 +24,12 @@ public class GlobalizationService  {
 
     #region Globalization Constants
     public const string ContinueButton = "ContinueButton";
+    public const string MaleButton = "MaleButton";
+    public const string FemaleButton = "FemaleButton";
+    public const string Session1Title = "Session1Title";
+    public const string Session1SubTitle = "Session1SubTitle";
+    public const string Session4Title = "Session4Title";
+    public const string Session4SubTitle = "Session4SubTitle";
     public const string OpeningTitle = "OpeningTitle";
     public const string OpeningAText = "OpeningAText";
     public const string OpeningBText = "OpeningBText";
@@ -37,6 +43,14 @@ public class GlobalizationService  {
     public const string IBoxIntroductionTitle = "IBoxIntroductionTitle";
     public const string IBoxIntroductionAText = "IBoxIntroductionAText";
     public const string IBoxIntroductionBText = "IBoxIntroductionBText";
+    public const string CandleCeremonyTitle = "CandleCeremonyTitle";
+    public const string CandleCeremonyText = "CandleCeremonyText";
+    public const string MinuteForMyselfTitle = "MinuteForMyselfTitle";
+    public const string MinuteForMyselfAText = "MinuteForMyselfAText";
+    public const string MinuteForMyselfBText = "MinuteForMyselfBText";
+    public const string MinuteForMyselfCText = "MinuteForMyselfCText";
+    public const string MinuteForMyselfDText = "MinuteForMyselfDText";
+    public const string MeMeterText = "MeMeterText";
     #endregion
 
     public string Globalize(string globalizationKey)
@@ -53,7 +67,7 @@ public class GlobalizationService  {
 
     private GlobalizationService()
     {
-        this.CurrentLanguage = SystemLanguage.Italian;
+        this.CurrentLanguage = SystemLanguage.English;
 
         this.multiLanguageDictionary = new Dictionary<string, Dictionary<SystemLanguage, string>>();
 
@@ -61,6 +75,42 @@ public class GlobalizationService  {
         {
             {SystemLanguage.English, "Continue"},
             {SystemLanguage.Italian, "Continuare"}
+        });
+
+        this.multiLanguageDictionary.Add(MaleButton, new Dictionary<SystemLanguage, string>
+        {
+            {SystemLanguage.English, "Male"},
+            {SystemLanguage.Italian, "Ragazzo"}
+        });
+
+        this.multiLanguageDictionary.Add(FemaleButton, new Dictionary<SystemLanguage, string>
+        {
+            {SystemLanguage.English, "Female"},
+            {SystemLanguage.Italian, "Ragazza"}
+        });
+
+        this.multiLanguageDictionary.Add(Session1Title, new Dictionary<SystemLanguage, string>
+        {
+            {SystemLanguage.English, "Introduction"},
+            {SystemLanguage.Italian, "Introduzione"}
+        });
+
+        this.multiLanguageDictionary.Add(Session1SubTitle, new Dictionary<SystemLanguage, string>
+        {
+            {SystemLanguage.English, "Session 1"},
+            {SystemLanguage.Italian, "Session 1"}
+        });
+
+        this.multiLanguageDictionary.Add(Session4Title, new Dictionary<SystemLanguage, string>
+        {
+            {SystemLanguage.English, "Physical Regulation"},
+            {SystemLanguage.Italian, "La Regolazione Fisica"}
+        });
+
+        this.multiLanguageDictionary.Add(Session4SubTitle, new Dictionary<SystemLanguage, string>
+        {
+            {SystemLanguage.English, "Session 4"},
+            {SystemLanguage.Italian, "Session 4"}
         });
 
         this.multiLanguageDictionary.Add(OpeningTitle, new Dictionary<SystemLanguage, string>
@@ -139,6 +189,54 @@ public class GlobalizationService  {
         {
             {SystemLanguage.English, "Well!\nWe are ready to start having fun! Click to continue."},
             {SystemLanguage.Italian, "Esther, please write down this part in italian please."}
+        });
+
+        this.multiLanguageDictionary.Add(CandleCeremonyTitle, new Dictionary<SystemLanguage, string>
+        {
+            {SystemLanguage.English, "Let's start: turn it on!"},
+            {SystemLanguage.Italian, "Si inizia: accendiamola!"}
+        });
+
+        this.multiLanguageDictionary.Add(CandleCeremonyText, new Dictionary<SystemLanguage, string>
+        {
+            {SystemLanguage.English, "We are finally in our game.\nBefore getting to the core, we must do something important.\n\nThis candle represents the beginning of our activities.\nTurn it on with the match!\n\nWhen we will finish, you will blow out this candle."},
+            {SystemLanguage.Italian, "Eccoci finalmente al nostro gioco.\nPrima di entrare nel vivo dobbiamo fare una cosa importante.\n\nQuesta candela rappresenta l'inizio della nostra attività.\nAccendila con il fiammifero!\n\nQuando avremo finito, la spegnerai."}
+        });
+
+        this.multiLanguageDictionary.Add(MinuteForMyselfTitle, new Dictionary<SystemLanguage, string>
+        {
+            {SystemLanguage.English, "A Minute for Myself - M&M"},
+            {SystemLanguage.Italian, "A Minute for Myself - M&M"}
+        });
+
+        this.multiLanguageDictionary.Add(MinuteForMyselfAText, new Dictionary<SystemLanguage, string>
+        {
+            {SystemLanguage.English, "Let's start now with the more practical exercises!"},
+            {SystemLanguage.Italian, "Iniziamo ora con gli esercizi più pratici!"}
+        });
+
+        this.multiLanguageDictionary.Add(MinuteForMyselfBText, new Dictionary<SystemLanguage, string>
+        {
+            {SystemLanguage.English, "The exercise is comprised of three stages:\n\nStage 1: Slow down your body and your thoughts\nTake a minute and focus on yourself, try to slow down your thoughts, let your mind and body relax, and pay attention to the natural rhythm of your breathing…You may close your eyes if you wish for a few seconds, take a slow deep breath. Just focus on the this natural action you are doing every day: breathing, and notice if it feels different to breath with focuse and attention."},
+            {SystemLanguage.Italian, "L'M&M è composto da 3 fasi:\n\nFase 1: Calma il tuo corpo e I tuoi pensieri\nPrenditi un minuto e concentrati su te stesso, prova a calmare i tuoi pensieri, lascia rilassare il tuo corpo e i tuoi pensieri, e poni attenzione al ritmo naturale del tuo respiro… Se vuoi, puoi chiudere gli occhi per qualche secondo, fai un respiro lento e profondo. Semplicemente, focalizzati su questa naturale azione che fai ogni giorno: respira, e nota se senti un respiro diverso, quando ti focalizzi e poni attenzione."}
+        });
+
+        this.multiLanguageDictionary.Add(MinuteForMyselfCText, new Dictionary<SystemLanguage, string>
+        {
+            {SystemLanguage.English, "Stage 2: Orient - Focus on yourselves\nTry and focus yourselves in space and pay attention to what you feel, what you're doing, on the space, what is around you, and what is in the room … remind yourselves that you are in a safe and protected place."},
+            {SystemLanguage.Italian, "Fase 2: Orient – Focalizzati su te stesso\nProva a concentrarti su te stesso nello spazio, e poni attenzione a cosa senti, a cosa fai, allo spazio, a ciò che è intorno a te, a ciò che c’è nella stanza...ricorda a te stesso che sei in uno spazio sicuro e protetto."}
+        });
+
+        this.multiLanguageDictionary.Add(MinuteForMyselfDText, new Dictionary<SystemLanguage, string>
+        {
+            {SystemLanguage.English, "Stage 3: Scan and rate yourselves\nTry and evaluate the amount of relaxation/tension you have in the moment according to the ME-Meter. Pay attention to how it feels in your body to be tense and what kind of thoughts come to your mind when you are tense."},
+            {SystemLanguage.Italian, "Fase 3: Analizza e valuta te stesso\nProva a valutare il tuo livello di tensione, al momento, secondo il ME-METER. Poni attenzione a cosa senti a livello corporeo quando sei teso, e quali pensieri hai quando sei in tensione."}
+        });
+
+        this.multiLanguageDictionary.Add(MeMeterText, new Dictionary<SystemLanguage, string>
+        {
+            {SystemLanguage.English, "Now mark on the ME-METER your level of tension, from 1 to 10. (1 – very relaxed, 10 very tense)."},
+            {SystemLanguage.Italian, "Adesso segna sul ME-METER il tuo livello di tensione, ora, da 1 a 10."}
         });
     }
 
