@@ -166,11 +166,15 @@ public class SessionFourManager : SessionManager {
                         
                             currentState = SessionState.FacialMindfulnessB;
                         };
-                        customText.Setup(setupNextPhaseCustomText, customTextWaitTime, "Now let's focus on the face!\n\nNote the different parts of your face, your forehead, chin, mouth, eyes.\nThe different parts of your face are relaxed or tense? Where do you feel more tense? Do you have some other feelings? What is your facial expression? Try to notice without changing expression.");
+                        customText.Setup(setupNextPhaseCustomText, customTextWaitTime, 
+                            new []{
+                                GlobalizationService.Instance.Globalize(GlobalizationService.FacialMindfulnessA1Text),
+                                GlobalizationService.Instance.Globalize(GlobalizationService.FacialMindfulnessA2Text)
+                            });
                         customText.enabled = true;
                         currentState = SessionState.CustomText;
                     };
-                    customTitleScript.Setup(setupNextPhaseCustomTitle, "Facial Mindfulness");
+                    customTitleScript.Setup(setupNextPhaseCustomTitle, GlobalizationService.Instance.Globalize(GlobalizationService.FacialMindfulnessTitle));
                     currentState = SessionState.CustomTitle;
                 }
                 break;
@@ -185,7 +189,12 @@ public class SessionFourManager : SessionManager {
 
                     currentState = SessionState.FacialMindfulnessC;
                 };
-                customText.Setup(setupNextPhaseCustomText, customTextWaitTime, "Now select from the list the parts of the face where you feel more tense: your avatar will be colored red in the corresponding areas.\n\nThen select the parts where you feel more relaxed: your avatar will be colored blue in the corresponding areas");
+                customText.Setup(setupNextPhaseCustomText, customTextWaitTime,
+                    new[]
+                    {
+                        GlobalizationService.Instance.Globalize(GlobalizationService.FacialMindfulnessB1Text),
+                        GlobalizationService.Instance.Globalize(GlobalizationService.FacialMindfulnessB2Text)
+                    });
                 customText.enabled = true;
                 currentState = SessionState.CustomText;
                 break;
@@ -204,7 +213,7 @@ public class SessionFourManager : SessionManager {
                         currentState = SessionState.BreathingRegulation;
                         breathingRegulation.enabled = true;
                     };
-                    customTitleScript.Setup(setupNextPhaseCustomTitle, "Breathing Regulation");
+                    customTitleScript.Setup(setupNextPhaseCustomTitle, GlobalizationService.Instance.Globalize(GlobalizationService.BreathingRegulationTitle));
                     currentState = SessionState.CustomTitle;
                 };
                 customText.Setup(setupNextPhaseCustomText, 3, "TODO: Replace this screen with a picture of the face...");
