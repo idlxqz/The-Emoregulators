@@ -29,7 +29,7 @@ public class ActiveShakingMeditationScript : MonoBehaviour {
         if (currentStage == SessionStage.AvatarDancing)
         {
             //TODO: show avatar dancing also
-            if (!isPlaying() && !triggeredMusic)
+            if (!triggeredMusic)
             {
                 PlayOneShot();
                 triggeredMusic = true;

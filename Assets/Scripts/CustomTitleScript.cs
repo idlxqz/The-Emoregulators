@@ -29,7 +29,7 @@ public class CustomTitleScript : MonoBehaviour {
     void OnGUI()
     {
         if ((Time.time - titleStart) < titleDuration && !finished)
-        {
+        {   
             GUI.Label(
                     new Rect(titleLateralPadding, Screen.height / 2 - titleRectHeight / 2, Screen.width - titleLateralPadding * 2, titleRectHeight),
                     title,

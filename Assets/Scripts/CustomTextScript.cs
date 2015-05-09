@@ -12,9 +12,6 @@ public class CustomTextScript : MonoBehaviour {
     //memeter and instructions text areas definition
     Rect instructionsArea;
 
-    //centralized logging
-    public Logger log;
-
     //instruction control
     public System.Action setupNextPhase;
     public string[] instructions;

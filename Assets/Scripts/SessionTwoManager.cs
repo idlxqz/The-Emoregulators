@@ -25,7 +25,6 @@ public class SessionTwoManager : SessionManager {
         firstMeMeterUse = true;
         mindfullness = GameObject.Find("Mindfullness").GetComponent<MindfullnessScript>();
         basicPh = GameObject.Find("BasicPh").GetComponent<BasicPhScript>();
-        basicPh.log = log;
 
         currentState = SessionState.CustomTitle;
     }

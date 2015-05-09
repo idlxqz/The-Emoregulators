@@ -15,9 +15,6 @@ public class IBoxScript : MonoBehaviour {
     public Rect iboxArea;
     public Rect instructionsArea;
 
-    //centralized logging
-    public Logger log;
-
     //instruction control
     public string instructions;
 

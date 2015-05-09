@@ -8,6 +8,7 @@ public class SessionManager : MonoBehaviour {
     public enum SessionState
     {
         Start,
+        ChooseBackground,
         OpeningA,
         OpeningB,
         OpeningC,
@@ -28,6 +29,7 @@ public class SessionManager : MonoBehaviour {
         FacialMindfulnessA,
         FacialMindfulnessB,
         FacialMindfulnessC,
+        FacialMindfulnessD,
         IBoxIntroductionTitle,
         IBoxIntroduction,
         MeMeterReuse,
@@ -126,6 +128,17 @@ public class SessionManager : MonoBehaviour {
     public static int playerScore = 0; //share it accross scenes 
     public GUIStyle scoreFormat;
 
+    //background configurations
+    public static Texture2D selectedBackground;
+
+    //help text
+    public bool showHelpText;
+    public string helpTextContent;
+    public GUIStyle helpTextStyle;
+    public int lateralOffsetHelp;
+    public int helpButtonSize;
+    public Texture2D helpButtonTexture;
+
     // Use this for initialization
     void Start()
     {
@@ -144,8 +157,7 @@ public class SessionManager : MonoBehaviour {
         customText.instructionsFormat = memeter.instructionsFormat = ibox.instructionsFormat = candle.instructionsFormat;
         memeter.instructionsArea = ibox.instructionsArea = candle.instructionsArea;
         //configure all logging
-        log = new Logger();
-        customText.log = candle.log = memeter.log = ibox.log = log;
+        log = Logger.Instance;
         //Cursor.visible = false;
 
         //set title and subtitle positioning
@@ -157,6 +169,11 @@ public class SessionManager : MonoBehaviour {
 
         //child specific initializations
         StartLogic();
+
+        if (selectedBackground != null)
+        {
+            SetBackground(selectedBackground);
+        }
     }
 
     // Update is called once per frame
@@ -168,6 +185,7 @@ public class SessionManager : MonoBehaviour {
 
     void OnGUI()
     {
+        GUI.depth = -1000;
         //shared logic
         //draw a custom cursor
         /*if (showOriginal == true)
@@ -198,6 +216,28 @@ public class SessionManager : MonoBehaviour {
 
         //child specific behavior
         OnGUILogic();
+
+        //help button
+        if (GUI.Button(new Rect(Screen.width - helpButtonSize, Screen.height - helpButtonSize, helpButtonSize, helpButtonSize), helpButtonTexture, GUIStyle.none))
+        {
+            showHelpText = !showHelpText;
+        }
+
+        //help text always overlays everything
+        if (showHelpText)
+        {
+            Rect helpArea = new Rect(lateralOffsetHelp, lateralOffsetHelp, Screen.width - lateralOffsetHelp *2, Screen.height - lateralOffsetHelp*2);
+            GUI.Label(helpArea, helpTextContent, helpTextStyle);
+        }
+    }
+
+    public void SetBackground(Texture2D _selected)
+    {
+        selectedBackground = _selected;
+        var cameraObject = GameObject.Find("Main Camera");
+        if(cameraObject != null){
+            cameraObject.GetComponentInChildren<MeshRenderer>().material.mainTexture = _selected;
+        }
     }
 
     public virtual void Continue()

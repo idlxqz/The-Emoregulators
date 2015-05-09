@@ -14,11 +14,11 @@ public class ProgressiveMuscleRelaxationScript : MonoBehaviour {
     public SessionStage currentStage;
 
     //logging
-    public Logger log;
+    Logger log;
 
 	// Use this for initialization
 	void Start () {
-	
+        log = Logger.Instance;
 	}
 	
 	// Update is called once per frame

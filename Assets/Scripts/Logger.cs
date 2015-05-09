@@ -3,11 +3,20 @@ using System.Collections;
 
 public class Logger{
 
+    private static Logger instance = null;
+
+    public static Logger Instance
+    {
+        get
+        {
+            if (instance == null) instance = new Logger();
+            return instance;
+        }
+    }
+
 	//generalize the logging system
-	public Logger ()
-	{
-		
-	}
+	private Logger ()
+	{}
 
 	public void LogInformation(string toLog){
 		Debug.Log("INFO["+GetTimeStamp()+"]:"+toLog);

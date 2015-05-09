@@ -34,10 +34,11 @@ public class BasicPhScript : MonoBehaviour {
     private Rect initialRect;
 
     //centralized logging
-    public Logger log;
+    Logger log;
 
 	// Use this for initialization
 	void Start () {
+        log = Logger.Instance;
         //logic
         assignedCards = 0;
         finished = false;

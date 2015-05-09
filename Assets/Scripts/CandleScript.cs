@@ -60,10 +60,11 @@ public class CandleScript : MonoBehaviour {
 	public GUIStyle instructionsFormat;
 
 	//logging
-	public Logger log;
+	Logger log;
 
 	// Use this for initialization
 	void Start () {
+        log = Logger.Instance;
         Setup();
 	}
 
@@ -253,7 +254,7 @@ public class CandleScript : MonoBehaviour {
 
     private void SetCandleOriginalRectangle()
     {
-        frameArea = new Rect(700, 150, frames[0].width * candleScale, frames[0].height * candleScale);
+        frameArea = new Rect(700, 130, frames[0].width * candleScale, frames[0].height * candleScale);
     }
 
     private void SetMatchOriginalRectangle()

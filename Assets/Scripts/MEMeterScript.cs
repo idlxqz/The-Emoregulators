@@ -32,7 +32,7 @@ public class MEMeterScript : MonoBehaviour {
 	public Rect instructionsArea;
 
 	//centralized logging
-	public Logger log;
+	Logger log;
 
 	//instruction control
 	public string instructions;
@@ -46,6 +46,7 @@ public class MEMeterScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        log = Logger.Instance;
         Setup();
 	}
 	

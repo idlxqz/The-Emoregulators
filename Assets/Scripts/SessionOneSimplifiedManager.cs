@@ -6,13 +6,16 @@ using Debug = UnityEngine.Debug;
 
 public class SessionOneSimplifiedManager : SessionManager
 {
-
     public Text maleButtonText;
     public Text femaleButtonText;
+
+    BackgroundChooserScript backgroundChooserScript;
 
 	// Use this for initialization
 	protected override void StartLogic ()
 	{
+        backgroundChooserScript = GameObject.Find("BackgroundChooser").GetComponent<BackgroundChooserScript>();
+
 	    this.sessionTitle = GlobalizationService.Instance.Globalize(GlobalizationService.Session1Title);
 	    this.sessionSubTitle = GlobalizationService.Instance.Globalize(GlobalizationService.Session1SubTitle);
 
@@ -21,7 +24,10 @@ public class SessionOneSimplifiedManager : SessionManager
 
         System.Action nextPhase  = () => {
             hideInterface = false;
-            currentState = SessionState.OpeningA;
+            currentState = SessionState.ChooseBackground;
+            backgroundChooserScript.backgroundSetter = SetBackground;
+            backgroundChooserScript.enabled = true;
+            UIManagerScript.EnableSkipping();
         };
         customTitleScript.Setup(nextPhase, GlobalizationService.Instance.Globalize(GlobalizationService.OpeningTitle));
 
@@ -36,6 +42,14 @@ public class SessionOneSimplifiedManager : SessionManager
         System.Action setupNextPhaseCustomTitle;
 		//coordinate the session state
 		switch (currentState) {
+            case SessionState.ChooseBackground:
+                if(backgroundChooserScript.finished || canSkip){
+                    backgroundChooserScript.enabled = false;
+                    canSkip = false;
+                    UIManagerScript.DisableSkipping();
+                    currentState = SessionState.OpeningA;
+                }
+                break;
             case SessionState.OpeningA:
                 activityName = GlobalizationService.Instance.Globalize(GlobalizationService.OpeningTitle);
                 log.LogInformation("Starting Opening Screen A.");

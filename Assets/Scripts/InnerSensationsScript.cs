@@ -21,10 +21,11 @@ public class InnerSensationsScript : MonoBehaviour {
     Rect[] swatchRects;
 
     //logging
-    public Logger log;
+    Logger log;
 
 	// Use this for initialization
 	void Start () {
+        log = Logger.Instance;
         //prepare the swatches rectangles
         int swCount = swatches.Length;
         swatchRects = new Rect[swCount];

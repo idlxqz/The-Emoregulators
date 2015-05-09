@@ -9,6 +9,7 @@ public class SessionFourManager : SessionManager {
     public ActiveShakingMeditationScript activeShakingMeditation;
     public ProgressiveMuscleRelaxationScript progressiveMuscleRelaxation;
     public InnerSensationsScript innerSensations;
+    public FacialMindfulnessScript facialMindfulness;
 
     // Use this for initialization
     protected override void StartLogic()
@@ -17,8 +18,7 @@ public class SessionFourManager : SessionManager {
         activeShakingMeditation = GameObject.Find("ActiveShakingMeditation").GetComponent<ActiveShakingMeditationScript>();
         progressiveMuscleRelaxation = GameObject.Find("ProgressiveMuscleRelaxation").GetComponent<ProgressiveMuscleRelaxationScript>();
         innerSensations = GameObject.Find("InnerSensations").GetComponent<InnerSensationsScript>();
-
-        innerSensations.log = progressiveMuscleRelaxation.log = log;
+        facialMindfulness = GameObject.Find("FacialMindfulness").GetComponent<FacialMindfulnessScript>();
 
         this.sessionTitle = GlobalizationService.Instance.Globalize(GlobalizationService.Session4Title);
         this.sessionSubTitle = GlobalizationService.Instance.Globalize(GlobalizationService.Session4SubTitle);
@@ -30,7 +30,6 @@ public class SessionFourManager : SessionManager {
         };
         customTitleScript.Setup(nextPhase, sessionTitle);
         hideInterface = true;
-
         
         currentState = SessionState.CustomTitle;
     }
@@ -162,8 +161,6 @@ public class SessionFourManager : SessionManager {
                             //disable the custom text and proceed to the next state
                             customText.enabled = false;
                             log.LogInformation("Started FacialMindfullness B.");
-                        
-                        
                             currentState = SessionState.FacialMindfulnessB;
                         };
                         customText.Setup(setupNextPhaseCustomText, customTextWaitTime, "Now let's focus on the face!\n\nNote the different parts of your face, your forehead, chin, mouth, eyes.\nThe different parts of your face are relaxed or tense? Where do you feel more tense? Do you have some other feelings? What is your facial expression? Try to notice without changing expression.");
@@ -197,6 +194,24 @@ public class SessionFourManager : SessionManager {
                     //disable the custom text and proceed to the next state
                     customText.enabled = false;
 
+                    //do the facial mindfulness activity
+                    log.LogInformation("Ended FacialMindfulness D.");
+                    facialMindfulness.Setup(userGender);
+                    facialMindfulness.enabled = true;
+                    currentState = SessionState.FacialMindfulnessD;
+                };
+                customText.Setup(setupNextPhaseCustomText, 3, "TODO: Replace this screen with a picture of the face...");
+                customText.enabled = true;
+                currentState = SessionState.CustomText;
+                break;
+            case SessionState.FacialMindfulnessD:
+                if (facialMindfulness.finished || canSkip)
+                {
+                    canSkip = false;
+                    UIManagerScript.DisableSkipping();
+                    facialMindfulness.enabled = false;
+                    log.LogInformation("Ended FacialMindfulness D.");
+
                     //prepare custom title
                     setupNextPhaseCustomTitle = () =>
                     {
@@ -206,10 +221,7 @@ public class SessionFourManager : SessionManager {
                     };
                     customTitleScript.Setup(setupNextPhaseCustomTitle, "Breathing Regulation");
                     currentState = SessionState.CustomTitle;
-                };
-                customText.Setup(setupNextPhaseCustomText, 3, "TODO: Replace this screen with a picture of the face...");
-                customText.enabled = true;
-                currentState = SessionState.CustomText;
+                }
                 break;
             case SessionState.BreathingRegulation:
                 if(breathingRegulation.finished || canSkip){
