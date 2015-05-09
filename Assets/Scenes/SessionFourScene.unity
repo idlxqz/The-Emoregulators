@@ -142,6 +142,10 @@ Prefab:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 01e07f440fc646949a4e246a65f9ab00, type: 2}
+    - target: {fileID: 100016, guid: cc0261f91d6293944bdb346777b27fa4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cc0261f91d6293944bdb346777b27fa4, type: 3}
   m_IsPrefabParent: 0
@@ -1834,7 +1838,7 @@ MonoBehaviour:
   ibox: {fileID: 341060322}
   nameInputField: {fileID: 0}
   customText: {fileID: 303922268}
-  customTitleScript: {fileID: 0}
+  customTitleScript: {fileID: 1735945326}
   facilitatorFrame: {fileID: 0}
   introducingOurselves: {fileID: 0}
   ContinueButtonText: {fileID: 717584570}
@@ -2172,7 +2176,7 @@ MonoBehaviour:
   activeShakingMeditation: {fileID: 693590937}
   progressiveMuscleRelaxation: {fileID: 1995764829}
   innerSensations: {fileID: 2028700826}
-  facialMindfulness: {fileID: 0}
+  facialMindfulness: {fileID: 2141127960}
 --- !u!114 &2004168113
 MonoBehaviour:
   m_ObjectHideFlags: 0

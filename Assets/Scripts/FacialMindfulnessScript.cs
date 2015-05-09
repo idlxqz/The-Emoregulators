@@ -125,28 +125,28 @@ public class FacialMindfulnessScript : MonoBehaviour {
         if (userGender == SessionManager.Gender.Male)
         {
             //parts of the face rectangles
-            headRect = new Rect(269, 225, 222, 72);
-            eyesRect = new Rect(299, 299, 161, 47);
-            leftCheekRect = new Rect(299, 352, 50, 85);
-            mouthRect = new Rect(351, 391, 66, 54);
-            rightCheekRect = new Rect(420, 350, 34, 85);
+            headRect = new Rect(590, 230, 160, 70);
+            eyesRect = new Rect(590, 300, 160, 52);
+            leftCheekRect = new Rect(590, 352, 50, 85);
+            mouthRect = new Rect(640, 391, 60, 65);
+            rightCheekRect = new Rect(700, 352, 50, 85);
         }
         else
         {
             //parts of the face rectangles
-            headRect = new Rect(267, 228, 233, 102);
-            eyesRect = new Rect(300, 334, 172, 42);
-            leftCheekRect = new Rect(300, 379, 48, 68);
-            mouthRect = new Rect(353, 409, 64, 46);
-            rightCheekRect = new Rect(420, 382, 47, 64);
+            headRect = new Rect(595, 265, 160, 60);
+            eyesRect = new Rect(595, 325, 160, 55);
+            leftCheekRect = new Rect(595, 380, 50, 60);
+            mouthRect = new Rect(645, 405, 60, 60);
+            rightCheekRect = new Rect(705, 380, 50, 60);
         }
 
         facePositions = new Dictionary<FacePosition,FacePositionState>() {
-            {FacePosition.Head, FacePositionState.Red},
-            {FacePosition.Eyes, FacePositionState.Red},
-            {FacePosition.LeftCheek, FacePositionState.Red},
-            {FacePosition.Mouth, FacePositionState.Red},
-            {FacePosition.RightCheek, FacePositionState.Red}
+            {FacePosition.Head, FacePositionState.Normal},
+            {FacePosition.Eyes, FacePositionState.Normal},
+            {FacePosition.LeftCheek, FacePositionState.Normal},
+            {FacePosition.Mouth, FacePositionState.Normal},
+            {FacePosition.RightCheek, FacePositionState.Normal}
         };
     }
 
