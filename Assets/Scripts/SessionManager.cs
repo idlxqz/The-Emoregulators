@@ -8,7 +8,6 @@ public class SessionManager : MonoBehaviour {
     public enum SessionState
     {
         Start,
-        ChooseBackground,
         OpeningA,
         OpeningB,
         OpeningC,
@@ -16,7 +15,8 @@ public class SessionManager : MonoBehaviour {
         OpeningE,
         OpeningF,
         IntroducingOurselvesTitle,
-        IntroducingOurselves,
+        IntroducingOurselvesBackground,
+        IntroducingOurselvesAvatar,
         MinuteForMyselfTitle,
         MinuteForMyselfA,
         MinuteForMyselfB,

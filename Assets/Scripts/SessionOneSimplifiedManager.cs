@@ -24,10 +24,8 @@ public class SessionOneSimplifiedManager : SessionManager
 
         System.Action nextPhase  = () => {
             hideInterface = false;
-            currentState = SessionState.ChooseBackground;
-            backgroundChooserScript.backgroundSetter = SetBackground;
-            backgroundChooserScript.enabled = true;
-            UIManagerScript.EnableSkipping();
+            currentState = SessionState.OpeningA;
+            
         };
         customTitleScript.Setup(nextPhase, GlobalizationService.Instance.Globalize(GlobalizationService.OpeningTitle));
 
@@ -42,14 +40,6 @@ public class SessionOneSimplifiedManager : SessionManager
         System.Action setupNextPhaseCustomTitle;
 		//coordinate the session state
 		switch (currentState) {
-            case SessionState.ChooseBackground:
-                if(backgroundChooserScript.finished || canSkip){
-                    backgroundChooserScript.enabled = false;
-                    canSkip = false;
-                    UIManagerScript.DisableSkipping();
-                    currentState = SessionState.OpeningA;
-                }
-                break;
             case SessionState.OpeningA:
                 activityName = GlobalizationService.Instance.Globalize(GlobalizationService.OpeningTitle);
                 log.LogInformation("Starting Opening Screen A.");
@@ -160,18 +150,31 @@ public class SessionOneSimplifiedManager : SessionManager
                 //prepare custom title
                 setupNextPhaseCustomTitle = () =>
                 {
-                    currentState = SessionState.IntroducingOurselves;
                     log.LogInformation("Ended introducing ourselves Title.");
+                    currentState = SessionState.IntroducingOurselvesBackground;
+                    backgroundChooserScript.backgroundSetter = SetBackground;
+                    backgroundChooserScript.enabled = true;
+                    UIManagerScript.EnableSkipping();
                     activityName = GlobalizationService.Instance.Globalize(GlobalizationService.IntroducingOurselvesTitle);
-                    introducingOurselves.SetActive(true);
-                    proceed = false;
-                    nameInputField.ActivateInputField();
-                    nameInputField.Select();
+                    
                 };
                 customTitleScript.Setup(setupNextPhaseCustomTitle, GlobalizationService.Instance.Globalize(GlobalizationService.IntroducingOurselvesTitle));
                 currentState = SessionState.CustomTitle;
 		        break;
-            case SessionState.IntroducingOurselves:
+            case SessionState.IntroducingOurselvesBackground:
+                if (backgroundChooserScript.finished || canSkip)
+                {
+                    backgroundChooserScript.enabled = false;
+                    canSkip = false;
+                    UIManagerScript.DisableSkipping();
+                    introducingOurselves.SetActive(true);
+                    proceed = false;
+                    nameInputField.ActivateInputField();
+                    nameInputField.Select();
+                    currentState = SessionState.IntroducingOurselvesAvatar;
+                }
+                break;
+            case SessionState.IntroducingOurselvesAvatar:
                 if (proceed)
                 {
                     log.LogInformation("User name: " + userName);
@@ -266,7 +269,7 @@ public class SessionOneSimplifiedManager : SessionManager
     protected override void OnGUILogic()
     {
         //check if enter pressed
-        if (currentState == SessionState.IntroducingOurselves)
+        if (currentState == SessionState.IntroducingOurselvesAvatar)
         {
             //check enter pressed for name input
             if (userName != "" && userName != null)

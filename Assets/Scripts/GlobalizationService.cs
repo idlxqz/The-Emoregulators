@@ -38,8 +38,8 @@ public class GlobalizationService  {
     public const string OpeningEText = "OpeningEText";
     public const string OpeningFText = "OpeningFText";
     public const string IntroducingOurselvesTitle = "IntroducingOurselvesTitle";
-    public const string IntroducingOurselvesAText = "IntroducingOurselvesAText";
-    public const string IntroducingOurselvesBText = "IntroducingOurselvesBText";
+    public const string IntroducingOurselvesBackgroundText = "IntroducingOurselvesBackgroundText";
+    public const string IntroducingOurselvesAvatarText = "IntroducingOurselvesAvatarText";
     public const string IBoxIntroductionTitle = "IBoxIntroductionTitle";
     public const string IBoxIntroductionAText = "IBoxIntroductionAText";
     public const string IBoxIntroductionBText = "IBoxIntroductionBText";
@@ -218,13 +218,13 @@ public class GlobalizationService  {
             {SystemLanguage.Italian, "Il mio avatar"}
         });
 
-        this.multiLanguageDictionary.Add(IntroducingOurselvesAText, new Dictionary<SystemLanguage, string>
+        this.multiLanguageDictionary.Add(IntroducingOurselvesBackgroundText, new Dictionary<SystemLanguage, string>
         {
             {SystemLanguage.English, "First of all you have to choose the background that you want to give to the game.\nHere are various options.\nClick on the image.\nPerfect!"},
             {SystemLanguage.Italian, "Prima di tutto scegli lo sfondo che vuoi dare al gioco.\nQui trovi varie opzioni.\nClicca sopra l'immagine.\nPerfetto!"}
         });
 
-        this.multiLanguageDictionary.Add(IntroducingOurselvesBText, new Dictionary<SystemLanguage, string>
+        this.multiLanguageDictionary.Add(IntroducingOurselvesAvatarText, new Dictionary<SystemLanguage, string>
         {
             {SystemLanguage.English, "Now, we have to create your own avatar!\nThis is you.\nGive him/her a name!\nYou can choose what you want, your real name, or a different one.\nEvery time you will complete an exercise, you will become stronger.\nThen click on √ and let's continue our game!"},
             {SystemLanguage.Italian, "Ora, invece, creiamo il tuo avatar!\nQuesto sei tu.\nDagli un un nome!\nPuoi scegliere quello che vuoi, il tuo vero nome, o inventarne un altro.\nOgni volta che terminerai un esercizio diventerai più forte\nPoi clicca su √ e prosegui nel nostro gioco!"}

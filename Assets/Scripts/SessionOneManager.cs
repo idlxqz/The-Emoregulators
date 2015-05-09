@@ -37,13 +37,13 @@ public class SessionOneManager : SessionManager {
 				log.LogInformation("Started introducing ourselves.");
 				activityName = "Introducing Ourselves";
 				introducingOurselves.SetActive(true);
-                currentState = SessionState.IntroducingOurselves;	
+                currentState = SessionState.IntroducingOurselvesAvatar;	
 				proceed = false;
                 nameInputField.ActivateInputField();
                 nameInputField.Select();
 			}
 			break;
-            case SessionState.IntroducingOurselves:
+            case SessionState.IntroducingOurselvesAvatar:
             if (proceed)
             {
                 log.LogInformation("User name: " + userName);
@@ -174,7 +174,7 @@ public class SessionOneManager : SessionManager {
     protected override void OnGUILogic()
     {
         //check if enter pressed
-        if (currentState == SessionState.IntroducingOurselves)
+        if (currentState == SessionState.IntroducingOurselvesAvatar)
         {
             //check enter pressed for name input
             if (userName != "" && userName != null)
@@ -195,7 +195,7 @@ public class SessionOneManager : SessionManager {
             case SessionState.CandleCeremony:
                 candle.finished = true;
                 break;
-            case SessionState.IntroducingOurselves:
+            case SessionState.IntroducingOurselvesAvatar:
                 proceed = true;
                 break;
             case SessionState.MeMeter:

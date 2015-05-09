@@ -174,7 +174,7 @@ public class SessionTwoManager : SessionManager {
     protected override void OnGUILogic()
     {
         //check if enter pressed
-        if (currentState == SessionState.IntroducingOurselves)
+        if (currentState == SessionState.IntroducingOurselvesAvatar)
         {
             //check enter pressed for name input
             if (userName != "" && userName != null)
