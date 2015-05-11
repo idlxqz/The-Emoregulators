@@ -1,53 +1,48 @@
 ﻿using UnityEngine;
-using System.Collections;
 
-public class ProgressiveMuscleRelaxationScript : MonoBehaviour {
+public class ProgressiveMuscleRelaxationScript : CustomTextScript
+{
 
-    //game logic control
-    public bool finished;
-    public enum SessionStage
+    //public bool finished;
+    public GameObject Avatar;
+    protected Animator Animator;
+    public int AnimationId;
+
+    // Use this for initialization
+    public override void Start()
     {
-        CloseBall,
-        ExtendArms,
-        Snail
+        this.Avatar.SetActive(true);
+        this.Avatar.GetComponent<RectTransform>().anchoredPosition = new Vector3(400, -300, 0);
+        this.Animator = this.Avatar.GetComponentInChildren<Animator>();
+
+        //UIManagerScript.EnableSkipping();
     }
-    public SessionStage currentStage;
 
-    //logging
-    Logger log;
-
-	// Use this for initialization
-	void Start () {
-        log = Logger.Instance;
-	}
-	
-	// Update is called once per frame
-	void Update () {
-        //TODO: animations
-	}
-
-    void OnGUI()
+    public override void Update()
     {
-        switch (currentStage)
+        //check if the waiting time is elapsed
+        if (moreInstructions)
         {
-            case SessionStage.CloseBall:
-                if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 25, 200, 50), "Click to proceed - CB"))
-                    currentStage = SessionStage.ExtendArms;
-                break;
-            case SessionStage.ExtendArms:
-                if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 25, 200, 50), "Click to proceed - EA"))
-                    currentStage = SessionStage.Snail;
-                break;
-            case SessionStage.Snail:
-                if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 25, 200, 50), "Click to proceed - Sn"))
+            if ((Time.time - timeStart) >= delayBetweenInstructions)
+            {
+                timeStart = Time.time;
+                instructionsPointer++;
+                currentInstructions += "\n\n" + instructions[instructionsPointer];
+
+                if (instructionsPointer == 1 || instructionsPointer == 4)
                 {
-                    finished = true;
+                    this.Animator.SetTrigger(this.AnimationId);
+                }
+                //check if there are more to show
+                if (instructions.Length == instructionsPointer + 1)
+                {
+
+                    finalWaitStart = Time.time;
+                    moreInstructions = false;
+                    //let the user skip from now on
                     UIManagerScript.EnableSkipping();
                 }
-                break;
-            default:
-                log.LogInformation("Unknown stage in progressive muscle relaxation.");
-                break;
+            }
         }
     }
 }

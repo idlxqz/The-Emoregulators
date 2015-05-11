@@ -25,6 +25,8 @@ public class SessionFourManager : SessionManager {
         breathingRegulation.instructionsFormat = customText.instructionsFormat;
         activeShakingMeditation.instructionsFormat = customText.instructionsFormat;
         activeShakingMeditation.instructionsArea = breathingRegulation.instructionsArea;
+        progressiveMuscleRelaxation.instructionsFormat = customText.instructionsFormat;
+        progressiveMuscleRelaxation.instructionsArea = breathingRegulation.instructionsArea;
         //breathingRegulation.instructionsArea = candle.instructionsArea;
 
         System.Action nextPhase = () =>
@@ -255,6 +257,7 @@ public class SessionFourManager : SessionManager {
                     //prepare custom title
                     setupNextPhaseCustomTitle = () =>
                     {
+                        UIManagerScript.EnableSkipping();
                         //start introducing active shaking meditation
                         log.LogInformation("Started active shaking meditation introduction.");
                         activityName = GlobalizationService.Instance.Globalize(GlobalizationService.ActiveMeditationTitle);
@@ -275,36 +278,321 @@ public class SessionFourManager : SessionManager {
             case SessionState.ActiveShakingMeditation:
                 if (activeShakingMeditation.finished || canSkip)
                 {
-                    canSkip = false;
-                    UIManagerScript.DisableSkipping();
+                    
                     log.LogInformation("Ended active shaking meditation exercise.");
                     //disable the active shaking meditation exercise
                     activeShakingMeditation.Avatar.SetActive(false);
                     activeShakingMeditation.enabled = false;
 
-                    //prepare custom title
-                    setupNextPhaseCustomTitle = () =>
+                    log.LogInformation("Started ActiveShaking Meditation B");
+
+                    setupNextPhaseCustomText = () =>
                     {
-                        //start introducing progressive muscle relaxation
-                        log.LogInformation("Started progressive muscle relaxation introduction.");
-                        activityName = "Progressive Muscle Relaxation Introduction";
-                        //prepare custom text of introduction
-                        setupNextPhaseCustomText = () =>
-                        {
-                            log.LogInformation("Ended progressive muscle relaxation introduction.");
-                            //disable the custom text and proceed to the next state
-                            customText.enabled = false;
-                            log.LogInformation("Started progressive muscle relaxation exercise");
-                            activityName = "Progressive Muscle Relaxation Exercise";
-                            progressiveMuscleRelaxation.enabled = true;
-                            currentState = SessionState.ProgressiveMuscleRelaxation;
-                        };
-                        customText.Setup(setupNextPhaseCustomText, 20, "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book");
-                        customText.enabled = true;
-                        currentState = SessionState.CustomText;
+                        log.LogInformation("Ended ActiveShaking Meditation B.");
+                        //disable the custom text and proceed to the next state
+                        customText.enabled = false;
+                        
+                        currentState = SessionState.ActiveShakingMeditationC;
                     };
-                    customTitleScript.Setup(setupNextPhaseCustomTitle, "Progressive Muscle Relaxation");
-                    currentState = SessionState.CustomTitle;
+
+                    customText.Setup(setupNextPhaseCustomText, customTextWaitTime, GlobalizationService.Instance.Globalize(GlobalizationService.ActiveMeditationBText));
+                    customText.enabled = true;
+                    currentState = SessionState.CustomText;
+                }
+                break;
+            case SessionState.ActiveShakingMeditationC:
+                log.LogInformation("Started ActiveShaking C");
+                setupNextPhaseCustomText = () =>
+                {
+                    log.LogInformation("Ended ActiveShaking Meditation C.");
+                    //disable the custom text and proceed to the next state
+                    customText.enabled = false;
+                    currentState = SessionState.ActiveShakingMeditationD;
+                };
+
+                customText.Setup(setupNextPhaseCustomText, customTextWaitTime, GlobalizationService.Instance.Globalize(GlobalizationService.ActiveMeditationCText));
+                customText.enabled = true;
+                currentState = SessionState.CustomText;
+                break;
+            case SessionState.ActiveShakingMeditationD:
+                log.LogInformation("Started ActiveShaking Meditation D.");
+
+                setupNextPhaseCustomText = () =>
+                {
+                    log.LogInformation("Ended ActiveShaking Meditation D.");
+                    //disable the custom text and proceed to the next state
+                    customText.enabled = false;
+                    currentState = SessionState.ProgressiveMuscleRelaxationTitle;
+                };
+
+                customText.Setup(setupNextPhaseCustomText, customTextWaitTime, GlobalizationService.Instance.Globalize(GlobalizationService.ActiveMeditationDText));
+                customText.enabled = true;
+                currentState = SessionState.CustomText;
+                break;
+            case SessionState.ProgressiveMuscleRelaxationTitle:
+                log.LogInformation("Started ProgressiveMuscleRelaxation Title.");
+                canSkip = false;
+                UIManagerScript.DisableSkipping();
+                //prepare custom title
+                setupNextPhaseCustomTitle = () =>
+                {
+                    log.LogInformation("Ended ProgressiveMuscleRelaxation Title.");
+                    currentState = SessionState.ProgressiveMuscleRelaxationA;
+
+                };
+                customTitleScript.Setup(setupNextPhaseCustomTitle, GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationTitle));
+                currentState = SessionState.CustomTitle;
+                break;
+            case SessionState.ProgressiveMuscleRelaxationA:
+                //start introducing progressive muscle relaxation
+                log.LogInformation("Started progressive muscle relaxation A.");
+                UIManagerScript.EnableSkipping();
+                activityName = GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationTitle);
+                //prepare custom text of introduction
+                setupNextPhaseCustomText = () =>
+                {
+                    log.LogInformation("Ended progressive muscle relaxation A.");
+                    //disable the custom text and proceed to the next state
+                    customText.enabled = false;
+                    currentState = SessionState.ProgressiveMuscleRelaxationB;
+                };
+
+                customText.Setup(setupNextPhaseCustomText, customTextWaitTime, GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationAText));
+                customText.enabled = true;
+                currentState = SessionState.CustomText;
+                break;
+            case SessionState.ProgressiveMuscleRelaxationB:
+                log.LogInformation("Started progressive muscle relaxation B.");
+                setupNextPhaseCustomText = () =>
+                {
+                    log.LogInformation("Ended progressive muscle relaxation B.");
+                    //disable the custom text and proceed to the next state
+                    customText.enabled = false;
+                    currentState = SessionState.ProgressiveMuscleRelaxationC;
+                };
+
+                customText.Setup(setupNextPhaseCustomText, customTextWaitTime, GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationBText));
+                customText.enabled = true;
+                currentState = SessionState.CustomText;
+                break;
+            case SessionState.ProgressiveMuscleRelaxationC:
+                log.LogInformation("Started progressive muscle relaxation C.");
+                setupNextPhaseCustomText = () =>
+                {
+                    log.LogInformation("Ended progressive muscle relaxation C.");
+                    //disable the custom text and proceed to the next state
+                    progressiveMuscleRelaxation.enabled = false;
+                    currentState = SessionState.ProgressiveMuscleRelaxationD;
+                };
+
+                progressiveMuscleRelaxation.Avatar = this.GetPlayerAvatar;
+                progressiveMuscleRelaxation.AnimationId = AnimatorControlerHashIDs.Instance.SqueezingExerciseTrigger;
+                progressiveMuscleRelaxation.enabled = true;
+
+                progressiveMuscleRelaxation.Setup(setupNextPhaseCustomText, customTextWaitTime, 
+                    new []
+                    {
+                        GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationC1Text),
+                        GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationC2Text),
+                        GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationC3Text),
+                        GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationC4Text),
+                        GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationC5Text),
+                        GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationC6Text),
+                        GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationC7Text)
+                    });
+                
+                currentState = SessionState.ProgressiveMuscleRelaxation;
+                break;
+            case SessionState.ProgressiveMuscleRelaxationD:
+                log.LogInformation("Started progressive muscle relaxation D.");
+                setupNextPhaseCustomText = () =>
+                {
+                    log.LogInformation("Ended progressive muscle relaxation D.");
+                    //disable the custom text and proceed to the next state
+                    progressiveMuscleRelaxation.enabled = false;
+                    currentState = SessionState.ProgressiveMuscleRelaxationE;
+                };
+
+                progressiveMuscleRelaxation.delayBetweenInstructions = 7;
+                progressiveMuscleRelaxation.AnimationId = AnimatorControlerHashIDs.Instance.StreachingExerciseTrigger;
+                progressiveMuscleRelaxation.enabled = true;
+
+                progressiveMuscleRelaxation.Setup(setupNextPhaseCustomText, customTextWaitTime, 
+                    new []
+                    {
+                        GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationD1Text),
+                        GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationD2Text),
+                        GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationD3Text),
+                        GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationD4Text),
+                        GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationD5Text),
+                        GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationD6Text),
+                        GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationD7Text)
+                    });
+                
+                currentState = SessionState.ProgressiveMuscleRelaxation;
+                break;
+            case SessionState.ProgressiveMuscleRelaxationE:
+                log.LogInformation("Started progressive muscle relaxation E.");
+                setupNextPhaseCustomText = () =>
+                {
+                    log.LogInformation("Ended progressive muscle relaxation E.");
+                    //disable the custom text and proceed to the next state
+                    progressiveMuscleRelaxation.enabled = false;
+                    currentState = SessionState.ProgressiveMuscleRelaxationF;
+                };
+
+                progressiveMuscleRelaxation.AnimationId = AnimatorControlerHashIDs.Instance.SnailExerciseTrigger;
+                progressiveMuscleRelaxation.enabled = true;
+
+                progressiveMuscleRelaxation.Setup(setupNextPhaseCustomText, customTextWaitTime,
+                    new[]
+                    {
+                        GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationE1Text),
+                        GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationE2Text),
+                        GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationE3Text),
+                        GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationE4Text),
+                        GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationE5Text),
+                        GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationE6Text)
+                    });
+
+                currentState = SessionState.ProgressiveMuscleRelaxation;
+                break;
+            case SessionState.ProgressiveMuscleRelaxationF:
+                log.LogInformation("Started progressive muscle relaxation F.");
+                setupNextPhaseCustomText = () =>
+                {
+                    log.LogInformation("Ended progressive muscle relaxation F.");
+                    progressiveMuscleRelaxation.Avatar.SetActive(false);
+                    progressiveMuscleRelaxation.enabled = false;
+                   
+                    currentState = SessionState.InnerSensationsTitle;
+                };
+
+                progressiveMuscleRelaxation.AnimationId = AnimatorControlerHashIDs.Instance.SandExerciseTrigger;
+                progressiveMuscleRelaxation.enabled = true;
+
+                progressiveMuscleRelaxation.Setup(setupNextPhaseCustomText, customTextWaitTime,
+                    new[]
+                    {
+                        GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationF1Text),
+                        GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationF2Text),
+                        GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationF3Text),
+                        GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationF4Text)
+                    });
+
+                currentState = SessionState.ProgressiveMuscleRelaxation;
+                break;
+            case SessionState.InnerSensationsTitle:
+                log.LogInformation("Started InnerSensations Title");
+                canSkip = false;
+                UIManagerScript.DisableSkipping();
+                //prepare custom title
+                setupNextPhaseCustomTitle = () =>
+                {
+                    
+                    currentState = SessionState.InnerSensationsA;
+                };
+                customTitleScript.Setup(setupNextPhaseCustomTitle, GlobalizationService.Instance.Globalize(GlobalizationService.InternalSensationsTitle));
+                currentState = SessionState.CustomTitle;
+                break;
+            case SessionState.InnerSensationsA:
+                //start IBOX inner sensations
+                log.LogInformation("Started ibox inner sensations A.");
+                setupNextPhaseCustomText = () =>
+                {
+                    log.LogInformation("Ended ibox inner sensations A.");
+                    customText.enabled = false;
+                    //disable the custom text and proceed to the next state
+                    activityName = GlobalizationService.Instance.Globalize(GlobalizationService.InternalSensationsTitle);
+                    //prepare the inner sensations activity
+                    innerSensations.enabled = true;
+                    currentState = SessionState.InnerSensationsB;
+                    log.LogInformation("Started ibox inner sensations B.");
+                };
+                customText.Setup(setupNextPhaseCustomText, customTextWaitTime, GlobalizationService.Instance.Globalize(GlobalizationService.InternalSensationsAText));
+                customText.enabled = true;
+                currentState = SessionState.CustomText;
+                break;
+            case SessionState.InnerSensationsB:
+                if (innerSensations.finished || canSkip)
+                {
+                    
+                    log.LogInformation("Ended ibox inner sensations exercise.");
+                    //disable the inner sensations
+                    innerSensations.enabled = false;
+                    //start closing text 
+                    currentState = SessionState.ClosingSessionTitle;
+
+                }
+                break;
+            case SessionState.ClosingSessionTitle:
+                canSkip = false;
+                UIManagerScript.DisableSkipping();
+                log.LogInformation("Started ClosingSession Title.");
+                activityName = GlobalizationService.Instance.Globalize(GlobalizationService.ClosingOfSessionTitle);
+                //prepare custom title
+                setupNextPhaseCustomTitle = () =>
+                {
+                    canSkip = false;
+                    UIManagerScript.EnableSkipping();
+                    log.LogInformation("Started Closing MeMeter");
+                    memeter.instructions = GlobalizationService.Instance.Globalize(GlobalizationService.MeMeterClosingText);
+                    memeter.showInstructions = true;
+                    memeter.enabled = true;
+                    memeter.finished = false;
+                    currentState = SessionState.ClosingMeMeter;
+                    proceed = false;
+                };
+                customTitleScript.Setup(setupNextPhaseCustomTitle, GlobalizationService.Instance.Globalize(GlobalizationService.ClosingOfSessionTitle));
+                currentState = SessionState.CustomTitle;
+                break;
+            case SessionState.ClosingMeMeter:
+                if (memeter.finished || canSkip)
+                {
+                    log.LogInformation("Ended Closing MeMeter.");
+                    //disable the memeter and proceed to the next state
+                    memeter.enabled = false;
+                    
+                    currentState = SessionState.ClosingSessionA;
+                }
+                break;
+            case SessionState.ClosingSessionA:
+                log.LogInformation("Started Closing Session A");
+
+                setupNextPhaseCustomText = () =>
+                {
+                    log.LogInformation("Ended Closing Session A");
+                    customText.enabled = false;
+
+                    log.LogInformation("Started Closing Candle activity");
+                    candle.waitClickToClose = true;
+                    candle.noInstructions = false;
+                    candle.instructions = GlobalizationService.Instance.Globalize(GlobalizationService.ClosingOfSessionCandleText);
+                    candle.isClosing = true;
+                    candle.Setup();
+                    candle.enabled = true;
+                    currentState = SessionState.ClosingCandle;
+                };
+                customText.Setup(setupNextPhaseCustomText, customTextWaitTime, GlobalizationService.Instance.Globalize(GlobalizationService.ClosingOfSessionAText));
+                customText.enabled = true;
+                currentState = SessionState.CustomText;
+                break;
+            case SessionState.ClosingCandle:
+                if (candle.finished)
+                {
+                    log.LogInformation("Ended closing activity.");
+                    //disable the candle and proceed to the next state
+                    candle.enabled = false;
+                    log.LogInformation("Started Closing Session C.");
+                    //prepare custom title
+                    setupNextPhaseCustomText = () =>
+                    {
+                        log.LogInformation("Ended Closing Session C.");
+                        Application.Quit();
+                    };
+                    customText.Setup(setupNextPhaseCustomText, customTextWaitTime, GlobalizationService.Instance.Globalize(GlobalizationService.ClosingOfSessionCText));
+                    customText.enabled = true;
+                    currentState = SessionState.CustomText;
                 }
                 break;
             case SessionState.ProgressiveMuscleRelaxation:
@@ -312,53 +600,8 @@ public class SessionFourManager : SessionManager {
                 {
                     canSkip = false;
                     UIManagerScript.DisableSkipping();
-                    log.LogInformation("Ended progressive muscle relaxation exercise.");
-                    //disable the progressive muscle relaxation
-                    progressiveMuscleRelaxation.enabled = false;
-                    //prepare custom title
-                    setupNextPhaseCustomTitle = () =>
-                    {
-                        //start IBOX inner sensations
-                        log.LogInformation("Started ibox inner sensations exercise.");
-                        activityName = "IBOX Inner Sensations";
-                        //prepare the inner sensations activity
-                        innerSensations.enabled = true;
-                        currentState = SessionState.InnerSensations;
-                    };
-                    customTitleScript.Setup(setupNextPhaseCustomTitle, "IBOX Inner Sensations");
-                    currentState = SessionState.CustomTitle;
-                }
-                break;
-            case SessionState.InnerSensations:
-                if (innerSensations.finished || canSkip)
-                {
-                    canSkip = false;
-                    UIManagerScript.DisableSkipping();
-                    log.LogInformation("Ended ibox inner sensations exercise.");
-                    //disable the inner sensations
-                    innerSensations.enabled = false;
-                    //start closing text 
-                    log.LogInformation("Started closing message.");
-                    activityName = "Closing message";
-                    //prepare custom text of introduction
-                    setupNextPhaseCustomText = () =>
-                    {
-                        log.LogInformation("Ended closing message.");
-                        //disable the custom text and proceed to the next state
-                        customText.enabled = false;
-                        displayIBox = false;
-                        log.LogInformation("Started closing activity");
-                        activityName = "Closing Activity";
-                        candle.waitClickToClose = true;
-                        candle.noInstructions = true;
-                        candle.isClosing = true;
-                        candle.Setup();
-                        candle.enabled = true;
-                        currentState = SessionState.CloseSession;
-                    };
-                    customText.Setup(setupNextPhaseCustomText, 20, "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book");
-                    customText.enabled = true;
-                    currentState = SessionState.CustomText;
+                    //setup the next phase
+                    progressiveMuscleRelaxation.setupNextPhase();
                 }
                 break;
             case SessionState.CustomText:
@@ -379,15 +622,7 @@ public class SessionFourManager : SessionManager {
                     customTitleScript.setupNextPhase();
                 }
                 break;
-            case SessionState.CloseSession:
-                if (candle.finished)
-                {
-                    log.LogInformation("Ended closing activity.");
-                    //disable the candle and proceed to the next state
-                    candle.enabled = false;
-                    //TODO: load next session?
-                }
-                break;
+            
             default:
                 Debug.LogError("Unknown/unhandled session state for this session.");
                 break;

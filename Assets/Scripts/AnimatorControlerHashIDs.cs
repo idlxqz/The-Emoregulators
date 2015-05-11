@@ -1,25 +1,39 @@
 ﻿using UnityEngine;
 
-public class AnimatorControlerHashIDs : MonoBehaviour
+public class AnimatorControlerHashIDs 
 {
+    #region singleton pattern
+    private static AnimatorControlerHashIDs instance = null;
 
-    public int IdleState;
-    public int BreathingExerciseState;
-    public int BreathingExerciseTrigger;
-    public int DancingExerciseState;
-    public int DancingExerciseTrigger;
-    public int DancingExerciseBool;
-    public int SqueezingExerciseState;
-    public int SqueezingExerciseTrigger;
-    public int StreachingExerciseState;
-    public int StreachingExerciseTrigger;
-    public int SnailExerciseState;
-    public int SnailExerciseTrigger;
-    public int SandExerciseState;
-    public int SandExerciseTrigger;
+    public static AnimatorControlerHashIDs Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                instance = new AnimatorControlerHashIDs();
+            }
+            return instance;
+        }
+    }
 
+    #endregion
+    public int IdleState { get; private set; }
+    public int BreathingExerciseState { get; private set; }
+    public int BreathingExerciseTrigger { get; private set; }
+    public int DancingExerciseState { get; private set; }
+    public int DancingExerciseTrigger { get; private set; }
+    public int DancingExerciseBool { get; private set; }
+    public int SqueezingExerciseState { get; private set; }
+    public int SqueezingExerciseTrigger { get; private set; }
+    public int StreachingExerciseState { get; private set; }
+    public int StreachingExerciseTrigger { get; private set; }
+    public int SnailExerciseState { get; private set; }
+    public int SnailExerciseTrigger { get; private set; }
+    public int SandExerciseState { get; private set; }
+    public int SandExerciseTrigger { get; private set; }
 
-    public void Awake()
+    private AnimatorControlerHashIDs()
     {
         this.IdleState = Animator.StringToHash("Base Layer.Idle");
         this.BreathingExerciseState = Animator.StringToHash("Base Layer.BreathingExercise");
@@ -36,5 +50,4 @@ public class AnimatorControlerHashIDs : MonoBehaviour
         this.SandExerciseState = Animator.StringToHash("Base Layer.SandExercise");
         this.SandExerciseTrigger = Animator.StringToHash("SandExercise");
     }
-
 }

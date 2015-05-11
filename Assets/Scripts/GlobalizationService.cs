@@ -607,6 +607,12 @@ public class GlobalizationService  {
             {SystemLanguage.Italian, "Siamo giunti alla fine..."}
         });
 
+        this.multiLanguageDictionary.Add(MeMeterClosingText, new Dictionary<SystemLanguage, string>
+        {
+            {SystemLanguage.English, "Now we'll make the ME-METER, as you did at the beginning.\n\nMind your thoughts and notice your body. \n\nDid it change from the beginning of the session?\n\nJust notice without judging.\nNot necessarily something must have changed.\n\nNow mark your level of relaxation on the ME-METER, from 1 to 10."},
+            {SystemLanguage.Italian, "Ora rifaremo il ME-METER, come hai fatto all'inizio.\n\nPoni attenzione ai tuoi pensieri e al tuo corpo.\n\nC'è stato un cambiamento dall'inizio della sessione?\n\nSemplicemente riflettici, non giudicare.\nNon per forza deve essere cambiato qualcosa.\n\nOra segna il tuo livello di tensione sul ME-METER, da 1 a 10."}
+        });
+
         this.multiLanguageDictionary.Add(ClosingOfSessionAText, new Dictionary<SystemLanguage, string>
         {
             {SystemLanguage.English, "We are arrived at the end of our journey today!\n\nToday we learned to be aware of our body and to regulate our sensations.\nWe learned to notice the difference between  “stress” and “relax.\nWe learned that sometimes we need to tense our muscles in order to feel it relaxed.\n\nYou were very good!\nYou worked hard and definitely you will be able to practice these exercises, when you need it!"},

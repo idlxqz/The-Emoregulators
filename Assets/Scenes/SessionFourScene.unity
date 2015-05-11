@@ -943,7 +943,6 @@ MonoBehaviour:
     m_StretchHeight: 0
   lateralOffset: 50
   Avatar: {fileID: 0}
-  currentStage: 0
 --- !u!82 &693590938
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1870,7 +1869,77 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   finished: 0
-  currentStage: 0
+  secondsToCloseSession: 5
+  instructionsArea:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 0
+    height: 0
+  instructions: []
+  delayBetweenInstructions: 5
+  instructionsFormat:
+    m_Name: 
+    m_Normal:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Hover:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Active:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Focused:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnNormal:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnHover:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnActive:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnFocused:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Margin:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Padding:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Overflow:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Font: {fileID: 0}
+    m_FontSize: 0
+    m_FontStyle: 0
+    m_Alignment: 0
+    m_WordWrap: 0
+    m_RichText: 1
+    m_TextClipping: 0
+    m_ImagePosition: 0
+    m_ContentOffset: {x: 0, y: 0}
+    m_FixedWidth: 0
+    m_FixedHeight: 0
+    m_StretchWidth: 1
+    m_StretchHeight: 0
+  lateralOffset: 50
+  Avatar: {fileID: 0}
+  AnimationId: 0
 --- !u!1 &2004168110
 GameObject:
   m_ObjectHideFlags: 0
@@ -1880,7 +1949,6 @@ GameObject:
   m_Component:
   - 224: {fileID: 2004168111}
   - 114: {fileID: 2004168112}
-  - 114: {fileID: 2004168113}
   m_Layer: 5
   m_Name: SessionManager
   m_TagString: Untagged
@@ -2264,31 +2332,6 @@ MonoBehaviour:
   progressiveMuscleRelaxation: {fileID: 1995764829}
   innerSensations: {fileID: 2028700826}
   facialMindfulness: {fileID: 2141127960}
---- !u!114 &2004168113
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2004168110}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ee64156080165f47819a95098223e00, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  IdleState: 0
-  BreathingExerciseState: 0
-  BreathingExerciseTrigger: 0
-  DancingExerciseState: 0
-  DancingExerciseTrigger: 0
-  DancingExerciseBool: 0
-  SqueezingExerciseState: 0
-  SqueezingExerciseTrigger: 0
-  StreachingExerciseState: 0
-  StreachingExerciseTrigger: 0
-  SnailExerciseState: 0
-  SnailExerciseTrigger: 0
-  SandExerciseState: 0
-  SandExerciseTrigger: 0
 --- !u!1 &2013681751 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100000, guid: c7a6de84866e87549a6ff4d6e06749ee, type: 3}

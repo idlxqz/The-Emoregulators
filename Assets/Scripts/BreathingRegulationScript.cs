@@ -1,27 +1,17 @@
-﻿using System.Linq;
-using UnityEngine;
-using System.Collections;
+﻿using UnityEngine;
 
 public class BreathingRegulationScript : CustomTextScript {
 
     //public bool finished;
     public GameObject Avatar;
     protected Animator Animator;
-    private AnimatorControlerHashIDs HashIDs;
-
 
 	// Use this for initialization
 	public override void Start ()
 	{
-	    //base.Start();
-	    var sessionManager = GameObject.Find("SessionManager");
- 
-	    this.HashIDs = sessionManager.GetComponent<AnimatorControlerHashIDs>();
         this.Avatar.SetActive(true);
 	    this.Avatar.GetComponent<RectTransform>().anchoredPosition = new Vector3(400,-300,0);
 	    this.Animator = this.Avatar.GetComponentInChildren<Animator>();
-	    
-
         
         //UIManagerScript.EnableSkipping();
 	}
@@ -39,7 +29,7 @@ public class BreathingRegulationScript : CustomTextScript {
 
                 if (instructionsPointer == 1)
                 {
-                    this.Animator.SetTrigger(this.HashIDs.BreathingExerciseTrigger);
+                    this.Animator.SetTrigger(AnimatorControlerHashIDs.Instance.BreathingExerciseTrigger);
                 }
                 //check if there are more to show
                 if (instructions.Length == instructionsPointer + 1)
@@ -52,7 +42,5 @@ public class BreathingRegulationScript : CustomTextScript {
                 }
             }
         }
-        //else if ((Time.time - finalWaitStart) >= secondsToCloseSession)
-        //    finished = true;
     }
 }

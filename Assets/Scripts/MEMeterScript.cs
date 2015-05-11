@@ -137,8 +137,8 @@ public class MEMeterScript : MonoBehaviour {
         }
 
         //check if the memeter introduction is finished
-        if (isSelected && (Time.time - finalWaitStart) >= secondsToCloseSession)
-            finished = true;
+        //if (isSelected && (Time.time - finalWaitStart) >= secondsToCloseSession)
+        //    finished = true;
 	}
 
     //fix inverted mouse Y
