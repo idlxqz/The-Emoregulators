@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using UnityEngine;
 using System.Collections;
@@ -20,7 +21,7 @@ public class GlobalizationService  {
 
     private Dictionary<string, Dictionary<SystemLanguage, string>> multiLanguageDictionary; 
 
-    public SystemLanguage CurrentLanguage { get; private set; }
+    public SystemLanguage CurrentLanguage { get; set; }
 
     #region Globalization Constants
     public const string ContinueButton = "ContinueButton";

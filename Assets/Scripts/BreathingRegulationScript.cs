@@ -1,38 +1,58 @@
 ﻿using System.Linq;
-using UnityEditor.Animations;
 using UnityEngine;
 using System.Collections;
 
-public class BreathingRegulationScript : MonoBehaviour {
+public class BreathingRegulationScript : CustomTextScript {
 
-    public bool finished;
+    //public bool finished;
     public GameObject Avatar;
     protected Animator Animator;
     private AnimatorControlerHashIDs HashIDs;
 
 
 	// Use this for initialization
-	void Start ()
+	public override void Start ()
 	{
+	    //base.Start();
 	    var sessionManager = GameObject.Find("SessionManager");
+ 
 	    this.HashIDs = sessionManager.GetComponent<AnimatorControlerHashIDs>();
-	    this.Animator = this.Avatar.GetComponent<Animator>();
-
-        //TODO: play breathing regulation animations and finish
         this.Avatar.SetActive(true);
-        this.Animator.SetTrigger(this.HashIDs.BreathingExerciseTrigger);
-        UIManagerScript.EnableSkipping();
-	}
-	
-	// Update is called once per frame
-	void Update () {
+	    this.Avatar.GetComponent<RectTransform>().anchoredPosition = new Vector3(400,-300,0);
+	    this.Animator = this.Avatar.GetComponentInChildren<Animator>();
 	    
-        
-        //var breathingParameter = this.Animator.parameters.FirstOrDefault(p => p.name.Equals("BreathingRegulation"));
-        //this.Animator.S
-        ////check if the waiting time is elapsed
-        //if ((Time.time - finalWaitStart) >= secondsToCloseSession)
-        //    finished = true;
 
+        
+        //UIManagerScript.EnableSkipping();
 	}
+
+    public override void Update()
+    {
+        //check if the waiting time is elapsed
+        if (moreInstructions)
+        {
+            if ((Time.time - timeStart) >= delayBetweenInstructions)
+            {
+                timeStart = Time.time;
+                instructionsPointer++;
+                currentInstructions += "\n\n" + instructions[instructionsPointer];
+
+                if (instructionsPointer == 1)
+                {
+                    this.Animator.SetTrigger(this.HashIDs.BreathingExerciseTrigger);
+                }
+                //check if there are more to show
+                if (instructions.Length == instructionsPointer + 1)
+                {
+                   
+                    finalWaitStart = Time.time;
+                    moreInstructions = false;
+                    //let the user skip from now on
+                    UIManagerScript.EnableSkipping();
+                }
+            }
+        }
+        //else if ((Time.time - finalWaitStart) >= secondsToCloseSession)
+        //    finished = true;
+    }
 }

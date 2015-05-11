@@ -1,5 +1,4 @@
-﻿using UnityEditor.VersionControl;
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
 
@@ -22,6 +21,11 @@ public class SessionFourManager : SessionManager {
 
         this.sessionTitle = GlobalizationService.Instance.Globalize(GlobalizationService.Session4Title);
         this.sessionSubTitle = GlobalizationService.Instance.Globalize(GlobalizationService.Session4SubTitle);
+
+        breathingRegulation.instructionsFormat = customText.instructionsFormat;
+        activeShakingMeditation.instructionsFormat = customText.instructionsFormat;
+        activeShakingMeditation.instructionsArea = breathingRegulation.instructionsArea;
+        //breathingRegulation.instructionsArea = candle.instructionsArea;
 
         System.Action nextPhase = () =>
         {
@@ -179,26 +183,6 @@ public class SessionFourManager : SessionManager {
                 //prepare custom text of introduction
                 setupNextPhaseCustomText = () =>
                 {
-                    log.LogInformation("Ended FacialMindfulness B.");
-                    //disable the custom text and proceed to the next state
-                    customText.enabled = false;
-                    log.LogInformation("Started FacialMindfulnessC activity");
-
-                    currentState = SessionState.FacialMindfulnessC;
-                };
-                customText.Setup(setupNextPhaseCustomText, customTextWaitTime,
-                    new[]
-                    {
-                        GlobalizationService.Instance.Globalize(GlobalizationService.FacialMindfulnessB1Text),
-                        GlobalizationService.Instance.Globalize(GlobalizationService.FacialMindfulnessB2Text)
-                    });
-                customText.enabled = true;
-                currentState = SessionState.CustomText;
-                break;
-            case SessionState.FacialMindfulnessC:
-                //prepare custom text of introduction
-                setupNextPhaseCustomText = () =>
-                {
                     log.LogInformation("Ended FacialMindfulness C.");
                     //disable the custom text and proceed to the next state
                     customText.enabled = false;
@@ -209,7 +193,12 @@ public class SessionFourManager : SessionManager {
                     facialMindfulness.enabled = true;
                     currentState = SessionState.FacialMindfulnessD;
                 };
-                customText.Setup(setupNextPhaseCustomText, 3, "TODO: Replace this screen with a picture of the face...");
+                customText.Setup(setupNextPhaseCustomText, customTextWaitTime,
+                    new[]
+                    {
+                        GlobalizationService.Instance.Globalize(GlobalizationService.FacialMindfulnessB1Text),
+                        GlobalizationService.Instance.Globalize(GlobalizationService.FacialMindfulnessB2Text)
+                    });
                 customText.enabled = true;
                 currentState = SessionState.CustomText;
                 break;
@@ -225,43 +214,61 @@ public class SessionFourManager : SessionManager {
                     setupNextPhaseCustomTitle = () =>
                     {
                         log.LogInformation("Started breathing regulation exercise");
-                        currentState = SessionState.BreathingRegulation;
+                        currentState = SessionState.BreathingRegulationB;
+                        breathingRegulation.Avatar = this.GetPlayerAvatar;
+                        breathingRegulation.Setup(null,customTextWaitTime, 
+                            new[]{GlobalizationService.Instance.Globalize(GlobalizationService.BreathingRegulationA1Text),
+                                GlobalizationService.Instance.Globalize(GlobalizationService.BreathingRegulationA2Text),
+                                GlobalizationService.Instance.Globalize(GlobalizationService.BreathingRegulationA3Text),
+                                GlobalizationService.Instance.Globalize(GlobalizationService.BreathingRegulationA4Text),
+                                GlobalizationService.Instance.Globalize(GlobalizationService.BreathingRegulationA5Text)});
                         breathingRegulation.enabled = true;
                     };
                     customTitleScript.Setup(setupNextPhaseCustomTitle, GlobalizationService.Instance.Globalize(GlobalizationService.BreathingRegulationTitle));
                     currentState = SessionState.CustomTitle;
                 }
                 break;
-            case SessionState.BreathingRegulation:
+            case SessionState.BreathingRegulationB:
                 if(breathingRegulation.finished || canSkip){
                     canSkip = false;
                     UIManagerScript.DisableSkipping();
-                    log.LogInformation("Ended breathing regulation exercise.");
-                    //disable the breathing regulation
-                    breathingRegulation.enabled = false;
+                    log.LogInformation("Ended breathing regulation B exercise.");
+                    //continue on the breathing regulation exercise
+                    //breathingRegulation.enabled = false;
+                    breathingRegulation.finished = false;
 
+                    breathingRegulation.Setup(null, customTextWaitTime,
+                            new[]{GlobalizationService.Instance.Globalize(GlobalizationService.BreathingRegulationB1Text),
+                                GlobalizationService.Instance.Globalize(GlobalizationService.BreathingRegulationB2Text),
+                                GlobalizationService.Instance.Globalize(GlobalizationService.BreathingRegulationB3Text)});
+                    currentState = SessionState.BreathingRegulationC;
+                }
+                break;
+            case SessionState.BreathingRegulationC:
+                if(breathingRegulation.finished || canSkip){
+                    canSkip = false;
+                    UIManagerScript.DisableSkipping();
+                    log.LogInformation("Ended breathing regulation B exercise.");
+                    //stop the breathing regulation exercise
+                    breathingRegulation.Avatar.SetActive(false);
+                    breathingRegulation.enabled = false;
                     //prepare custom title
                     setupNextPhaseCustomTitle = () =>
                     {
                         //start introducing active shaking meditation
                         log.LogInformation("Started active shaking meditation introduction.");
-                        activityName = "Active/Shaking Meditation Introduction";
-                        //prepare custom text of introduction
-                        setupNextPhaseCustomText = () =>
-                        {
-                            log.LogInformation("Ended active shaking meditation introduction.");
-                            //disable the custom text and proceed to the next state
-                            customText.enabled = false;
-                            log.LogInformation("Started active shaking meditation exercise");
-                            activityName = "Active/Shaking Meditation Exercise";
-                            activeShakingMeditation.enabled = true;
-                            currentState = SessionState.ActiveShakingMeditation;
-                        };
-                        customText.Setup(setupNextPhaseCustomText, customTextWaitTime, "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book");
-                        customText.enabled = true;
-                        currentState = SessionState.CustomText;
+                        activityName = GlobalizationService.Instance.Globalize(GlobalizationService.ActiveMeditationTitle);
+                        activeShakingMeditation.Avatar = this.GetPlayerAvatar;
+                        activeShakingMeditation.enabled = true;
+                        activeShakingMeditation.Setup(null, customTextWaitTime,
+                            new[]{GlobalizationService.Instance.Globalize(GlobalizationService.ActiveMeditationA1Text),
+                                GlobalizationService.Instance.Globalize(GlobalizationService.ActiveMeditationA2Text),
+                                GlobalizationService.Instance.Globalize(GlobalizationService.ActiveMeditationA3Text),
+                                GlobalizationService.Instance.Globalize(GlobalizationService.ActiveMeditationA4Text)
+                            });
+                        currentState = SessionState.ActiveShakingMeditation;
                     };
-                    customTitleScript.Setup(setupNextPhaseCustomTitle, "Active/Shaking Meditation");
+                    customTitleScript.Setup(setupNextPhaseCustomTitle, GlobalizationService.Instance.Globalize(GlobalizationService.ActiveMeditationTitle));
                     currentState = SessionState.CustomTitle;
                 }
                 break;
@@ -272,6 +279,7 @@ public class SessionFourManager : SessionManager {
                     UIManagerScript.DisableSkipping();
                     log.LogInformation("Ended active shaking meditation exercise.");
                     //disable the active shaking meditation exercise
+                    activeShakingMeditation.Avatar.SetActive(false);
                     activeShakingMeditation.enabled = false;
 
                     //prepare custom title

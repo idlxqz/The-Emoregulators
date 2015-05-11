@@ -14,7 +14,7 @@ public class UIManagerScript : MonoBehaviour {
 	}
 
 	public void StartButton () {
-		Application.LoadLevel ("SessionOneScene");
+		Application.LoadLevel ("SessionOneSimplified");
 	}
 
 	public void QuitButton () {
@@ -28,6 +28,16 @@ public class UIManagerScript : MonoBehaviour {
         {
             sessionManager.Continue();
         }
+    }
+
+    public void EnglishButton()
+    {
+        GlobalizationService.Instance.CurrentLanguage = SystemLanguage.English;
+    }
+
+    public void ItalianButton()
+    {
+        GlobalizationService.Instance.CurrentLanguage = SystemLanguage.Italian;
     }
 
     public static void EnableSkipping()

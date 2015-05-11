@@ -8,6 +8,7 @@ public class AnimatorControlerHashIDs : MonoBehaviour
     public int BreathingExerciseTrigger;
     public int DancingExerciseState;
     public int DancingExerciseTrigger;
+    public int DancingExerciseBool;
     public int SqueezingExerciseState;
     public int SqueezingExerciseTrigger;
     public int StreachingExerciseState;
@@ -24,7 +25,8 @@ public class AnimatorControlerHashIDs : MonoBehaviour
         this.BreathingExerciseState = Animator.StringToHash("Base Layer.BreathingExercise");
         this.BreathingExerciseTrigger = Animator.StringToHash("BreathingExercise");
         this.DancingExerciseState = Animator.StringToHash("Base Layer.DancingExercise");
-        this.DancingExerciseTrigger = Animator.StringToHash("DancingExercise");
+        this.DancingExerciseTrigger = Animator.StringToHash("DancingExerciseTri");
+        this.DancingExerciseBool = Animator.StringToHash("DancingExercise");
         this.SqueezingExerciseState = Animator.StringToHash("Base Layer.SqueezingExercise");
         this.SqueezingExerciseTrigger = Animator.StringToHash("SqueezingExercise");
         this.StreachingExerciseState = Animator.StringToHash("Base Layer.StreachingExercise");

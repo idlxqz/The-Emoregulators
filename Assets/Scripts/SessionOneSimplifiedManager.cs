@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Linq;
 using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
@@ -168,6 +169,7 @@ public class SessionOneSimplifiedManager : SessionManager
                     canSkip = false;
                     UIManagerScript.DisableSkipping();
                     introducingOurselves.SetActive(true);
+                    introducingOurselves.GetComponentsInChildren<Text>().FirstOrDefault(t => t.name.Equals("Instructions")).text = GlobalizationService.Instance.Globalize(GlobalizationService.IntroducingOurselvesAvatarText);
                     proceed = false;
                     nameInputField.ActivateInputField();
                     nameInputField.Select();
@@ -211,6 +213,7 @@ public class SessionOneSimplifiedManager : SessionManager
                     log.LogInformation("Started IBox introduction.");
                     activityName = GlobalizationService.Instance.Globalize(GlobalizationService.IBoxIntroductionTitle);
                     ibox.enabled = true;
+                    ibox.instructions = GlobalizationService.Instance.Globalize(GlobalizationService.IBoxIntroductionAText);
                     currentState = SessionState.IBoxIntroduction;
                 };
                 customTitleScript.Setup(setupNextPhaseCustomTitle, GlobalizationService.Instance.Globalize(GlobalizationService.IBoxIntroductionTitle));

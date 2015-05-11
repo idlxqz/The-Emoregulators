@@ -729,7 +729,7 @@ GameObject:
   - 114: {fileID: 629411170}
   m_Layer: 5
   m_Name: Instructions
-  m_TagString: Untagged
+  m_TagString: Instructions
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -931,6 +931,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   finished: 0
   secondsToCloseSession: 5
+  instructionsArea:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 0
+    height: 0
   instructions: []
   delayBetweenInstructions: 3
   instructionsFormat:
@@ -2122,7 +2128,7 @@ MonoBehaviour:
     I-box.  It's your personal space, where you collect points that you will be able
     to earn. Here also, you can put anything you will create during the exercises.
     You can color the I-box as desired. Moreover it will always be at the top left.
-    Next to the I-BOX you'll see your heartbeats, next to the hearth symbol.l
+    Next to the I-BOX you'll see your heartbeats, next to the hearth symbol.
   instructionsFormat:
     m_Name: 
     m_Normal:

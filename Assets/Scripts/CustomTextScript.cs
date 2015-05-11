@@ -5,20 +5,20 @@ public class CustomTextScript : MonoBehaviour {
 
     //logic control
     public bool finished;
-    private float timeStart;
-    private float finalWaitStart;
+    protected float timeStart;
+    protected float finalWaitStart;
     public float secondsToCloseSession;
 
     //memeter and instructions text areas definition
-    Rect instructionsArea;
+    public Rect instructionsArea;
 
     //instruction control
     public System.Action setupNextPhase;
     public string[] instructions;
     public int delayBetweenInstructions;
-    private bool moreInstructions;
-    private int instructionsPointer;
-    private string currentInstructions;
+    protected bool moreInstructions;
+    protected int instructionsPointer;
+    protected string currentInstructions;
 
     //instructions format
     public GUIStyle instructionsFormat;
@@ -27,7 +27,7 @@ public class CustomTextScript : MonoBehaviour {
     public int lateralOffset;
 
 	// Use this for initialization
-	void Start () {
+	public virtual void Start () {
         instructionsArea.x = lateralOffset;
         instructionsArea.y = Screen.height / 5;
         instructionsArea.width = Screen.width - 2 * lateralOffset ;
@@ -35,7 +35,7 @@ public class CustomTextScript : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	public virtual void Update () {
         //check if the waiting time is elapsed
         if (moreInstructions)
         {
@@ -43,7 +43,7 @@ public class CustomTextScript : MonoBehaviour {
             {
                 timeStart = Time.time;
                 instructionsPointer++;
-                currentInstructions += instructions[instructionsPointer];
+                currentInstructions += "\n\n" + instructions[instructionsPointer];
                 //check if there are more to show
                 if (instructions.Length == instructionsPointer + 1)
                 {
@@ -54,11 +54,11 @@ public class CustomTextScript : MonoBehaviour {
                 }
             }
         }
-        else if ((Time.time - finalWaitStart) >= secondsToCloseSession)
-            finished = true;
+        //else if ((Time.time - finalWaitStart) >= secondsToCloseSession)
+        //    finished = true;
 	}
 
-    void OnGUI()
+    public virtual void OnGUI()
     {
         //draw the instructions text
         GUI.Label(instructionsArea, currentInstructions, instructionsFormat);

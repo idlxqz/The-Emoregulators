@@ -38,7 +38,8 @@ public class SessionManager : MonoBehaviour {
         CloseSession,
         Mindfullness,
         BasicPH,
-        BreathingRegulation,
+        BreathingRegulationB,
+        BreathingRegulationC,
         ActiveShakingMeditation,
         ProgressiveMuscleRelaxation,
         InnerSensations
