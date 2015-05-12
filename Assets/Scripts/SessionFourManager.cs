@@ -56,7 +56,7 @@ public class SessionFourManager : SessionManager {
                     log.LogInformation("Ended candle cermony title");
                     //activate the candle cerimony
                     log.LogInformation("Started candle lighting cerimony.");
-                    activityName = GlobalizationService.Instance.Globalize(GlobalizationService.CandleCeremonyTitle);
+                    activityName = GlobalizationService.Instance.Globalize(GlobalizationService.CandleCeremonyActivityName);
                     this.candle.instructions = GlobalizationService.Instance.Globalize(GlobalizationService.CandleCeremonyText);
                     candle.enabled = true;
                     currentState = SessionState.CandleCeremony;
@@ -77,7 +77,7 @@ public class SessionFourManager : SessionManager {
                     {
                         //start introducing ourselves
                         log.LogInformation("Started a MinuteForMyselfA.");
-                        activityName = GlobalizationService.Instance.Globalize(GlobalizationService.MinuteForMyselfTitle);
+                        activityName = GlobalizationService.Instance.Globalize(GlobalizationService.MinuteForMyselfActivityName);
 
                         //prepare custom text of introduction
                         setupNextPhaseCustomText = () =>
@@ -159,7 +159,7 @@ public class SessionFourManager : SessionManager {
                     setupNextPhaseCustomTitle = () =>
                     {
                         log.LogInformation("Started Facial Mindfullness A.");
-                        activityName = "Facial Mindfulness";
+                        activityName = GlobalizationService.Instance.Globalize(GlobalizationService.FacialMindfulnessActivityName);
                         //prepare custom text of introduction
                         setupNextPhaseCustomText = () =>
                         {
@@ -260,7 +260,7 @@ public class SessionFourManager : SessionManager {
                         UIManagerScript.EnableSkipping();
                         //start introducing active shaking meditation
                         log.LogInformation("Started active shaking meditation introduction.");
-                        activityName = GlobalizationService.Instance.Globalize(GlobalizationService.ActiveMeditationTitle);
+                        activityName = GlobalizationService.Instance.Globalize(GlobalizationService.ActiveMeditationActivityName);
                         activeShakingMeditation.Avatar = this.GetPlayerAvatar;
                         activeShakingMeditation.enabled = true;
                         activeShakingMeditation.Setup(null, customTextWaitTime,
@@ -347,7 +347,7 @@ public class SessionFourManager : SessionManager {
                 //start introducing progressive muscle relaxation
                 log.LogInformation("Started progressive muscle relaxation A.");
                 UIManagerScript.EnableSkipping();
-                activityName = GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationTitle);
+                activityName = GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationActivityName);
                 //prepare custom text of introduction
                 setupNextPhaseCustomText = () =>
                 {
@@ -503,7 +503,7 @@ public class SessionFourManager : SessionManager {
                     log.LogInformation("Ended ibox inner sensations A.");
                     customText.enabled = false;
                     //disable the custom text and proceed to the next state
-                    activityName = GlobalizationService.Instance.Globalize(GlobalizationService.InternalSensationsTitle);
+                    activityName = GlobalizationService.Instance.Globalize(GlobalizationService.InternalSensationsActivityName);
                     //prepare the inner sensations activity
                     innerSensations.enabled = true;
                     currentState = SessionState.InnerSensationsB;
@@ -529,7 +529,7 @@ public class SessionFourManager : SessionManager {
                 canSkip = false;
                 UIManagerScript.DisableSkipping();
                 log.LogInformation("Started ClosingSession Title.");
-                activityName = GlobalizationService.Instance.Globalize(GlobalizationService.ClosingOfSessionTitle);
+                activityName = GlobalizationService.Instance.Globalize(GlobalizationService.ClosingOfSessionActivityName);
                 //prepare custom title
                 setupNextPhaseCustomTitle = () =>
                 {

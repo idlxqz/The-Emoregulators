@@ -42,7 +42,7 @@ public class SessionOneSimplifiedManager : SessionManager
 		//coordinate the session state
 		switch (currentState) {
             case SessionState.OpeningA:
-                activityName = GlobalizationService.Instance.Globalize(GlobalizationService.OpeningTitle);
+                activityName = GlobalizationService.Instance.Globalize(GlobalizationService.OpeningActivityName);
                 log.LogInformation("Starting Opening Screen A.");
                 
                 //prepare custom text
@@ -156,7 +156,7 @@ public class SessionOneSimplifiedManager : SessionManager
                     backgroundChooserScript.backgroundSetter = SetBackground;
                     backgroundChooserScript.enabled = true;
                     UIManagerScript.EnableSkipping();
-                    activityName = GlobalizationService.Instance.Globalize(GlobalizationService.IntroducingOurselvesTitle);
+                    activityName = GlobalizationService.Instance.Globalize(GlobalizationService.IntroducingOurselvesActivityName);
                     
                 };
                 customTitleScript.Setup(setupNextPhaseCustomTitle, GlobalizationService.Instance.Globalize(GlobalizationService.IntroducingOurselvesTitle));
@@ -211,7 +211,7 @@ public class SessionOneSimplifiedManager : SessionManager
                     log.LogInformation("Ended IBox Introduction Title");
                     //start memeter introduction
                     log.LogInformation("Started IBox introduction.");
-                    activityName = GlobalizationService.Instance.Globalize(GlobalizationService.IBoxIntroductionTitle);
+                    activityName = GlobalizationService.Instance.Globalize(GlobalizationService.IBoxIntroductionActivityName);
                     ibox.enabled = true;
                     ibox.instructions = GlobalizationService.Instance.Globalize(GlobalizationService.IBoxIntroductionAText);
                     currentState = SessionState.IBoxIntroduction;

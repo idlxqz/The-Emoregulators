@@ -32,6 +32,7 @@ public class GlobalizationService  {
     public const string Session4Title = "Session4Title";
     public const string Session4SubTitle = "Session4SubTitle";
     public const string OpeningTitle = "OpeningTitle";
+    public const string OpeningActivityName = "OpeningActivityName";
     public const string OpeningAText = "OpeningAText";
     public const string OpeningBText = "OpeningBText";
     public const string OpeningCText = "OpeningCText";
@@ -39,14 +40,18 @@ public class GlobalizationService  {
     public const string OpeningEText = "OpeningEText";
     public const string OpeningFText = "OpeningFText";
     public const string IntroducingOurselvesTitle = "IntroducingOurselvesTitle";
+    public const string IntroducingOurselvesActivityName = "IntroducingOurselvesActivityName";
     public const string IntroducingOurselvesBackgroundText = "IntroducingOurselvesBackgroundText";
     public const string IntroducingOurselvesAvatarText = "IntroducingOurselvesAvatarText";
     public const string IBoxIntroductionTitle = "IBoxIntroductionTitle";
+    public const string IBoxIntroductionActivityName = "IBoxIntroductionActivityName";
     public const string IBoxIntroductionAText = "IBoxIntroductionAText";
     public const string IBoxIntroductionBText = "IBoxIntroductionBText";
     public const string CandleCeremonyTitle = "CandleCeremonyTitle";
+    public const string CandleCeremonyActivityName = "CandleCeremonyActivityName";
     public const string CandleCeremonyText = "CandleCeremonyText";
     public const string MinuteForMyselfTitle = "MinuteForMyselfTitle";
+    public const string MinuteForMyselfActivityName = "MinuteForMyselfActivityName";
     public const string MinuteForMyselfAText = "MinuteForMyselfAText";
     public const string MinuteForMyselfBText = "MinuteForMyselfBText";
     public const string MinuteForMyselfCText = "MinuteForMyselfCText";
@@ -54,11 +59,13 @@ public class GlobalizationService  {
     public const string MeMeterText = "MeMeterText";
     public const string MeMeterClosingText = "MeMeterClosingText";
     public const string FacialMindfulnessTitle = "FacialMindfulnessTitle";
+    public const string FacialMindfulnessActivityName = "FacialMindfulnessActivityName";
     public const string FacialMindfulnessA1Text = "FacialMindfulnessA1Text";
     public const string FacialMindfulnessA2Text = "FacialMindfulnessA2Text";
     public const string FacialMindfulnessB1Text = "FacialMindfulnessB1Text";
     public const string FacialMindfulnessB2Text = "FacialMindfulnessB2Text";
     public const string BreathingRegulationTitle = "BreathingRegulationTitle";
+    public const string BreathingRegulationActivityName = "BreathingRegulationActivityName";
     public const string BreathingRegulationA1Text = "BreathingRegulationA1Text";
     public const string BreathingRegulationA2Text = "BreathingRegulationA2Text";
     public const string BreathingRegulationA3Text = "BreathingRegulationA3Text";
@@ -68,6 +75,7 @@ public class GlobalizationService  {
     public const string BreathingRegulationB2Text = "BreathingRegulationB2Text";
     public const string BreathingRegulationB3Text = "BreathingRegulationB3Text";
     public const string ActiveMeditationTitle = "ActiveMeditationTitle";
+    public const string ActiveMeditationActivityName = "ActiveMeditationActivityName";
     public const string ActiveMeditationA1Text = "ActiveMeditationA1Text";
     public const string ActiveMeditationA2Text = "ActiveMeditationA2Text";
     public const string ActiveMeditationA3Text = "ActiveMeditationA3Text";
@@ -76,6 +84,7 @@ public class GlobalizationService  {
     public const string ActiveMeditationCText = "ActiveMeditationCText";
     public const string ActiveMeditationDText = "ActiveMeditationDText";
     public const string ProgressiveMuscleRelaxationTitle = "ProgressiveMuscleRelaxationTitle";
+    public const string ProgressiveMuscleRelaxationActivityName = "ProgressiveMuscleRelaxationActivityName";
     public const string ProgressiveMuscleRelaxationAText = "ProgressiveMuscleRelaxationAText";
     public const string ProgressiveMuscleRelaxationBText = "ProgressiveMuscleRelaxationBText";
     public const string ProgressiveMuscleRelaxationC1Text = "ProgressiveMuscleRelaxationC1Text";
@@ -103,8 +112,10 @@ public class GlobalizationService  {
     public const string ProgressiveMuscleRelaxationF3Text = "ProgressiveMuscleRelaxationF3Text";
     public const string ProgressiveMuscleRelaxationF4Text = "ProgressiveMuscleRelaxationF4Text";
     public const string InternalSensationsTitle = "InternalSensationsTitle";
+    public const string InternalSensationsActivityName = "InternalSensationsActivityName";
     public const string InternalSensationsAText = "InternalSensationsAText";
     public const string ClosingOfSessionTitle = "ClosingOfSessionTitle";
+    public const string ClosingOfSessionActivityName = "ClosingOfSessionActivityName";
     public const string ClosingOfSessionAText = "ClosingOfSessionAText";
     public const string ClosingOfSessionCandleText = "ClosingOfSessionCandleText";
     public const string ClosingOfSessionCText = "ClosingOfSessionCText";
@@ -167,14 +178,20 @@ public class GlobalizationService  {
 
         this.multiLanguageDictionary.Add(Session4SubTitle, new Dictionary<SystemLanguage, string>
         {
-            {SystemLanguage.English, "Session 4"},
-            {SystemLanguage.Italian, "Session 4"}
+            {SystemLanguage.English, "Session 1"},
+            {SystemLanguage.Italian, "Session 1"}
         });
 
         this.multiLanguageDictionary.Add(OpeningTitle, new Dictionary<SystemLanguage, string>
         {
             {SystemLanguage.English, "Introduction"},
             {SystemLanguage.Italian, "Introduzione"}
+        });
+
+        this.multiLanguageDictionary.Add(OpeningActivityName, new Dictionary<SystemLanguage, string>
+        {
+            {SystemLanguage.English, "Introduction"},
+            {SystemLanguage.Italian, "Introduction"}
         });
 
         this.multiLanguageDictionary.Add(OpeningAText, new Dictionary<SystemLanguage, string>
@@ -219,6 +236,12 @@ public class GlobalizationService  {
             {SystemLanguage.Italian, "Il mio avatar"}
         });
 
+        this.multiLanguageDictionary.Add(IntroducingOurselvesActivityName, new Dictionary<SystemLanguage, string>
+        {
+            {SystemLanguage.English, "Introducing Ourselves"},
+            {SystemLanguage.Italian, "Introducing Ourselves"}
+        });
+
         this.multiLanguageDictionary.Add(IntroducingOurselvesBackgroundText, new Dictionary<SystemLanguage, string>
         {
             {SystemLanguage.English, "First of all you have to choose the background that you want to give to the game.\nHere are various options.\nClick on the image.\nPerfect!"},
@@ -235,6 +258,12 @@ public class GlobalizationService  {
         {
             {SystemLanguage.English, "I-Box"},
             {SystemLanguage.Italian, "I-Box"}
+        });
+
+        this.multiLanguageDictionary.Add(IBoxIntroductionActivityName, new Dictionary<SystemLanguage, string>
+        {
+            {SystemLanguage.English, "I-Box 1: Introduction"},
+            {SystemLanguage.Italian, "I-Box 1: Introduction"}
         });
 
         this.multiLanguageDictionary.Add(IBoxIntroductionAText, new Dictionary<SystemLanguage, string>
@@ -255,6 +284,12 @@ public class GlobalizationService  {
             {SystemLanguage.Italian, "Si inizia: accendiamola!"}
         });
 
+        this.multiLanguageDictionary.Add(CandleCeremonyActivityName, new Dictionary<SystemLanguage, string>
+        {
+            {SystemLanguage.English, "Candle Lighting Ceremony"},
+            {SystemLanguage.Italian, "Candle Lighting Ceremony"}
+        });
+
         this.multiLanguageDictionary.Add(CandleCeremonyText, new Dictionary<SystemLanguage, string>
         {
             {SystemLanguage.English, "We are finally in our game.\nBefore getting to the core, we must do something important.\n\nThis candle represents the beginning of our activities.\nTurn it on with the match!\n\nWhen we will finish, you will blow out this candle."},
@@ -265,6 +300,12 @@ public class GlobalizationService  {
         {
             {SystemLanguage.English, "A Minute for Myself - M&M"},
             {SystemLanguage.Italian, "A Minute for Myself - M&M"}
+        });
+
+        this.multiLanguageDictionary.Add(MinuteForMyselfActivityName, new Dictionary<SystemLanguage, string>
+        {
+            {SystemLanguage.English, "A Minute for Myself"},
+            {SystemLanguage.Italian, "A Minute for Myself"}
         });
 
         this.multiLanguageDictionary.Add(MinuteForMyselfAText, new Dictionary<SystemLanguage, string>
@@ -303,6 +344,12 @@ public class GlobalizationService  {
             {SystemLanguage.Italian, "Facial mindfulness"}
         });
 
+        this.multiLanguageDictionary.Add(FacialMindfulnessActivityName, new Dictionary<SystemLanguage, string>
+        {
+            {SystemLanguage.English, "Facial mindfulness"},
+            {SystemLanguage.Italian, "Facial mindfulness"}
+        });
+
         this.multiLanguageDictionary.Add(FacialMindfulnessA1Text, new Dictionary<SystemLanguage, string>
         {
             {SystemLanguage.English, "Now let's focus on the face!"},
@@ -331,6 +378,12 @@ public class GlobalizationService  {
         {
             {SystemLanguage.English, "Let's regulate our breath!"},
             {SystemLanguage.Italian, "Regoliamo il respiro!"}
+        });
+
+        this.multiLanguageDictionary.Add(BreathingRegulationActivityName, new Dictionary<SystemLanguage, string>
+        {
+            {SystemLanguage.English, "Breathing Regulation"},
+            {SystemLanguage.Italian, "Breathing Regulation"}
         });
 
         this.multiLanguageDictionary.Add(BreathingRegulationA1Text, new Dictionary<SystemLanguage, string>
@@ -387,6 +440,12 @@ public class GlobalizationService  {
             {SystemLanguage.Italian, "Attiviamoci, muoviamoci e...meditiamo!"}
         });
 
+        this.multiLanguageDictionary.Add(ActiveMeditationActivityName, new Dictionary<SystemLanguage, string>
+        {
+            {SystemLanguage.English, "Active/Shaking Meditation"},
+            {SystemLanguage.Italian, "Active/Shaking Meditation"}
+        });
+
         this.multiLanguageDictionary.Add(ActiveMeditationA1Text, new Dictionary<SystemLanguage, string>
         {
             {SystemLanguage.English, "Now a bit of movement!"},
@@ -433,6 +492,12 @@ public class GlobalizationService  {
         {
             {SystemLanguage.English, "Let's relax our muscles!"},
             {SystemLanguage.Italian, "Rilassiamo i muscoli!"}
+        });
+
+        this.multiLanguageDictionary.Add(ProgressiveMuscleRelaxationActivityName, new Dictionary<SystemLanguage, string>
+        {
+            {SystemLanguage.English, "Progressive Muscle Relaxation"},
+            {SystemLanguage.Italian, "Progressive Muscle Relaxation"}
         });
 
         this.multiLanguageDictionary.Add(ProgressiveMuscleRelaxationAText, new Dictionary<SystemLanguage, string>
@@ -595,6 +660,12 @@ public class GlobalizationService  {
             {SystemLanguage.Italian, "Colore!"}
         });
 
+        this.multiLanguageDictionary.Add(InternalSensationsActivityName, new Dictionary<SystemLanguage, string>
+        {
+            {SystemLanguage.English, "IBox 2: Internal Sensations"},
+            {SystemLanguage.Italian, "IBox 2: Internal Sensations"}
+        });
+
         this.multiLanguageDictionary.Add(InternalSensationsAText, new Dictionary<SystemLanguage, string>
         {
             {SystemLanguage.English, "We are coming to the end of our game.\n\nNow you can begin to customize a bit your Ibox!\n\nWe worked a lot on how to manage stress and on how to get relax.\n\nNow you will see a palette of colors.\nPick one that represents for you the sense of relaxation, calm.\nTake it and put it on 'Ibox to color!"},
@@ -605,6 +676,12 @@ public class GlobalizationService  {
         {
             {SystemLanguage.English, "We came to the end..."},
             {SystemLanguage.Italian, "Siamo giunti alla fine..."}
+        });
+
+        this.multiLanguageDictionary.Add(ClosingOfSessionActivityName, new Dictionary<SystemLanguage, string>
+        {
+            {SystemLanguage.English, "Closing of Session"},
+            {SystemLanguage.Italian, "Closing of Session"}
         });
 
         this.multiLanguageDictionary.Add(MeMeterClosingText, new Dictionary<SystemLanguage, string>
