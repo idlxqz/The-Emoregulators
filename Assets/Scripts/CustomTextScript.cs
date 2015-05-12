@@ -64,7 +64,7 @@ public class CustomTextScript : MonoBehaviour {
         GUI.Label(instructionsArea, currentInstructions, instructionsFormat);
     }
 
-    public void Setup(System.Action nextPhaseSetup, float timeToDisplay,  string[] newInstructions)
+    public virtual void Setup(System.Action nextPhaseSetup, float timeToDisplay,  string[] newInstructions)
     {   
         finished = false;
         secondsToCloseSession = timeToDisplay;

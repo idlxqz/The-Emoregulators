@@ -29,6 +29,8 @@ public class SessionFourManager : SessionManager {
         progressiveMuscleRelaxation.instructionsArea = breathingRegulation.instructionsArea;
         //breathingRegulation.instructionsArea = candle.instructionsArea;
 
+        this.displayIBox = true;
+
         System.Action nextPhase = () =>
         {
             hideInterface = false;

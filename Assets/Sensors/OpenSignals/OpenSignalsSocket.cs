@@ -1,10 +1,9 @@
 using UnityEngine;
-using System.Collections;
 using System;
 using System.IO;
 using System.Net.Sockets;
 
-public class networkSocket : MonoBehaviour
+public class OpenSignalsSocket : MonoBehaviour
 {
     public String host = "127.0.0.1";
     public Int32 port = 30000;
@@ -27,12 +26,29 @@ public class networkSocket : MonoBehaviour
         	// Do something with the received data,
         	// print it in the log for now
             Debug.Log(received_data);
+            var splitData = received_data.Split(new[]{':'}, StringSplitOptions.RemoveEmptyEntries);
+            var messageType = splitData[0];
+            if (messageType.Equals("HR"))
+            {
+                var hearthRate = float.Parse(splitData[1]);
+                if (hearthRate >= 50 && hearthRate <= 220)
+                {
+                    SessionManager.HeartRate = Convert.ToInt32(hearthRate);
+                }
+            }
+            else if (messageType.Equals("EMG1"))
+            {
+                var muscleActive = bool.Parse(splitData[1]);
+                SessionManager.IsMuscleActive = muscleActive;
+            }
+            
         }
     }
 
     void Awake()
     {
         setupSocket();
+        DontDestroyOnLoad(this);
     }
 
     void OnApplicationQuit()

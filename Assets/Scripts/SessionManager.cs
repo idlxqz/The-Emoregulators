@@ -142,7 +142,10 @@ public class SessionManager : MonoBehaviour {
                 return maleAvatar;
         }
     }
-    public static int playerScore = 0; //share it accross scenes 
+    public static int PlayerScore { get; set; } //share it accross scenes
+    public static int HeartRate { get; set; }
+    public static bool IsMuscleActive { get; set; }
+
     public GUIStyle scoreFormat;
 
     //background configurations
@@ -221,7 +224,9 @@ public class SessionManager : MonoBehaviour {
             {
                 GUI.DrawTexture(iboxArea, iboxTexture);
                 GUI.DrawTexture(new Rect(iboxArea.xMin + iboxArea.width + heartSpacing, iboxArea.yMin, iboxArea.width, iboxArea.height), heartTexture);
-                GUI.Label(new Rect(iboxArea.xMin, iboxArea.yMin + iboxArea.height, iboxArea.width * 2 + heartSpacing, 15), ""+playerScore, scoreFormat);
+                GUI.Label(new Rect(iboxArea.xMin, iboxArea.yMin + iboxArea.height, iboxArea.width, 15), ""+PlayerScore, scoreFormat);
+                GUI.Label(new Rect(iboxArea.xMin + iboxArea.width + heartSpacing, iboxArea.yMin + iboxArea.height, iboxArea.width, 15), (SessionManager.HeartRate==0? "-" : ""+SessionManager.HeartRate), scoreFormat);
+                GUI.Label(new Rect(iboxArea.xMin + 2 * iboxArea.width + 2* heartSpacing, iboxArea.yMin + iboxArea.height, iboxArea.width, 15),""+SessionManager.IsMuscleActive, scoreFormat);
             }
             //draw title and subtitle of the session
             GUI.Label(titleArea, sessionTitle, titleFormat);

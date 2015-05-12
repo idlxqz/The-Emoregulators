@@ -1,7 +1,5 @@
-﻿using System.Diagnostics;
-using System.Linq;
+﻿using System.Linq;
 using UnityEngine;
-using System.Collections;
 using UnityEngine.UI;
 using Debug = UnityEngine.Debug;
 
