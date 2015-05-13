@@ -24,7 +24,6 @@ public class SessionOneSimplifiedManager : SessionManager
         System.Action nextPhase  = () => {
             hideInterface = false;
             currentState = SessionState.OpeningA;
-            
         };
         customTitleScript.Setup(nextPhase, GlobalizationService.Instance.Globalize(GlobalizationService.OpeningTitle));
 

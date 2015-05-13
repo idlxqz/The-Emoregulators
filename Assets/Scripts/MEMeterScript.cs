@@ -16,6 +16,17 @@ public class MEMeterScript : MonoBehaviour {
 	public Texture2D memeterSelected;
 
     //memeter levels in the texture from click
+    private static int LEVEL_10 = 224;
+    private static int LEVEL_9 = 280;
+    private static int LEVEL_8 = 336;
+    private static int LEVEL_7 = 392;
+    private static int LEVEL_6 = 448;
+    private static int LEVEL_5 = 508;
+    private static int LEVEL_4 = 562;
+    private static int LEVEL_3 = 618;
+    private static int LEVEL_2 = 674;
+    private static int LEVEL_1 = 730;
+    /* Old memeter image values
     private static int LEVEL_9 = 120;
     private static int LEVEL_8 = 199;
     private static int LEVEL_7 = 276;
@@ -26,7 +37,7 @@ public class MEMeterScript : MonoBehaviour {
     private static int LEVEL_2 = 670;
     private static int LEVEL_1 = 748;
     private static int LEVEL_0 = 826;
-
+    */
 	//memeter and instructions text areas definition
 	public Rect memeterArea;
 	public Rect instructionsArea;
@@ -63,7 +74,12 @@ public class MEMeterScript : MonoBehaviour {
             {
                 bool emptySelected = false;
                 //determine the level selected
-                if (clickY < DetermineScreenPositionBoundary(workingRect, LEVEL_9, memeterSelected))
+                if (clickY < DetermineScreenPositionBoundary(workingRect, LEVEL_10, memeterSelected))
+                {
+                    memeterSelected = memeterLevels[10];
+                    log.LogInformation("Memeter selection level 10");
+                }
+                else if (clickY < DetermineScreenPositionBoundary(workingRect, LEVEL_9, memeterSelected))
                 {
                     memeterSelected = memeterLevels[9];
                     log.LogInformation("Memeter selection level 9");
@@ -107,11 +123,6 @@ public class MEMeterScript : MonoBehaviour {
                 {
                     memeterSelected = memeterLevels[1];
                     log.LogInformation("Memeter selection level 1");
-                }
-                else if (clickY < DetermineScreenPositionBoundary(workingRect, LEVEL_0, memeterSelected))
-                {
-                    memeterSelected = memeterLevels[0];
-                    log.LogInformation("Memeter selection level 0");
                 }
                 //empty level cannot be selected
                 else

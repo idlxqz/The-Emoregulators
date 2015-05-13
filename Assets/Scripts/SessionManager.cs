@@ -199,6 +199,8 @@ public class SessionManager : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+        //make the background fill the fov
+        UpdateBackgroundPlane();
         //child specific behavior
         UpdateLogic();
     }
@@ -258,8 +260,22 @@ public class SessionManager : MonoBehaviour {
         selectedBackground = _selected;
         var cameraObject = GameObject.Find("Main Camera");
         if(cameraObject != null){
-            cameraObject.GetComponentInChildren<MeshRenderer>().material.mainTexture = _selected;
+            SpriteRenderer sr = cameraObject.GetComponentInChildren<SpriteRenderer>();
+            sr.sprite = Sprite.Create(_selected, new Rect(0, 0, _selected.width, _selected.height), new Vector2(0.5f, 0.5f));
         }
+    }
+
+    private void UpdateBackgroundPlane()
+    {
+        SpriteRenderer sr = GameObject.Find("Main Camera").GetComponentInChildren<SpriteRenderer>();
+        GameObject spriteBack = GameObject.Find("Background");
+
+        float worldScreenHeight = Camera.main.orthographicSize * 2;
+        float worldScreenWidth = worldScreenHeight / Screen.height * Screen.width;
+
+        spriteBack.transform.localScale = new Vector3(
+            worldScreenWidth / sr.sprite.bounds.size.x,
+            worldScreenHeight / sr.sprite.bounds.size.y, 1);
     }
 
     public virtual void Continue()

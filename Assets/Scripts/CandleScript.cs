@@ -30,6 +30,7 @@ public class CandleScript : MonoBehaviour {
 
     //match animation and control
     public Texture2D[] matchFrames;
+    public int matchBurntPosition;
     private bool holdingMatch;
     private bool matchClicked;
     private int selectedMatchFrame;
@@ -85,7 +86,7 @@ public class CandleScript : MonoBehaviour {
                 if (isLit)
                 {
                     //match is out
-                    selectedMatchFrame = 0;
+                    selectedMatchFrame = matchBurntPosition;
                 }
                 else if ((Time.time - previousMatchTimestamp) >= frameChangeInterval * 2)
                 {

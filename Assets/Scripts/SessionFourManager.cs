@@ -29,15 +29,13 @@ public class SessionFourManager : SessionManager {
         progressiveMuscleRelaxation.instructionsArea = breathingRegulation.instructionsArea;
         //breathingRegulation.instructionsArea = candle.instructionsArea;
 
-        this.displayIBox = true;
-
         System.Action nextPhase = () =>
-        {
-            hideInterface = false;
+        {   
             currentState = SessionState.CandleCeremonyTitle;
         };
         customTitleScript.Setup(nextPhase, sessionTitle);
         hideInterface = true;
+        displayIBox = false;
         
         currentState = SessionState.CustomTitle;
     }
@@ -62,6 +60,9 @@ public class SessionFourManager : SessionManager {
                     this.candle.instructions = GlobalizationService.Instance.Globalize(GlobalizationService.CandleCeremonyText);
                     candle.enabled = true;
                     currentState = SessionState.CandleCeremony;
+                    //re-enable interface
+                    hideInterface = false;
+                    displayIBox = true;
                 };
                 customTitleScript.Setup(setupNextPhaseCustomTitle, GlobalizationService.Instance.Globalize(GlobalizationService.CandleCeremonyTitle));
                 currentState = SessionState.CustomTitle;
