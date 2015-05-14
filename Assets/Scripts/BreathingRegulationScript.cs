@@ -10,7 +10,7 @@ public class BreathingRegulationScript : CustomTextScript {
 	public override void Start ()
 	{
         this.Avatar.SetActive(true);
-	    this.Avatar.GetComponent<RectTransform>().anchoredPosition = new Vector3(400,-300,0);
+	    this.Avatar.GetComponent<RectTransform>().anchoredPosition = new Vector3(400,-300,-100);
 	    this.Animator = this.Avatar.GetComponentInChildren<Animator>();
         
         //UIManagerScript.EnableSkipping();

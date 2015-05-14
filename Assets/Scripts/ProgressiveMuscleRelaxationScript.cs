@@ -9,6 +9,12 @@ public class ProgressiveMuscleRelaxationScript : CustomTextScript
     public int AnimationId;
     private bool ExpectedMuscleTense;
     private bool ExpectedMuscleRelaxed;
+    public Texture2D GrassBackground;
+    public Texture2D SnailBackground;
+    public Texture2D SunBackground;
+    public Texture2D SandBackground;
+    private Sprite SelectedSprite;
+
 
     // Use this for initialization
     public override void Start()
@@ -16,8 +22,9 @@ public class ProgressiveMuscleRelaxationScript : CustomTextScript
         this.ExpectedMuscleTense = false;
         this.ExpectedMuscleRelaxed = false;
         this.Avatar.SetActive(true);
-        this.Avatar.GetComponent<RectTransform>().anchoredPosition = new Vector3(400, -300, 0);
+        this.Avatar.GetComponent<RectTransform>().anchoredPosition = new Vector3(400, -300, -50);
         this.Animator = this.Avatar.GetComponentInChildren<Animator>();
+        
 
         //UIManagerScript.EnableSkipping();
     }
@@ -59,7 +66,6 @@ public class ProgressiveMuscleRelaxationScript : CustomTextScript
                     moreInstructions = false;
                     //let the user skip from now on
                     UIManagerScript.EnableSkipping();
-                    SessionManager.PlayerScore += 2;
                 }
             }
         }
@@ -70,5 +76,32 @@ public class ProgressiveMuscleRelaxationScript : CustomTextScript
         base.Setup(nextPhaseSetup, timeToDisplay, newInstructions);
         this.ExpectedMuscleRelaxed = false;
         this.ExpectedMuscleTense = false;
-    }   
+    }
+
+    public void SetBackground(Texture2D backgroundTexture)
+    {
+        var cameraObject = GameObject.Find("Main Camera");
+        if (cameraObject != null)
+        {
+            SpriteRenderer sr = cameraObject.GetComponentInChildren<SpriteRenderer>();
+
+            if (this.SelectedSprite == null)
+            {
+                //the first time this method is called, it should remember the user's selected sprite for the background
+                this.SelectedSprite = sr.sprite;
+            }
+            
+            sr.sprite = Sprite.Create(backgroundTexture, new Rect(0, 0, backgroundTexture.width, backgroundTexture.height), new Vector2(0.5f, 0.5f));
+        }
+    }
+
+    public void RevertToSessionBackground()
+    {
+        var cameraObject = GameObject.Find("Main Camera");
+        if (cameraObject != null)
+        {
+            SpriteRenderer sr = cameraObject.GetComponentInChildren<SpriteRenderer>();
+            sr.sprite = this.SelectedSprite;
+        }
+    }
 }

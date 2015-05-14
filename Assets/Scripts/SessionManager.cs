@@ -265,6 +265,8 @@ public class SessionManager : MonoBehaviour {
         }
     }
 
+    
+
     private void UpdateBackgroundPlane()
     {
         SpriteRenderer sr = GameObject.Find("Main Camera").GetComponentInChildren<SpriteRenderer>();

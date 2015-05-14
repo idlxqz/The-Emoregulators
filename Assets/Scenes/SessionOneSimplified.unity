@@ -267,7 +267,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 145624201}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -50}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 439554583}
@@ -497,7 +497,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 353275148}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 135}
+  m_LocalPosition: {x: 0, y: 0, z: 500}
   m_LocalScale: {x: 50, y: 50, z: 1}
   m_Children: []
   m_Father: {fileID: 83131282}
@@ -527,7 +527,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 9a529a0b8ccb79b47b6167c547dfc714, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: .588235319}
 --- !u!1 &392375982
 GameObject:
   m_ObjectHideFlags: 0
@@ -1519,7 +1519,7 @@ MonoBehaviour:
   activityName: 
   displayIBox: 0
   iboxTexture: {fileID: 2800000, guid: 9f73edbd988684848a66a114908d0bc6, type: 3}
-  heartTexture: {fileID: 2800000, guid: 3af895c7eb9462546a7078470a2ea86d, type: 3}
+  heartTexture: {fileID: 2800000, guid: ddba6e58929b6754584f725ecc9abc47, type: 3}
   iboxArea:
     serializedVersion: 2
     x: 30
@@ -1975,7 +1975,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 979032482}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -50}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 237996885}
@@ -2213,22 +2213,22 @@ MonoBehaviour:
   waitClickToClose: 0
   isClosing: 0
   frames:
-  - {fileID: 2800000, guid: baf6a6ed0b3cefe4884abd94fdb44b3a, type: 3}
-  - {fileID: 2800000, guid: ac78663dada537a43846c8d308dbb2a4, type: 3}
-  - {fileID: 2800000, guid: 328bf4e47d020a44790785bd21809c65, type: 3}
-  - {fileID: 2800000, guid: 23a6979c59e3ba6468f2b9eddcabaab5, type: 3}
-  - {fileID: 2800000, guid: 2b80faa2a7a0a03498471392556ca216, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   frameChangeInterval: .300000012
   lightinUpSeconds: 0
   lightinDownSeconds: 5
   animationTime: 20
   candleScale: .400000006
   matchFrames:
-  - {fileID: 2800000, guid: 626342b0407d3f845bbcb2976abfecd6, type: 3}
-  - {fileID: 2800000, guid: 82b101dd7361605418ad9dacaf4f28d2, type: 3}
-  - {fileID: 2800000, guid: 5de79953618e5f44f9c912c16bc8934e, type: 3}
-  - {fileID: 2800000, guid: 994145656bab1d0459deecea8b2f8127, type: 3}
-  - {fileID: 2800000, guid: 9bb4b981fc828fb44bc9f9790d8be9e6, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   matchBurntPosition: 0
   bottomPadding: 80
   matchScale: .200000003
@@ -2771,16 +2771,16 @@ MonoBehaviour:
   showInstructions: 1
   memeterOut: {fileID: 2800000, guid: c1910b1bfbd271043be4ad952b838df7, type: 3}
   memeterLevels:
-  - {fileID: 2800000, guid: 2d69b468149638144a34bba421a453f0, type: 3}
-  - {fileID: 2800000, guid: 8baceeeb888dddb42a249155dccbd202, type: 3}
-  - {fileID: 2800000, guid: 55e1815d61ef96e48a6834d952464ead, type: 3}
-  - {fileID: 2800000, guid: 109945722ea000a44acc73fc4e7f0d23, type: 3}
-  - {fileID: 2800000, guid: a72e8c05702e96c49846234097f36aa2, type: 3}
-  - {fileID: 2800000, guid: b4e5091b857ccef459bfb7f993ef49b9, type: 3}
-  - {fileID: 2800000, guid: f94c7f989e3a0e24d8ec6f823561ead8, type: 3}
-  - {fileID: 2800000, guid: 31ca12f0b3e29ec40ad0137a96e787b6, type: 3}
-  - {fileID: 2800000, guid: 5f335e456a071a841960ef3184f7cde6, type: 3}
-  - {fileID: 2800000, guid: 8d96f9010679d674686472b715a3734f, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   memeterSelected: {fileID: 2800000, guid: 8ab6c8a472296a44ba63e3921eca2912, type: 3}
   memeterArea:
     serializedVersion: 2
