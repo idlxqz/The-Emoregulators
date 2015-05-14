@@ -1167,7 +1167,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 861568558}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2, y: 0, z: 209}
+  m_LocalPosition: {x: 0, y: 0, z: 500}
   m_LocalScale: {x: 50, y: 50, z: 1}
   m_Children: []
   m_Father: {fileID: 381334375}
@@ -1197,7 +1197,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 9a529a0b8ccb79b47b6167c547dfc714, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: .588235319}
 --- !u!1 &1117330465
 GameObject:
   m_ObjectHideFlags: 0
@@ -2108,6 +2108,10 @@ MonoBehaviour:
   lateralOffset: 50
   Avatar: {fileID: 0}
   AnimationId: 0
+  GrassBackground: {fileID: 2800000, guid: dbb451b5e5ac06d41ae7e43043c06e40, type: 3}
+  SnailBackground: {fileID: 2800000, guid: 14f9f9893a9824b49bf43a7509043579, type: 3}
+  SunBackground: {fileID: 2800000, guid: 4ebfe249d4cae0b4a96bc6afe79f0487, type: 3}
+  SandBackground: {fileID: 2800000, guid: a9d7d10163492ca40801787e48055a95, type: 3}
 --- !u!1 &2004168110
 GameObject:
   m_ObjectHideFlags: 0
@@ -2354,14 +2358,14 @@ MonoBehaviour:
     m_StretchHeight: 0
   activityName: 
   displayIBox: 0
-  iboxTexture: {fileID: 2800000, guid: 2a344188fcc809f48b8eda2d169fe9a0, type: 3}
-  heartTexture: {fileID: 2800000, guid: 3af895c7eb9462546a7078470a2ea86d, type: 3}
+  iboxTexture: {fileID: 2800000, guid: 9f73edbd988684848a66a114908d0bc6, type: 3}
+  heartTexture: {fileID: 2800000, guid: ddba6e58929b6754584f725ecc9abc47, type: 3}
   iboxArea:
     serializedVersion: 2
-    x: 25
+    x: 30
     y: 15
-    width: 50
-    height: 50
+    width: 70
+    height: 70
   heartSpacing: 15
   maleAvatar: {fileID: 1117330465}
   femaleAvatar: {fileID: 238705608}
@@ -2411,10 +2415,10 @@ MonoBehaviour:
       m_Right: 0
       m_Top: 0
       m_Bottom: 0
-    m_Font: {fileID: 0}
-    m_FontSize: 0
+    m_Font: {fileID: 12800000, guid: 1b81332020e0a914d870de655d452c7f, type: 3}
+    m_FontSize: 25
     m_FontStyle: 0
-    m_Alignment: 0
+    m_Alignment: 4
     m_WordWrap: 0
     m_RichText: 1
     m_TextClipping: 0

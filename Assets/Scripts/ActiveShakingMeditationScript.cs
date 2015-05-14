@@ -26,7 +26,7 @@ public class ActiveShakingMeditationScript : CustomTextScript {
         triggeredMusic = false;
 
         this.Avatar.SetActive(true);
-        this.Avatar.GetComponent<RectTransform>().anchoredPosition = new Vector3(400, -300, 0);
+        this.Avatar.GetComponent<RectTransform>().anchoredPosition = new Vector3(400, -300, -50);
         this.Animator = this.Avatar.GetComponentInChildren<Animator>();
 	    this.heartRateSamples = new List<int>();
 	}
@@ -70,17 +70,17 @@ public class ActiveShakingMeditationScript : CustomTextScript {
             //if the current average hearthRate is 1.4 times bigger than the baseline, give 10 points to the user
             if (currentHeartRate > this.heartRateBaseline*1.4)
             {
-                SessionManager.PlayerScore += 10;
+                SessionManager.PlayerScore += 20;
             }
             else if (currentHeartRate > this.heartRateBaseline)
             {
                 //the heart rate increased just a bit, give the user 6 points
-                SessionManager.PlayerScore += 6;
+                SessionManager.PlayerScore += 12;
             }
             else
             {
                 //the user didn't do anything, just give him 2 points
-                SessionManager.PlayerScore += 2;
+                SessionManager.PlayerScore += 4;
             }
         }
     }

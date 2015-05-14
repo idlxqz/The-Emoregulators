@@ -269,13 +269,13 @@ public class GlobalizationService  {
         this.multiLanguageDictionary.Add(IBoxIntroductionAText, new Dictionary<SystemLanguage, string>
         {
             {SystemLanguage.English, "Another thing to know before starting our game ...\n\nThis is your I-box.\nIt's your personal space, where you collect points that you will be able to earn.\nHere also, you can put anything you will create during the exercises.\nYou can color the I-box as desired.\nMoreover it will always be at the top left.\nNext to the I-BOX you'll see your heartbeats, next to the hearth symbol."},
-            {SystemLanguage.Italian, "Esther, please write down this part in italian please."}
+            {SystemLanguage.Italian, "Altra cosa da sapere prima di iniziare il nostro gioco...\n\nQuesta è la tua I-BOX.\nÈ il tuo spazio personale, dove raccoglierai i punti che riuscirai a guadagnare.\nQui inoltre, potrai mettere tutto ciò che creerai con i vari esercizi.\nPotrai colorare l'I-BOX come desideri.\nInoltre sarà sempre visualizzabile in alto a sinistra.\nVicino vedrai i tuoi battiti, con questo simbolo."}
         });
 
         this.multiLanguageDictionary.Add(IBoxIntroductionBText, new Dictionary<SystemLanguage, string>
         {
             {SystemLanguage.English, "Well!\nWe are ready to start having fun! Click to continue."},
-            {SystemLanguage.Italian, "Esther, please write down this part in italian please."}
+            {SystemLanguage.Italian, "Bene!\nDirei che siamo pronti per iniziare a divertirci! Clicca per proseguire col nostro gioco!"}
         });
 
         this.multiLanguageDictionary.Add(CandleCeremonyTitle, new Dictionary<SystemLanguage, string>

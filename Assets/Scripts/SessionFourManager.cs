@@ -70,6 +70,7 @@ public class SessionFourManager : SessionManager {
             case SessionState.CandleCeremony:
                 if (candle.finished || canSkip)
                 {
+                    SessionManager.PlayerScore += 2;
                     canSkip = false;
                     UIManagerScript.DisableSkipping();
                     log.LogInformation("Ended candle lighting cerimony.");
@@ -152,6 +153,7 @@ public class SessionFourManager : SessionManager {
             case SessionState.MeMeter:
                 if (memeter.finished || canSkip)
                 {
+                    SessionManager.PlayerScore += 4;
                     canSkip = false;
                     UIManagerScript.DisableSkipping();
                     log.LogInformation("Ended me-meter interaction.");
@@ -210,6 +212,7 @@ public class SessionFourManager : SessionManager {
             case SessionState.FacialMindfulnessD:
                 if (facialMindfulness.finished || canSkip)
                 {
+                    SessionManager.PlayerScore += 10;
                     canSkip = false;
                     UIManagerScript.DisableSkipping();
                     facialMindfulness.enabled = false;
@@ -234,7 +237,9 @@ public class SessionFourManager : SessionManager {
                 }
                 break;
             case SessionState.BreathingRegulationB:
-                if(breathingRegulation.finished || canSkip){
+                if(breathingRegulation.finished || canSkip)
+                {
+                    SessionManager.PlayerScore += 10;
                     canSkip = false;
                     UIManagerScript.DisableSkipping();
                     log.LogInformation("Ended breathing regulation B exercise.");
@@ -250,7 +255,9 @@ public class SessionFourManager : SessionManager {
                 }
                 break;
             case SessionState.BreathingRegulationC:
-                if(breathingRegulation.finished || canSkip){
+                if(breathingRegulation.finished || canSkip)
+                {
+                    SessionManager.PlayerScore += 5;
                     canSkip = false;
                     UIManagerScript.DisableSkipping();
                     log.LogInformation("Ended breathing regulation B exercise.");
@@ -281,7 +288,6 @@ public class SessionFourManager : SessionManager {
             case SessionState.ActiveShakingMeditation:
                 if (activeShakingMeditation.finished || canSkip)
                 {
-                    
                     log.LogInformation("Ended active shaking meditation exercise.");
                     //disable the active shaking meditation exercise
                     activeShakingMeditation.Avatar.SetActive(false);
@@ -291,6 +297,7 @@ public class SessionFourManager : SessionManager {
 
                     setupNextPhaseCustomText = () =>
                     {
+                        SessionManager.PlayerScore += 5;
                         log.LogInformation("Ended ActiveShaking Meditation B.");
                         //disable the custom text and proceed to the next state
                         customText.enabled = false;
@@ -305,6 +312,7 @@ public class SessionFourManager : SessionManager {
                 break;
             case SessionState.ActiveShakingMeditationC:
                 log.LogInformation("Started ActiveShaking C");
+
                 setupNextPhaseCustomText = () =>
                 {
                     log.LogInformation("Ended ActiveShaking Meditation C.");
@@ -383,6 +391,7 @@ public class SessionFourManager : SessionManager {
                 setupNextPhaseCustomText = () =>
                 {
                     log.LogInformation("Ended progressive muscle relaxation C.");
+                    SessionManager.PlayerScore += 2;
                     //disable the custom text and proceed to the next state
                     progressiveMuscleRelaxation.enabled = false;
                     currentState = SessionState.ProgressiveMuscleRelaxationD;
@@ -391,6 +400,7 @@ public class SessionFourManager : SessionManager {
                 progressiveMuscleRelaxation.Avatar = this.GetPlayerAvatar;
                 progressiveMuscleRelaxation.AnimationId = AnimatorControlerHashIDs.Instance.SqueezingExerciseTrigger;
                 progressiveMuscleRelaxation.enabled = true;
+                progressiveMuscleRelaxation.SetBackground(progressiveMuscleRelaxation.GrassBackground);
 
                 progressiveMuscleRelaxation.Setup(setupNextPhaseCustomText, customTextWaitTime, 
                     new []
@@ -411,6 +421,7 @@ public class SessionFourManager : SessionManager {
                 setupNextPhaseCustomText = () =>
                 {
                     log.LogInformation("Ended progressive muscle relaxation D.");
+                    SessionManager.PlayerScore += 2;
                     //disable the custom text and proceed to the next state
                     progressiveMuscleRelaxation.enabled = false;
                     currentState = SessionState.ProgressiveMuscleRelaxationE;
@@ -419,6 +430,7 @@ public class SessionFourManager : SessionManager {
                 progressiveMuscleRelaxation.delayBetweenInstructions = 7;
                 progressiveMuscleRelaxation.AnimationId = AnimatorControlerHashIDs.Instance.StreachingExerciseTrigger;
                 progressiveMuscleRelaxation.enabled = true;
+                progressiveMuscleRelaxation.SetBackground(progressiveMuscleRelaxation.SunBackground);
 
                 progressiveMuscleRelaxation.Setup(setupNextPhaseCustomText, customTextWaitTime, 
                     new []
@@ -439,6 +451,7 @@ public class SessionFourManager : SessionManager {
                 setupNextPhaseCustomText = () =>
                 {
                     log.LogInformation("Ended progressive muscle relaxation E.");
+                    SessionManager.PlayerScore += 2;
                     //disable the custom text and proceed to the next state
                     progressiveMuscleRelaxation.enabled = false;
                     currentState = SessionState.ProgressiveMuscleRelaxationF;
@@ -446,6 +459,7 @@ public class SessionFourManager : SessionManager {
 
                 progressiveMuscleRelaxation.AnimationId = AnimatorControlerHashIDs.Instance.SnailExerciseTrigger;
                 progressiveMuscleRelaxation.enabled = true;
+                progressiveMuscleRelaxation.SetBackground(progressiveMuscleRelaxation.SnailBackground);
 
                 progressiveMuscleRelaxation.Setup(setupNextPhaseCustomText, customTextWaitTime,
                     new[]
@@ -465,6 +479,8 @@ public class SessionFourManager : SessionManager {
                 setupNextPhaseCustomText = () =>
                 {
                     log.LogInformation("Ended progressive muscle relaxation F.");
+                    SessionManager.PlayerScore += 1;
+                    progressiveMuscleRelaxation.RevertToSessionBackground();
                     progressiveMuscleRelaxation.Avatar.SetActive(false);
                     progressiveMuscleRelaxation.enabled = false;
                    
@@ -473,6 +489,7 @@ public class SessionFourManager : SessionManager {
 
                 progressiveMuscleRelaxation.AnimationId = AnimatorControlerHashIDs.Instance.SandExerciseTrigger;
                 progressiveMuscleRelaxation.enabled = true;
+                progressiveMuscleRelaxation.SetBackground(progressiveMuscleRelaxation.SandBackground);
 
                 progressiveMuscleRelaxation.Setup(setupNextPhaseCustomText, customTextWaitTime,
                     new[]
@@ -519,7 +536,7 @@ public class SessionFourManager : SessionManager {
             case SessionState.InnerSensationsB:
                 if (innerSensations.finished || canSkip)
                 {
-                    
+                    SessionManager.PlayerScore += 3;
                     log.LogInformation("Ended ibox inner sensations exercise.");
                     //disable the inner sensations
                     innerSensations.enabled = false;
@@ -552,6 +569,7 @@ public class SessionFourManager : SessionManager {
             case SessionState.ClosingMeMeter:
                 if (memeter.finished || canSkip)
                 {
+                    SessionManager.PlayerScore += 3;
                     log.LogInformation("Ended Closing MeMeter.");
                     //disable the memeter and proceed to the next state
                     memeter.enabled = false;
@@ -583,6 +601,7 @@ public class SessionFourManager : SessionManager {
             case SessionState.ClosingCandle:
                 if (candle.finished)
                 {
+                    SessionManager.PlayerScore += 2;
                     log.LogInformation("Ended closing activity.");
                     //disable the candle and proceed to the next state
                     candle.enabled = false;
