@@ -178,8 +178,8 @@ public class GlobalizationService  {
 
         this.multiLanguageDictionary.Add(Session4SubTitle, new Dictionary<SystemLanguage, string>
         {
-            {SystemLanguage.English, "Session 1"},
-            {SystemLanguage.Italian, "Session 1"}
+            {SystemLanguage.English, "Session 2"},
+            {SystemLanguage.Italian, "Session 2"}
         });
 
         this.multiLanguageDictionary.Add(OpeningTitle, new Dictionary<SystemLanguage, string>
