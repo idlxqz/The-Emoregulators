@@ -1,19 +1,18 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class CustomTextScript : MonoBehaviour {
 
     //logic control
     public bool finished;
     protected float timeStart;
-    protected float finalWaitStart;
-    public float secondsToCloseSession;
+    public float MinimumWaitTime;
 
     //memeter and instructions text areas definition
     public Rect instructionsArea;
 
     //instruction control
     public System.Action setupNextPhase;
+    protected System.Action ExecuteOnFinish;
     public string[] instructions;
     public int delayBetweenInstructions;
     protected bool moreInstructions;
@@ -27,7 +26,10 @@ public class CustomTextScript : MonoBehaviour {
     public int lateralOffset;
 
 	// Use this for initialization
-	public virtual void Start () {
+	public virtual void Start ()
+	{
+	    this.MinimumWaitTime = 5;
+
         instructionsArea.x = lateralOffset;
         instructionsArea.y = Screen.height / 5;
         instructionsArea.width = Screen.width - 2 * lateralOffset ;
@@ -37,37 +39,47 @@ public class CustomTextScript : MonoBehaviour {
 	// Update is called once per frame
 	public virtual void Update () {
         //check if the waiting time is elapsed
-        if (moreInstructions)
+        if (this.moreInstructions)
         {
-            if ((Time.time - timeStart) >= delayBetweenInstructions)
+            if ((Time.time - this.timeStart) >= this.delayBetweenInstructions)
             {
-                timeStart = Time.time;
+                this.timeStart = Time.time;
                 instructionsPointer++;
                 currentInstructions += "\n\n" + instructions[instructionsPointer];
                 //check if there are more to show
                 if (instructions.Length == instructionsPointer + 1)
                 {
-                    finalWaitStart = Time.time;
                     moreInstructions = false;
-                    //let the user skip from now on
                     UIManagerScript.EnableSkipping();
+                    this.OnFinish();
                 }
             }
         }
-        //else if ((Time.time - finalWaitStart) >= secondsToCloseSession)
-        //    finished = true;
+        else if ((Time.time - this.timeStart) >= this.MinimumWaitTime)
+        {
+            UIManagerScript.EnableSkipping();
+            this.OnFinish();
+        }
 	}
+
+    protected void OnFinish()
+    {
+        if (this.ExecuteOnFinish != null)
+        {
+            this.ExecuteOnFinish();
+            this.ExecuteOnFinish = null;
+        }
+    }
 
     public virtual void OnGUI()
     {
         //draw the instructions text
-        GUI.Label(instructionsArea, currentInstructions, instructionsFormat);
+        GUI.Label(this.instructionsArea, this.currentInstructions, this.instructionsFormat);
     }
 
-    public virtual void Setup(System.Action nextPhaseSetup, float timeToDisplay,  string[] newInstructions)
-    {   
+    public virtual void Setup(System.Action nextPhaseSetup,  string[] newInstructions)
+    {
         finished = false;
-        secondsToCloseSession = timeToDisplay;
         setupNextPhase = nextPhaseSetup;
         instructions = newInstructions;
         if (instructions.Length > 1)
@@ -77,18 +89,27 @@ public class CustomTextScript : MonoBehaviour {
         else
         {
             moreInstructions = false;
-            finalWaitStart = Time.time;
-            //let the user skip from now on
-            UIManagerScript.EnableSkipping();
         }
         currentInstructions = instructions[0];
         instructionsPointer = 0;
         timeStart = Time.time;
     }
 
-    public void Setup(System.Action nextPhaseSetup, float timeToDisplay, string newInstructions)
+    public void Setup(System.Action nextPhaseSetup, System.Action executeOnFinish, string[] newInstructions)
     {
-        Setup(nextPhaseSetup, timeToDisplay, new string[] { newInstructions });
+        this.ExecuteOnFinish = executeOnFinish;
+        this.Setup(nextPhaseSetup, newInstructions);
+    }
+
+    public void Setup(System.Action nextPhaseSetup, string newInstructions)
+    {
+        Setup(nextPhaseSetup, new string[] { newInstructions });
+    }
+
+    public void Setup(System.Action nextPhaseSetup, System.Action executeOnFinish, string newInstructions)
+    {
+        this.ExecuteOnFinish = executeOnFinish;
+        this.Setup(nextPhaseSetup, newInstructions);
     }
 
 }

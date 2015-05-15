@@ -137,6 +137,7 @@ public class MEMeterScript : MonoBehaviour {
                 {
                     finalWaitStart = Time.time;
                     isSelected = true;
+                    SessionManager.PlayerScore += 4;
                     UIManagerScript.EnableSkipping();
                 }
                 log.LogInformation("Clicked on memeter area.");
@@ -148,7 +149,7 @@ public class MEMeterScript : MonoBehaviour {
         }
 
         //check if the memeter introduction is finished
-        //if (isSelected && (Time.time - finalWaitStart) >= secondsToCloseSession)
+        //if (isSelected && (Time.time - finalWaitStart) >= MinimumWaitTime)
         //    finished = true;
 	}
 

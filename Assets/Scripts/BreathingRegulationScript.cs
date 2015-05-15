@@ -34,11 +34,10 @@ public class BreathingRegulationScript : CustomTextScript {
                 //check if there are more to show
                 if (instructions.Length == instructionsPointer + 1)
                 {
-                   
-                    finalWaitStart = Time.time;
                     moreInstructions = false;
                     //let the user skip from now on
                     UIManagerScript.EnableSkipping();
+                    this.OnFinish();
                 }
             }
         }

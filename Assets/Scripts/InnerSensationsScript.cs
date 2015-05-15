@@ -24,7 +24,9 @@ public class InnerSensationsScript : MonoBehaviour {
     Logger log;
 
 	// Use this for initialization
-	void Start () {
+	void Start ()
+	{
+	    this.finished = false;
         log = Logger.Instance;
         //prepare the swatches rectangles
         int swCount = swatches.Length;
@@ -52,7 +54,12 @@ public class InnerSensationsScript : MonoBehaviour {
                 {
                     selectedIbox = iboxes[i];
                     log.LogInformation("Selected box: "+selectedIbox.name);
-                    UIManagerScript.EnableSkipping();
+                    if (!this.finished)
+                    {
+                        UIManagerScript.EnableSkipping();
+                        this.finished = true;
+                        SessionManager.PlayerScore += 3;
+                    }
                 }
             }
         }

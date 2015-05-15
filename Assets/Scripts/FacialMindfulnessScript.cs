@@ -83,7 +83,12 @@ public class FacialMindfulnessScript : MonoBehaviour {
                 break;
         }
 
-        UIManagerScript.EnableSkipping();
+        if (!this.finished)
+        {
+            this.finished = true;
+            UIManagerScript.EnableSkipping();
+            SessionManager.PlayerScore += 10;
+        }
     }
 
     Texture2D GetMask(FacePosition _toGet)
@@ -127,20 +132,20 @@ public class FacialMindfulnessScript : MonoBehaviour {
 
         if (userGender == SessionManager.Gender.Male)
         {
-            headRect = new Rect(faceX + 85 * scale, faceY + 148 * scale, 300 * scale, 107 * scale);
-            eyesRect = new Rect(faceX + 85 * scale, faceY + 271 * scale, 308 * scale, 90 * scale);
-            leftCheekRect = new Rect(faceX + 85 * scale, faceY + 371 * scale, 81 * scale, 171 * scale);
-            mouthRect = new Rect(faceX + 176 * scale, faceY + 453 * scale, 125 * scale, 55 * scale);
-            rightCheekRect = new Rect(faceX + 310 * scale, faceY + 371 * scale, 81 * scale, 171 * scale);
+            headRect = new Rect(faceX + 85 * scale, faceY + 148 * scale, 308 * scale, 124 * scale);
+            eyesRect = new Rect(faceX + 85 * scale, faceY + 271 * scale, 308 * scale, 100 * scale);
+            leftCheekRect = new Rect(faceX + 85 * scale, faceY + 371 * scale, 90 * scale, 171 * scale);
+            mouthRect = new Rect(faceX + 176 * scale, faceY + 453 * scale, 125 * scale, 110 * scale);
+            rightCheekRect = new Rect(faceX + 302 * scale, faceY + 371 * scale, 90 * scale, 171 * scale);
         }
         else
         {
             //parts of the face rectangles
-            headRect = new Rect(faceX + 105 * scale, faceY + 175 * scale, 342 * scale, 145 * scale);
-            eyesRect = new Rect(faceX + 105 * scale, faceY + 330 * scale, 345 * scale, 85 * scale);
-            leftCheekRect = new Rect(faceX + 110 * scale, faceY + 435 * scale, 100 * scale, 125 * scale);
-            mouthRect = new Rect(faceX + 220 * scale, faceY + 485 * scale, 115 * scale, 65 * scale);
-            rightCheekRect = new Rect(faceX + 345 * scale, faceY + 435 * scale, 100 * scale, 125 * scale);
+            headRect = new Rect(faceX + 105 * scale, faceY + 207 * scale, 345 * scale, 124 * scale);
+            eyesRect = new Rect(faceX + 105 * scale, faceY + 330 * scale, 345 * scale, 100 * scale);
+            leftCheekRect = new Rect(faceX + 110 * scale, faceY + 431 * scale, 100 * scale, 125 * scale);
+            mouthRect = new Rect(faceX + 210 * scale, faceY + 485 * scale, 134 * scale, 100 * scale);
+            rightCheekRect = new Rect(faceX + 345 * scale, faceY + 431 * scale, 100 * scale, 125 * scale);
         }
 
         facePositions = new Dictionary<FacePosition,FacePositionState>() {

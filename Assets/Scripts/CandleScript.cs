@@ -78,7 +78,12 @@ public class CandleScript : MonoBehaviour {
             {
                 lightingUpStart = Time.time;
                 isLit = true;
-                UIManagerScript.EnableSkipping();
+                if (!this.finished)
+                {
+                    UIManagerScript.EnableSkipping();
+                    SessionManager.PlayerScore += 2;
+                    this.finished = true;
+                }
             }
             //select the current match frame
             if (matchClicked)
@@ -156,14 +161,14 @@ public class CandleScript : MonoBehaviour {
                 lightingDownStart = Time.time;
                 isLit = false;
                 clickedToClose = true;
+                if (!this.finished)
+                {
+                    this.finished = true;
+                    UIManagerScript.EnableSkipping();
+                    SessionManager.PlayerScore += 2;
+                }
             }
         }
-
-		//check if the candle cerimony is finished
-        if (isLit && !waitClickToClose && (Time.time - lightingUpStart) >= animationTime)
-            finished = true;
-        else if (waitClickToClose && clickedToClose && (Time.time - lightingDownStart) >= lightinDownSeconds)
-            finished = true;
 	}
 
 	void OnGUI() {

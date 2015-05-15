@@ -5,6 +5,7 @@ public class CustomTitleScript : MonoBehaviour {
 
     //logic
     public bool finished;
+    public bool endlessTitle;
     public int titleDuration;
     private float titleStart;
     public System.Action setupNextPhase;
@@ -22,6 +23,11 @@ public class CustomTitleScript : MonoBehaviour {
     public int titleLateralPadding;
     public int titleRectHeight;
     public GUIStyle titleFormat;
+
+    void Awake()
+    {
+        this.Setup(null, "The Emoregulators");
+    }
 
 	// Use this for initialization
 	void Start () {
@@ -46,7 +52,7 @@ public class CustomTitleScript : MonoBehaviour {
             }
             loadCharTimer = Time.time;
         }
-        if (loading || ((Time.time - titleStart) < titleDuration && !finished))
+        if (loading || this.endlessTitle || ((Time.time - titleStart) < titleDuration && !finished))
         {   
             GUI.Label(
                     new Rect(titleLateralPadding, Screen.height / 2 - titleRectHeight / 2, Screen.width - titleLateralPadding * 2, titleRectHeight),

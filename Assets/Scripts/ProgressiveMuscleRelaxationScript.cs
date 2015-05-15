@@ -61,19 +61,18 @@ public class ProgressiveMuscleRelaxationScript : CustomTextScript
                 //check if there are more to show
                 if (instructions.Length == instructionsPointer + 1)
                 {
-
-                    finalWaitStart = Time.time;
                     moreInstructions = false;
                     //let the user skip from now on
                     UIManagerScript.EnableSkipping();
+                    this.OnFinish();
                 }
             }
         }
     }
 
-    public override void Setup(System.Action nextPhaseSetup, float timeToDisplay, string[] newInstructions)
+    public override void Setup(System.Action nextPhaseSetup, string[] newInstructions)
     {
-        base.Setup(nextPhaseSetup, timeToDisplay, newInstructions);
+        base.Setup(nextPhaseSetup, newInstructions);
         this.ExpectedMuscleRelaxed = false;
         this.ExpectedMuscleTense = false;
     }

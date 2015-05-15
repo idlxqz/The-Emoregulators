@@ -50,7 +50,7 @@ public class SessionOneSimplifiedManager : SessionManager
                     currentState = SessionState.OpeningB;
                 };
 
-		        customText.Setup(setupNextPhaseCustomText, Constants.TextTimeToDisplay,GlobalizationService.Instance.Globalize(GlobalizationService.OpeningAText));
+		        customText.Setup(setupNextPhaseCustomText, GlobalizationService.Instance.Globalize(GlobalizationService.OpeningAText));
                 customText.enabled = true;
                 currentState = SessionState.CustomText;
 				
@@ -67,7 +67,7 @@ public class SessionOneSimplifiedManager : SessionManager
                     currentState = SessionState.OpeningC;
                 };
 
-                customText.Setup(setupNextPhaseCustomText, Constants.TextTimeToDisplay, GlobalizationService.Instance.Globalize(GlobalizationService.OpeningBText));
+                customText.Setup(setupNextPhaseCustomText, GlobalizationService.Instance.Globalize(GlobalizationService.OpeningBText));
                 customText.enabled = true;
                 currentState = SessionState.CustomText;
 
@@ -84,7 +84,7 @@ public class SessionOneSimplifiedManager : SessionManager
                     currentState = SessionState.OpeningD;
                 };
 
-                customText.Setup(setupNextPhaseCustomText, Constants.TextTimeToDisplay, GlobalizationService.Instance.Globalize(GlobalizationService.OpeningCText));
+                customText.Setup(setupNextPhaseCustomText, GlobalizationService.Instance.Globalize(GlobalizationService.OpeningCText));
                 customText.enabled = true;
                 currentState = SessionState.CustomText;
 
@@ -102,7 +102,7 @@ public class SessionOneSimplifiedManager : SessionManager
                     currentState = SessionState.OpeningE;
                 };
 
-		        customText.Setup(setupNextPhaseCustomText, Constants.TextTimeToDisplay, GlobalizationService.Instance.Globalize(GlobalizationService.OpeningDText));
+		        customText.Setup(setupNextPhaseCustomText, GlobalizationService.Instance.Globalize(GlobalizationService.OpeningDText));
 
                 customText.enabled = true;
                 currentState = SessionState.CustomText;
@@ -120,7 +120,7 @@ public class SessionOneSimplifiedManager : SessionManager
                     currentState = SessionState.OpeningF;
                 };
 
-                customText.Setup(setupNextPhaseCustomText, Constants.TextTimeToDisplay, GlobalizationService.Instance.Globalize(GlobalizationService.OpeningEText));
+                customText.Setup(setupNextPhaseCustomText, GlobalizationService.Instance.Globalize(GlobalizationService.OpeningEText));
 
                 customText.enabled = true;
                 currentState = SessionState.CustomText;
@@ -137,7 +137,7 @@ public class SessionOneSimplifiedManager : SessionManager
                     currentState = SessionState.IntroducingOurselvesTitle;
                 };
 
-                customText.Setup(setupNextPhaseCustomText, Constants.TextTimeToDisplay, GlobalizationService.Instance.Globalize(GlobalizationService.OpeningFText));
+                customText.Setup(setupNextPhaseCustomText, GlobalizationService.Instance.Globalize(GlobalizationService.OpeningFText));
 
                 customText.enabled = true;
                 currentState = SessionState.CustomText;
@@ -160,7 +160,7 @@ public class SessionOneSimplifiedManager : SessionManager
                 currentState = SessionState.CustomTitle;
 		        break;
             case SessionState.IntroducingOurselvesBackground:
-                if (backgroundChooserScript.finished || canSkip)
+                if (canSkip)
                 {
                     backgroundChooserScript.enabled = false;
                     canSkip = false;
@@ -217,7 +217,7 @@ public class SessionOneSimplifiedManager : SessionManager
                 currentState = SessionState.CustomTitle;
 		        break;
             case SessionState.IBoxIntroduction:
-                if (ibox.finished || canSkip)
+                if (canSkip)
                 {
                     canSkip = false;
                     UIManagerScript.DisableSkipping();
@@ -236,13 +236,13 @@ public class SessionOneSimplifiedManager : SessionManager
                         log.LogInformation("Ended ibox introduction Screen B.");
                         Application.LoadLevel("SessionFourScene");
                     };
-                    customText.Setup(setupNextPhaseCustomText, Constants.TextTimeToDisplay, GlobalizationService.Instance.Globalize(GlobalizationService.IBoxIntroductionBText));
+                    customText.Setup(setupNextPhaseCustomText, GlobalizationService.Instance.Globalize(GlobalizationService.IBoxIntroductionBText));
                     customText.enabled = true;
                     currentState = SessionState.CustomText;
                 }
                 break;
             case SessionState.CustomText:
-                if (customText.finished || canSkip)
+                if (canSkip)
                 {
                     canSkip = false;
                     UIManagerScript.DisableSkipping();

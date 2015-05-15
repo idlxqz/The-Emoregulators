@@ -130,7 +130,9 @@ public class SessionManager : MonoBehaviour {
     }
 
     public GameObject maleAvatar;
+    public GameObject maleBall;
     public GameObject femaleAvatar;
+    public GameObject femaleBall;
     public static Gender userGender; //share it accross scenes 
     public GameObject GetPlayerAvatar
     {
@@ -140,6 +142,17 @@ public class SessionManager : MonoBehaviour {
                 return femaleAvatar;
             else
                 return maleAvatar;
+        }
+    }
+
+    public GameObject GetPlayerBall
+    {
+        get
+        {
+            if (userGender == Gender.Female)
+                return femaleBall;
+            else
+                return maleBall;
         }
     }
     public static int PlayerScore { get; set; } //share it accross scenes
@@ -179,6 +192,7 @@ public class SessionManager : MonoBehaviour {
         //configure all logging
         log = Logger.Instance;
         //Cursor.visible = false;
+        
 
         //set title and subtitle positioning
         int width = 100;

@@ -51,7 +51,6 @@ public class ActiveShakingMeditationScript : CustomTextScript {
                     //reset the heartRateSamples to collect the heart rate data when dancing
                     heartRateSamples = new List<int>();
                     this.Animator.SetBool(AnimatorControlerHashIDs.Instance.DancingExerciseBool,true);
-                    finalWaitStart = Time.time;
                     moreInstructions = false;
                     PlayOneShot();
                     
@@ -67,19 +66,19 @@ public class ActiveShakingMeditationScript : CustomTextScript {
             this.music.Stop();
             this.Animator.SetBool(AnimatorControlerHashIDs.Instance.DancingExerciseBool, false);
 
-            //if the current average hearthRate is 1.4 times bigger than the baseline, give 10 points to the user
+            //if the current average hearthRate is 1.4 times bigger than the baseline, give 20 points to the user
             if (currentHeartRate > this.heartRateBaseline*1.4)
             {
                 SessionManager.PlayerScore += 20;
             }
             else if (currentHeartRate > this.heartRateBaseline)
             {
-                //the heart rate increased just a bit, give the user 6 points
+                //the heart rate increased just a bit, give the user 12 points
                 SessionManager.PlayerScore += 12;
             }
             else
             {
-                //the user didn't do anything, just give him 2 points
+                //the user didn't do anything, just give him 4 points
                 SessionManager.PlayerScore += 4;
             }
         }
@@ -87,13 +86,13 @@ public class ActiveShakingMeditationScript : CustomTextScript {
 
     private void PlayOneShot()
     {
-        music.Play();
+        music.PlayDelayed(2);
         startTime = Time.time;
     }
 
     public bool isPlaying()
     {
-        if ((Time.time - startTime) >= (music.clip.length-30))
+        if ((Time.time - startTime) >= (music.clip.length-1))
             return false;
         return true;
     }
