@@ -59,6 +59,7 @@ public class SessionManager : MonoBehaviour {
         ClosingMeMeter,
         ClosingCandle,
         ClosingSessionB,
+        HowDoesMyBodyFeel
     }
 
     //title support

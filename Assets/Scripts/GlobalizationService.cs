@@ -119,6 +119,12 @@ public class GlobalizationService  {
     public const string ClosingOfSessionAText = "ClosingOfSessionAText";
     public const string ClosingOfSessionCandleText = "ClosingOfSessionCandleText";
     public const string ClosingOfSessionCText = "ClosingOfSessionCText";
+    public const string HowDoesMyBodyFeelHappiness = "HowDoesMyBodyFeelHappiness";
+    public const string HowDoesMyBodyFeelSadness = "HowDoesMyBodyFeelHappy";
+    public const string HowDoesMyBodyFeelAnger = "HowDoesMyBodyFeelAnger";
+    public const string HowDoesMyBodyFeelFear = "HowDoesMyBodyFeelFear";
+    public const string HowDoesMyBodyFeelDisgust = "HowDoesMyBodyFeelDisgust";
+    public const string HowDoesMyBodyFeelSurprise = "HowDoesMyBodyFeelSurprise";
     
     #endregion
 
@@ -707,5 +713,42 @@ public class GlobalizationService  {
             {SystemLanguage.English, "Thank you for participating, I hope you enjoyed!"},
             {SystemLanguage.Italian, "Please Esther, write this in italian"}
         });
+
+        this.multiLanguageDictionary.Add(HowDoesMyBodyFeelHappiness, new Dictionary<SystemLanguage, string>
+        {
+            {SystemLanguage.English, "Happiness"},
+            {SystemLanguage.Italian, "Felicità"}
+        });
+
+        this.multiLanguageDictionary.Add(HowDoesMyBodyFeelSadness, new Dictionary<SystemLanguage, string>
+        {
+            {SystemLanguage.English, "Sadness"},
+            {SystemLanguage.Italian, "Tristezza"}
+        });
+
+        this.multiLanguageDictionary.Add(HowDoesMyBodyFeelAnger, new Dictionary<SystemLanguage, string>
+        {
+            {SystemLanguage.English, "Anger"},
+            {SystemLanguage.Italian, "Rabbia"}
+        });
+
+        this.multiLanguageDictionary.Add(HowDoesMyBodyFeelFear, new Dictionary<SystemLanguage, string>
+        {
+            {SystemLanguage.English, "Fear"},
+            {SystemLanguage.Italian, "Paura"}
+        });
+
+        this.multiLanguageDictionary.Add(HowDoesMyBodyFeelDisgust, new Dictionary<SystemLanguage, string>
+        {
+            {SystemLanguage.English, "Disgust"},
+            {SystemLanguage.Italian, "Disgusto"}
+        });
+
+        this.multiLanguageDictionary.Add(HowDoesMyBodyFeelSurprise, new Dictionary<SystemLanguage, string>
+        {
+            {SystemLanguage.English, "Surprise"},
+            {SystemLanguage.Italian, "Sorpresa"}
+        });
+        
     }
 }
