@@ -1728,7 +1728,7 @@ MonoBehaviour:
   finished: 1
   endlessTitle: 1
   titleDuration: 2
-  charLoadInterval: .200000003
+  charLoadInterval: .150000006
   titleLateralPadding: 100
   titleRectHeight: 300
   titleFormat:

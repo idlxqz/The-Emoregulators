@@ -24,6 +24,10 @@ public class GlobalizationService  {
     public SystemLanguage CurrentLanguage { get; set; }
 
     #region Globalization Constants
+
+    public const string StartButton = "StartButton";
+    public const string QuitButton = "QuitButton";
+    public const string UserCodePlaceholder = "UserCodePlaceholder";
     public const string ContinueButton = "ContinueButton";
     public const string MaleButton = "MaleButton";
     public const string FemaleButton = "FemaleButton";
@@ -119,6 +123,12 @@ public class GlobalizationService  {
     public const string ClosingOfSessionAText = "ClosingOfSessionAText";
     public const string ClosingOfSessionCandleText = "ClosingOfSessionCandleText";
     public const string ClosingOfSessionCText = "ClosingOfSessionCText";
+    public const string HowDoesMyBodyFeelTitle = "HowDoesMyBodyFeelTitle";
+    public const string HowDoesMyBodyFeelActivityName = "HowDoesMyBodyFeelActivityName";
+    public const string HowDoesMyBodyFeelAText = "HowDoesMyBodyFeelAText";
+    public const string HowDoesMyBodyFeelBText = "HowDoesMyBodyFeelBText";
+    public const string HowDoesMyBodyFeelCText = "HowDoesMyBodyFeelCText";
+    public const string HowDoesMyBodyFeelDText = "HowDoesMyBodyFeelDText";
     public const string HowDoesMyBodyFeelHappiness = "HowDoesMyBodyFeelHappiness";
     public const string HowDoesMyBodyFeelSadness = "HowDoesMyBodyFeelHappy";
     public const string HowDoesMyBodyFeelAnger = "HowDoesMyBodyFeelAnger";
@@ -145,6 +155,25 @@ public class GlobalizationService  {
         this.CurrentLanguage = SystemLanguage.English;
 
         this.multiLanguageDictionary = new Dictionary<string, Dictionary<SystemLanguage, string>>();
+
+        this.multiLanguageDictionary.Add(StartButton, new Dictionary<SystemLanguage, string>
+        {
+            {SystemLanguage.English, "Start"},
+            {SystemLanguage.Italian, "Inizio"}
+        });
+
+        this.multiLanguageDictionary.Add(QuitButton, new Dictionary<SystemLanguage, string>
+        {
+            {SystemLanguage.English, "Quit"},
+            {SystemLanguage.Italian, "Uscita"}
+        });
+
+        this.multiLanguageDictionary.Add(UserCodePlaceholder, new Dictionary<SystemLanguage, string>
+        {
+            {SystemLanguage.English, "Enter User Code..."},
+            {SystemLanguage.Italian, "Inserire il Codice Utente..."}
+        });
+
 
         this.multiLanguageDictionary.Add(ContinueButton, new Dictionary<SystemLanguage, string>
         {
@@ -713,6 +742,43 @@ public class GlobalizationService  {
             {SystemLanguage.English, "Thank you for participating, I hope you enjoyed!"},
             {SystemLanguage.Italian, "Please Esther, write this in italian"}
         });
+
+        this.multiLanguageDictionary.Add(HowDoesMyBodyFeelTitle, new Dictionary<SystemLanguage, string>
+        {
+            {SystemLanguage.English, "How does my body feel?"},
+            {SystemLanguage.Italian, "Cosa sento con il mio corpo?"}
+        });
+
+        this.multiLanguageDictionary.Add(HowDoesMyBodyFeelActivityName, new Dictionary<SystemLanguage, string>
+        {
+            {SystemLanguage.English, "How does my body feel?"},
+            {SystemLanguage.Italian, "How does my body feel?"}
+        });
+
+        this.multiLanguageDictionary.Add(HowDoesMyBodyFeelAText, new Dictionary<SystemLanguage, string>
+        {
+            {SystemLanguage.English, "Now we will do another kind of exercise.\nYou can sit."},
+            {SystemLanguage.Italian, "Ora passiamo ad un altro tipo di esercizio.\nPoi sederti."}
+        });
+
+        this.multiLanguageDictionary.Add(HowDoesMyBodyFeelBText, new Dictionary<SystemLanguage, string>
+        {
+            {SystemLanguage.English, "Here beside you can see a list of the main emotions.\nRead them carefully and try to identify where in your body, you feel them.\nWhere, for example, you feel the anger? Where the fear?"},
+            {SystemLanguage.Italian, "Qui di fianco vedi una lista delle emozioni principali.\nLeggile con attenzione e cerca di individuare dove nel tuo corpo, le senti.\nDove ad esempio senti la rabbia? E dove la paura?"}
+        });
+
+        this.multiLanguageDictionary.Add(HowDoesMyBodyFeelCText, new Dictionary<SystemLanguage, string>
+        {
+            {SystemLanguage.English, "Now you have to mark on your avatar where you feel these emotions.\nClick on an emotion and then click on the part of your body.\nIt will color in the same way.\n\nEvery emotion is written in a different color.\nChoose the corresponding color from the palette below, and click on your avatar, on the part you want to be colored in the same way, because right there you feel that emotion"},
+            {SystemLanguage.Italian, "Ora dovrai segnare sul tuo avatar dove senti queste emozioni.\nClicca sull'emozione e poi clicca sulla parte del tuo corpo. Si colorerà allo stesso modo.\n\nOgni emozione è scritta con un colore diverso. Scegli il colore corrispondente dalla tavolozza qui sotto, e clicca sul tuo avatar, sulla parte che vuoi venga colorata allo stesso modo, perchè proprio lì senti quell'emozione!"}
+        });
+
+        this.multiLanguageDictionary.Add(HowDoesMyBodyFeelDText, new Dictionary<SystemLanguage, string>
+        {
+            {SystemLanguage.English, "Good, great job!"},
+            {SystemLanguage.Italian, "Bravo, ottimo lavoro!"}
+        });
+
 
         this.multiLanguageDictionary.Add(HowDoesMyBodyFeelHappiness, new Dictionary<SystemLanguage, string>
         {

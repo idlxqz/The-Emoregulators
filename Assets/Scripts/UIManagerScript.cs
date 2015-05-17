@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class UIManagerScript : MonoBehaviour {
 
@@ -13,9 +14,17 @@ public class UIManagerScript : MonoBehaviour {
 	
 	}
 
-	public void StartButton () {
+	public void StartButton () 
+    {
 		Application.LoadLevel ("SessionOneSimplified");
 	}
+
+    private void Globalize()
+    {
+        GameObject.Find("StartButton").GetComponentInChildren<Text>().text = GlobalizationService.Instance.Globalize(GlobalizationService.StartButton);
+        GameObject.Find("QuitButton").GetComponentInChildren<Text>().text = GlobalizationService.Instance.Globalize(GlobalizationService.QuitButton);
+        GameObject.Find("Placeholder").GetComponentInChildren<Text>().text = GlobalizationService.Instance.Globalize(GlobalizationService.UserCodePlaceholder);
+    }
 
 	public void QuitButton () {
 		Application.Quit ();
@@ -33,11 +42,13 @@ public class UIManagerScript : MonoBehaviour {
     public void EnglishButton()
     {
         GlobalizationService.Instance.CurrentLanguage = SystemLanguage.English;
+        this.Globalize();
     }
 
     public void ItalianButton()
     {
         GlobalizationService.Instance.CurrentLanguage = SystemLanguage.Italian;
+        this.Globalize();
     }
 
     public static void EnableSkipping()

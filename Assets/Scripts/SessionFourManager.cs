@@ -26,10 +26,8 @@ public class SessionFourManager : SessionManager {
 
         System.Action nextPhase = () =>
         {
-            log.LogInformation("Started How Does My Body Feel");
-            howDoesMyBodyFeel.Setup(userGender);
-            howDoesMyBodyFeel.enabled = true;
-            currentState = SessionState.HowDoesMyBodyFeel;
+            
+            currentState = SessionState.CandleCeremonyTitle;
         };
         customTitleScript.Setup(nextPhase, sessionTitle);
         hideInterface = true;
@@ -46,13 +44,7 @@ public class SessionFourManager : SessionManager {
         //coordinate the session state
         switch (currentState)
         {
-            case SessionState.HowDoesMyBodyFeel:
-                if (howDoesMyBodyFeel.finished)
-                {
-                    log.LogInformation("Ended How Does My Body Feel");
-                    currentState = SessionState.CandleCeremonyTitle;
-                }
-                break;
+            
             case SessionState.CandleCeremonyTitle:
                 log.LogInformation("Started candle ceremony title");
                 //prepare custom title
@@ -485,8 +477,9 @@ public class SessionFourManager : SessionManager {
                     progressiveMuscleRelaxation.RevertToSessionBackground();
                     progressiveMuscleRelaxation.Avatar.SetActive(false);
                     progressiveMuscleRelaxation.enabled = false;
-                   
-                    currentState = SessionState.InnerSensationsTitle;
+
+                    
+                    currentState = SessionState.HowDoesMyBodyFeelTitle;
                 };
 
                 progressiveMuscleRelaxation.AnimationId = AnimatorControlerHashIDs.Instance.SandExerciseTrigger;
@@ -503,6 +496,83 @@ public class SessionFourManager : SessionManager {
                     });
 
                 currentState = SessionState.ProgressiveMuscleRelaxation;
+                break;
+            case SessionState.HowDoesMyBodyFeelTitle:
+                log.LogInformation("Started HowDoesMyBodyFeel Title");
+                canSkip = false;
+                UIManagerScript.DisableSkipping();
+                //prepare custom title
+                setupNextPhaseCustomTitle = () =>
+                {
+                    log.LogInformation("Ended HowDoesMyBodyFeel Title.");
+                    activityName = GlobalizationService.Instance.Globalize(GlobalizationService.HowDoesMyBodyFeelActivityName);
+                    currentState = SessionState.HowDoesMyBodyFeelA;
+
+                };
+                customTitleScript.Setup(setupNextPhaseCustomTitle, GlobalizationService.Instance.Globalize(GlobalizationService.HowDoesMyBodyFeelTitle));
+                currentState = SessionState.CustomTitle;
+                break;
+            case SessionState.HowDoesMyBodyFeelA:
+                log.LogInformation("Started HowDoesMyBodyFeel A");
+                setupNextPhaseCustomText = () =>
+                {
+                    log.LogInformation("Ended HowDoesMyBodyFeel A.");
+                    customText.enabled = false;
+                    currentState = SessionState.HowDoesMyBodyFeelB;
+                };
+                customText.Setup(setupNextPhaseCustomText, GlobalizationService.Instance.Globalize(GlobalizationService.HowDoesMyBodyFeelAText));
+                customText.enabled = true;
+                currentState = SessionState.CustomText;
+                break;
+            case SessionState.HowDoesMyBodyFeelB:
+                log.LogInformation("Started HowDoesMyBodyFeel B");
+                setupNextPhaseCustomText = () =>
+                {
+                    log.LogInformation("Ended HowDoesMyBodyFeel B.");
+                    customText.enabled = false;
+                    currentState = SessionState.HowDoesMyBodyFeelC;
+                };
+                customText.Setup(setupNextPhaseCustomText, GlobalizationService.Instance.Globalize(GlobalizationService.HowDoesMyBodyFeelBText));
+                customText.enabled = true;
+                currentState = SessionState.CustomText;
+                break;
+            case SessionState.HowDoesMyBodyFeelC:
+                log.LogInformation("Started HowDoesMyBodyFeel C");
+                setupNextPhaseCustomText = () =>
+                {
+                    log.LogInformation("Ended HowDoesMyBodyFeel C.");
+                    customText.enabled = false;
+                    
+                    log.LogInformation("Started HowDoesMyBodyFeel Exercise");
+                    howDoesMyBodyFeel.Setup(userGender);
+                    howDoesMyBodyFeel.enabled = true;
+                    //prepare the inner sensations activity
+                    currentState = SessionState.HowDoesMyBodyFeel;
+                };
+                customText.Setup(setupNextPhaseCustomText, GlobalizationService.Instance.Globalize(GlobalizationService.HowDoesMyBodyFeelCText));
+                customText.enabled = true;
+                currentState = SessionState.CustomText;
+                break;
+            case SessionState.HowDoesMyBodyFeel:
+                if (canSkip)
+                {
+                    canSkip = false;
+                    howDoesMyBodyFeel.enabled = false;
+                    log.LogInformation("Ended HowDoesMyBodyFeel Exercise");
+                    currentState = SessionState.HowDoesMyBodyFeelD;
+                }
+                break;
+            case SessionState.HowDoesMyBodyFeelD:
+                log.LogInformation("Started HowDoesMyBodyFeel D");
+                setupNextPhaseCustomText = () =>
+                {
+                    log.LogInformation("Ended HowDoesMyBodyFeel D.");
+                    customText.enabled = false;
+                    currentState = SessionState.InnerSensationsTitle;
+                };
+                customText.Setup(setupNextPhaseCustomText, GlobalizationService.Instance.Globalize(GlobalizationService.HowDoesMyBodyFeelDText));
+                customText.enabled = true;
+                currentState = SessionState.CustomText;
                 break;
             case SessionState.InnerSensationsTitle:
                 log.LogInformation("Started InnerSensations Title");

@@ -97,6 +97,7 @@ public class HowDoesMyBodyFeelScript : MonoBehaviour {
             {
                 if (RectsOverlap(item.Value, draggedEmotionRect))
                 {
+                    UIManagerScript.EnableSkipping();
                     //dropped on this item
                     bodyAreasOverlays[item.Key] = emotionColorTextures[emotionSelected];
                     //special cases
