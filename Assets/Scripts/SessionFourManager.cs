@@ -7,6 +7,7 @@ public class SessionFourManager : SessionManager {
     public ProgressiveMuscleRelaxationScript progressiveMuscleRelaxation;
     public InnerSensationsScript innerSensations;
     public FacialMindfulnessScript facialMindfulness;
+    public HowDoesMyBodyFeelScript howDoesMyBodyFeel;
 
     public AudioSource AlarmSound;
 
@@ -18,13 +19,17 @@ public class SessionFourManager : SessionManager {
         progressiveMuscleRelaxation = GameObject.Find("ProgressiveMuscleRelaxation").GetComponent<ProgressiveMuscleRelaxationScript>();
         innerSensations = GameObject.Find("InnerSensations").GetComponent<InnerSensationsScript>();
         facialMindfulness = GameObject.Find("FacialMindfulness").GetComponent<FacialMindfulnessScript>();
+        howDoesMyBodyFeel = GameObject.Find("HowDoesMyBodyFeel").GetComponent<HowDoesMyBodyFeelScript>();
 
         this.sessionTitle = GlobalizationService.Instance.Globalize(GlobalizationService.Session4Title);
         this.sessionSubTitle = GlobalizationService.Instance.Globalize(GlobalizationService.Session4SubTitle);
 
         System.Action nextPhase = () =>
-        {   
-            currentState = SessionState.CandleCeremonyTitle;
+        {
+            log.LogInformation("Started How Does My Body Feel");
+            howDoesMyBodyFeel.Setup(userGender);
+            howDoesMyBodyFeel.enabled = true;
+            currentState = SessionState.HowDoesMyBodyFeel;
         };
         customTitleScript.Setup(nextPhase, sessionTitle);
         hideInterface = true;
@@ -41,6 +46,13 @@ public class SessionFourManager : SessionManager {
         //coordinate the session state
         switch (currentState)
         {
+            case SessionState.HowDoesMyBodyFeel:
+                if (howDoesMyBodyFeel.finished)
+                {
+                    log.LogInformation("Ended How Does My Body Feel");
+                    currentState = SessionState.CandleCeremonyTitle;
+                }
+                break;
             case SessionState.CandleCeremonyTitle:
                 log.LogInformation("Started candle ceremony title");
                 //prepare custom title
