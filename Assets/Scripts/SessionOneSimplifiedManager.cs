@@ -9,11 +9,13 @@ public class SessionOneSimplifiedManager : SessionManager
     public Text femaleButtonText;
 
     BackgroundChooserScript backgroundChooserScript;
+    private IntroducingOurselvesScript introducingOurselvesScript;
 
 	// Use this for initialization
 	protected override void StartLogic ()
 	{
         backgroundChooserScript = GameObject.Find("BackgroundChooser").GetComponent<BackgroundChooserScript>();
+	    this.introducingOurselvesScript = GameObject.Find("IntroducingOurselvesScript").GetComponent<IntroducingOurselvesScript>();
 
 	    this.sessionTitle = GlobalizationService.Instance.Globalize(GlobalizationService.Session1Title);
 	    this.sessionSubTitle = GlobalizationService.Instance.Globalize(GlobalizationService.Session1SubTitle);
@@ -165,11 +167,10 @@ public class SessionOneSimplifiedManager : SessionManager
                     backgroundChooserScript.enabled = false;
                     canSkip = false;
                     UIManagerScript.DisableSkipping();
-                    introducingOurselves.SetActive(true);
-                    introducingOurselves.GetComponentsInChildren<Text>().FirstOrDefault(t => t.name.Equals("Instructions")).text = GlobalizationService.Instance.Globalize(GlobalizationService.IntroducingOurselvesAvatarText);
                     proceed = false;
-                    nameInputField.ActivateInputField();
-                    nameInputField.Select();
+                    this.introducingOurselves.SetActive(true);
+                    this.introducingOurselvesScript.Setup(GlobalizationService.Instance.Globalize(GlobalizationService.IntroducingOurselvesAvatarText));
+                    this.introducingOurselvesScript.enabled = true;
                     currentState = SessionState.IntroducingOurselvesAvatar;
                 }
                 break;
@@ -182,6 +183,7 @@ public class SessionOneSimplifiedManager : SessionManager
                     nameInputField.DeactivateInputField();
                     //GUIUtility.keyboardControl = 0; //ensure lose focus
                     introducingOurselves.SetActive(false);
+                    this.introducingOurselvesScript.enabled = false;
                     proceed = false;
                     currentState = SessionState.IBoxIntroductionTitle;
                 }

@@ -52,19 +52,26 @@ public class CandleScript : MonoBehaviour {
 
 	//candle and instructions text areas definition
 	public Rect frameArea;
-	public Rect instructionsArea;
 
 	//instruction control
 	public string instructions;
-
+    private StandardConfigurations Configurations;
 	//instructions format
-	public GUIStyle instructionsFormat;
 
 	//logging
 	Logger log;
 
 	// Use this for initialization
-	void Start () {
+	void Start ()
+	{
+	    this.Configurations = GameObject.FindObjectOfType<StandardConfigurations>();
+        //dynamic positioning
+        var xcenterOfMediaArea = this.Configurations.FullTextArea.x + this.Configurations.FullTextArea.width * 0.8f -
+                                this.frames[0].width * this.candleScale / 2;
+        var ycenterOfMediaArea = this.Configurations.FullTextArea.y + this.Configurations.FullTextArea.height / 2 -
+                                 this.frames[0].height * this.candleScale / 2;
+        this.frameArea = new Rect(xcenterOfMediaArea, ycenterOfMediaArea, this.frames[0].width * this.candleScale, this.frames[0].height * this.candleScale);
+
         log = Logger.Instance;
         Setup();
 	}
@@ -180,7 +187,7 @@ public class CandleScript : MonoBehaviour {
         }
 		//draw the candle cerimony text
         if (!simpleCandleAnimation && !noInstructions)
-		    GUI.Label(instructionsArea, instructions, instructionsFormat);
+		    GUI.Label(this.Configurations.HalfTextArea, instructions, this.Configurations.InstructionsFormat);
 		//draw the candle frame
         GUI.DrawTexture(GetCandleArea(), frames[selectedFrame]);
         //draw the match
@@ -220,10 +227,12 @@ public class CandleScript : MonoBehaviour {
         {
             float width = frameArea.width;
             float height = frameArea.height;
-            return new Rect(Screen.width / 2 - width / 2, Screen.height / 2 - height / 2, width, height);
+            return new Rect(Screen.width/2 - width/2, Screen.height/2 - height/2, width, height);
         }
         else
+        {
             return frameArea;
+        }
     }
 
     public void Setup()
@@ -243,25 +252,17 @@ public class CandleScript : MonoBehaviour {
         matchClicked = false;
         holdingMatch = false;
 
-        SetCandleOriginalRectangle();
+        //SetCandleOriginalRectangle();
 
         //dynamic positioning
-        if (!noInstructions)
-        {
-            //text
-            instructionsArea.x = lateralOffset;
-            instructionsArea.width = Screen.width - 2 * lateralOffset - frameArea.width - textCandleSpacing;
-            //candle
-            frameArea.x = Screen.width - lateralOffset - frameArea.width;
-        }
 
         SetMatchOriginalRectangle();
     }
 
-    private void SetCandleOriginalRectangle()
+    /*private void SetCandleOriginalRectangle()
     {
         frameArea = new Rect(700, 130, frames[0].width * candleScale, frames[0].height * candleScale);
-    }
+    }*/
 
     private void SetMatchOriginalRectangle()
     {

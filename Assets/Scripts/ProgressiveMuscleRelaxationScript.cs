@@ -15,17 +15,15 @@ public class ProgressiveMuscleRelaxationScript : CustomTextScript
     public Texture2D SandBackground;
     private Sprite SelectedSprite;
 
-
     // Use this for initialization
     public override void Start()
     {
+        this.Configurations = GameObject.FindObjectOfType<StandardConfigurations>();
         this.ExpectedMuscleTense = false;
         this.ExpectedMuscleRelaxed = false;
         this.Avatar.SetActive(true);
         this.Avatar.GetComponent<RectTransform>().anchoredPosition = new Vector3(400, -300, -50);
         this.Animator = this.Avatar.GetComponentInChildren<Animator>();
-        
-
         //UIManagerScript.EnableSkipping();
     }
 
@@ -68,6 +66,12 @@ public class ProgressiveMuscleRelaxationScript : CustomTextScript
                 }
             }
         }
+    }
+
+    public override void OnGUI()
+    {
+        //draw the instructions text
+        GUI.Label(this.Configurations.HalfTextArea, this.currentInstructions, this.Configurations.InstructionsFormat);
     }
 
     public override void Setup(System.Action nextPhaseSetup, string[] newInstructions)

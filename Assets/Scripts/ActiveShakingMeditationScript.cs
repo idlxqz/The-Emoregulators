@@ -22,8 +22,9 @@ public class ActiveShakingMeditationScript : CustomTextScript {
 	// Use this for initialization
 	public override void Start () {
        
-        music = this.GetComponent<AudioSource>();
-        triggeredMusic = false;
+        this.music = this.GetComponent<AudioSource>();
+        this.Configurations = GameObject.FindObjectOfType<StandardConfigurations>();
+        this.triggeredMusic = false;
 
         this.Avatar.SetActive(true);
         this.Avatar.GetComponent<RectTransform>().anchoredPosition = new Vector3(400, -300, -50);
@@ -82,6 +83,12 @@ public class ActiveShakingMeditationScript : CustomTextScript {
                 SessionManager.PlayerScore += 4;
             }
         }
+    }
+
+    public override void OnGUI()
+    {
+        //draw the instructions text
+        GUI.Label(this.Configurations.HalfTextArea, this.currentInstructions, this.Configurations.InstructionsFormat);
     }
 
     private void PlayOneShot()

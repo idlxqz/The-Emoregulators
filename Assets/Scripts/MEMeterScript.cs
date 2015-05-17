@@ -40,24 +40,26 @@ public class MEMeterScript : MonoBehaviour {
     */
 	//memeter and instructions text areas definition
 	public Rect memeterArea;
-	public Rect instructionsArea;
+    public float memeterScale;
 
 	//centralized logging
 	Logger log;
 
 	//instruction control
 	public string instructions;
-	
-	//instructions format
-	public GUIStyle instructionsFormat;
 
-    //dynimc positioning
-    public int lateralOffset;
-    public int instructionsMeMeterSpacing;
+    protected StandardConfigurations Configurations;
 
 	// Use this for initialization
 	void Start () {
         log = Logger.Instance;
+	    this.Configurations = GameObject.FindObjectOfType<StandardConfigurations>();
+        //dynamic positioning
+        var xcenterOfMediaArea = this.Configurations.FullTextArea.x + this.Configurations.FullTextArea.width * 0.8f -
+                                this.memeterOut.width * this.memeterScale / 2;
+        var ycenterOfMediaArea = this.Configurations.FullTextArea.y + this.Configurations.FullTextArea.height / 2 -
+                                 this.memeterOut.height * this.memeterScale / 2;
+        this.memeterArea = new Rect(xcenterOfMediaArea, ycenterOfMediaArea, this.memeterOut.width * this.memeterScale, this.memeterOut.height * this.memeterScale);
         Setup();
 	}
 	
@@ -163,7 +165,7 @@ public class MEMeterScript : MonoBehaviour {
     {
         //draw the instructions text
         if (showInstructions)
-            GUI.Label(instructionsArea, instructions, instructionsFormat);
+            GUI.Label(this.Configurations.HalfTextArea, instructions, this.Configurations.InstructionsFormat);
         //draw the memeter frame
         GUI.DrawTexture(GetMemeterArea(), memeterSelected);
     }
@@ -185,12 +187,5 @@ public class MEMeterScript : MonoBehaviour {
         finalWaitStart = 0;
         isSelected = false;
         finished = false;
-        if (showInstructions)
-        {
-            //dynamic positioning
-            memeterArea.x = Screen.width - lateralOffset - memeterArea.width;
-            instructionsArea.x = lateralOffset;
-            instructionsArea.width = Screen.width - 2 * lateralOffset - memeterArea.width - instructionsMeMeterSpacing;
-        }
     }
 }

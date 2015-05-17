@@ -22,13 +22,6 @@ public class SessionFourManager : SessionManager {
         this.sessionTitle = GlobalizationService.Instance.Globalize(GlobalizationService.Session4Title);
         this.sessionSubTitle = GlobalizationService.Instance.Globalize(GlobalizationService.Session4SubTitle);
 
-        breathingRegulation.instructionsFormat = customText.instructionsFormat;
-        activeShakingMeditation.instructionsFormat = customText.instructionsFormat;
-        activeShakingMeditation.instructionsArea = breathingRegulation.instructionsArea;
-        progressiveMuscleRelaxation.instructionsFormat = customText.instructionsFormat;
-        progressiveMuscleRelaxation.instructionsArea = breathingRegulation.instructionsArea;
-        //breathingRegulation.instructionsArea = candle.instructionsArea;
-
         System.Action nextPhase = () =>
         {   
             currentState = SessionState.CandleCeremonyTitle;

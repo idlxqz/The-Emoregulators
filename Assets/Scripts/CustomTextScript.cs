@@ -7,8 +7,6 @@ public class CustomTextScript : MonoBehaviour {
     protected float timeStart;
     public float MinimumWaitTime;
 
-    //memeter and instructions text areas definition
-    public Rect instructionsArea;
 
     //instruction control
     public System.Action setupNextPhase;
@@ -19,21 +17,13 @@ public class CustomTextScript : MonoBehaviour {
     protected int instructionsPointer;
     protected string currentInstructions;
 
-    //instructions format
-    public GUIStyle instructionsFormat;
-
-    //positioning
-    public int lateralOffset;
+    protected StandardConfigurations Configurations;
 
 	// Use this for initialization
 	public virtual void Start ()
 	{
+	    this.Configurations = GameObject.FindObjectOfType<StandardConfigurations>();
 	    this.MinimumWaitTime = 5;
-
-        instructionsArea.x = lateralOffset;
-        instructionsArea.y = Screen.height / 5;
-        instructionsArea.width = Screen.width - 2 * lateralOffset ;
-        instructionsArea.height = Screen.height - (Screen.height / 5) - (Screen.height / 6);
 	}
 	
 	// Update is called once per frame
@@ -74,7 +64,7 @@ public class CustomTextScript : MonoBehaviour {
     public virtual void OnGUI()
     {
         //draw the instructions text
-        GUI.Label(this.instructionsArea, this.currentInstructions, this.instructionsFormat);
+        GUI.Label(this.Configurations.FullTextArea, this.currentInstructions, this.Configurations.InstructionsFormat);
     }
 
     public virtual void Setup(System.Action nextPhaseSetup,  string[] newInstructions)

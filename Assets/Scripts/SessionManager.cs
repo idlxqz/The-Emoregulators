@@ -177,7 +177,6 @@ public class SessionManager : MonoBehaviour {
     {
         currentState = SessionState.Start;
         candle = GameObject.Find("Candle").GetComponent<CandleScript>();
-        memeter = GameObject.Find("MeMeter").GetComponent<MEMeterScript>();
         ibox = GameObject.Find("IBox").GetComponent<IBoxScript>();
         customText = GameObject.Find("CustomText").GetComponent<CustomTextScript>();
         customTitleScript = GameObject.Find("CustomTitle").GetComponent<CustomTitleScript>();
@@ -186,9 +185,7 @@ public class SessionManager : MonoBehaviour {
         activityFormat.wordWrap = true;
         activityFormat.alignment = TextAnchor.MiddleCenter;
         customTextWaitTime = 5;
-        //propagate instructions text formatting
-        customText.instructionsFormat = memeter.instructionsFormat = ibox.instructionsFormat = candle.instructionsFormat;
-        memeter.instructionsArea = ibox.instructionsArea = candle.instructionsArea;
+        
         //configure all logging
         log = Logger.Instance;
         //Cursor.visible = false;
