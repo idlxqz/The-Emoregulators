@@ -43,7 +43,7 @@ public class SessionTwoManager : SessionManager {
                 currentState = SessionState.CandleCeremony;
                 break;
             case SessionState.CandleCeremony:
-                if (candle.finished)
+                if (candle.CanContinue)
                 {
                     log.LogInformation("Ended candle lighting cerimony.");
                     //disable the candle and proceed to the next state
@@ -57,7 +57,7 @@ public class SessionTwoManager : SessionManager {
                 }
                 break;
             case SessionState.MeMeterReuse:
-                if (memeter.finished)
+                if (memeter.CanContinue)
                 {   
                     log.LogInformation("Ended me-meter interaction.");
                     //disable the memeter and proceed to the next state
@@ -112,7 +112,7 @@ public class SessionTwoManager : SessionManager {
                 }
                 break;
             case SessionState.Mindfullness:
-                if (mindfullness.finished)
+                if (mindfullness.CanContinue)
                 {
                     log.LogInformation("Ended mindfullness exercise.");
                     //disable the mindfullness and proceed to the next state
@@ -150,14 +150,14 @@ public class SessionTwoManager : SessionManager {
                 }
                 break;
             case SessionState.CustomText:
-                if (customText.finished)
+                if (customText.CanContinue)
                 {
                     //setup the next phase
                     customText.setupNextPhase();
                 }
                 break;
             case SessionState.ClosingCandle:
-                if (candle.finished)
+                if (candle.CanContinue)
                 {
                     log.LogInformation("Ended closing activity.");
                     //disable the candle and proceed to the next state

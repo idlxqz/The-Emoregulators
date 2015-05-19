@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Linq;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class UIManagerScript : MonoBehaviour {
@@ -14,8 +14,20 @@ public class UIManagerScript : MonoBehaviour {
 	
 	}
 
-	public void StartButton () 
-    {
+	public void StartButton ()
+	{
+	    SessionManager.UserCode = GameObject.Find("UserCode").GetComponent<InputField>().text;
+	    var sensorManager = GameObject.FindObjectOfType<SensorManager>();
+	    if (sensorManager.BaselineHeartRateSamples.Any())
+	    {
+            Logger.Instance.LogInformation("BaselineHR (avg,min,max): " + sensorManager.BaselineHeartRateSamples.Average() + ", " + sensorManager.BaselineHeartRateSamples.Min() + ", " + sensorManager.BaselineHeartRateSamples.Max());
+	    }
+	    if (sensorManager.BaselineEDASamples.Any())
+	    {
+            Logger.Instance.LogInformation("BaselineEDA (avg,min,max): " + sensorManager.BaselineEDASamples.Average() + ", " + sensorManager.BaselineEDASamples.Min() + ", " + sensorManager.BaselineEDASamples.Max());
+	        
+	    }
+        Logger.Instance.LogInformation("User started Application");
 		Application.LoadLevel ("SessionOneSimplified");
 	}
 

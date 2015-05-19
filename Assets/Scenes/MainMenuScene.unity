@@ -1725,7 +1725,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4a0c85727b3ba748b806964ca178a3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  finished: 1
+  CanContinue: 0
   endlessTitle: 1
   titleDuration: 2
   charLoadInterval: .150000006

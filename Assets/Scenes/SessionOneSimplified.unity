@@ -1029,7 +1029,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: caa09abaffa0a7a479cafeb1c90a5e43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  finished: 0
+  CanContinue: 0
   MinimumWaitTime: 0
   instructions: []
   delayBetweenInstructions: 3
@@ -1288,6 +1288,7 @@ MonoBehaviour:
     width: 70
     height: 70
   heartSpacing: 15
+  userName: 
   maleAvatar: {fileID: 145624201}
   maleBall: {fileID: 0}
   femaleAvatar: {fileID: 979032482}
@@ -1540,47 +1541,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 921327318}
---- !u!1 &948873276
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 948873278}
-  - 114: {fileID: 948873277}
-  m_Layer: 0
-  m_Name: SensorManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &948873277
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 948873276}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e058e151e4b3a64b844282332edf253, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  host: 127.0.0.1
-  port: 30000
---- !u!4 &948873278
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 948873276}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 567, y: 319, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 2
 --- !u!1 &956836320
 GameObject:
   m_ObjectHideFlags: 0
@@ -1969,7 +1929,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a4845e63658a7e4d8d09740553a0a40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  finished: 0
+  CanContinue: 0
   isLit: 0
   simpleCandleAnimation: 0
   noInstructions: 0
@@ -2122,7 +2082,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6df15704321f17a45b20b0e835cda23e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  finished: 0
+  CanContinue: 0
   secondsToCloseSession: 20
   ibox: {fileID: 2800000, guid: 9f73edbd988684848a66a114908d0bc6, type: 3}
   iboxArea:
@@ -2417,7 +2377,7 @@ MonoBehaviour:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 24
     m_FontStyle: 0
-    m_Alignment: 0
+    m_Alignment: 3
     m_WordWrap: 1
     m_RichText: 1
     m_TextClipping: 1
@@ -2438,7 +2398,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
 --- !u!1 &1457797663
 GameObject:
   m_ObjectHideFlags: 0
@@ -2607,7 +2567,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f095de361c82a14a99bcb5071c72b39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  finished: 0
+  CanContinue: 0
   backgrounds: []
   lateraOffset: 50
   itemSpacing: 10
@@ -2773,7 +2733,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cdca3f813f4c8d468089e4dcb0c008a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  finished: 0
+  CanContinue: 0
   MinimumWaitTime: 5
   instructions: []
   delayBetweenInstructions: 0
@@ -2887,7 +2847,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4a0c85727b3ba748b806964ca178a3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  finished: 1
+  CanContinue: 0
   endlessTitle: 0
   titleDuration: 2
   charLoadInterval: .150000006

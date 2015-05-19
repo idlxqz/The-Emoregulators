@@ -118,7 +118,7 @@ public class SessionManager : MonoBehaviour {
 
     //hack to reuse the existing setup for the introducing ourselves
     protected bool proceed;
-    protected string userName;
+    public string userName;
 
     //custom text support
     protected string customTextActivityName;
@@ -162,8 +162,8 @@ public class SessionManager : MonoBehaviour {
         }
     }
     public static int PlayerScore { get; set; } //share it accross scenes
-    public static int HeartRate { get; set; }
-    public static bool IsMuscleActive { get; set; }
+
+    public static string UserCode { get; set; }
 
     public GUIStyle scoreFormat;
 
@@ -244,8 +244,8 @@ public class SessionManager : MonoBehaviour {
                 GUI.DrawTexture(iboxArea, iboxTexture);
                 GUI.DrawTexture(new Rect(iboxArea.xMin + iboxArea.width + heartSpacing, iboxArea.yMin, iboxArea.width, iboxArea.height), heartTexture);
                 GUI.Label(new Rect(iboxArea.xMin, iboxArea.yMin + iboxArea.height, iboxArea.width, 15), ""+PlayerScore, scoreFormat);
-                GUI.Label(new Rect(iboxArea.xMin + iboxArea.width + heartSpacing, iboxArea.yMin + iboxArea.height, iboxArea.width, 15), (SessionManager.HeartRate==0? "-" : ""+SessionManager.HeartRate), scoreFormat);
-                GUI.Label(new Rect(iboxArea.xMin + 2 * iboxArea.width + 2* heartSpacing, iboxArea.yMin + iboxArea.height, iboxArea.width, 15),""+SessionManager.IsMuscleActive, scoreFormat);
+                GUI.Label(new Rect(iboxArea.xMin + iboxArea.width + heartSpacing, iboxArea.yMin + iboxArea.height, iboxArea.width, 15), (SensorManager.HeartRate==0? "-" : ""+SensorManager.HeartRate), scoreFormat);
+                GUI.Label(new Rect(iboxArea.xMin + 2 * iboxArea.width + 2* heartSpacing, iboxArea.yMin + iboxArea.height, iboxArea.width, 15),""+SensorManager.MuscleActive, scoreFormat);
             }
             //draw title and subtitle of the session
             GUI.Label(titleArea, sessionTitle, titleFormat);

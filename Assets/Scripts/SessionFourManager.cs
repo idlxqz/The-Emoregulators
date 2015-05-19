@@ -53,7 +53,7 @@ public class SessionFourManager : SessionManager {
                     log.LogInformation("Ended candle cermony title");
                     //activate the candle cerimony
                     log.LogInformation("Started candle lighting cerimony.");
-                    activityName = GlobalizationService.Instance.Globalize(GlobalizationService.CandleCeremonyActivityName);
+                    activityName = GlobalizationService.Instance.Globalize(GlobalizationService.CandleCeremonyTitle);
                     this.candle.instructions = GlobalizationService.Instance.Globalize(GlobalizationService.CandleCeremonyText);
                     candle.enabled = true;
                     currentState = SessionState.CandleCeremony;
@@ -69,23 +69,24 @@ public class SessionFourManager : SessionManager {
                 {
                     canSkip = false;
                     UIManagerScript.DisableSkipping();
+                    candle.EndActivity();
                     log.LogInformation("Ended candle lighting cerimony.");
-                    //disable the candle and proceed to the next state
-                    candle.enabled = false;
+                   
                     //prepare custom title
                     setupNextPhaseCustomTitle = () =>
                     {
                         //start introducing ourselves
                         log.LogInformation("Started a MinuteForMyselfA.");
-                        activityName = GlobalizationService.Instance.Globalize(GlobalizationService.MinuteForMyselfActivityName);
+                        activityName = GlobalizationService.Instance.Globalize(GlobalizationService.MinuteForMyselfTitle);
 
                         //prepare custom text of introduction
                         setupNextPhaseCustomText = () =>
                         {
-                            log.LogInformation("Ended A MinuteForMyselfA message.");
+                            customText.EndActivity();
+                            log.LogInformation("Ended A MinuteForMyselfA.");
                             //disable the custom text and proceed to the next state
                             customText.enabled = false;
-                            log.LogInformation("Started A MinuteForMyselfB activity");
+                            log.LogInformation("Started A MinuteForMyselfB.");
                         
                             currentState = SessionState.MinuteForMyselfB;
                         };
@@ -101,10 +102,10 @@ public class SessionFourManager : SessionManager {
                 //prepare custom text of introduction
                 setupNextPhaseCustomText = () =>
                 {
-                    log.LogInformation("Ended A MinuteForMyselfB message.");
+                    customText.EndActivity();
+                    log.LogInformation("Ended A MinuteForMyselfB.");
                     //disable the custom text and proceed to the next state
-                    customText.enabled = false;
-                    log.LogInformation("Started A MinuteForMyselfC activity");
+                    
 
                     currentState = SessionState.MinuteForMyselfC;
                 };
@@ -113,13 +114,14 @@ public class SessionFourManager : SessionManager {
                 currentState = SessionState.CustomText;
                 break;
             case SessionState.MinuteForMyselfC:
+                log.LogInformation("Started A MinuteForMyselfC.");
                 //prepare custom text of introduction
                 setupNextPhaseCustomText = () =>
                 {
-                    log.LogInformation("Ended A MinuteForMyselfC message.");
+                    customText.EndActivity();
+                    log.LogInformation("Ended A MinuteForMyselfC.");
                     //disable the custom text and proceed to the next state
-                    customText.enabled = false;
-                    log.LogInformation("Started A MinuteForMyselfD activity");
+                    
 
                     currentState = SessionState.MinuteForMyselfD;
                 };
@@ -128,12 +130,13 @@ public class SessionFourManager : SessionManager {
                 currentState = SessionState.CustomText;
                 break;
             case SessionState.MinuteForMyselfD:
+                log.LogInformation("Started A MinuteForMyselfD.");
                 //prepare custom text of introduction
                 setupNextPhaseCustomText = () =>
                 {
-                    log.LogInformation("Ended A MinuteForMyselfD message.");
+                    customText.EndActivity();
+                    log.LogInformation("Ended A MinuteForMyselfD.");
                     //disable the custom text and proceed to the next state
-                    customText.enabled = false;
                    
                     log.LogInformation("Started MeMeter activity");
                     memeter.instructions = GlobalizationService.Instance.Globalize(GlobalizationService.MeMeterText);
@@ -151,22 +154,22 @@ public class SessionFourManager : SessionManager {
                 {
                     canSkip = false;
                     UIManagerScript.DisableSkipping();
+                    memeter.EndActivity();
                     log.LogInformation("Ended me-meter interaction.");
-                    //disable the memeter and proceed to the next state
-                    memeter.enabled = false;                   
+                    //disable the memeter and proceed to the next state             
                     
                     //prepare custom title
                     setupNextPhaseCustomTitle = () =>
                     {
                         log.LogInformation("Started Facial Mindfullness A.");
-                        activityName = GlobalizationService.Instance.Globalize(GlobalizationService.FacialMindfulnessActivityName);
+                        activityName = GlobalizationService.Instance.Globalize(GlobalizationService.FacialMindfulnessTitle);
                         //prepare custom text of introduction
                         setupNextPhaseCustomText = () =>
                         {
+                            customText.EndActivity();
                             log.LogInformation("Ended FacialMindfullness A.");
                             //disable the custom text and proceed to the next state
-                            customText.enabled = false;
-                            log.LogInformation("Started FacialMindfullness B.");
+                          
                             currentState = SessionState.FacialMindfulnessB;
                         };
                         customText.Setup(setupNextPhaseCustomText, 
@@ -182,15 +185,16 @@ public class SessionFourManager : SessionManager {
                 }
                 break;
             case SessionState.FacialMindfulnessB:
+                log.LogInformation("Started FacialMindfullness B.");
                 //prepare custom text of introduction
                 setupNextPhaseCustomText = () =>
                 {
-                    log.LogInformation("Ended FacialMindfulness C.");
-                    //disable the custom text and proceed to the next state
-                    customText.enabled = false;
+                    customText.EndActivity();
+                    log.LogInformation("Ended FacialMindfulness B.");
+                    
 
                     //do the facial mindfulness activity
-                    log.LogInformation("Ended FacialMindfulness D.");
+                    log.LogInformation("Started FacialMindfulness D.");
                     facialMindfulness.Setup(userGender);
                     facialMindfulness.enabled = true;
                     currentState = SessionState.FacialMindfulnessD;
@@ -209,7 +213,7 @@ public class SessionFourManager : SessionManager {
                 {
                     canSkip = false;
                     UIManagerScript.DisableSkipping();
-                    facialMindfulness.enabled = false;
+                    facialMindfulness.EndActivity();
                     log.LogInformation("Ended FacialMindfulness D.");
 
                     //prepare custom title
@@ -218,7 +222,7 @@ public class SessionFourManager : SessionManager {
                         log.LogInformation("Started breathing regulation exercise");
                         currentState = SessionState.BreathingRegulationB;
                         breathingRegulation.Avatar = this.GetPlayerAvatar;
-                        breathingRegulation.Setup(null, () => SessionManager.PlayerScore += 10,
+                        breathingRegulation.Setup(null, () => SessionManager.PlayerScore += 5,
                             new[]{GlobalizationService.Instance.Globalize(GlobalizationService.BreathingRegulationA1Text),
                                 GlobalizationService.Instance.Globalize(GlobalizationService.BreathingRegulationA2Text),
                                 GlobalizationService.Instance.Globalize(GlobalizationService.BreathingRegulationA3Text),
@@ -235,11 +239,11 @@ public class SessionFourManager : SessionManager {
                 {
                     canSkip = false;
                     UIManagerScript.DisableSkipping();
+                    breathingRegulation.EndActivity();
                     log.LogInformation("Ended breathing regulation B exercise.");
                     //continue on the breathing regulation exercise
                     //breathingRegulation.enabled = false;
-                    breathingRegulation.finished = false;
-
+                    log.LogInformation("Started Breathing Regulation C.");
                     breathingRegulation.Setup(null, () => SessionManager.PlayerScore += 5,
                             new[]{GlobalizationService.Instance.Globalize(GlobalizationService.BreathingRegulationB1Text),
                                 GlobalizationService.Instance.Globalize(GlobalizationService.BreathingRegulationB2Text),
@@ -252,7 +256,8 @@ public class SessionFourManager : SessionManager {
                 {
                     canSkip = false;
                     UIManagerScript.DisableSkipping();
-                    log.LogInformation("Ended breathing regulation B exercise.");
+                    breathingRegulation.EndActivity();
+                    log.LogInformation("Ended breathing regulation C.");
                     //stop the breathing regulation exercise
                     breathingRegulation.Avatar.SetActive(false);
                     breathingRegulation.enabled = false;
@@ -260,8 +265,8 @@ public class SessionFourManager : SessionManager {
                     setupNextPhaseCustomTitle = () =>
                     {
                         //start introducing active shaking meditation
-                        log.LogInformation("Started active shaking meditation introduction.");
-                        activityName = GlobalizationService.Instance.Globalize(GlobalizationService.ActiveMeditationActivityName);
+                        log.LogInformation("Started active shaking meditation.");
+                        activityName = GlobalizationService.Instance.Globalize(GlobalizationService.ActiveMeditationTitle);
                         activeShakingMeditation.Avatar = this.GetPlayerAvatar;
                         activeShakingMeditation.enabled = true;
                         activeShakingMeditation.Setup(null, 
@@ -280,10 +285,10 @@ public class SessionFourManager : SessionManager {
                 if (canSkip)
                 {
                     canSkip = false;
-                    log.LogInformation("Ended active shaking meditation exercise.");
+                    activeShakingMeditation.EndActivity();
+                    log.LogInformation("Ended active shaking meditation.");
                     //disable the active shaking meditation exercise
                     activeShakingMeditation.Avatar.SetActive(false);
-                    activeShakingMeditation.enabled = false;
 
                     var defaultWaitTime = customText.MinimumWaitTime;
 
@@ -291,15 +296,15 @@ public class SessionFourManager : SessionManager {
 
                     setupNextPhaseCustomText = () =>
                     {
+                        customText.EndActivity();
                         log.LogInformation("Ended ActiveShaking Meditation B.");
                         //disable the custom text and proceed to the next state
                         customText.MinimumWaitTime = defaultWaitTime;
-                        customText.enabled = false;
                         
                         currentState = SessionState.ActiveShakingMeditationC;
                     };
 
-                    customText.MinimumWaitTime = 10;
+                    customText.MinimumWaitTime = 60;
                     customText.Setup(setupNextPhaseCustomText,() => { this.AlarmSound.Play(); SessionManager.PlayerScore += 5; }, GlobalizationService.Instance.Globalize(GlobalizationService.ActiveMeditationBText));
                     customText.enabled = true;
                     currentState = SessionState.CustomText;
@@ -310,9 +315,9 @@ public class SessionFourManager : SessionManager {
 
                 setupNextPhaseCustomText = () =>
                 {
+                    customText.EndActivity();
                     log.LogInformation("Ended ActiveShaking Meditation C.");
                     //disable the custom text and proceed to the next state
-                    customText.enabled = false;
                     currentState = SessionState.ActiveShakingMeditationD;
                 };
 
@@ -325,9 +330,9 @@ public class SessionFourManager : SessionManager {
 
                 setupNextPhaseCustomText = () =>
                 {
+                    customText.EndActivity();
                     log.LogInformation("Ended ActiveShaking Meditation D.");
                     //disable the custom text and proceed to the next state
-                    customText.enabled = false;
                     currentState = SessionState.ProgressiveMuscleRelaxationTitle;
                 };
 
@@ -353,13 +358,13 @@ public class SessionFourManager : SessionManager {
                 //start introducing progressive muscle relaxation
                 log.LogInformation("Started progressive muscle relaxation A.");
                 UIManagerScript.EnableSkipping();
-                activityName = GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationActivityName);
+                activityName = GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationTitle);
                 //prepare custom text of introduction
                 setupNextPhaseCustomText = () =>
                 {
+                    customText.EndActivity();
                     log.LogInformation("Ended progressive muscle relaxation A.");
                     //disable the custom text and proceed to the next state
-                    customText.enabled = false;
                     currentState = SessionState.ProgressiveMuscleRelaxationB;
                 };
 
@@ -371,9 +376,9 @@ public class SessionFourManager : SessionManager {
                 log.LogInformation("Started progressive muscle relaxation B.");
                 setupNextPhaseCustomText = () =>
                 {
+                    customText.EndActivity();
                     log.LogInformation("Ended progressive muscle relaxation B.");
                     //disable the custom text and proceed to the next state
-                    customText.enabled = false;
                     currentState = SessionState.ProgressiveMuscleRelaxationC;
                 };
 
@@ -385,10 +390,11 @@ public class SessionFourManager : SessionManager {
                 log.LogInformation("Started progressive muscle relaxation C.");
                 setupNextPhaseCustomText = () =>
                 {
-                    log.LogInformation("Ended progressive muscle relaxation C.");
                     this.GetPlayerBall.SetActive(false);
+                    progressiveMuscleRelaxation.EndActivity();
+                    log.LogInformation("Ended progressive muscle relaxation C.");
+                    
                     //disable the custom text and proceed to the next state
-                    progressiveMuscleRelaxation.enabled = false;
                     currentState = SessionState.ProgressiveMuscleRelaxationD;
                 };
 
@@ -417,9 +423,9 @@ public class SessionFourManager : SessionManager {
                 log.LogInformation("Started progressive muscle relaxation D.");
                 setupNextPhaseCustomText = () =>
                 {
+                    progressiveMuscleRelaxation.EndActivity();
                     log.LogInformation("Ended progressive muscle relaxation D.");
                     //disable the custom text and proceed to the next state
-                    progressiveMuscleRelaxation.enabled = false;
                     currentState = SessionState.ProgressiveMuscleRelaxationE;
                 };
 
@@ -446,9 +452,9 @@ public class SessionFourManager : SessionManager {
                 log.LogInformation("Started progressive muscle relaxation E.");
                 setupNextPhaseCustomText = () =>
                 {
+                    progressiveMuscleRelaxation.EndActivity();
                     log.LogInformation("Ended progressive muscle relaxation E.");
                     //disable the custom text and proceed to the next state
-                    progressiveMuscleRelaxation.enabled = false;
                     currentState = SessionState.ProgressiveMuscleRelaxationF;
                 };
 
@@ -473,11 +479,10 @@ public class SessionFourManager : SessionManager {
                 log.LogInformation("Started progressive muscle relaxation F.");
                 setupNextPhaseCustomText = () =>
                 {
+                    progressiveMuscleRelaxation.EndActivity();
                     log.LogInformation("Ended progressive muscle relaxation F.");
                     progressiveMuscleRelaxation.RevertToSessionBackground();
                     progressiveMuscleRelaxation.Avatar.SetActive(false);
-                    progressiveMuscleRelaxation.enabled = false;
-
                     
                     currentState = SessionState.HowDoesMyBodyFeelTitle;
                 };
@@ -505,7 +510,7 @@ public class SessionFourManager : SessionManager {
                 setupNextPhaseCustomTitle = () =>
                 {
                     log.LogInformation("Ended HowDoesMyBodyFeel Title.");
-                    activityName = GlobalizationService.Instance.Globalize(GlobalizationService.HowDoesMyBodyFeelActivityName);
+                    activityName = GlobalizationService.Instance.Globalize(GlobalizationService.HowDoesMyBodyFeelTitle);
                     currentState = SessionState.HowDoesMyBodyFeelA;
 
                 };
@@ -516,8 +521,8 @@ public class SessionFourManager : SessionManager {
                 log.LogInformation("Started HowDoesMyBodyFeel A");
                 setupNextPhaseCustomText = () =>
                 {
+                    customText.EndActivity();
                     log.LogInformation("Ended HowDoesMyBodyFeel A.");
-                    customText.enabled = false;
                     currentState = SessionState.HowDoesMyBodyFeelB;
                 };
                 customText.Setup(setupNextPhaseCustomText, GlobalizationService.Instance.Globalize(GlobalizationService.HowDoesMyBodyFeelAText));
@@ -528,8 +533,8 @@ public class SessionFourManager : SessionManager {
                 log.LogInformation("Started HowDoesMyBodyFeel B");
                 setupNextPhaseCustomText = () =>
                 {
+                    customText.EndActivity();
                     log.LogInformation("Ended HowDoesMyBodyFeel B.");
-                    customText.enabled = false;
                     currentState = SessionState.HowDoesMyBodyFeelC;
                 };
                 customText.Setup(setupNextPhaseCustomText, GlobalizationService.Instance.Globalize(GlobalizationService.HowDoesMyBodyFeelBText));
@@ -540,8 +545,8 @@ public class SessionFourManager : SessionManager {
                 log.LogInformation("Started HowDoesMyBodyFeel C");
                 setupNextPhaseCustomText = () =>
                 {
+                    customText.EndActivity();
                     log.LogInformation("Ended HowDoesMyBodyFeel C.");
-                    customText.enabled = false;
                     
                     log.LogInformation("Started HowDoesMyBodyFeel Exercise");
                     howDoesMyBodyFeel.Setup(userGender);
@@ -557,7 +562,7 @@ public class SessionFourManager : SessionManager {
                 if (canSkip)
                 {
                     canSkip = false;
-                    howDoesMyBodyFeel.enabled = false;
+                    howDoesMyBodyFeel.EndActivity();
                     log.LogInformation("Ended HowDoesMyBodyFeel Exercise");
                     currentState = SessionState.HowDoesMyBodyFeelD;
                 }
@@ -566,8 +571,8 @@ public class SessionFourManager : SessionManager {
                 log.LogInformation("Started HowDoesMyBodyFeel D");
                 setupNextPhaseCustomText = () =>
                 {
+                    customText.EndActivity();
                     log.LogInformation("Ended HowDoesMyBodyFeel D.");
-                    customText.enabled = false;
                     currentState = SessionState.InnerSensationsTitle;
                 };
                 customText.Setup(setupNextPhaseCustomText, GlobalizationService.Instance.Globalize(GlobalizationService.HowDoesMyBodyFeelDText));
@@ -581,7 +586,6 @@ public class SessionFourManager : SessionManager {
                 //prepare custom title
                 setupNextPhaseCustomTitle = () =>
                 {
-                    
                     currentState = SessionState.InnerSensationsA;
                 };
                 customTitleScript.Setup(setupNextPhaseCustomTitle, GlobalizationService.Instance.Globalize(GlobalizationService.InternalSensationsTitle));
@@ -592,10 +596,10 @@ public class SessionFourManager : SessionManager {
                 log.LogInformation("Started ibox inner sensations A.");
                 setupNextPhaseCustomText = () =>
                 {
+                    customText.EndActivity();
                     log.LogInformation("Ended ibox inner sensations A.");
-                    customText.enabled = false;
                     //disable the custom text and proceed to the next state
-                    activityName = GlobalizationService.Instance.Globalize(GlobalizationService.InternalSensationsActivityName);
+                    activityName = GlobalizationService.Instance.Globalize(GlobalizationService.InternalSensationsTitle);
                     //prepare the inner sensations activity
                     innerSensations.enabled = true;
                     currentState = SessionState.InnerSensationsB;
@@ -608,10 +612,10 @@ public class SessionFourManager : SessionManager {
             case SessionState.InnerSensationsB:
                 if (canSkip)
                 {
+                    innerSensations.EndActivity();
                     log.LogInformation("Ended ibox inner sensations exercise.");
                     //disable the inner sensations
-                    innerSensations.enabled = false;
-                    //start closing text 
+                    //start closing Title 
                     currentState = SessionState.ClosingSessionTitle;
 
                 }
@@ -620,7 +624,7 @@ public class SessionFourManager : SessionManager {
                 canSkip = false;
                 UIManagerScript.DisableSkipping();
                 log.LogInformation("Started ClosingSession Title.");
-                activityName = GlobalizationService.Instance.Globalize(GlobalizationService.ClosingOfSessionActivityName);
+                activityName = GlobalizationService.Instance.Globalize(GlobalizationService.ClosingOfSessionTitle);
                 //prepare custom title
                 setupNextPhaseCustomTitle = () =>
                 {
@@ -640,9 +644,9 @@ public class SessionFourManager : SessionManager {
             case SessionState.ClosingMeMeter:
                 if (canSkip)
                 {
+                    memeter.EndActivity();
                     log.LogInformation("Ended Closing MeMeter.");
                     //disable the memeter and proceed to the next state
-                    memeter.enabled = false;
                     
                     currentState = SessionState.ClosingSessionA;
                 }
@@ -652,8 +656,8 @@ public class SessionFourManager : SessionManager {
 
                 setupNextPhaseCustomText = () =>
                 {
+                    customText.EndActivity();
                     log.LogInformation("Ended Closing Session A");
-                    customText.enabled = false;
 
                     log.LogInformation("Started Closing Candle activity");
                     candle.waitClickToClose = true;
@@ -669,15 +673,17 @@ public class SessionFourManager : SessionManager {
                 currentState = SessionState.CustomText;
                 break;
             case SessionState.ClosingCandle:
-                if (candle.finished)
+                if (candle.CanContinue)
                 {
-                    log.LogInformation("Ended closing activity.");
+                    canSkip = false;
+                    candle.EndActivity();
+                    log.LogInformation("Ended Closing Candle activity.");
                     //disable the candle and proceed to the next state
-                    candle.enabled = false;
                     log.LogInformation("Started Closing Session C.");
                     //prepare custom title
                     setupNextPhaseCustomText = () =>
                     {
+                        customText.EndActivity();
                         log.LogInformation("Ended Closing Session C.");
                         Application.Quit();
                     };
@@ -705,7 +711,7 @@ public class SessionFourManager : SessionManager {
                 }
                 break;
             case SessionState.CustomTitle:
-                if (customTitleScript.finished || canSkip)
+                if (customTitleScript.CanContinue || canSkip)
                 {
                     canSkip = false;
                     UIManagerScript.DisableSkipping();

@@ -1,9 +1,11 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.IO;
+using UnityEngine;
 
 public class Logger{
 
     private static Logger instance = null;
+
+    private StreamWriter LogStreamWriter;
 
     public static Logger Instance
     {
@@ -15,11 +17,28 @@ public class Logger{
     }
 
 	//generalize the logging system
-	private Logger ()
-	{}
+    private Logger()
+    {
+        
+    }
 
 	public void LogInformation(string toLog){
-		Debug.Log("INFO["+GetTimeStamp()+"]:"+toLog);
+        var message = "[" + GetTimeStamp() + "]:" + toLog;
+        Debug.Log(message);
+
+	    if (this.LogStreamWriter == null)
+	    {
+	        if (SessionManager.UserCode != null)
+	        {
+                this.LogStreamWriter = new StreamWriter(new FileStream("logs\\" + SessionManager.UserCode + ".log", FileMode.OpenOrCreate));        
+	        }
+	    }
+
+	    if (this.LogStreamWriter != null)
+	    {
+	        this.LogStreamWriter.WriteLine(message);
+            this.LogStreamWriter.Flush();
+	    }
 	}
 
 	private static string GetTimeStamp(){

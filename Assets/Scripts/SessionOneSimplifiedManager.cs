@@ -41,14 +41,14 @@ public class SessionOneSimplifiedManager : SessionManager
 		//coordinate the session state
 		switch (currentState) {
             case SessionState.OpeningA:
-                activityName = GlobalizationService.Instance.Globalize(GlobalizationService.OpeningActivityName);
+                activityName = GlobalizationService.Instance.Globalize(GlobalizationService.OpeningTitle);
                 log.LogInformation("Starting Opening Screen A.");
                 
                 //prepare custom text
-                setupNextPhaseCustomText = () => {
+                setupNextPhaseCustomText = () =>
+                {
+                    customText.EndActivity();
                     log.LogInformation("Ended Opening Screen A.");
-                    //disable the custom text and proceed to the next state
-                    customText.enabled = false;
                     currentState = SessionState.OpeningB;
                 };
 
@@ -63,9 +63,9 @@ public class SessionOneSimplifiedManager : SessionManager
                 //prepare custom text
                 setupNextPhaseCustomText = () =>
                 {
+                    customText.EndActivity();
                     log.LogInformation("Ended Opening Screen B.");
                     //disable the custom text and proceed to the next state
-                    customText.enabled = false;
                     currentState = SessionState.OpeningC;
                 };
 
@@ -80,9 +80,8 @@ public class SessionOneSimplifiedManager : SessionManager
                 //prepare custom text
                 setupNextPhaseCustomText = () =>
                 {
-                    log.LogInformation("Ended Opening Screen C.");
-                    //disable the custom text and proceed to the next state
-                    customText.enabled = false;
+                    customText.EndActivity();
+                    log.LogInformation("Ended Opening Screen C.");            
                     currentState = SessionState.OpeningD;
                 };
 
@@ -97,10 +96,9 @@ public class SessionOneSimplifiedManager : SessionManager
                 //prepare custom text
                 setupNextPhaseCustomText = () =>
                 {
+                    customText.EndActivity();
                     log.LogInformation("Ended Opening Screen D.");
                     //disable the custom text and proceed to the next state
-                    customText.enabled = false;
-                    customText.enabled = false;
                     currentState = SessionState.OpeningE;
                 };
 
@@ -116,14 +114,13 @@ public class SessionOneSimplifiedManager : SessionManager
                 //prepare custom text
                 setupNextPhaseCustomText = () =>
                 {
+                    customText.EndActivity();
                     log.LogInformation("Ended Opening Screen E.");
                     //disable the custom text and proceed to the next state
-                    customText.enabled = false;
                     currentState = SessionState.OpeningF;
                 };
 
                 customText.Setup(setupNextPhaseCustomText, GlobalizationService.Instance.Globalize(GlobalizationService.OpeningEText));
-
                 customText.enabled = true;
                 currentState = SessionState.CustomText;
                 break;
@@ -133,14 +130,13 @@ public class SessionOneSimplifiedManager : SessionManager
                 //prepare custom text
                 setupNextPhaseCustomText = () =>
                 {
+                    customText.EndActivity();
                     log.LogInformation("Ended Opening Screen F.");
-                    //disable the custom text and proceed to the next state
-                    customText.enabled = false;
+                    //disable the custom text and proceed to the next 
                     currentState = SessionState.IntroducingOurselvesTitle;
                 };
 
                 customText.Setup(setupNextPhaseCustomText, GlobalizationService.Instance.Globalize(GlobalizationService.OpeningFText));
-
                 customText.enabled = true;
                 currentState = SessionState.CustomText;
                 break;
@@ -155,8 +151,8 @@ public class SessionOneSimplifiedManager : SessionManager
                     backgroundChooserScript.backgroundSetter = SetBackground;
                     backgroundChooserScript.enabled = true;
                     UIManagerScript.EnableSkipping();
-                    activityName = GlobalizationService.Instance.Globalize(GlobalizationService.IntroducingOurselvesActivityName);
-                    
+                    activityName = GlobalizationService.Instance.Globalize(GlobalizationService.IntroducingOurselvesTitle);
+                    log.LogInformation("Started introducing Ourselves Background Selection");
                 };
                 customTitleScript.Setup(setupNextPhaseCustomTitle, GlobalizationService.Instance.Globalize(GlobalizationService.IntroducingOurselvesTitle));
                 currentState = SessionState.CustomTitle;
@@ -164,6 +160,8 @@ public class SessionOneSimplifiedManager : SessionManager
             case SessionState.IntroducingOurselvesBackground:
                 if (canSkip)
                 {
+                    backgroundChooserScript.EndActivity();
+                    log.LogInformation("Ended introducing Ourselves Background Selection");
                     backgroundChooserScript.enabled = false;
                     canSkip = false;
                     UIManagerScript.DisableSkipping();
@@ -171,14 +169,15 @@ public class SessionOneSimplifiedManager : SessionManager
                     this.introducingOurselves.SetActive(true);
                     this.introducingOurselvesScript.Setup(GlobalizationService.Instance.Globalize(GlobalizationService.IntroducingOurselvesAvatarText));
                     this.introducingOurselvesScript.enabled = true;
+                    log.LogInformation("Started introducing Ourselves Avatar Selection");
                     currentState = SessionState.IntroducingOurselvesAvatar;
                 }
                 break;
             case SessionState.IntroducingOurselvesAvatar:
                 if (proceed)
                 {
-                    log.LogInformation("User name: " + userName);
-                    log.LogInformation("Ended introducing ourselves.");
+                    introducingOurselvesScript.EndActivity();
+                    log.LogInformation("Ended introducing ourselves Avatar Selection.");
                     //disable the introducing ourselves object
                     nameInputField.DeactivateInputField();
                     //GUIUtility.keyboardControl = 0; //ensure lose focus
@@ -210,7 +209,7 @@ public class SessionOneSimplifiedManager : SessionManager
                     log.LogInformation("Ended IBox Introduction Title");
                     //start memeter introduction
                     log.LogInformation("Started IBox introduction.");
-                    activityName = GlobalizationService.Instance.Globalize(GlobalizationService.IBoxIntroductionActivityName);
+                    activityName = GlobalizationService.Instance.Globalize(GlobalizationService.IBoxIntroductionTitle);
                     ibox.enabled = true;
                     ibox.instructions = GlobalizationService.Instance.Globalize(GlobalizationService.IBoxIntroductionAText);
                     currentState = SessionState.IBoxIntroduction;
@@ -223,6 +222,7 @@ public class SessionOneSimplifiedManager : SessionManager
                 {
                     canSkip = false;
                     UIManagerScript.DisableSkipping();
+                    ibox.EndActivity();
                     log.LogInformation("Ended ibox introduction Screen A.");
                     //disable the ibox and proceed to the next state
                     ibox.enabled = false;
@@ -233,8 +233,7 @@ public class SessionOneSimplifiedManager : SessionManager
                     //prepare custom text
                     setupNextPhaseCustomText = () => {
                         //disable the custom text and proceed to the next state
-                        customText.enabled = false;
-
+                        customText.EndActivity();
                         log.LogInformation("Ended ibox introduction Screen B.");
                         Application.LoadLevel("SessionFourScene");
                     };
@@ -253,7 +252,7 @@ public class SessionOneSimplifiedManager : SessionManager
                 }
                 break;
             case SessionState.CustomTitle:
-                if (customTitleScript.finished || canSkip)
+                if (customTitleScript.CanContinue || canSkip)
                 {
                     canSkip = false;
                     UIManagerScript.DisableSkipping();

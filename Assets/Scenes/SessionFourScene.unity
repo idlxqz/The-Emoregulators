@@ -373,7 +373,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a12317aa7395e3040b2c2253d0fdae9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  finished: 0
+  CanContinue: 0
   MinimumWaitTime: 0
   instructions: []
   delayBetweenInstructions: 3
@@ -422,7 +422,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: caa09abaffa0a7a479cafeb1c90a5e43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  finished: 0
+  CanContinue: 0
   MinimumWaitTime: 0
   instructions: []
   delayBetweenInstructions: 3
@@ -470,7 +470,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6df15704321f17a45b20b0e835cda23e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  finished: 0
+  CanContinue: 0
   secondsToCloseSession: 20
   ibox: {fileID: 2800000, guid: 9f73edbd988684848a66a114908d0bc6, type: 3}
   iboxArea:
@@ -814,7 +814,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12872fe843bbbc64bb4a0c2b04406789, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  finished: 0
+  CanContinue: 0
   MinimumWaitTime: 0
   instructions: []
   delayBetweenInstructions: 3
@@ -1454,7 +1454,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a4845e63658a7e4d8d09740553a0a40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  finished: 0
+  CanContinue: 0
   isLit: 0
   simpleCandleAnimation: 0
   noInstructions: 0
@@ -1757,7 +1757,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4a0c85727b3ba748b806964ca178a3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  finished: 1
+  CanContinue: 0
   endlessTitle: 0
   titleDuration: 2
   charLoadInterval: .150000006
@@ -1963,7 +1963,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76f7aa5a2dc28c64faf808880bedd502, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  finished: 0
+  CanContinue: 0
   playerGender: 0
   optionHeight: 50
   optionWidth: 200
@@ -2082,7 +2082,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fa2af85f9ca9894bbf5eae8d2cd324f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  finished: 0
+  CanContinue: 0
   MinimumWaitTime: 0
   instructions: []
   delayBetweenInstructions: 5
@@ -2532,7 +2532,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 643b5d71aef9e734cb22e1fb6d2a4603, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  finished: 0
+  CanContinue: 0
   swatches:
   - {fileID: 2800000, guid: 97cca27d87445e54eafbbc3b086140f1, type: 3}
   - {fileID: 2800000, guid: 7afa94f86b9a7e647b4566fb7be0ffbf, type: 3}
@@ -2660,7 +2660,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97933c74176539e4ea0cddbeae956f93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  finished: 0
+  CanContinue: 0
   isSelected: 0
   secondsToCloseSession: 20
   showInstructions: 0
@@ -2731,7 +2731,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8620fc6b5a3065b4ea8be50aa6dbdf27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  finished: 0
+  CanContinue: 0
   maleFace: {fileID: 2800000, guid: 4c8623b4cd74d9d4a8da75ba5a32403a, type: 3}
   femaleFace: {fileID: 2800000, guid: f0b49f63b53a2df46abb37066ce438c2, type: 3}
   noMask: {fileID: 2800000, guid: daad3c817cc9acb439c2a396da498e7b, type: 3}
