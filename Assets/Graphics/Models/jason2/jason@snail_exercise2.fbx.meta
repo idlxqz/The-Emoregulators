@@ -246,8 +246,8 @@ ModelImporter:
     - serializedVersion: 16
       name: snail_exercise2
       takeName: Take 017
-      firstFrame: 60
-      lastFrame: 464
+      firstFrame: 75
+      lastFrame: 415
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

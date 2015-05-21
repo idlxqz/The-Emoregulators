@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class StandardConfigurations : MonoBehaviour
 {
@@ -6,6 +7,8 @@ public class StandardConfigurations : MonoBehaviour
     public int VerticalOffset;
     public Rect HalfTextArea;
     public Rect FullTextArea;
+    public Texture2D TextBoxTexture;
+    public Image TextBoxImage;
 
     public GUIStyle InstructionsFormat;
 

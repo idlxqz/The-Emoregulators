@@ -1,21 +1,49 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class SensorManager : MonoBehaviour
 {
+    public static T Max<T>(ICollection<T> collection) where T : struct
+    {
+        if (collection != null && collection.Any())
+        {
+            return collection.Max();
+        }
+        else return default(T);
+    }
+
+    public static T Min<T>(ICollection<T> collection) where T : struct
+    {
+        if (collection != null && collection.Any())
+        {
+            return collection.Min();
+        }
+        else return default(T);
+    }
+
+    public static double Avg(ICollection<int> collection)
+    {
+        if (collection != null && collection.Any())
+        {
+            return collection.Average();
+        }
+        else return 0;
+    }
+
+
     public static int HeartRate;
-    public static double EDA;
-    public static bool MuscleActive;
+    public static int EDA;
+    public static bool Muscle1Active;
+    public static bool Muscle2Active;
 
 
     public ICollection<int> CurrentActivityHeartRateSamples { get; set; }
     public ICollection<int> SessionHeartRateSamples { get; set; }
-
-    public ICollection<int> BaselineHeartRateSamples { get; set; } 
-    public ICollection<double> CurrentActivityEDASamples { get; set; }
-    public ICollection<double> SessionEDASamples { get; set; }
-
-    public ICollection<double> BaselineEDASamples { get; set; } 
+    public ICollection<int> BaselineHeartRateSamples { get; set; }
+    public ICollection<int> CurrentActivityEDASamples { get; set; }
+    public ICollection<int> SessionEDASamples { get; set; }
+    public ICollection<int> BaselineEDASamples { get; set; } 
 
     private float MeasuringInterval { get; set; }
 
@@ -35,10 +63,10 @@ public class SensorManager : MonoBehaviour
 
     public void Start()
     {
-        this.SessionEDASamples = new List<double>();
+        this.SessionEDASamples = new List<int>();
         this.SessionHeartRateSamples = new List<int>();
         this.BaselineHeartRateSamples = new List<int>();
-        this.BaselineEDASamples = new List<double>();
+        this.BaselineEDASamples = new List<int>();
         this.StartNewActivity();
         this.IsRecordingBaseline = false;
         this.LastMeasurementTime = Time.time;
@@ -65,14 +93,14 @@ public class SensorManager : MonoBehaviour
 
     public void StartNewActivity()
     {
-        this.CurrentActivityEDASamples = new List<double>();
+        this.CurrentActivityEDASamples = new List<int>();
         this.CurrentActivityHeartRateSamples = new List<int>();
     }
 
     public void StartRecordingBaseline()
     {
         this.BaselineHeartRateSamples = new List<int>();
-        this.BaselineEDASamples = new List<double>();
+        this.BaselineEDASamples = new List<int>();
         this.IsRecordingBaseline = true;
     }
 
@@ -80,4 +108,6 @@ public class SensorManager : MonoBehaviour
     {
         this.IsRecordingBaseline = false;
     }
+
+    
 }

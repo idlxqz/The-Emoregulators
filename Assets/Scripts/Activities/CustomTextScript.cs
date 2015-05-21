@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Runtime.Serialization.Formatters;
+using UnityEngine;
+using UnityEngine.UI;
 
 public class CustomTextScript : Activity {
 
@@ -11,17 +13,18 @@ public class CustomTextScript : Activity {
     public System.Action setupNextPhase;
     protected System.Action ExecuteOnFinish;
     public string[] instructions;
+    public int firstDelayBetweenInstructions;
     public int delayBetweenInstructions;
     protected bool moreInstructions;
     protected int instructionsPointer;
     protected string currentInstructions;
 
-	// Use this for initialization
-	public override void Start ()
-	{
-        base.Start();
-	    this.MinimumWaitTime = 5;
-	}
+    protected override void Awake()
+    {
+        base.Awake();
+        this.MinimumWaitTime = 5;
+    }
+
 	
 	// Update is called once per frame
 	public virtual void Update ()
@@ -29,7 +32,9 @@ public class CustomTextScript : Activity {
         //check if the waiting time is elapsed
         if (this.moreInstructions)
         {
-            if ((Time.time - this.timeStart) >= this.delayBetweenInstructions)
+            var delay = (instructionsPointer == 0 ? this.firstDelayBetweenInstructions : this.delayBetweenInstructions);
+           
+            if ((Time.time - this.timeStart) >= delay)
             {
                 this.timeStart = Time.time;
                 instructionsPointer++;

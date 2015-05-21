@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityEngine.UI;
 
 public class SessionManager : MonoBehaviour {
@@ -7,6 +6,7 @@ public class SessionManager : MonoBehaviour {
     //states of the session
     public enum SessionState
     {
+        LoadingScreen,
         Start,
         OpeningA,
         OpeningB,
@@ -15,6 +15,7 @@ public class SessionManager : MonoBehaviour {
         OpeningE,
         OpeningF,
         IntroducingOurselvesTitle,
+        IntroducingOurselvesA,
         IntroducingOurselvesBackground,
         IntroducingOurselvesAvatar,
         MinuteForMyselfTitle,
@@ -34,6 +35,7 @@ public class SessionManager : MonoBehaviour {
         IBoxIntroduction,
         MeMeterReuse,
         CustomText,
+        CustomTextWithImage,
         CustomTitle,
         Mindfullness,
         BasicPH,
@@ -65,6 +67,7 @@ public class SessionManager : MonoBehaviour {
         HowDoesMyBodyFeelC,
         HowDoesMyBodyFeelD,
         HowDoesMyBodyFeel,
+        EmotionList,
     }
 
     //title support
@@ -80,6 +83,7 @@ public class SessionManager : MonoBehaviour {
     public InputField nameInputField;
     public CustomTextScript customText;
     public CustomTitleScript customTitleScript;
+    public LoadingScreenScript loadingScreenScript;
 
     public GameObject facilitatorFrame;
 
@@ -171,6 +175,7 @@ public class SessionManager : MonoBehaviour {
     public static Texture2D selectedBackground;
 
     //help text
+    public bool showHelpButton;
     public bool showHelpText;
     public string helpTextContent;
     public GUIStyle helpTextStyle;
@@ -181,11 +186,13 @@ public class SessionManager : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
+        showHelpButton = false;
         currentState = SessionState.Start;
         candle = GameObject.Find("Candle").GetComponent<CandleScript>();
         ibox = GameObject.Find("IBox").GetComponent<IBoxScript>();
         customText = GameObject.Find("CustomText").GetComponent<CustomTextScript>();
         customTitleScript = GameObject.Find("CustomTitle").GetComponent<CustomTitleScript>();
+        loadingScreenScript = GameObject.Find("LoadingScreen").GetComponent<LoadingScreenScript>();
 
         activityArea = new Rect(Screen.width - 180, 22, 150, 50);
         activityFormat.wordWrap = true;
@@ -245,7 +252,7 @@ public class SessionManager : MonoBehaviour {
                 GUI.DrawTexture(new Rect(iboxArea.xMin + iboxArea.width + heartSpacing, iboxArea.yMin, iboxArea.width, iboxArea.height), heartTexture);
                 GUI.Label(new Rect(iboxArea.xMin, iboxArea.yMin + iboxArea.height, iboxArea.width, 15), ""+PlayerScore, scoreFormat);
                 GUI.Label(new Rect(iboxArea.xMin + iboxArea.width + heartSpacing, iboxArea.yMin + iboxArea.height, iboxArea.width, 15), (SensorManager.HeartRate==0? "-" : ""+SensorManager.HeartRate), scoreFormat);
-                GUI.Label(new Rect(iboxArea.xMin + 2 * iboxArea.width + 2* heartSpacing, iboxArea.yMin + iboxArea.height, iboxArea.width, 15),""+SensorManager.MuscleActive, scoreFormat);
+                GUI.Label(new Rect(iboxArea.xMin + 2 * iboxArea.width + 2* heartSpacing, iboxArea.yMin + iboxArea.height, iboxArea.width, 15),""+SensorManager.Muscle1Active, scoreFormat);
             }
             //draw title and subtitle of the session
             GUI.Label(titleArea, sessionTitle, titleFormat);
@@ -258,17 +265,20 @@ public class SessionManager : MonoBehaviour {
         //child specific behavior
         OnGUILogic();
 
-        //help button
-        if (GUI.Button(new Rect(Screen.width - helpButtonSize, Screen.height - helpButtonSize, helpButtonSize, helpButtonSize), helpButtonTexture, GUIStyle.none))
+        if (this.showHelpButton)
         {
-            showHelpText = !showHelpText;
-        }
+            //help button
+            if (GUI.Button(new Rect(Screen.width - helpButtonSize, Screen.height - helpButtonSize, helpButtonSize, helpButtonSize), helpButtonTexture, GUIStyle.none))
+            {
+                showHelpText = !showHelpText;
+            }
 
-        //help text always overlays everything
-        if (showHelpText)
-        {
-            Rect helpArea = new Rect(lateralOffsetHelp, lateralOffsetHelp, Screen.width - lateralOffsetHelp *2, Screen.height - lateralOffsetHelp*2);
-            GUI.Label(helpArea, helpTextContent, helpTextStyle);
+            //help text always overlays everything
+            if (showHelpText)
+            {
+                Rect helpArea = new Rect(lateralOffsetHelp, lateralOffsetHelp, Screen.width - lateralOffsetHelp * 2, Screen.height - lateralOffsetHelp * 2);
+                GUI.Label(helpArea, helpTextContent, helpTextStyle);
+            }
         }
     }
 

@@ -8,8 +8,14 @@ public class SessionFourManager : SessionManager {
     public InnerSensationsScript innerSensations;
     public FacialMindfulnessScript facialMindfulness;
     public HowDoesMyBodyFeelScript howDoesMyBodyFeel;
+    public CustomTextWithImage CustomTextWithImage;
+    public EmotionListScript emotionListScript;
 
     public AudioSource AlarmSound;
+    public AudioSource ApplauseSound;
+    public AudioSource SeaSound;
+    public AudioSource SpringSound;
+    public AudioSource Alarm2Sound;
 
     // Use this for initialization
     protected override void StartLogic()
@@ -20,20 +26,31 @@ public class SessionFourManager : SessionManager {
         innerSensations = GameObject.Find("InnerSensations").GetComponent<InnerSensationsScript>();
         facialMindfulness = GameObject.Find("FacialMindfulness").GetComponent<FacialMindfulnessScript>();
         howDoesMyBodyFeel = GameObject.Find("HowDoesMyBodyFeel").GetComponent<HowDoesMyBodyFeelScript>();
+        CustomTextWithImage = GameObject.Find("CustomTextWithImage").GetComponent<CustomTextWithImage>();
+        emotionListScript = GameObject.Find("EmotionList").GetComponent<EmotionListScript>();
+        
 
         this.sessionTitle = GlobalizationService.Instance.Globalize(GlobalizationService.Session4Title);
         this.sessionSubTitle = GlobalizationService.Instance.Globalize(GlobalizationService.Session4SubTitle);
 
-        System.Action nextPhase = () =>
-        {
-            
-            currentState = SessionState.CandleCeremonyTitle;
-        };
-        customTitleScript.Setup(nextPhase, sessionTitle);
         hideInterface = true;
-        displayIBox = false;
-        
-        currentState = SessionState.CustomTitle;
+
+        System.Action openingTitlePhase = () =>
+        {
+            System.Action nextPhase = () =>
+            {
+                currentState = SessionState.CandleCeremonyTitle;
+            };
+            customTitleScript.Setup(nextPhase, sessionTitle);
+            customTitleScript.enabled = true;
+            displayIBox = false;
+
+            currentState = SessionState.CustomTitle;
+        };
+
+        loadingScreenScript.setupNextPhase = openingTitlePhase;
+        loadingScreenScript.enabled = true;
+        currentState = SessionState.LoadingScreen;
     }
 
     // Update is called once per frame
@@ -139,6 +156,9 @@ public class SessionFourManager : SessionManager {
                     //disable the custom text and proceed to the next state
                    
                     log.LogInformation("Started MeMeter activity");
+                    this.showHelpButton = true;
+                    this.helpTextContent =
+                        GlobalizationService.Instance.Globalize(GlobalizationService.MinuteForMyselfDText);
                     memeter.instructions = GlobalizationService.Instance.Globalize(GlobalizationService.MeMeterText);
                     memeter.showInstructions = true;
                     memeter.enabled = true;
@@ -153,6 +173,7 @@ public class SessionFourManager : SessionManager {
                 if (canSkip)
                 {
                     canSkip = false;
+                    this.showHelpButton = false;
                     UIManagerScript.DisableSkipping();
                     memeter.EndActivity();
                     log.LogInformation("Ended me-meter interaction.");
@@ -195,6 +216,11 @@ public class SessionFourManager : SessionManager {
 
                     //do the facial mindfulness activity
                     log.LogInformation("Started FacialMindfulness D.");
+                    this.showHelpButton = true;
+                    this.helpTextContent =
+                        GlobalizationService.Instance.Globalize(GlobalizationService.FacialMindfulnessA2Text) + "\n\n"
+                        + GlobalizationService.Instance.Globalize(GlobalizationService.FacialMindfulnessB1Text) + "\n\n"
+                        + GlobalizationService.Instance.Globalize(GlobalizationService.FacialMindfulnessB2Text);
                     facialMindfulness.Setup(userGender);
                     facialMindfulness.enabled = true;
                     currentState = SessionState.FacialMindfulnessD;
@@ -211,6 +237,7 @@ public class SessionFourManager : SessionManager {
             case SessionState.FacialMindfulnessD:
                 if (canSkip)
                 {
+                    this.showHelpButton = false;
                     canSkip = false;
                     UIManagerScript.DisableSkipping();
                     facialMindfulness.EndActivity();
@@ -248,6 +275,7 @@ public class SessionFourManager : SessionManager {
                             new[]{GlobalizationService.Instance.Globalize(GlobalizationService.BreathingRegulationB1Text),
                                 GlobalizationService.Instance.Globalize(GlobalizationService.BreathingRegulationB2Text),
                                 GlobalizationService.Instance.Globalize(GlobalizationService.BreathingRegulationB3Text)});
+                    breathingRegulation.enabled = true;
                     currentState = SessionState.BreathingRegulationC;
                 }
                 break;
@@ -400,8 +428,10 @@ public class SessionFourManager : SessionManager {
 
                 progressiveMuscleRelaxation.Avatar = this.GetPlayerAvatar;
                 progressiveMuscleRelaxation.AnimationId = AnimatorControlerHashIDs.Instance.SqueezingExerciseTrigger;
+                progressiveMuscleRelaxation.ExpectedMuscle = 1;
                 progressiveMuscleRelaxation.enabled = true;
                 progressiveMuscleRelaxation.SetBackground(progressiveMuscleRelaxation.GrassBackground);
+                SpringSound.Play();
                 
                 this.GetPlayerBall.SetActive(true);
 
@@ -431,6 +461,7 @@ public class SessionFourManager : SessionManager {
 
                 progressiveMuscleRelaxation.delayBetweenInstructions = 7;
                 progressiveMuscleRelaxation.AnimationId = AnimatorControlerHashIDs.Instance.StreachingExerciseTrigger;
+                progressiveMuscleRelaxation.ExpectedMuscle = 2;
                 progressiveMuscleRelaxation.enabled = true;
                 progressiveMuscleRelaxation.SetBackground(progressiveMuscleRelaxation.SunBackground);
 
@@ -458,6 +489,7 @@ public class SessionFourManager : SessionManager {
                     currentState = SessionState.ProgressiveMuscleRelaxationF;
                 };
 
+                progressiveMuscleRelaxation.delayBetweenInstructions = 6;
                 progressiveMuscleRelaxation.AnimationId = AnimatorControlerHashIDs.Instance.SnailExerciseTrigger;
                 progressiveMuscleRelaxation.enabled = true;
                 progressiveMuscleRelaxation.SetBackground(progressiveMuscleRelaxation.SnailBackground);
@@ -470,7 +502,8 @@ public class SessionFourManager : SessionManager {
                         GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationE3Text),
                         GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationE4Text),
                         GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationE5Text),
-                        GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationE6Text)
+                        GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationE6Text),
+                        GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationE7Text)
                     });
 
                 currentState = SessionState.ProgressiveMuscleRelaxation;
@@ -480,6 +513,7 @@ public class SessionFourManager : SessionManager {
                 setupNextPhaseCustomText = () =>
                 {
                     progressiveMuscleRelaxation.EndActivity();
+                    SeaSound.Stop();
                     log.LogInformation("Ended progressive muscle relaxation F.");
                     progressiveMuscleRelaxation.RevertToSessionBackground();
                     progressiveMuscleRelaxation.Avatar.SetActive(false);
@@ -487,11 +521,14 @@ public class SessionFourManager : SessionManager {
                     currentState = SessionState.HowDoesMyBodyFeelTitle;
                 };
 
+                progressiveMuscleRelaxation.delayBetweenInstructions = 7;
                 progressiveMuscleRelaxation.AnimationId = AnimatorControlerHashIDs.Instance.SandExerciseTrigger;
                 progressiveMuscleRelaxation.enabled = true;
                 progressiveMuscleRelaxation.SetBackground(progressiveMuscleRelaxation.SandBackground);
+                SpringSound.Stop();
+                SeaSound.Play();
 
-                progressiveMuscleRelaxation.Setup(setupNextPhaseCustomText, () => SessionManager.PlayerScore += 1,
+                progressiveMuscleRelaxation.Setup(setupNextPhaseCustomText, () => SessionManager.PlayerScore += 4,
                     new[]
                     {
                         GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationF1Text),
@@ -531,15 +568,18 @@ public class SessionFourManager : SessionManager {
                 break;
             case SessionState.HowDoesMyBodyFeelB:
                 log.LogInformation("Started HowDoesMyBodyFeel B");
-                setupNextPhaseCustomText = () =>
+                emotionListScript.Setup(null, GlobalizationService.Instance.Globalize(GlobalizationService.HowDoesMyBodyFeelBText));
+                emotionListScript.enabled = true;
+                currentState = SessionState.EmotionList;
+                break;
+            case SessionState.EmotionList:
+                if (canSkip)
                 {
-                    customText.EndActivity();
+                    canSkip = false;
+                    emotionListScript.EndActivity();
                     log.LogInformation("Ended HowDoesMyBodyFeel B.");
                     currentState = SessionState.HowDoesMyBodyFeelC;
-                };
-                customText.Setup(setupNextPhaseCustomText, GlobalizationService.Instance.Globalize(GlobalizationService.HowDoesMyBodyFeelBText));
-                customText.enabled = true;
-                currentState = SessionState.CustomText;
+                }
                 break;
             case SessionState.HowDoesMyBodyFeelC:
                 log.LogInformation("Started HowDoesMyBodyFeel C");
@@ -547,8 +587,10 @@ public class SessionFourManager : SessionManager {
                 {
                     customText.EndActivity();
                     log.LogInformation("Ended HowDoesMyBodyFeel C.");
-                    
-                    log.LogInformation("Started HowDoesMyBodyFeel Exercise");
+                    this.showHelpButton = true;
+                    this.helpTextContent =
+                        GlobalizationService.Instance.Globalize(GlobalizationService.HowDoesMyBodyFeelBText) + "\n\n" +
+                        GlobalizationService.Instance.Globalize(GlobalizationService.HowDoesMyBodyFeelCText);
                     howDoesMyBodyFeel.Setup(userGender);
                     howDoesMyBodyFeel.enabled = true;
                     //prepare the inner sensations activity
@@ -562,6 +604,7 @@ public class SessionFourManager : SessionManager {
                 if (canSkip)
                 {
                     canSkip = false;
+                    this.showHelpButton = false;
                     howDoesMyBodyFeel.EndActivity();
                     log.LogInformation("Ended HowDoesMyBodyFeel Exercise");
                     currentState = SessionState.HowDoesMyBodyFeelD;
@@ -600,6 +643,8 @@ public class SessionFourManager : SessionManager {
                     log.LogInformation("Ended ibox inner sensations A.");
                     //disable the custom text and proceed to the next state
                     activityName = GlobalizationService.Instance.Globalize(GlobalizationService.InternalSensationsTitle);
+                    this.showHelpButton = true;
+                    this.helpTextContent = GlobalizationService.Instance.Globalize(GlobalizationService.InternalSensationsAText);
                     //prepare the inner sensations activity
                     innerSensations.enabled = true;
                     currentState = SessionState.InnerSensationsB;
@@ -612,6 +657,8 @@ public class SessionFourManager : SessionManager {
             case SessionState.InnerSensationsB:
                 if (canSkip)
                 {
+                    canSkip = false;
+                    this.showHelpButton = false;
                     innerSensations.EndActivity();
                     log.LogInformation("Ended ibox inner sensations exercise.");
                     //disable the inner sensations
@@ -621,7 +668,6 @@ public class SessionFourManager : SessionManager {
                 }
                 break;
             case SessionState.ClosingSessionTitle:
-                canSkip = false;
                 UIManagerScript.DisableSkipping();
                 log.LogInformation("Started ClosingSession Title.");
                 activityName = GlobalizationService.Instance.Globalize(GlobalizationService.ClosingOfSessionTitle);
@@ -644,6 +690,7 @@ public class SessionFourManager : SessionManager {
             case SessionState.ClosingMeMeter:
                 if (canSkip)
                 {
+                    canSkip = false;
                     memeter.EndActivity();
                     log.LogInformation("Ended Closing MeMeter.");
                     //disable the memeter and proceed to the next state
@@ -683,13 +730,17 @@ public class SessionFourManager : SessionManager {
                     //prepare custom title
                     setupNextPhaseCustomText = () =>
                     {
-                        customText.EndActivity();
+                        CustomTextWithImage.EndActivity();
                         log.LogInformation("Ended Closing Session C.");
                         Application.Quit();
                     };
-                    customText.Setup(setupNextPhaseCustomText, GlobalizationService.Instance.Globalize(GlobalizationService.ClosingOfSessionCText));
-                    customText.enabled = true;
-                    currentState = SessionState.CustomText;
+
+                    CustomTextWithImage.ShowImageLabel = true;
+                    CustomTextWithImage.ImageLabel = SessionManager.PlayerScore + "/100 Points";
+                    CustomTextWithImage.Setup(setupNextPhaseCustomText, () => this.ApplauseSound.Play(), GlobalizationService.Instance.Globalize(GlobalizationService.ClosingOfSessionCText));
+                    CustomTextWithImage.MinimumWaitTime = 0;
+                    CustomTextWithImage.enabled = true;
+                    currentState = SessionState.CustomTextWithImage;
                 }
                 break;
             case SessionState.ProgressiveMuscleRelaxation:
@@ -710,6 +761,15 @@ public class SessionFourManager : SessionManager {
                     customText.setupNextPhase();
                 }
                 break;
+            case SessionState.CustomTextWithImage:
+                if (canSkip)
+                {
+                    canSkip = false;
+                    UIManagerScript.DisableSkipping();
+                    //setup the next phase
+                    CustomTextWithImage.setupNextPhase();
+                }
+                break;
             case SessionState.CustomTitle:
                 if (customTitleScript.CanContinue || canSkip)
                 {
@@ -717,6 +777,13 @@ public class SessionFourManager : SessionManager {
                     UIManagerScript.DisableSkipping();
                     //setup the next phase
                     customTitleScript.setupNextPhase();
+                }
+                break;
+            case SessionState.LoadingScreen:
+                if (loadingScreenScript.finished)
+                {
+                    loadingScreenScript.enabled = false;
+                    loadingScreenScript.setupNextPhase();
                 }
                 break;
             

@@ -18,15 +18,10 @@ public class UIManagerScript : MonoBehaviour {
 	{
 	    SessionManager.UserCode = GameObject.Find("UserCode").GetComponent<InputField>().text;
 	    var sensorManager = GameObject.FindObjectOfType<SensorManager>();
-	    if (sensorManager.BaselineHeartRateSamples.Any())
-	    {
-            Logger.Instance.LogInformation("BaselineHR (avg,min,max): " + sensorManager.BaselineHeartRateSamples.Average() + ", " + sensorManager.BaselineHeartRateSamples.Min() + ", " + sensorManager.BaselineHeartRateSamples.Max());
-	    }
-	    if (sensorManager.BaselineEDASamples.Any())
-	    {
-            Logger.Instance.LogInformation("BaselineEDA (avg,min,max): " + sensorManager.BaselineEDASamples.Average() + ", " + sensorManager.BaselineEDASamples.Min() + ", " + sensorManager.BaselineEDASamples.Max());
-	        
-	    }
+	    
+        Logger.Instance.LogInformation("BaselineHR (avg,min,max): " + SensorManager.Avg(sensorManager.BaselineHeartRateSamples) + ", " + SensorManager.Min(sensorManager.BaselineHeartRateSamples) + ", " + SensorManager.Max(sensorManager.BaselineHeartRateSamples));
+        Logger.Instance.LogInformation("BaselineEDA (avg,min,max): " + SensorManager.Avg(sensorManager.BaselineEDASamples) + ", " + SensorManager.Min(sensorManager.BaselineEDASamples) + ", " + SensorManager.Max(sensorManager.BaselineEDASamples));
+	    
         Logger.Instance.LogInformation("User started Application");
 		Application.LoadLevel ("SessionOneSimplified");
 	}

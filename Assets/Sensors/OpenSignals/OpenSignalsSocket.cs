@@ -41,25 +41,43 @@ public class OpenSignalsSocket : MonoBehaviour
             }
             else if (messageType.Equals("EMG1"))
             {
-                var muscleActive = bool.Parse(splitData[1]);
+                var muscle1Active = bool.Parse(splitData[1]);
                 //if the muscle is updated we need to log the change in muscle activation
-                if (muscleActive != SensorManager.MuscleActive)
+                if (muscle1Active != SensorManager.Muscle1Active)
                 {
-                    SensorManager.MuscleActive = muscleActive;
-                    if (muscleActive)
+                    SensorManager.Muscle1Active = muscle1Active;
+                    if (muscle1Active)
                     {
-                        Logger.Instance.LogInformation("User activated muscle.");
+                        Logger.Instance.LogInformation("Muscle1 Activated.");
                     }
                     else
                     {
-                        Logger.Instance.LogInformation("User relaxed muscle.");
+                        Logger.Instance.LogInformation("Muscle1 Relaxed.");
                     }
                 }
                 
             }
+            else if (messageType.Equals("EMG2"))
+            {
+                var muscle2Active = bool.Parse(splitData[1]);
+                //if the muscle is updated we need to log the change in muscle activation
+                if (muscle2Active != SensorManager.Muscle2Active)
+                {
+                    SensorManager.Muscle1Active = muscle2Active;
+                    if (muscle2Active)
+                    {
+                        Logger.Instance.LogInformation("Muscle2 Activated.");
+                    }
+                    else
+                    {
+                        Logger.Instance.LogInformation("Muscle2 Relaxed.");
+                    }
+                }
+
+            }
             else if (messageType.Equals("EDA"))
             {
-                var eda = double.Parse(splitData[1]);
+                var eda = int.Parse(splitData[1]);
                 SensorManager.EDA = eda;
             }
             

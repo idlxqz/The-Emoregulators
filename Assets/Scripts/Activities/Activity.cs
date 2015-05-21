@@ -24,7 +24,7 @@ public class Activity : MonoBehaviour
         this.enabled = false;
 
         Logger.Instance.LogInformation("Player score: " + SessionManager.PlayerScore);
-        Logger.Instance.LogInformation("Activity HR (Avg,Min,Max): " + this.SensorManager.CurrentActivityHeartRateSamples.Average() + "," + this.SensorManager.CurrentActivityHeartRateSamples.Min() + "," + this.SensorManager.CurrentActivityHeartRateSamples.Max());
-        Logger.Instance.LogInformation("Activity EDA (Avg,Min,Max): " + this.SensorManager.CurrentActivityEDASamples.Average() + "," + this.SensorManager.CurrentActivityEDASamples.Min() + "," + this.SensorManager.CurrentActivityEDASamples.Max());
+        Logger.Instance.LogInformation("Activity HR (Avg,Min,Max): " + SensorManager.Avg(this.SensorManager.CurrentActivityHeartRateSamples) + "," + SensorManager.Min(this.SensorManager.CurrentActivityHeartRateSamples) + "," + SensorManager.Max(this.SensorManager.CurrentActivityHeartRateSamples));
+        Logger.Instance.LogInformation("Activity EDA (Avg,Min,Max): " + SensorManager.Avg(this.SensorManager.CurrentActivityEDASamples) + "," + SensorManager.Min(this.SensorManager.CurrentActivityEDASamples) + "," + SensorManager.Max(this.SensorManager.CurrentActivityEDASamples));
     }
 }

@@ -9,6 +9,7 @@ public class ProgressiveMuscleRelaxationScript : CustomTextScript
     public int AnimationId;
     private bool ExpectedMuscleTense;
     private bool ExpectedMuscleRelaxed;
+    public int ExpectedMuscle;
     public Texture2D GrassBackground;
     public Texture2D SnailBackground;
     public Texture2D SunBackground;
@@ -28,23 +29,31 @@ public class ProgressiveMuscleRelaxationScript : CustomTextScript
 
     public override void Update()
     {
-        if (this.ExpectedMuscleTense && SensorManager.MuscleActive)
+        if (this.ExpectedMuscleTense)
         {
-            this.ExpectedMuscleTense = false;
-            //after the muscle being tense, we expected to become relaxed
-            this.ExpectedMuscleRelaxed = true;
-            SessionManager.PlayerScore += 1;
+            if ((this.ExpectedMuscle == 1 && SensorManager.Muscle1Active) || (this.ExpectedMuscle == 2 && SensorManager.Muscle2Active))
+            {
+                this.ExpectedMuscleTense = false;
+                //after the muscle being tense, we expected to become relaxed
+                this.ExpectedMuscleRelaxed = true;
+                SessionManager.PlayerScore += 1;
+            }
+            
         }
-        else if (this.ExpectedMuscleRelaxed && !SensorManager.MuscleActive)
+        else if (this.ExpectedMuscleRelaxed) 
         {
-            this.ExpectedMuscleRelaxed = false;
-            SessionManager.PlayerScore += 2;
+            if ((this.ExpectedMuscle == 1 && !SensorManager.Muscle1Active) || (this.ExpectedMuscle == 2 && !SensorManager.Muscle2Active))
+            {
+                this.ExpectedMuscleRelaxed = false;
+                SessionManager.PlayerScore += 2;
+            }
         }
 
         //check if the waiting time is elapsed
         if (moreInstructions)
         {
-            if ((Time.time - timeStart) >= delayBetweenInstructions)
+            var delay = (instructionsPointer == 0 ? this.firstDelayBetweenInstructions : this.delayBetweenInstructions);
+            if ((Time.time - timeStart) >= delay)
             {
                 timeStart = Time.time;
                 instructionsPointer++;
@@ -53,6 +62,11 @@ public class ProgressiveMuscleRelaxationScript : CustomTextScript
                 if (instructionsPointer == 1 || instructionsPointer == 4)
                 {
                     Logger.Instance.LogInformation("Exercise Animation Started");
+                    if (this.AnimationId == AnimatorControlerHashIDs.Instance.SnailExerciseTrigger)
+                    {
+                        //simple hack to play the alarm sound in the snail exercise
+                        GameObject.Find("Alarm2 Audio Source").GetComponent<AudioSource>().Play();
+                    }
                     this.Animator.SetTrigger(this.AnimationId);
                     this.ExpectedMuscleTense = true;
                 }

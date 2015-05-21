@@ -7,6 +7,10 @@ public class SessionOneSimplifiedManager : SessionManager
 {
     public Text maleButtonText;
     public Text femaleButtonText;
+    public GameObject HeartIcon;
+    public GameObject HelpIcon;
+    public GameObject MemeterIcon;
+
 
     BackgroundChooserScript backgroundChooserScript;
     private IntroducingOurselvesScript introducingOurselvesScript;
@@ -21,16 +25,27 @@ public class SessionOneSimplifiedManager : SessionManager
 	    this.sessionSubTitle = GlobalizationService.Instance.Globalize(GlobalizationService.Session1SubTitle);
 
         maleButtonText.text = GlobalizationService.Instance.Globalize(GlobalizationService.MaleButton);
-        femaleButtonText.text = GlobalizationService.Instance.Globalize(GlobalizationService.FemaleButton); 
-
-        System.Action nextPhase  = () => {
-            hideInterface = false;
-            currentState = SessionState.OpeningA;
-        };
-        customTitleScript.Setup(nextPhase, GlobalizationService.Instance.Globalize(GlobalizationService.OpeningTitle));
+        femaleButtonText.text = GlobalizationService.Instance.Globalize(GlobalizationService.FemaleButton);
 
         hideInterface = true;
-        currentState = SessionState.CustomTitle;
+
+	    System.Action openingTitlePhase = () =>
+	    {
+	        System.Action nextPhase = () =>
+	        {
+	            hideInterface = false;
+	            currentState = SessionState.OpeningA;
+	        };
+	        customTitleScript.Setup(nextPhase, GlobalizationService.Instance.Globalize(GlobalizationService.OpeningTitle));
+	        customTitleScript.enabled = true;
+
+	        currentState = SessionState.CustomTitle;
+	    };
+
+	    loadingScreenScript.setupNextPhase = openingTitlePhase;
+	    loadingScreenScript.enabled = true;
+        currentState = SessionState.LoadingScreen;
+
 	}
 	
 	// Update is called once per frame
@@ -40,6 +55,7 @@ public class SessionOneSimplifiedManager : SessionManager
         System.Action setupNextPhaseCustomTitle;
 		//coordinate the session state
 		switch (currentState) {
+           
             case SessionState.OpeningA:
                 activityName = GlobalizationService.Instance.Globalize(GlobalizationService.OpeningTitle);
                 log.LogInformation("Starting Opening Screen A.");
@@ -110,10 +126,11 @@ public class SessionOneSimplifiedManager : SessionManager
                 break;
             case SessionState.OpeningE:
                 log.LogInformation("Starting Opening Screen E.");
-
+                this.MemeterIcon.SetActive(true);
                 //prepare custom text
                 setupNextPhaseCustomText = () =>
                 {
+                    this.MemeterIcon.SetActive(false);
                     customText.EndActivity();
                     log.LogInformation("Ended Opening Screen E.");
                     //disable the custom text and proceed to the next state
@@ -126,10 +143,11 @@ public class SessionOneSimplifiedManager : SessionManager
                 break;
             case SessionState.OpeningF:
                 log.LogInformation("Starting Opening Screen F.");
-
+                this.HelpIcon.SetActive(true);
                 //prepare custom text
                 setupNextPhaseCustomText = () =>
                 {
+                    this.HelpIcon.SetActive(false);
                     customText.EndActivity();
                     log.LogInformation("Ended Opening Screen F.");
                     //disable the custom text and proceed to the next 
@@ -147,19 +165,39 @@ public class SessionOneSimplifiedManager : SessionManager
                 setupNextPhaseCustomTitle = () =>
                 {
                     log.LogInformation("Ended introducing ourselves Title.");
-                    currentState = SessionState.IntroducingOurselvesBackground;
-                    backgroundChooserScript.backgroundSetter = SetBackground;
-                    backgroundChooserScript.enabled = true;
-                    UIManagerScript.EnableSkipping();
-                    activityName = GlobalizationService.Instance.Globalize(GlobalizationService.IntroducingOurselvesTitle);
-                    log.LogInformation("Started introducing Ourselves Background Selection");
+                    currentState = SessionState.IntroducingOurselvesA;
                 };
                 customTitleScript.Setup(setupNextPhaseCustomTitle, GlobalizationService.Instance.Globalize(GlobalizationService.IntroducingOurselvesTitle));
                 currentState = SessionState.CustomTitle;
 		        break;
+            case SessionState.IntroducingOurselvesA:
+		        canSkip = false;
+                activityName = GlobalizationService.Instance.Globalize(GlobalizationService.IntroducingOurselvesTitle);
+                log.LogInformation("Starting IntroducingOurselvesA.");
+                //prepare custom text
+                setupNextPhaseCustomText = () =>
+                {
+                    log.LogInformation("Ended IntroducingOurselvesA");
+                    customText.EndActivity();
+                    log.LogInformation("Started introducing Ourselves Background Selection");
+                    this.showHelpButton = true;
+                    this.helpTextContent =
+                        GlobalizationService.Instance.Globalize(GlobalizationService.IntroducingOurselvesBackgroundText);
+                    currentState = SessionState.IntroducingOurselvesBackground;
+                    backgroundChooserScript.backgroundSetter = SetBackground;
+                    backgroundChooserScript.enabled = true;
+                    UIManagerScript.EnableSkipping();
+                };
+
+                customText.Setup(setupNextPhaseCustomText, GlobalizationService.Instance.Globalize(GlobalizationService.IntroducingOurselvesBackgroundText));
+		        customText.enabled = true;
+		        currentState = SessionState.CustomText;
+                
+		        break;
             case SessionState.IntroducingOurselvesBackground:
                 if (canSkip)
                 {
+                    this.showHelpButton = false;
                     backgroundChooserScript.EndActivity();
                     log.LogInformation("Ended introducing Ourselves Background Selection");
                     backgroundChooserScript.enabled = false;
@@ -208,7 +246,8 @@ public class SessionOneSimplifiedManager : SessionManager
                 {
                     log.LogInformation("Ended IBox Introduction Title");
                     //start memeter introduction
-                    log.LogInformation("Started IBox introduction.");
+                    log.LogInformation("Started IBox introduction A.");
+                    this.HeartIcon.SetActive(true);
                     activityName = GlobalizationService.Instance.Globalize(GlobalizationService.IBoxIntroductionTitle);
                     ibox.enabled = true;
                     ibox.instructions = GlobalizationService.Instance.Globalize(GlobalizationService.IBoxIntroductionAText);
@@ -221,6 +260,7 @@ public class SessionOneSimplifiedManager : SessionManager
                 if (canSkip)
                 {
                     canSkip = false;
+                    this.HeartIcon.SetActive(false);
                     UIManagerScript.DisableSkipping();
                     ibox.EndActivity();
                     log.LogInformation("Ended ibox introduction Screen A.");
@@ -260,10 +300,16 @@ public class SessionOneSimplifiedManager : SessionManager
                     customTitleScript.setupNextPhase();
                 }
                 break;
-            
-		default:
-			Debug.LogError("Unknown/unhandled session state for this session.");
-			break;
+            case SessionState.LoadingScreen:
+		        if (loadingScreenScript.finished)
+		        {
+		            loadingScreenScript.enabled = false;
+		            loadingScreenScript.setupNextPhase();
+		        }
+		        break;
+		    default:
+			    Debug.LogError("Unknown/unhandled session state for this session.");
+			    break;
 		}
 	}
 

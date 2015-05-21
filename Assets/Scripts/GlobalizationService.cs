@@ -111,6 +111,7 @@ public class GlobalizationService  {
     public const string ProgressiveMuscleRelaxationE4Text = "ProgressiveMuscleRelaxationE4Text";
     public const string ProgressiveMuscleRelaxationE5Text = "ProgressiveMuscleRelaxationE5Text";
     public const string ProgressiveMuscleRelaxationE6Text = "ProgressiveMuscleRelaxationE6Text";
+    public const string ProgressiveMuscleRelaxationE7Text = "ProgressiveMuscleRelaxationE7Text";
     public const string ProgressiveMuscleRelaxationF1Text = "ProgressiveMuscleRelaxationF1Text";
     public const string ProgressiveMuscleRelaxationF2Text = "ProgressiveMuscleRelaxationF2Text";
     public const string ProgressiveMuscleRelaxationF3Text = "ProgressiveMuscleRelaxationF3Text";
@@ -279,8 +280,8 @@ public class GlobalizationService  {
 
         this.multiLanguageDictionary.Add(IntroducingOurselvesBackgroundText, new Dictionary<SystemLanguage, string>
         {
-            {SystemLanguage.English, "First of all you have to choose the background that you want to give to the game.\nHere are various options.\nClick on the image.\nPerfect!"},
-            {SystemLanguage.Italian, "Prima di tutto scegli lo sfondo che vuoi dare al gioco.\nQui trovi varie opzioni.\nClicca sopra l'immagine.\nPerfetto!"}
+            {SystemLanguage.English, "First of all you have to choose the background that you want to give to the game.\nIn the next screen you will find various options.\nClick on the image you would prefer."},
+            {SystemLanguage.Italian, "Prima di tutto scegli lo sfondo che vuoi dare al gioco.\nQui trovi varie opzioni.\nClicca sopra l'immagine."}
         });
 
         this.multiLanguageDictionary.Add(IntroducingOurselvesAvatarText, new Dictionary<SystemLanguage, string>
@@ -471,7 +472,7 @@ public class GlobalizationService  {
 
         this.multiLanguageDictionary.Add(ActiveMeditationTitle, new Dictionary<SystemLanguage, string>
         {
-            {SystemLanguage.English, "Let's be active, let's moving ... and let's meditate!"},
+            {SystemLanguage.English, "Let's be active, let's move ... and let's meditate!"},
             {SystemLanguage.Italian, "Attiviamoci, muoviamoci e...meditiamo!"}
         });
 
@@ -632,19 +633,19 @@ public class GlobalizationService  {
 
         this.multiLanguageDictionary.Add(ProgressiveMuscleRelaxationE1Text, new Dictionary<SystemLanguage, string>
         {
-            {SystemLanguage.English, "Now let’s try another exercise!"},
-            {SystemLanguage.Italian, "Passiamo al prossimo esercizio!"}
+            {SystemLanguage.English, "Now let’s try another exercise!\n\nPretend that you are a snail and you are sitting outside."},
+            {SystemLanguage.Italian, "Passiamo al prossimo esercizio!\n\nFai finta di essere una lumaca."}
         });
 
         this.multiLanguageDictionary.Add(ProgressiveMuscleRelaxationE2Text, new Dictionary<SystemLanguage, string>
         {
-            {SystemLanguage.English, "Pretend that you are a snail and you are sitting outside. Uh-oh, all of sudden you hear the alarm and you sense danger!"},
-            {SystemLanguage.Italian, "Fai finta di essere una lumaca, ad un tratto senti un allarme e percepisci un pericolo!"}});
+            {SystemLanguage.English, "Uh-oh, all of sudden you hear the alarm and you sense danger!\nCurl back into your shell and hide…\nPull your shoulder up to your ears and push your head down into your shoulders."},
+            {SystemLanguage.Italian, "Ad un tratto senti un allarme e percepisci un pericolo!\nPiegati nel tuo guscio e nasconditi…\nTira su le spalle fino alle orecchie e metti la testa dentro le spalle."}});
 
         this.multiLanguageDictionary.Add(ProgressiveMuscleRelaxationE3Text, new Dictionary<SystemLanguage, string>
         {
-            {SystemLanguage.English, "Curl back into your shell and hide…\npull your shoulder up to your ears and push your head down into your shoulders.\nHold it tight! Hold it!"},
-            {SystemLanguage.Italian, "Piegati nel tuo guscio e nasconditi…\nTira su le spalle fino alle orecchie e metti la testa dentro le spalle.\nTienile strette! Tienile strette!"}
+            {SystemLanguage.English, "Hold it tight! Hold it!"},
+            {SystemLanguage.Italian, "Tienile strette! Tienile strette!"}
         });
 
         this.multiLanguageDictionary.Add(ProgressiveMuscleRelaxationE4Text, new Dictionary<SystemLanguage, string>
@@ -660,6 +661,12 @@ public class GlobalizationService  {
         });
 
         this.multiLanguageDictionary.Add(ProgressiveMuscleRelaxationE6Text, new Dictionary<SystemLanguage, string>
+        {
+            {SystemLanguage.English, "Hold it tight! Hold it!"},
+            {SystemLanguage.Italian, "Tienile strette! Tienile strette!"}
+        });
+
+        this.multiLanguageDictionary.Add(ProgressiveMuscleRelaxationE7Text, new Dictionary<SystemLanguage, string>
         {
             {SystemLanguage.English, "Ok you can relax now, bring your head out, and let your shoulders relax."},
             {SystemLanguage.Italian, "Ok, ora ti puoi rilassare, tira fuori la testa e rilassa le spalle."}
@@ -740,7 +747,7 @@ public class GlobalizationService  {
         this.multiLanguageDictionary.Add(ClosingOfSessionCText, new Dictionary<SystemLanguage, string>
         {
             {SystemLanguage.English, "Thank you for participating, I hope you enjoyed!"},
-            {SystemLanguage.Italian, "Please Esther, write this in italian"}
+            {SystemLanguage.Italian, "Grazie per la partecipazione, spero tu ti sia divertito! /spero te ti sia divertita!"}
         });
 
         this.multiLanguageDictionary.Add(HowDoesMyBodyFeelTitle, new Dictionary<SystemLanguage, string>
