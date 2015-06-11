@@ -323,8 +323,9 @@ public class HowDoesMyBodyFeelScript : Activity {
         };
     }
 
-    public void Setup(SessionManager.Gender _playerGender)
-    {   
+    public void Setup(string description, SessionManager.Gender _playerGender)
+    {
+        this.Description = description;
         this.CanContinue = false;
         playerGender = _playerGender;
         hasEmotionSelected = false;

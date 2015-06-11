@@ -41,7 +41,7 @@ public class MEMeterScript : Activity {
         var ycenterOfMediaArea = this.Configurations.FullTextArea.y + this.Configurations.FullTextArea.height / 2 -
                                  this.memeterOut.height * this.memeterScale / 2;
         this.memeterArea = new Rect(xcenterOfMediaArea, ycenterOfMediaArea, this.memeterOut.width * this.memeterScale, this.memeterOut.height * this.memeterScale);
-        Setup();
+        Setup("MeMeter");
 	}
 	
 	// Update is called once per frame
@@ -146,7 +146,7 @@ public class MEMeterScript : Activity {
     {
         //draw the instructions text
         if (showInstructions)
-            GUI.Label(this.Configurations.HalfTextArea, instructions, this.Configurations.InstructionsFormat);
+            GUI.Label(this.Configurations.HalfTextArea, instructions, this.Configurations.BoxFormat);
         //draw the memeter frame
         GUI.DrawTexture(GetMemeterArea(), memeterSelected);
     }
@@ -163,8 +163,9 @@ public class MEMeterScript : Activity {
         }
     }
 
-    public void Setup()
+    public void Setup(string description)
     {
+        this.Description = description;
         finalWaitStart = 0;
         isSelected = false;
         this.CanContinue = false;

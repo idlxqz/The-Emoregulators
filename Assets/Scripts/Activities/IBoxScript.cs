@@ -8,9 +8,11 @@ public class IBoxScript : Activity {
 
     //ibox display
     public Texture2D ibox;
+    public Texture2D heartRate;
 
     //memeter and instructions text areas definition
     public Rect iboxArea;
+    public Rect heartRateArea;
 
     //instruction control
     public string instructions;
@@ -28,6 +30,8 @@ public class IBoxScript : Activity {
 	                             this.ibox.height*this.scale/2;
         this.iboxArea = new Rect(xcenterOfMediaArea, ycenterOfMediaArea, this.ibox.width*this.scale, this.ibox.height*this.scale);
 
+        this.heartRateArea = new Rect(this.Configurations.HalfTextArea.x + this.Configurations.HalfTextArea.width/2-25, this.Configurations.HalfTextArea.y + this.Configurations.HalfTextArea.height/2 + 125, 50, 50);
+
         //immediatelly enable the skipping functionality 
         UIManagerScript.EnableSkipping();
 
@@ -44,7 +48,8 @@ public class IBoxScript : Activity {
     void OnGUI()
     {
         //draw the instructions text
-        GUI.Label(this.Configurations.HalfTextArea, instructions, this.Configurations.InstructionsFormat);
+        GUI.Label(this.Configurations.HalfTextArea, instructions, this.Configurations.BoxFormat);
+        //GUI.DrawTexture(this.heartRateArea, this.heartRate);
         //draw the memeter frame
         GUI.DrawTexture(iboxArea, ibox);
     }

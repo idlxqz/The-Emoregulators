@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class UIManagerScript : MonoBehaviour {
@@ -17,13 +16,10 @@ public class UIManagerScript : MonoBehaviour {
 	public void StartButton ()
 	{
 	    SessionManager.UserCode = GameObject.Find("UserCode").GetComponent<InputField>().text;
-	    var sensorManager = GameObject.FindObjectOfType<SensorManager>();
-	    
-        Logger.Instance.LogInformation("BaselineHR (avg,min,max): " + SensorManager.Avg(sensorManager.BaselineHeartRateSamples) + ", " + SensorManager.Min(sensorManager.BaselineHeartRateSamples) + ", " + SensorManager.Max(sensorManager.BaselineHeartRateSamples));
-        Logger.Instance.LogInformation("BaselineEDA (avg,min,max): " + SensorManager.Avg(sensorManager.BaselineEDASamples) + ", " + SensorManager.Min(sensorManager.BaselineEDASamples) + ", " + SensorManager.Max(sensorManager.BaselineEDASamples));
-	    
+        
         Logger.Instance.LogInformation("User started Application");
-		Application.LoadLevel ("SessionOneSimplified");
+	    
+		Application.LoadLevel ("SessionZero");
 	}
 
     private void Globalize()
@@ -43,6 +39,15 @@ public class UIManagerScript : MonoBehaviour {
         if (sessionManager != null)
         {
             sessionManager.Continue();
+        }
+    }
+
+    public void ContinueSessionZero()
+    {
+        SessionZeroManager session0Manager = GameObject.Find("SessionManager").GetComponent<SessionZeroManager>();
+        if (session0Manager != null)
+        {
+            session0Manager.Continue = true;
         }
     }
 

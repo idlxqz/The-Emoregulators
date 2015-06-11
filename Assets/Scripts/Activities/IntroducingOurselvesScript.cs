@@ -5,7 +5,7 @@ public class IntroducingOurselvesScript : CustomTextScript
     public override void OnGUI()
     {
         //draw the instructions text
-        GUI.Label(this.Configurations.HalfTextArea, this.currentInstructions, this.Configurations.InstructionsFormat);
+        GUI.Label(this.Configurations.HalfTextArea, this.currentInstructions, this.Configurations.BoxFormat);
     }
 
     public override void Update()
@@ -13,8 +13,9 @@ public class IntroducingOurselvesScript : CustomTextScript
     }
     
 
-    public void Setup(string _instructions)
+    public void Setup(string description, string _instructions)
     {
+        this.Description = description;
         UIManagerScript.DisableSkipping();
         this.currentInstructions = _instructions;
         this.SensorManager.StartNewActivity();

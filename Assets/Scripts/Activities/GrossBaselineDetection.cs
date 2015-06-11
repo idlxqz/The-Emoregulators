@@ -10,7 +10,9 @@ public class GrossBaselineDetection : Activity {
     public bool played;
 
 	// Use this for initialization
-	public override void Start () {
+	public override void Start ()
+	{
+	    this.Description = "GrossBaselineDetection";
         currentRenderer = GetComponent<Renderer>();
         played = false;
         this.CanContinue = false;
@@ -24,31 +26,40 @@ public class GrossBaselineDetection : Activity {
 
 	    var sensorSocket = GameObject.FindObjectOfType<OpenSignalsSocket>();
 
-	    if (sensorSocket == null || !sensorSocket.SocketReady)
+        if (sensorSocket == null || !sensorSocket.SocketReady)
+        {
+            this.CanContinue = true;
+            return;
+        }
+
+	    if (movTexture.isPlaying)
 	    {
-            this.EndActivity();
-            Application.LoadLevel("MainMenuScene");
 	        return;
 	    }
-        
-        if (movTexture.isPlaying)
-            return;
         else if (!movTexture.isPlaying && !this.CanContinue && !played)
         {
             currentRenderer.enabled = true;
             currentRenderer.material.mainTexture = movTexture;
             movTexture.Play();
             played = true;
+            Logger.Instance.LogInformation("Gross Baseline Video Started");
         }
         else
         {
-            this.EndActivity();
-            Application.LoadLevel("MainMenuScene");
+            this.CanContinue = true;
+            
         }
 	}
 
     public override void EndActivity()
     {
+        this.currentRenderer.enabled = false;
         this.SensorManager.StopRecordingBaseline();
+
+        Logger.Instance.LogInformation("Gross Baseline Video Ended");
+        Logger.Instance.LogInformation("BaselineHR (avg,min,max): " + SensorManager.Avg(this.SensorManager.BaselineHeartRateSamples) + ", " + SensorManager.Min(this.SensorManager.BaselineHeartRateSamples) + ", " + SensorManager.Max(this.SensorManager.BaselineHeartRateSamples));
+        Logger.Instance.LogInformation("BaselineEDA (avg,min,max): " + SensorManager.Avg(this.SensorManager.BaselineEDASamples) + ", " + SensorManager.Min(this.SensorManager.BaselineEDASamples) + ", " + SensorManager.Max(this.SensorManager.BaselineEDASamples));
+        Logger.LogPhysiologicalSignals("Baseline", this.SensorManager.BaselineHeartRateSamples, this.SensorManager.BaselineEDASamples);
+        
     }
 }

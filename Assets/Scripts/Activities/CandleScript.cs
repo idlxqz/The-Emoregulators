@@ -67,7 +67,7 @@ public class CandleScript : Activity {
         var ycenterOfMediaArea = this.Configurations.FullTextArea.y + this.Configurations.FullTextArea.height / 2 -
                                  this.frames[0].height * this.candleScale / 2;
         this.frameArea = new Rect(xcenterOfMediaArea, ycenterOfMediaArea, this.frames[0].width * this.candleScale, this.frames[0].height * this.candleScale);
-        Setup();
+        Setup("Candle");
 	}
 
 	// Update is called once per frame
@@ -184,7 +184,7 @@ public class CandleScript : Activity {
         }
 		//draw the candle cerimony text
         if (!simpleCandleAnimation && !noInstructions)
-		    GUI.Label(this.Configurations.HalfTextArea, instructions, this.Configurations.InstructionsFormat);
+		    GUI.Label(this.Configurations.HalfTextArea, instructions, this.Configurations.BoxFormat);
 		//draw the candle frame
         GUI.DrawTexture(GetCandleArea(), frames[selectedFrame]);
         //draw the match
@@ -232,8 +232,9 @@ public class CandleScript : Activity {
         }
     }
 
-    public void Setup()
+    public void Setup(string description)
     {
+        this.Description = description;
         isLit = false;
         previousFrameTimestamp = Time.time;
         lightingUp = true;

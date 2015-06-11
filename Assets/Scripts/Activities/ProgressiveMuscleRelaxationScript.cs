@@ -85,12 +85,12 @@ public class ProgressiveMuscleRelaxationScript : CustomTextScript
     public override void OnGUI()
     {
         //draw the instructions text
-        GUI.Label(this.Configurations.HalfTextArea, this.currentInstructions, this.Configurations.InstructionsFormat);
+        GUI.Label(this.Configurations.HalfTextArea, this.currentInstructions, this.Configurations.BoxFormat);
     }
 
-    public override void Setup(System.Action nextPhaseSetup, string[] newInstructions)
+    public override void Setup(string description, System.Action nextPhaseSetup, string[] newInstructions)
     {
-        base.Setup(nextPhaseSetup, newInstructions);
+        base.Setup(description, nextPhaseSetup, newInstructions);
         this.ExpectedMuscleRelaxed = false;
         this.ExpectedMuscleTense = false;
     }

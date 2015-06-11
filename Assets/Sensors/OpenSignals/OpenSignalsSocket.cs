@@ -63,7 +63,7 @@ public class OpenSignalsSocket : MonoBehaviour
                 //if the muscle is updated we need to log the change in muscle activation
                 if (muscle2Active != SensorManager.Muscle2Active)
                 {
-                    SensorManager.Muscle1Active = muscle2Active;
+                    SensorManager.Muscle2Active = muscle2Active;
                     if (muscle2Active)
                     {
                         Logger.Instance.LogInformation("Muscle2 Activated.");

@@ -11,7 +11,7 @@ public class EmotionListScript : CustomTextScript {
 	// Use this for initialization
 	public override void Start ()
 	{
-
+        SensorManager.StartNewActivity();
 	    this.howDoesMyBodyFeel = GameObject.Find("HowDoesMyBodyFeel").GetComponent<HowDoesMyBodyFeelScript>();
         //setup the emotions strings
         emotions = new string[6];
@@ -33,7 +33,7 @@ public class EmotionListScript : CustomTextScript {
     void OnGUI()
     {
         //draw the instructions text
-        GUI.Label(this.Configurations.HalfTextArea, this.currentInstructions, this.Configurations.InstructionsFormat);
+        GUI.Label(this.Configurations.HalfTextArea, this.currentInstructions, this.Configurations.BoxFormat);
 
         //draw the emotion options
         for (int i = 0; i < emotions.Length; i++ )

@@ -71,7 +71,10 @@ public class BackgroundChooserScript : Activity {
         for (int i = 0; i < galleryRects.Length; i++)
         {
             if (CanShowGalleryItem(i))
-                GUI.DrawTexture(galleryRects[i], backgrounds[selectedBAckgroundsSet + i]);
+            {
+                GUI.Box(galleryRects[i], "");
+                GUI.DrawTexture(this.GetTextureRect(galleryRects[i]), backgrounds[selectedBAckgroundsSet + i]);
+            }
         }
         //control displayed images
         if(canClickPrevious()){
@@ -137,5 +140,16 @@ public class BackgroundChooserScript : Activity {
         //buttons
         previousArea = new Rect(lateraOffset, topRowY + (itemSide + itemSpacing) * 2, buttonWidth, buttonHeight);
         nextArea = new Rect(Screen.width - lateraOffset - buttonWidth, topRowY + (itemSide + itemSpacing) * 2, buttonWidth, buttonHeight);
+    }
+
+    private Rect GetTextureRect(Rect boxRect)
+    {
+        var textureRect = new Rect(boxRect);
+        textureRect.x += 2;
+        textureRect.y += 2;
+        textureRect.width -= 4;
+        textureRect.height -= 4;
+
+        return textureRect;
     }
 }

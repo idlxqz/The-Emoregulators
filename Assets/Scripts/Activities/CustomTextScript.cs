@@ -1,6 +1,4 @@
-﻿using System.Runtime.Serialization.Formatters;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 
 public class CustomTextScript : Activity {
 
@@ -57,6 +55,7 @@ public class CustomTextScript : Activity {
 
     protected void OnFinish()
     {
+        this.CanContinue = true;
         if (this.ExecuteOnFinish != null)
         {
             this.ExecuteOnFinish();
@@ -67,11 +66,12 @@ public class CustomTextScript : Activity {
     public virtual void OnGUI()
     {
         //draw the instructions text
-        GUI.Label(this.Configurations.FullTextArea, this.currentInstructions, this.Configurations.InstructionsFormat);
+        GUI.Label(this.Configurations.FullTextArea, this.currentInstructions, this.Configurations.BoxFormat);
     }
 
-    public virtual void Setup(System.Action nextPhaseSetup,  string[] newInstructions)
+    public virtual void Setup(string description, System.Action nextPhaseSetup,  string[] newInstructions)
     {
+        this.Description = description;
         this.SensorManager.StartNewActivity();
 
         this.CanContinue = false;
@@ -80,9 +80,14 @@ public class CustomTextScript : Activity {
         if (instructions.Length > 1)
         {
             moreInstructions = true;
+            this.Configurations.BoxFormat.alignment = TextAnchor.UpperLeft;
         }
         else
         {
+            if (this.Configurations.BoxFormat != null)
+            {
+                this.Configurations.BoxFormat.alignment = TextAnchor.MiddleLeft;
+            }
             moreInstructions = false;
         }
         currentInstructions = instructions[0];
@@ -90,21 +95,21 @@ public class CustomTextScript : Activity {
         timeStart = Time.time;
     }
 
-    public void Setup(System.Action nextPhaseSetup, System.Action executeOnFinish, string[] newInstructions)
+    public void Setup(string description, System.Action nextPhaseSetup, System.Action executeOnFinish, string[] newInstructions)
     {
         this.ExecuteOnFinish = executeOnFinish;
-        this.Setup(nextPhaseSetup, newInstructions);
+        this.Setup(description, nextPhaseSetup, newInstructions);
     }
 
-    public void Setup(System.Action nextPhaseSetup, string newInstructions)
+    public void Setup(string description, System.Action nextPhaseSetup, string newInstructions)
     {
-        Setup(nextPhaseSetup, new string[] { newInstructions });
+        Setup(description, nextPhaseSetup, new string[] { newInstructions });
     }
 
-    public void Setup(System.Action nextPhaseSetup, System.Action executeOnFinish, string newInstructions)
+    public void Setup(string description, System.Action nextPhaseSetup, System.Action executeOnFinish, string newInstructions)
     {
         this.ExecuteOnFinish = executeOnFinish;
-        this.Setup(nextPhaseSetup, newInstructions);
+        this.Setup(description,nextPhaseSetup, newInstructions);
     }
 
    

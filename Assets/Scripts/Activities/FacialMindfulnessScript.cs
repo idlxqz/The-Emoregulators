@@ -103,8 +103,9 @@ public class FacialMindfulnessScript : Activity {
         }
     }
 
-    public void Setup(SessionManager.Gender _selectedGender)
+    public void Setup(string description, SessionManager.Gender _selectedGender)
     {
+        this.Description = description;
         this.CanContinue = false;
         userGender = _selectedGender;
         if (userGender == SessionManager.Gender.Male)

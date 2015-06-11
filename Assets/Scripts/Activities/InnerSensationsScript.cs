@@ -50,13 +50,16 @@ public class InnerSensationsScript : Activity {
                 if (swatchRects[i].Contains(new Vector2(Input.mousePosition.x, Screen.height - Input.mousePosition.y)))
                 {
                     selectedIbox = iboxes[i];
-                    GameObject.FindObjectOfType<SessionManager>().iboxTexture = iboxes[i];
+                    SessionManager.selectedIBox = iboxes[i];
                     Logger.Instance.LogInformation("Selected box: "+selectedIbox.name);
                     if (!this.CanContinue)
                     {
                         UIManagerScript.EnableSkipping();
                         this.CanContinue = true;
-                        SessionManager.PlayerScore += 5;
+                        if (SessionManager.PlayerScore > 0)
+                        {
+                            SessionManager.PlayerScore += 5;
+                        }
                     }
                 }
             }

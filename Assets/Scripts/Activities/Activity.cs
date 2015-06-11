@@ -1,11 +1,11 @@
-﻿using System.Linq;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Activity : MonoBehaviour
 {
     protected StandardConfigurations Configurations;
     protected SensorManager SensorManager;
     public bool CanContinue;
+    public string Description;
 
     protected virtual void Awake()
     {
@@ -26,5 +26,6 @@ public class Activity : MonoBehaviour
         Logger.Instance.LogInformation("Player score: " + SessionManager.PlayerScore);
         Logger.Instance.LogInformation("Activity HR (Avg,Min,Max): " + SensorManager.Avg(this.SensorManager.CurrentActivityHeartRateSamples) + "," + SensorManager.Min(this.SensorManager.CurrentActivityHeartRateSamples) + "," + SensorManager.Max(this.SensorManager.CurrentActivityHeartRateSamples));
         Logger.Instance.LogInformation("Activity EDA (Avg,Min,Max): " + SensorManager.Avg(this.SensorManager.CurrentActivityEDASamples) + "," + SensorManager.Min(this.SensorManager.CurrentActivityEDASamples) + "," + SensorManager.Max(this.SensorManager.CurrentActivityEDASamples));
+        Logger.LogPhysiologicalSignals(this.Description,this.SensorManager.CurrentActivityHeartRateSamples, this.SensorManager.CurrentActivityEDASamples);
     }
 }

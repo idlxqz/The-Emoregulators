@@ -45,7 +45,7 @@ public class BreathingRegulationScript : CustomTextScript {
     public override void OnGUI()
     {
         //draw the instructions text
-        GUI.Label(this.Configurations.HalfTextArea, this.currentInstructions, this.Configurations.InstructionsFormat);
+        GUI.Label(this.Configurations.HalfTextArea, this.currentInstructions, this.Configurations.BoxFormat);
     }
     
 }

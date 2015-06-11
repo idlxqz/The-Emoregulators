@@ -26,7 +26,7 @@ public class CustomTitleScript : Activity {
     protected override void Awake()
     {
         base.Awake();
-        this.Setup(null, "The Emoregulators");
+        this.Setup("title",null, "The Emoregulators");
     }
 
     void OnGUI()
@@ -56,7 +56,10 @@ public class CustomTitleScript : Activity {
         }
     }
 
-    public void Setup(System.Action _nextPhase, string _title){
+    public void Setup(string description, System.Action _nextPhase, string _title)
+    {
+        SensorManager.StartNewActivity();
+        this.Description = description;
         setupNextPhase = _nextPhase;
         this.CanContinue = false;
         title = _title;

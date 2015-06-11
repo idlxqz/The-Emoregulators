@@ -8,6 +8,9 @@ public class SessionManager : MonoBehaviour {
     {
         LoadingScreen,
         Start,
+        PreBaseline,
+        GrossBaselineDetection,
+        PostBaseline,
         OpeningA,
         OpeningB,
         OpeningC,
@@ -32,7 +35,9 @@ public class SessionManager : MonoBehaviour {
         FacialMindfulnessC,
         FacialMindfulnessD,
         IBoxIntroductionTitle,
-        IBoxIntroduction,
+        IBoxIntroductionA,
+        IBoxIntroductionB,
+        IBoxIntroductionC,
         MeMeterReuse,
         CustomText,
         CustomTextWithImage,
@@ -84,6 +89,7 @@ public class SessionManager : MonoBehaviour {
     public CustomTextScript customText;
     public CustomTitleScript customTitleScript;
     public LoadingScreenScript loadingScreenScript;
+    public CustomTextWithImage CustomTextWithImage;
 
     public GameObject facilitatorFrame;
 
@@ -100,14 +106,11 @@ public class SessionManager : MonoBehaviour {
     //session display formating
     private Rect titleArea;
     private Rect subTitleArea;
-    public GUIStyle titleFormat;
-    public GUIStyle subTitleFormat;
     protected string sessionTitle;
     protected string sessionSubTitle;
 
     //activity display formating
     public Rect activityArea;
-    public GUIStyle activityFormat;
     public string activityName;
 
     //ibox display
@@ -116,6 +119,9 @@ public class SessionManager : MonoBehaviour {
     public Texture2D heartTexture;
     public Rect iboxArea;
     public int heartSpacing;
+
+    //configurations
+    protected StandardConfigurations Configurations;
 
     //logging
     protected Logger log;
@@ -169,16 +175,14 @@ public class SessionManager : MonoBehaviour {
 
     public static string UserCode { get; set; }
 
-    public GUIStyle scoreFormat;
-
     //background configurations
     public static Texture2D selectedBackground;
+    public static Texture2D selectedIBox;
 
     //help text
     public bool showHelpButton;
     public bool showHelpText;
     public string helpTextContent;
-    public GUIStyle helpTextStyle;
     public int lateralOffsetHelp;
     public int helpButtonSize;
     public Texture2D helpButtonTexture;
@@ -193,10 +197,11 @@ public class SessionManager : MonoBehaviour {
         customText = GameObject.Find("CustomText").GetComponent<CustomTextScript>();
         customTitleScript = GameObject.Find("CustomTitle").GetComponent<CustomTitleScript>();
         loadingScreenScript = GameObject.Find("LoadingScreen").GetComponent<LoadingScreenScript>();
+        CustomTextWithImage = GameObject.Find("CustomTextWithImage").GetComponent<CustomTextWithImage>();
+
+        this.Configurations = GameObject.FindObjectOfType<StandardConfigurations>();
 
         activityArea = new Rect(Screen.width - 180, 22, 150, 50);
-        activityFormat.wordWrap = true;
-        activityFormat.alignment = TextAnchor.MiddleCenter;
         customTextWaitTime = 5;
         
         //configure all logging
@@ -248,18 +253,19 @@ public class SessionManager : MonoBehaviour {
             //draw ibox
             if (displayIBox)
             {
-                GUI.DrawTexture(iboxArea, iboxTexture);
+                GUI.DrawTexture(iboxArea, SessionManager.selectedIBox);
                 GUI.DrawTexture(new Rect(iboxArea.xMin + iboxArea.width + heartSpacing, iboxArea.yMin, iboxArea.width, iboxArea.height), heartTexture);
-                GUI.Label(new Rect(iboxArea.xMin, iboxArea.yMin + iboxArea.height, iboxArea.width, 15), ""+PlayerScore, scoreFormat);
-                GUI.Label(new Rect(iboxArea.xMin + iboxArea.width + heartSpacing, iboxArea.yMin + iboxArea.height, iboxArea.width, 15), (SensorManager.HeartRate==0? "-" : ""+SensorManager.HeartRate), scoreFormat);
-                GUI.Label(new Rect(iboxArea.xMin + 2 * iboxArea.width + 2* heartSpacing, iboxArea.yMin + iboxArea.height, iboxArea.width, 15),""+SensorManager.Muscle1Active, scoreFormat);
+                GUI.Label(new Rect(iboxArea.xMin, iboxArea.yMin + iboxArea.height, iboxArea.width, 15), ""+PlayerScore, this.Configurations.ScoreFormat );
+                GUI.Label(new Rect(iboxArea.xMin + iboxArea.width + heartSpacing, iboxArea.yMin + iboxArea.height, iboxArea.width, 15), (SensorManager.HeartRate==0? "-" : ""+SensorManager.HeartRate), this.Configurations.ScoreFormat);
+                //GUI.Label(new Rect(iboxArea.xMin + 2 * iboxArea.width + 2* heartSpacing, iboxArea.yMin + iboxArea.height, iboxArea.width, 15),""+SensorManager.Muscle1Active, scoreFormat);
+                //GUI.Label(new Rect(iboxArea.xMin + 3 * iboxArea.width + 3 * heartSpacing, iboxArea.yMin + iboxArea.height, iboxArea.width, 15), "" + SensorManager.Muscle2Active, scoreFormat);
             }
             //draw title and subtitle of the session
-            GUI.Label(titleArea, sessionTitle, titleFormat);
-            GUI.Label(subTitleArea, sessionSubTitle, subTitleFormat);
+            GUI.Label(titleArea, sessionTitle, this.Configurations.TitleFormat);
+            GUI.Label(subTitleArea, sessionSubTitle, this.Configurations.SubTitleFormat);
 
             //draw the name of the activity
-            GUI.Label(activityArea, activityName, activityFormat);
+            GUI.Label(activityArea, activityName, this.Configurations.ActivityFormat);
         }
 
         //child specific behavior
@@ -277,7 +283,7 @@ public class SessionManager : MonoBehaviour {
             if (showHelpText)
             {
                 Rect helpArea = new Rect(lateralOffsetHelp, lateralOffsetHelp, Screen.width - lateralOffsetHelp * 2, Screen.height - lateralOffsetHelp * 2);
-                GUI.Label(helpArea, helpTextContent, helpTextStyle);
+                GUI.Label(helpArea, helpTextContent, this.Configurations.HelpFormat);
             }
         }
     }
@@ -302,9 +308,12 @@ public class SessionManager : MonoBehaviour {
         float worldScreenHeight = Camera.main.orthographicSize * 2;
         float worldScreenWidth = worldScreenHeight / Screen.height * Screen.width;
 
-        spriteBack.transform.localScale = new Vector3(
+        if(spriteBack != null)
+        {
+            spriteBack.transform.localScale = new Vector3(
             worldScreenWidth / sr.sprite.bounds.size.x,
             worldScreenHeight / sr.sprite.bounds.size.y, 1);
+        }
     }
 
     public virtual void Continue()
