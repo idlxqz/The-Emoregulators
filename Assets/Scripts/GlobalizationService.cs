@@ -233,7 +233,7 @@ public class GlobalizationService  {
 
         this.multiLanguageDictionary.Add(PostBaselineText, new Dictionary<SystemLanguage, string>
         {
-            {SystemLanguage.English, "Now we start our training!\n\nThen, it will begin, the first session, with the general explanation, followed by the second session, with the exercises.\n\nClick \"continue\"."},
+            {SystemLanguage.English, "Now we start our training!\n\nFirst, it will begin, the first session, with the general explanation, then the second session will follow, with the exercises.\n\nClick \"continue\"."},
             {SystemLanguage.Italian, "Ora iniziamo il nostro training!\n\nPrima inizierà la sessione 1, con la spiegazione generale, poi seguirà la sessione 2, con gli esercizi.\n\nClicca “continuare”"}
         });
 
@@ -264,13 +264,13 @@ public class GlobalizationService  {
         this.multiLanguageDictionary.Add(OpeningCText, new Dictionary<SystemLanguage, string>
         {
             {SystemLanguage.English, "Before each execise, you will find the written instructions of what you have to do.\nAlso, as you saw, you were equipped with some physiological sensors.\nWe will not do any medical examinations ;-).\nYou will use them, because you will be able to see your heart rate, and then, see your progress during the various exercises.\nYou can always see your heart rate, with this symbol, up, in the left corner:\n\nThe more you will be good, more points you'll get!"},
-            {SystemLanguage.Italian, "Prima di ogni livello, troverai le istruzioni scritte di ciò che dovrai fare.\nInoltre, come hai visto, sei stato dotato/stata dotata di alcuni sensori fisiologici.\nNon vogliamo farti degli esami medici ;-)\nServiranno a te perchè così potrai vedere il tuo battito cardiaco, e quindi, vedere il tuo andamento, nel corso dei vari esercizi.\nPotrai SEMPRE vedere il tuo battito cardiaco, con questo simbolo, in alto a sinistra:\n\nPiù migliorerai, più punti guadagnerai!"}
+            {SystemLanguage.Italian, "Prima di ogni esercizio, troverai le istruzioni scritte di ciò che dovrai fare.\nInoltre, come hai visto, sei stato dotato/stata dotata di alcuni sensori fisiologici.\nNon vogliamo farti degli esami medici ;-)\nServiranno a te perchè così potrai vedere il tuo battito cardiaco, e quindi, vedere il tuo andamento, nel corso dei vari esercizi.\nPotrai sempre vedere il tuo battito cardiaco, con questo simbolo, in alto a sinistra:\n\nPiù migliorerai, più punti guadagnerai!"}
         });
 
         this.multiLanguageDictionary.Add(OpeningDText, new Dictionary<SystemLanguage, string>
         {
-            {SystemLanguage.English, "As every game, Emoregulators consists of several levels, and, to move to the next one, you should always complete the previous one and then click on the \"continue\" button. You can earn points, only if you will complete the exercise.\nAt the top left you will see the points that you can achieve and then, those that actually you have received.\nThe maximum points you can earn, in total, is 100.\nIn this way, your avatar will become stronger and more skilled in dealing with stress and manage emotions!"},
-            {SystemLanguage.Italian, "Come ogni gioco, Emoregulators si compone di diversi livelli, e, per passare al seguente, dovrai sempre completare quello precedente e poi, cliccare in basso, sul tasto “continuare”.\nOgni esercizio sarà un livello.\n\nGuadagnerai dei punti, solo se porterai a termine l'esercizio. potrai guadagnarne sempre di più!\nIn alto a sinistra vedrai i punti che potresti raggiungere e poi, quelli che effettivamente riesci a prendere.\nIl massimo dei punti che potrai guadagnare, in totale, è 100.\nIl tuo avatar diventerà così sempre più forte e più bravo nell'affrontare lo stress e gestire le emozioni!."}
+            {SystemLanguage.English, "As every game, Emoregulators consists of several levels, and, to move to the next one, you should always complete the previous one and then click on the \"continue\" button. You can earn points, only if you will complete the exercise. You can earn more and more! \nAt the top left you will see the points that you have received.\nThe maximum points you can earn, in total, is 100.\nIn this way, your avatar will become stronger and more skilled in dealing with stress and manage emotions!"},
+            {SystemLanguage.Italian, "Come ogni gioco, Emoregulators si compone di diversi livelli, e, per passare al seguente, dovrai sempre completare quello precedente e poi, cliccare in basso, sul tasto “continuare”.\nOgni esercizio sarà un livello.\n\nGuadagnerai dei punti, solo se porterai a termine l'esercizio. Potrai guadagnarne sempre di più! \nIn alto a sinistra vedrai i punti che riesci a prendere.\nIl massimo dei punti che potrai guadagnare, in totale, è 100.\nIl tuo avatar diventerà così sempre più forte e più bravo nell'affrontare lo stress e gestire le emozioni!."}
         });
 
         this.multiLanguageDictionary.Add(OpeningEText, new Dictionary<SystemLanguage, string>
@@ -281,14 +281,14 @@ public class GlobalizationService  {
         
         this.multiLanguageDictionary.Add(OpeningFText, new Dictionary<SystemLanguage, string>
         {
-            {SystemLanguage.English, "Last information ...\nOnce you start exercising, you can always click on this icon, situated in the lower right corner, and read again the instructions.\nNow, it's time to have fun!\n\nCome on, let's start!"},
-            {SystemLanguage.Italian, "Ultima informazione...\nUna volta iniziato l'esercizio, potrai sempre cliccare su questa icona, che troverai in basso a destra, e rileggere le istruzioni.\nOra, direi che è arrivato il momento di divertirci!\n\nForza, iniziamo!"}
+            {SystemLanguage.English, "Last information ...\nOnce you start exercising, sometimes, you will find this icon, in the lower right. You can click on it, and read again the instructions.\nNow, it's time to have fun!\n\nLet's start customizing a bit the game, before starting the exercise!"},
+            {SystemLanguage.Italian, "Ultima informazione...\nUna volta iniziato l'esercizio, a volte troverai questa icona, in basso a destra. Potrai cliccarla e rileggere le istruzioni.\nOra, direi che è arrivato il momento di divertirci!\n\nIniziamo personalizzando un po' il gioco, prima di iniziare gli esercizi!"}
         });
 
         this.multiLanguageDictionary.Add(IntroducingOurselvesTitle, new Dictionary<SystemLanguage, string>
         {
-            {SystemLanguage.English, "My avatar"},
-            {SystemLanguage.Italian, "Il mio avatar"}
+            {SystemLanguage.English, "My personal space"},
+            {SystemLanguage.Italian, "Il mio spazio personale"}
         });
 
         this.multiLanguageDictionary.Add(IntroducingOurselvesActivityName, new Dictionary<SystemLanguage, string>
@@ -299,14 +299,14 @@ public class GlobalizationService  {
 
         this.multiLanguageDictionary.Add(IntroducingOurselvesBackgroundText, new Dictionary<SystemLanguage, string>
         {
-            {SystemLanguage.English, "First of all you have to choose the background that you want to give to the game.\nIn the next screen you will find various options.\nClick on the image that you prefer."},
-            {SystemLanguage.Italian, "Prima di tutto scegli lo sfondo che vuoi dare al gioco.\nNei prossimi screen troverai varie opzioni.\nClicca sopra l'immagine che preferisci."}
+            {SystemLanguage.English, "First of all you have to choose the background that you want to give to the game, the one that makes you feel more relaxed.\nIn the next screen you will find various options. Click on “next” or on “previous” to go forward or to go back. \nBy clicking on each box, you can preview it.\nClick on the image that you prefer."},
+            {SystemLanguage.Italian, "Prima di tutto scegli lo sfondo che vuoi dare al gioco, lo sfondo che più ti rilassa.\nNel prossimo screen troverai varie opzioni. Clicca su “next” o “previous” per andare avanti, o per tornare indietro.\nCliccando su ogni riquadro, potrai vederne l'anteprima.\nClicca sopra l'immagine che preferisci."}
         });
 
         this.multiLanguageDictionary.Add(IntroducingOurselvesAvatarText, new Dictionary<SystemLanguage, string>
         {
-            {SystemLanguage.English, "Now, we have to create your own avatar!\nThis is you.\nGive him/her a name!\nYou can choose what you want, your real name, or a different one.\nEvery time you will complete an exercise, you will become stronger.\nThen click on √ and let's continue our game!"},
-            {SystemLanguage.Italian, "Ora, invece, creiamo il tuo avatar!\nQuesto sei tu/Questa sei te.\nDagli un un nome!\nPuoi scegliere quello che vuoi, il tuo vero nome, o inventarne un altro.\nOgni volta che terminerai un esercizio diventerai più forte\nPoi clicca su √ e prosegui nel nostro gioco!"}
+            {SystemLanguage.English, "Now, you have to choose your own avatar!\nClick on “Female” or “Male” to see them.\nThen give him/her a name!\nYou can choose what you want, your real name, or a different one.\nEvery time you will complete an exercise, you will become stronger.\nThen click on \"ok\" and let's continue!"},
+            {SystemLanguage.Italian, "Ora, invece, scegli il tuo avatar!\nClicca su “femmina” o su “maschio”, per visualizzarli.\nPoi dagli anche un un nome!\nPuoi scegliere quello che vuoi, il tuo vero nome, o inventarne un altro.\nOgni volta che terminerai un esercizio diventerai più forte\nPoi clicca su \"ok\" e prosegui!"}
         });
 
         this.multiLanguageDictionary.Add(IBoxIntroductionTitle, new Dictionary<SystemLanguage, string>
@@ -323,8 +323,8 @@ public class GlobalizationService  {
 
         this.multiLanguageDictionary.Add(IBoxIntroductionAText, new Dictionary<SystemLanguage, string>
         {
-            {SystemLanguage.English, "Another thing to know before starting our game ...\n\nThis is your I-box.\nIt's your personal space, where you collect points that you will be able to earn.\nYou can color the I-box as desired.\nMoreover it will always be at the top left."},
-            {SystemLanguage.Italian, "Altra cosa da sapere prima di iniziare il nostro gioco...\n\nQuesta è la tua I-BOX.\nÈ il tuo spazio personale, dove raccoglierai i punti che riuscirai a guadagnare.\nPotrai colorare l'I-BOX come desideri.\nInoltre sarà sempre visualizzabile in alto a sinistra."}
+            {SystemLanguage.English, "Another thing to know before starting the game ...\n\nThis is your I-box.\nIt's your personal space, where you collect points that you will be able to earn.\nMoreover it will always be at the top left. \nIn the next screen you will find the instructions, the you can color the Ibox, as you want."},
+            {SystemLanguage.Italian, "Altra cosa da sapere prima di iniziare il gioco...\n\nQuesta è la tua I-BOX.\nÈ il tuo spazio personale, dove raccoglierai i punti che riuscirai a guadagnare.\nInoltre sarà sempre visualizzabile in alto a sinistra. \nNel prossimo screen troverai delle istruzioni e poi, potrai colorare l'I-box come desideri"}
         });
 
         this.multiLanguageDictionary.Add(IBoxIntroductionBText, new Dictionary<SystemLanguage, string>
@@ -335,8 +335,8 @@ public class GlobalizationService  {
 
         this.multiLanguageDictionary.Add(IBoxIntroductionCText, new Dictionary<SystemLanguage, string>
         {
-            {SystemLanguage.English, "Well!\n\nNow, that you have created your personal space, we are ready to start the next session!\nClick to continue with the game."},
-            {SystemLanguage.Italian, "Bene!\nDirei che siamo pronti per iniziare a divertirci! Clicca per proseguire col nostro gioco!"}
+            {SystemLanguage.English, "Well!\n\nNow, that you have created your personal space, we are ready to start to have fun with the next session!\nClick to continue with the game."},
+            {SystemLanguage.Italian, "Bene!\nOra che hai creato il tuo spazio personale, direi che siamo pronti per iniziare a divertirci con la prossima sessione! Clicca per proseguire col gioco!"}
         });
 
         this.multiLanguageDictionary.Add(CandleCeremonyTitle, new Dictionary<SystemLanguage, string>
@@ -371,26 +371,26 @@ public class GlobalizationService  {
 
         this.multiLanguageDictionary.Add(MinuteForMyselfAText, new Dictionary<SystemLanguage, string>
         {
-            {SystemLanguage.English, "Let's start now with the first exercise! \n\nNow, and at the end of this session, you'll find the M&M, your ME-METER. This will be your thermometer to measure how you will improve your ability to relax.\nLet 's see how much good you are! "},
+            {SystemLanguage.English, "Let's start now with the first exercise! \n\nNow, and at the end of this session, you'll find the M&M, your ME-METER. This will be your thermometer to measure how you will improve your ability to relax.\nLet 's see how much good you will be! "},
             {SystemLanguage.Italian, "Iniziamo ora con il primo esercizio! Ora, e poi alla fine di questa sessione, troverai l' M&M, il tuo ME-METER.\n\nQuesto sarà il tuo termometro per misurare quanto migliorerai la tua capacità di rilassamento.\nVediamo un po' quanto sarai bravo!"}
         });
 
         this.multiLanguageDictionary.Add(MinuteForMyselfBText, new Dictionary<SystemLanguage, string>
         {
-            {SystemLanguage.English, "The exercise is comprised of three stages, look at how your heart beat will change.\n\nStage 1: Slow down your body and your thoughts\n\nTake a minute and focus on yourself, try to slow down your thoughts, let your mind and body relax, and pay attention to the natural rhythm of your breathing…You may close your eyes if you wish for a few seconds, take a slow deep breath. Just focus on this natural action you are doing every day: breathing, and notice if it feels different to breath with focus and attention."},
-            {SystemLanguage.Italian, "L'M&M è composto da 3 fasi, osserva come il tuo battito varierà.\n\nFase 1: Calma il tuo corpo e I tuoi pensieri\n\nPrenditi un minuto e concentrati su te stesso, prova a calmare i tuoi pensieri, lascia rilassare il tuo corpo e i tuoi pensieri, e poni attenzione al ritmo naturale del tuo respiro… Se vuoi, puoi chiudere gli occhi per qualche secondo, fai un respiro lento e profondo. Semplicemente, focalizzati su questa naturale azione che fai ogni giorno: respira, e nota se senti un respiro diverso, quando ti focalizzi e poni attenzione."}
+            {SystemLanguage.English, "The exercise is comprised of three stages, look at how your heart beat will change.\n\nStage 1: Slow down your body and your thoughts\n\nTake a minute and focus on yourself, try to slow down your thoughts, let your mind and body relax, and pay attention to the natural rhythm of your breathing…You may close your eyes if you wish for a few seconds, take 1 slow deep breath. Just focus on this natural action you are doing every day: breathing, and notice if it feels different to breath with focus and attention."},
+            {SystemLanguage.Italian, "L'M&M è composto da 3 fasi, osserva come il tuo battito varierà.\n\nFase 1: Calma il tuo corpo e I tuoi pensieri\n\nPrenditi un minuto e concentrati su te stesso, prova a calmare i tuoi pensieri, lascia rilassare il tuo corpo e i tuoi pensieri, e poni attenzione al ritmo naturale del tuo respiro… Se vuoi, puoi chiudere gli occhi per qualche secondo, fai 1 respiro lento e profondo. Semplicemente, focalizzati su questa naturale azione che fai ogni giorno: respira, e nota se senti un respiro diverso, quando ti focalizzi e poni attenzione."}
         });
 
         this.multiLanguageDictionary.Add(MinuteForMyselfCText, new Dictionary<SystemLanguage, string>
         {
-            {SystemLanguage.English, "Stage 2: Orient - Focus on yourselves\n\nTry and focus yourselves in space and pay attention to what you feel, what you're doing, on the space, what is around you, and what is in the room … remind yourselves that you are in a safe and protected place.\n\nTake some seconds for you."},
-            {SystemLanguage.Italian, "Fase 2: Orient – Focalizzati su te stesso\n\nProva a concentrarti su te stesso nello spazio, e poni attenzione a cosa senti, a cosa fai, allo spazio, a ciò che è intorno a te, a ciò che c’è nella stanza...ricorda a te stesso che sei in uno spazio sicuro e protetto.\n\nPrenditi qualche secondo."}
+            {SystemLanguage.English, "Stage 2: Orient - Focus on yourselves\n\nTry and focus yourselves in space and pay attention to what you feel, what you're doing, on the space, what is around you, and what is in the room … remind yourselves that you are in a safe and protected place.\n\nTake some seconds, until you hear a sound, and try to make 2 other deep breaths.\n\nInhales and exhales."},
+            {SystemLanguage.Italian, "Fase 2: Orient – Focalizzati su te stesso\n\nProva a concentrarti su te stesso nello spazio, e poni attenzione a cosa senti, a cosa fai, allo spazio, a ciò che è intorno a te, a ciò che c’è nella stanza...ricorda a te stesso che sei in uno spazio sicuro e protetto.\n\nPrenditi qualche secondo, fino a quando sentirai un suono, e prova a fare altri 2 respiri profondi.\n\nInspira ed espira"}
         });
 
         this.multiLanguageDictionary.Add(MinuteForMyselfDText, new Dictionary<SystemLanguage, string>
         {
-            {SystemLanguage.English, "Stage 3: Scan and rate yourselves\n\nTry and evaluate the amount of relaxation/tension you have in the moment according to the ME-Meter. Pay attention to how it feels in your body to be tense and what kind of thoughts come to your mind when you are tense. Click on \"continue\" to see your ME-METER"},
-            {SystemLanguage.Italian, "Fase 3: Analizza e valuta te stesso\n\nProva a valutare il tuo livello di tensione, al momento, secondo il ME-METER. Poni attenzione a cosa senti a livello corporeo quando sei teso, e quali pensieri hai quando sei in tensione.\n\nClicca su \"continuare\" per visualizzare il tuo ME-METER."}
+            {SystemLanguage.English, "Stage 3: Scan and rate yourselves\n\nTry and evaluate the amount of relaxation/tension you have in the moment according to the ME-Meter. Pay attention to how it feels in your body to be tense and what kind of thoughts come to your mind when you are tense.\n\nNow click on \"continue\" to see your ME-METER"},
+            {SystemLanguage.Italian, "Fase 3: Analizza e valuta te stesso\n\nProva a valutare il tuo livello di tensione, al momento, secondo il ME-METER. Poni attenzione a cosa senti a livello corporeo quando sei teso, e quali pensieri hai quando sei in tensione.\n\nOra clicca su \"continuare\" per visualizzare il tuo ME-METER."}
         });
 
         this.multiLanguageDictionary.Add(MeMeterText, new Dictionary<SystemLanguage, string>
@@ -414,24 +414,24 @@ public class GlobalizationService  {
         this.multiLanguageDictionary.Add(FacialMindfulnessA1Text, new Dictionary<SystemLanguage, string>
         {
             {SystemLanguage.English, "Now let's focus on the face!"},
-            {SystemLanguage.Italian, "Ora concentriamoci sulla faccia!"}
+            {SystemLanguage.Italian, "Ora concentriamoci sul viso!"}
         });
 
         this.multiLanguageDictionary.Add(FacialMindfulnessA2Text, new Dictionary<SystemLanguage, string>
         {
-            {SystemLanguage.English, "Note the different parts of your face, your forehead, chin, mouth, eyes. The different parts of your face are relaxed or tense? Where do you feel more tense? Do you have some other feelings? What is your facial expression? Try to notice without changing expression."},
-            {SystemLanguage.Italian, "Nota le diverse parti del tuo viso, la tua fronte, il mento, la bocca, gli occhi. Le diverse parti del tuo viso sono rilassate o tese? Dove le senti più tese? Hai altre sensazioni? Qual è la tua espressione facciale? Prova a notarlo senza cambiare espressione."}
+            {SystemLanguage.English, "Note the different parts of your face, your forehead, chin, mouth, eyes. The different parts of your face are relaxed or tense? Where do you feel more tense? Do you have some other feelings? What is your facial expression? Try to notice without changing expression.\nTake some seconds, then click on “continue”"},
+            {SystemLanguage.Italian, "Nota le diverse parti del tuo viso, la tua fronte, il mento, la bocca, gli occhi. Le diverse parti del tuo viso sono rilassate o tese? Dove le senti più tese? Hai altre sensazioni? Qual è la tua espressione facciale? Prova a notarlo senza cambiare espressione.\nPrenditi qualche secondo, poi clicca “continuare”"}
         });
 
         this.multiLanguageDictionary.Add(FacialMindfulnessB1Text, new Dictionary<SystemLanguage, string>
         {
-            {SystemLanguage.English, "Now select the parts of the face where you feel more tense: your avatar will be colored red in the corresponding areas.\nClick 1 time.\nThen select the parts where you feel more relaxed: your avatar will be colored blue in the corresponding areas.\nClick 2 times.\n\nIf you want to change, click 3 times and then select again."},
-            {SystemLanguage.Italian, "Ora seleziona le parti del viso dove ti senti più teso: il tuo avatar si colorerà di rosso nelle aree corrispondenti.\nDovrai cliccare 1 volta.\nSeleziona poi le parti dove ti senti più rilassato: il tuo avatar si colorerà di azzurro nelle aree corrispondenti.\nDovrai cliccare 2 volta.\n\nSe vuoi cambiare, clicca 3 volte e poi ri-seleziona."}
+            {SystemLanguage.English, "In the next screen you will have to select the parts of the face where you feel more tense: your avatar will be colored red in the corresponding areas.\nClick 1 time.\nThen select the parts where you feel more relaxed: your avatar will be colored blue in the corresponding areas.\nClick 2 times.\n\nIf you want to change, click 3 times and then select again."},
+            {SystemLanguage.Italian, "Nel prossimo screen dovrai selezionare le parti del viso dove ti senti più teso: il tuo avatar si colorerà di rosso nelle aree corrispondenti.\nDovrai cliccare 1 volta.\nSeleziona poi le parti dove ti senti più rilassato: il tuo avatar si colorerà di azzurro nelle aree corrispondenti.\nDovrai cliccare 2 volte.\n\nSe vuoi cambiare, clicca 3 volte e poi ri-seleziona."}
         });
 
         this.multiLanguageDictionary.Add(FacialMindfulnessB2Text, new Dictionary<SystemLanguage, string>
         {
-            {SystemLanguage.English, "Click \"continue\" to find the face of your avatar."},
+            {SystemLanguage.English, "Click \"continue\" and you will find the face of your avatar."},
             {SystemLanguage.Italian, "Clicca \"continuare\" e troverai la faccia del tuo avatar."}
         });
 
@@ -461,7 +461,7 @@ public class GlobalizationService  {
 
         this.multiLanguageDictionary.Add(BreathingRegulationA3Text, new Dictionary<SystemLanguage, string>
         {
-            {SystemLanguage.English, "Put one hand on your stomach and the other on your chest.\nNow fill your Balloon-stomach with air (without moving the chest)."},
+            {SystemLanguage.English, "Put one hand on your stomach and the other on your chest.\nNow fill your balloon-stomach with air (without moving the chest)."},
             {SystemLanguage.Italian, "Metti una mano sul tuo stomaco e l'altra sul petto.\nOra riempi il tuo palloncino-stomaco con l’aria (senza spostare il petto)."}
         });
 
@@ -485,8 +485,8 @@ public class GlobalizationService  {
 
         this.multiLanguageDictionary.Add(BreathingRegulationB2Text, new Dictionary<SystemLanguage, string>
         {
-            {SystemLanguage.English, "And focus back on your breathing, an activity that you do every day automatically. Just breathe in and out, that’s right- just like that."},
-            {SystemLanguage.Italian, "E concentrati di nuovo sulla respirazione.\nQuesta è un'attività che fai ogni giorno automaticamente.\nSemplicemente inspira ed espira."}
+            {SystemLanguage.English, "And focus back on your breathing, an activity that you do every day automatically. Just breathe in and out, that’s right- just like that, 2 times."},
+            {SystemLanguage.Italian, "E concentrati di nuovo sulla respirazione.\nQuesta è un'attività che fai ogni giorno automaticamente.\nSemplicemente inspira ed espira, 2 volte."}
         });
 
         this.multiLanguageDictionary.Add(BreathingRegulationB3Text, new Dictionary<SystemLanguage, string>
@@ -515,8 +515,8 @@ public class GlobalizationService  {
 
         this.multiLanguageDictionary.Add(ActiveMeditationA2Text, new Dictionary<SystemLanguage, string>
         {
-            {SystemLanguage.English, "Now we will put a music, for 3-5 minutes.\nYou'll have to move, dance with the beat, with all the parts of your body.\nTry to use every part.\n\nJust be careful not to turn off the sensor (and do not drop it) while moving ;-)."},
-            {SystemLanguage.Italian, "Adesso metteremo una musica, per 3-5 minuti.\nDovrai far muovere, ballare a ritmo, tutte le parti del tuo corpo.\nCerca di utilizzare ogni parte.\n\nFai solo attenzione a non spegnere il sensore (e a non farlo cadere), mentre ti muovi ;-)."}
+            {SystemLanguage.English, "Now we will put a music, for 3-5 minutes.\nYou'll have to move, dance with the beat, with all the parts of your body.\nTry to use every part.\n\nIf you want you can follow the movements of the avatar, or move freely.\n\nJust be careful not to turn off the sensor (and do not drop it) while moving ;-)."},
+            {SystemLanguage.Italian, "Adesso metteremo una musica, per 3-5 minuti.\nDovrai far muovere, ballare a ritmo, tutte le parti del tuo corpo.\nCerca di utilizzare ogni parte.\n\n Se vuoi puoi seguire i movimenti dell'avatar, oppure muoverti liberamente.\n\nFai solo attenzione a non spegnere il sensore (e a non farlo cadere), mentre ti muovi ;-)."}
         });
 
         this.multiLanguageDictionary.Add(ActiveMeditationA3Text, new Dictionary<SystemLanguage, string>
@@ -593,8 +593,8 @@ public class GlobalizationService  {
 
         this.multiLanguageDictionary.Add(ProgressiveMuscleRelaxationC4Text, new Dictionary<SystemLanguage, string>
         {
-            {SystemLanguage.English, "Now drop the ball and notice how your muscles are relaxed.\nSee how much better your hands feel."},
-            {SystemLanguage.Italian, "Ora lascia cadere la palla e senti come i tuoi muscoli sono rilassati.\nVedi come le tue mani si sentono meglio?"}
+            {SystemLanguage.English, "Now don't press with your hands, do as the avatar and relax your arms, holding the ball with one hand, so that it doesn't fall, and notice how your muscles are relaxed.\nSee how much better your hands feel."},
+            {SystemLanguage.Italian, "Ora non premere più con le mani, fai come l'avatar e stendi le braccia, tenendo la palla con una mano, per non farla cadere, e senti come i tuoi muscoli sono rilassati.\nVedi come le tue mani si sentono meglio?"}
         });
 
         this.multiLanguageDictionary.Add(ProgressiveMuscleRelaxationC5Text, new Dictionary<SystemLanguage, string>
@@ -629,8 +629,8 @@ public class GlobalizationService  {
 
         this.multiLanguageDictionary.Add(ProgressiveMuscleRelaxationD2Text, new Dictionary<SystemLanguage, string>
         {
-            {SystemLanguage.English, "Pretend that you just got up in the morning and you want to stretch so you can reach the sun…"},
-            {SystemLanguage.Italian, "Fai finta che è mattina e ti sei appena svegliato.\nVuoi fare streching e raggiungere il sole con le mani"}});
+            {SystemLanguage.English, "It's morning and you just got up.\nYou want to stretch and to reach the sun with your hands"},
+            {SystemLanguage.Italian, "E' mattina e ti sei appena svegliato.\nVuoi fare streching e raggiungere il sole con le mani"}});
 
         this.multiLanguageDictionary.Add(ProgressiveMuscleRelaxationD3Text, new Dictionary<SystemLanguage, string>
         {
@@ -664,8 +664,8 @@ public class GlobalizationService  {
 
         this.multiLanguageDictionary.Add(ProgressiveMuscleRelaxationE1Text, new Dictionary<SystemLanguage, string>
         {
-            {SystemLanguage.English, "Now let’s try another exercise!\n\nPretend that you are a snail and you are sitting outside."},
-            {SystemLanguage.Italian, "Passiamo al prossimo esercizio!\n\nFai finta di essere una lumaca."}
+            {SystemLanguage.English, "Now let’s try another exercise!\n\nYou are a snail and you are sitting outside."},
+            {SystemLanguage.Italian, "Passiamo al prossimo esercizio!\n\nSei una lumaca."}
         });
 
         this.multiLanguageDictionary.Add(ProgressiveMuscleRelaxationE2Text, new Dictionary<SystemLanguage, string>
@@ -717,8 +717,8 @@ public class GlobalizationService  {
 
         this.multiLanguageDictionary.Add(ProgressiveMuscleRelaxationF2Text, new Dictionary<SystemLanguage, string>
         {
-            {SystemLanguage.English, "Pretend that you are standing barefooted on a warm, sandy beach.\nSquish your toes deep into the sand and feel how it goes through your toes."},
-            {SystemLanguage.Italian, "Fai finta di essere al mare, a piedi nudi su una calda e morbida sabbia.\nPremi i piedi nella sabbia profondamente e senti come questa entra tra le dita."}
+            {SystemLanguage.English, "You are standing barefooted on a warm, sandy beach.\nSquish your toes deep into the sand and feel how it goes through your toes."},
+            {SystemLanguage.Italian, "Sei al mare, a piedi nudi su una calda e morbida sabbia.\nPremi i piedi nella sabbia profondamente e senti come questa entra tra le dita."}
         });
 
         this.multiLanguageDictionary.Add(ProgressiveMuscleRelaxationF3Text, new Dictionary<SystemLanguage, string>
@@ -729,8 +729,8 @@ public class GlobalizationService  {
 
         this.multiLanguageDictionary.Add(ProgressiveMuscleRelaxationF4Text, new Dictionary<SystemLanguage, string>
         {
-            {SystemLanguage.English, "Now relax your feet, let your toes go loose and feel how nice and warm it is. Now you can slowly open your eyes.\n\nVery good! Now, let's continue with the next level!"},
-            {SystemLanguage.Italian, "Ora rilassa i tuoi piedi, lascia sciogliere le tue dita e senti com'è piacevole, e come sono rilassate e calde.\n\nBravissimo/Bravissima! Proseguiamo col prossimo livello!"}
+            {SystemLanguage.English, "Now relax your feet, let your toes go loose and feel how nice and warm it is. Now you can slowly open your eyes.\n\nVery good! Now, let's continue!"},
+            {SystemLanguage.Italian, "Ora rilassa i tuoi piedi, lascia sciogliere le tue dita e senti com'è piacevole, e come sono rilassate e calde.\n\nBravissimo/Bravissima! Proseguiamo!"}
         });
 
         this.multiLanguageDictionary.Add(InternalSensationsTitle, new Dictionary<SystemLanguage, string>
@@ -747,8 +747,8 @@ public class GlobalizationService  {
 
         this.multiLanguageDictionary.Add(InternalSensationsAText, new Dictionary<SystemLanguage, string>
         {
-            {SystemLanguage.English, "We are coming to the end of our game.\n\nNow you can begin to customize a bit your Ibox!\n\nWe worked a lot on how to manage stress and on how to get relax.\n\nNow you will see a palette of colors.\nPick one that represents for you the sense of relaxation, calm.\nTake it and put it on the Ibox to color!\n\nThen watch your Ibox at top left: from now on, it will become the color you choose!"},
-            {SystemLanguage.Italian, "Stiamo giungendo alla fine del nostro gioco.\n\nFinalmente ora potrai cominciare a personalizzare un po' la tua Ibox!\n\nAbbiamo lavorato un bel po' sulla gestione dello stress e su come rilassarci.\n\nOra troverai una tavolozza di colori.\nScegline uno che rappresenti per te il senso di rilassamento, di calma.\nPrendilo e mettilo sull' Ibox per colorarla!\n\nPoi guarda la tua Ibox, in alto a sinistra: d'ora in poi diventerà del colore da te scelto!"}
+            {SystemLanguage.English, "We are coming to the end of our game.\n\nNow you can change the color to your Ibox!\n\nWe worked a lot on how to manage stress and on how to get relax.\n\nAs in the beginning of the game, now, in the next screen, you will see a palette of colors.\nPick one that represents for you the sense of relaxation, calm,and not of tension, as before..\nTake it and put it on the Ibox to color!\n\nEven now it will change color.\n\nClick \"continue\" to choose the color"},
+            {SystemLanguage.Italian, "Stiamo giungendo alla fine del nostro gioco.\n\nOra potrai cambiare colore alla tua Ibox!\n\nAbbiamo lavorato un bel po' sulla gestione dello stress e su come rilassarci.\n\nCome all'inizio del gioco, troverai ora, nel prossimo screen, una tavolozza di colori.\nOra però dovrai sceglierne uno che rappresenti per te il senso di rilassamento, di calma, e non di tensione, come prima.\nPrendilo e mettilo sull' Ibox per colorarla!\n\nAnche ora cambierà colore.\n\nClicca “continuare” per scegliere il colore"}
         });
 
         this.multiLanguageDictionary.Add(ClosingOfSessionTitle, new Dictionary<SystemLanguage, string>
@@ -765,8 +765,8 @@ public class GlobalizationService  {
 
         this.multiLanguageDictionary.Add(MeMeterClosingText, new Dictionary<SystemLanguage, string>
         {
-            {SystemLanguage.English, "Now we'll make the ME-METER, as you did at the beginning.\n\nMind your thoughts and notice your body. \n\nDid it change from the beginning of the session?\n\nJust notice without judging.\nNot necessarily something must have changed.\n\nNow mark your level of relaxation on the ME-METER, from 1 to 10.\n(1 – very relaxed, 10 - very tense)"},
-            {SystemLanguage.Italian, "Ora rifaremo il ME-METER, come hai fatto all'inizio.\n\nPoni attenzione ai tuoi pensieri e al tuo corpo.\n\nC'è stato un cambiamento dall'inizio della sessione?\n\nSemplicemente riflettici, non giudicare.\nNon per forza deve essere cambiato qualcosa.\n\nOra segna il tuo livello di tensione sul ME-METER, da 1 a 10.\n(1 - molto rilassato, 10 - molto teso)"}
+            {SystemLanguage.English, "Now we'll make the ME-METER, as you did at the beginning.\n\nMind your thoughts and notice your body.\n\nWhat is the level of tension you feel at this moment?\n\nDid it change from the beginning of the session?\n\nJust notice without judging.\nNot necessarily something must have changed.\n\nNow mark your level of tension on the ME-METER, from 1 to 10.\n(1 – very relaxed, 10 - very tense)"},
+            {SystemLanguage.Italian, "Ora rifaremo il ME-METER, come hai fatto all'inizio.\n\nPoni attenzione ai tuoi pensieri e al tuo corpo.\n\nQual è il tuo livello di tensione in questo momento?\n\nC'è stato un cambiamento dall'inizio della sessione?\n\nSemplicemente riflettici, non giudicare.\nNon per forza deve essere cambiato qualcosa.\n\nOra segna il tuo livello di tensione sul ME-METER, da 1 a 10.\n(1 - molto rilassato, 10 - molto teso)"}
         });
 
         this.multiLanguageDictionary.Add(ClosingOfSessionA1Text, new Dictionary<SystemLanguage, string>
@@ -777,8 +777,8 @@ public class GlobalizationService  {
 
         this.multiLanguageDictionary.Add(ClosingOfSessionA2Text, new Dictionary<SystemLanguage, string>
         {
-            {SystemLanguage.English, "Today we learned to be aware of our body and to regulate our sensations.\nWe learned to notice the difference between  “stress” and “relax.\nWe learned that sometimes we need to tense our muscles in order to feel it relaxed."},
-            {SystemLanguage.Italian, "Abbiamo imparato a diventare più consapevoli del nostro corpo ed a regolare le nostre sensazioni.\nAbbiamo imparato a notare la differenza tra “stress” e “relax”.\nAbbiamo imparato che a volte, dobbiamo mettere in tensione i nostri muscoli, per poterci poi rilassare."}
+            {SystemLanguage.English, "Today we learned to be aware of our body and to regulate our sensations, through the breathing exercise, through the exercise when you have dance and shake all the body, and thanks to the attention you gave to your heartbeat.\nWe learned to notice the difference between  “stress” and “relax,through the Ibox, the ME-METER and through the exercise of mindfulness on your face.\nWe learned that sometimes we need to tense our muscles in order to feel it relaxed,through the Progressive Muscle Relaxation."},
+            {SystemLanguage.Italian, "Abbiamo imparato a diventare più consapevoli del nostro corpo ed a regolare le nostre sensazioni,tramite l'esercizio di respirazione, tramite l'esercizio in cui hai ballato e mosso tutto il corpo, e grazie all'attenzione che hai posto ai tuoi battiti.\nAbbiamo imparato a notare la differenza tra “stress” e “relax”,tramite l'I-BOX, il ME-METER e tramite l'esercizio di mindfulness sul viso.\nAbbiamo imparato che a volte, dobbiamo mettere in tensione i nostri muscoli, per poterci poi rilassare,con il Rilassamento Muscolare Progressivo."}
         });
 
         this.multiLanguageDictionary.Add(ClosingOfSessionA3Text, new Dictionary<SystemLanguage, string>
@@ -796,7 +796,7 @@ public class GlobalizationService  {
         this.multiLanguageDictionary.Add(ClosingOfSessionCText, new Dictionary<SystemLanguage, string>
         {
             {SystemLanguage.English, "Thank you for participating, I hope you enjoyed!"},
-            {SystemLanguage.Italian, "Grazie per la partecipazione, spero tu ti sia divertito! /spero te ti sia divertita!"}
+            {SystemLanguage.Italian, "Grazie per la partecipazione, spero tu ti sia divertito/divertita!"}
         });
 
         this.multiLanguageDictionary.Add(HowDoesMyBodyFeelTitle, new Dictionary<SystemLanguage, string>
@@ -813,20 +813,20 @@ public class GlobalizationService  {
 
         this.multiLanguageDictionary.Add(HowDoesMyBodyFeelAText, new Dictionary<SystemLanguage, string>
         {
-            {SystemLanguage.English, "Take a look at how may points you've gained.\nNow we will do another kind of exercise.\nYou can sit."},
-            {SystemLanguage.Italian, "Guarda quanti punti hai già guadagnato!\nOra passiamo ad un altro tipo di esercizio.\nPuoi sederti."}
+            {SystemLanguage.English, "Now we will do another kind of exercise.\nYou can sit."},
+            {SystemLanguage.Italian, "Ora passiamo ad un altro tipo di esercizio.\nPuoi sederti."}
         });
 
         this.multiLanguageDictionary.Add(HowDoesMyBodyFeelBText, new Dictionary<SystemLanguage, string>
         {
-            {SystemLanguage.English, "Here beside you can see a list of the main emotions.\nRead them carefully and try to identify where in your body, you feel them.\nWhere, for example, you feel the anger? Where the fear? Think about it, and then click continue."},
-            {SystemLanguage.Italian, "Qui di fianco vedi una lista delle emozioni principali.\nLeggile con attenzione e cerca di individuare dove nel tuo corpo, le senti.\nDove ad esempio senti la rabbia? E dove la paura? Riflettici, poi clicca continuare."}
+            {SystemLanguage.English, "Here beside you can see a list of the main emotions.\nRead them carefully and try to identify where in your body, you feel them.\nNow, think only, then click continue and you will find your avatar, together with the list, in order to do the exercise."},
+            {SystemLanguage.Italian, "Qui di fianco vedi una lista delle emozioni principali.\nLeggile con attenzione e cerca di individuare dove nel tuo corpo, le senti.\nRiflettici soltanto ora, poi clicca continuare e troverai anche il tuo avatar, insieme alla lista, per poter svolgere l'esercizio."}
         });
 
         this.multiLanguageDictionary.Add(HowDoesMyBodyFeelCText, new Dictionary<SystemLanguage, string>
         {
-            {SystemLanguage.English, "Now you have to mark on your avatar where you feel these emotions.\nClick on an emotion and then drag and drop it on the part of your body.\nIt will color in the same way.\n\nThink about every emotion, in general, even if you do not feel it now, in this moment.\n\nEvery emotion is written in a different color."},
-            {SystemLanguage.Italian, "Ora dovrai segnare sul tuo avatar dove senti queste emozioni.\nClicca sull'emozione e poi trascina la mano sulla parte del corpo, dove la senti.\nSi colorerà allo stesso modo.\n\nRagiona su ogni emozione, in generale, anche se non la senti ora, in questo momento.\n\nOgni emozione è scritta con un colore diverso."}
+            {SystemLanguage.English, "Now you have to mark on your avatar where you feel these emotions.\nClick on an emotion and then drag and drop it on the part of your body.\nIt will color in the same way.\n\nThink about every emotion, in general, even if you do not feel it now, in this moment.\n\nYou'll have to mark all the emotions, in order to earn points, remember that!\n\nDon't worry if you have to place two or more emotions, on the same side.\nIf you then change your mind, click 2 times on that part, and re-select."},
+            {SystemLanguage.Italian, "Ora dovrai segnare sul tuo avatar dove senti queste emozioni.\nClicca sull'emozione e poi trascina la mano sulla parte del corpo, dove la senti.\nSi colorerà allo stesso modo.\n\nRagiona su ogni emozione, in generale, anche se non la senti ora, in questo momento.\n\nDovrai segnare tutte le emozioni, per poter guadagnare i punti, ricordatelo!\n\nNon ti preoccupare se dovrai posizionare due o più emozioni, sulla stessa parte.\nSe poi cambi idea, clicca 2 volte sulla parte, e riseleziona."}
         });
 
         this.multiLanguageDictionary.Add(HowDoesMyBodyFeelDText, new Dictionary<SystemLanguage, string>

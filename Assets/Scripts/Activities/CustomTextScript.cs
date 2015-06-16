@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
 
 public class CustomTextScript : Activity {
 
@@ -16,6 +17,7 @@ public class CustomTextScript : Activity {
     protected bool moreInstructions;
     protected int instructionsPointer;
     protected string currentInstructions;
+    protected string fullInstructions;
 
     protected override void Awake()
     {
@@ -65,6 +67,11 @@ public class CustomTextScript : Activity {
 
     public virtual void OnGUI()
     {
+        
+        //var rect = GUILayoutUtility.GetRect(new GUIContent(this.fullInstructions), this.Configurations.BoxFormat);
+        //this.Configurations.FullTextArea.height = rect.height + 30;    
+       
+        
         //draw the instructions text
         GUI.Label(this.Configurations.FullTextArea, this.currentInstructions, this.Configurations.BoxFormat);
     }
@@ -81,6 +88,11 @@ public class CustomTextScript : Activity {
         {
             moreInstructions = true;
             this.Configurations.BoxFormat.alignment = TextAnchor.UpperLeft;
+            fullInstructions = newInstructions[0];
+            foreach (var s in newInstructions.Skip(1))
+            {
+                fullInstructions += "\n\n" + s;
+            }
         }
         else
         {
@@ -89,6 +101,7 @@ public class CustomTextScript : Activity {
                 this.Configurations.BoxFormat.alignment = TextAnchor.MiddleLeft;
             }
             moreInstructions = false;
+            fullInstructions = instructions[0];
         }
         currentInstructions = instructions[0];
         instructionsPointer = 0;

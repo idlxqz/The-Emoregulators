@@ -84,6 +84,9 @@ public class ProgressiveMuscleRelaxationScript : CustomTextScript
 
     public override void OnGUI()
     {
+        //var rect = GUILayoutUtility.GetRect(new GUIContent(this.fullInstructions), this.Configurations.BoxFormat);
+        //this.Configurations.HalfTextArea.height = rect.height + 30;
+
         //draw the instructions text
         GUI.Label(this.Configurations.HalfTextArea, this.currentInstructions, this.Configurations.BoxFormat);
     }

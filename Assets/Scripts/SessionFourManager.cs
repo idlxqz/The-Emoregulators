@@ -140,6 +140,7 @@ public class SessionFourManager : SessionManager {
                 //prepare custom text of introduction
                 setupNextPhaseCustomText = () =>
                 {
+                    customText.MinimumWaitTime = 5;
                     customText.EndActivity();
                     log.LogInformation("Ended A MinuteForMyselfC.");
                     //disable the custom text and proceed to the next state
@@ -147,7 +148,8 @@ public class SessionFourManager : SessionManager {
 
                     currentState = SessionState.MinuteForMyselfD;
                 };
-                customText.Setup("MinuteForMySelfC",setupNextPhaseCustomText, GlobalizationService.Instance.Globalize(GlobalizationService.MinuteForMyselfCText));
+                customText.MinimumWaitTime = 10;
+                customText.Setup("MinuteForMySelfC",setupNextPhaseCustomText, () => this.AlarmSound.Play(),GlobalizationService.Instance.Globalize(GlobalizationService.MinuteForMyselfCText));
                 customText.enabled = true;
                 currentState = SessionState.CustomText;
                 break;
@@ -156,6 +158,7 @@ public class SessionFourManager : SessionManager {
                 //prepare custom text of introduction
                 setupNextPhaseCustomText = () =>
                 {
+                    customText.MinimumWaitTime = 5;
                     customText.EndActivity();
                     log.LogInformation("Ended A MinuteForMyselfD.");
                     //disable the custom text and proceed to the next state
@@ -171,6 +174,7 @@ public class SessionFourManager : SessionManager {
                     currentState = SessionState.MeMeter;
                     proceed = false;
                 };
+                customText.MinimumWaitTime = 10;
                 customText.Setup("MinuteForMySelfD",setupNextPhaseCustomText, GlobalizationService.Instance.Globalize(GlobalizationService.MinuteForMyselfDText));
                 customText.enabled = true;
                 currentState = SessionState.CustomText;
@@ -193,12 +197,14 @@ public class SessionFourManager : SessionManager {
                         //prepare custom text of introduction
                         setupNextPhaseCustomText = () =>
                         {
+                            customText.MinimumWaitTime = 5;
                             customText.EndActivity();
                             log.LogInformation("Ended FacialMindfullness A.");
                             //disable the custom text and proceed to the next state
                           
                             currentState = SessionState.FacialMindfulnessB;
                         };
+                        customText.MinimumWaitTime = 10;
                         customText.Setup("FacialMindfulnessA",setupNextPhaseCustomText, 
                             new []{
                                 GlobalizationService.Instance.Globalize(GlobalizationService.FacialMindfulnessA1Text),
@@ -537,7 +543,7 @@ public class SessionFourManager : SessionManager {
                 SpringSound.Stop();
                 SeaSound.Play();
 
-                progressiveMuscleRelaxation.Setup("PMRF",setupNextPhaseCustomText, () => SessionManager.PlayerScore += 4,
+                progressiveMuscleRelaxation.Setup("PMRF",setupNextPhaseCustomText, () => SessionManager.PlayerScore += 1,
                     new[]
                     {
                         GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationF1Text),
