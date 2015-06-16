@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Assets.Scripts;
 using UnityEngine;
 
 public class CustomTextScript : Activity {
@@ -11,9 +12,7 @@ public class CustomTextScript : Activity {
     //instruction control
     public System.Action setupNextPhase;
     protected System.Action ExecuteOnFinish;
-    public string[] instructions;
-    public int firstDelayBetweenInstructions;
-    public int delayBetweenInstructions;
+    public Instruction[] instructions;
     protected bool moreInstructions;
     protected int instructionsPointer;
     protected string currentInstructions;
@@ -32,7 +31,7 @@ public class CustomTextScript : Activity {
         //check if the waiting time is elapsed
         if (this.moreInstructions)
         {
-            var delay = (instructionsPointer == 0 ? this.firstDelayBetweenInstructions : this.delayBetweenInstructions);
+            var delay = instructions[instructionsPointer + 1].DelayTime;
            
             if ((Time.time - this.timeStart) >= delay)
             {
@@ -76,7 +75,7 @@ public class CustomTextScript : Activity {
         GUI.Label(this.Configurations.FullTextArea, this.currentInstructions, this.Configurations.BoxFormat);
     }
 
-    public virtual void Setup(string description, System.Action nextPhaseSetup,  string[] newInstructions)
+    public virtual void Setup(string description, System.Action nextPhaseSetup,  Instruction[] newInstructions)
     {
         this.Description = description;
         this.SensorManager.StartNewActivity();
@@ -88,10 +87,10 @@ public class CustomTextScript : Activity {
         {
             moreInstructions = true;
             this.Configurations.BoxFormat.alignment = TextAnchor.UpperLeft;
-            fullInstructions = newInstructions[0];
-            foreach (var s in newInstructions.Skip(1))
+            fullInstructions = newInstructions[0].Text;
+            foreach (var instruction in newInstructions.Skip(1))
             {
-                fullInstructions += "\n\n" + s;
+                fullInstructions += "\n\n" + instruction.Text;
             }
         }
         else
@@ -101,14 +100,14 @@ public class CustomTextScript : Activity {
                 this.Configurations.BoxFormat.alignment = TextAnchor.MiddleLeft;
             }
             moreInstructions = false;
-            fullInstructions = instructions[0];
+            fullInstructions = instructions[0].Text;
         }
-        currentInstructions = instructions[0];
+        currentInstructions = instructions[0].Text;
         instructionsPointer = 0;
         timeStart = Time.time;
     }
 
-    public void Setup(string description, System.Action nextPhaseSetup, System.Action executeOnFinish, string[] newInstructions)
+    public void Setup(string description, System.Action nextPhaseSetup, System.Action executeOnFinish, Instruction[] newInstructions)
     {
         this.ExecuteOnFinish = executeOnFinish;
         this.Setup(description, nextPhaseSetup, newInstructions);
@@ -116,7 +115,7 @@ public class CustomTextScript : Activity {
 
     public void Setup(string description, System.Action nextPhaseSetup, string newInstructions)
     {
-        Setup(description, nextPhaseSetup, new string[] { newInstructions });
+        Setup(description, nextPhaseSetup, new Instruction[] { new Instruction(newInstructions)});
     }
 
     public void Setup(string description, System.Action nextPhaseSetup, System.Action executeOnFinish, string newInstructions)

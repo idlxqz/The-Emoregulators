@@ -38,11 +38,12 @@ public class ActiveShakingMeditationScript : CustomTextScript {
         //check if the waiting time is elapsed
         if (moreInstructions)
         {
-            if ((Time.time - timeStart) >= delayBetweenInstructions)
+            var delay = instructions[instructionsPointer + 1].DelayTime;
+            if ((Time.time - timeStart) >= delay)
             {
                 timeStart = Time.time;
                 instructionsPointer++;
-                currentInstructions += "\n\n" + instructions[instructionsPointer];
+                currentInstructions += "\n\n" + instructions[instructionsPointer].Text;
                 //check if there are more to show
                 if (instructions.Length == instructionsPointer + 1)
                 {

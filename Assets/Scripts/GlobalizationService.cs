@@ -81,6 +81,7 @@ public class GlobalizationService  {
     public const string BreathingRegulationB1Text = "BreathingRegulationB1Text";
     public const string BreathingRegulationB2Text = "BreathingRegulationB2Text";
     public const string BreathingRegulationB3Text = "BreathingRegulationB3Text";
+    public const string BreathingRegulationB4Text = "BreathingRegulationB4Text";
     public const string ActiveMeditationTitle = "ActiveMeditationTitle";
     public const string ActiveMeditationActivityName = "ActiveMeditationActivityName";
     public const string ActiveMeditationA1Text = "ActiveMeditationA1Text";
@@ -299,8 +300,8 @@ public class GlobalizationService  {
 
         this.multiLanguageDictionary.Add(IntroducingOurselvesBackgroundText, new Dictionary<SystemLanguage, string>
         {
-            {SystemLanguage.English, "First of all you have to choose the background that you want to give to the game, the one that makes you feel more relaxed.\nIn the next screen you will find various options. Click on “next” or on “previous” to go forward or to go back. \nBy clicking on each box, you can preview it.\nClick on the image that you prefer."},
-            {SystemLanguage.Italian, "Prima di tutto scegli lo sfondo che vuoi dare al gioco, lo sfondo che più ti rilassa.\nNel prossimo screen troverai varie opzioni. Clicca su “next” o “previous” per andare avanti, o per tornare indietro.\nCliccando su ogni riquadro, potrai vederne l'anteprima.\nClicca sopra l'immagine che preferisci."}
+            {SystemLanguage.English, "First of all you have to choose the background that you want to give to the game, the one that makes you feel more relaxed.\nIn the next screen you will find various options.\nBy clicking on each box, you can preview it.\nClick on the image that you prefer."},
+            {SystemLanguage.Italian, "Prima di tutto scegli lo sfondo che vuoi dare al gioco, lo sfondo che più ti rilassa.\nNel prossimo screen troverai varie opzioni.\nCliccando su ogni riquadro, potrai vederne l'anteprima.\nClicca sopra l'immagine che preferisci."}
         });
 
         this.multiLanguageDictionary.Add(IntroducingOurselvesAvatarText, new Dictionary<SystemLanguage, string>
@@ -491,8 +492,14 @@ public class GlobalizationService  {
 
         this.multiLanguageDictionary.Add(BreathingRegulationB3Text, new Dictionary<SystemLanguage, string>
         {
-            {SystemLanguage.English, "That's right! Good! Take a look at how many points you've gained and at your heart rate.\n\nLet's continue!"},
-            {SystemLanguage.Italian, "Così giusto, proprio così! Bravo/Brava.\n\nGuarda quanti punti stai guadagnando e osserva il tuo battito.\n\nOra continuiamo!"}
+            {SystemLanguage.English, "That's right! Good! Take a look at how many points you've gained and at your heart rate."},
+            {SystemLanguage.Italian, "Così giusto, proprio così! Bravo/Brava.\n\nGuarda quanti punti stai guadagnando e osserva il tuo battito."}
+        });
+
+        this.multiLanguageDictionary.Add(BreathingRegulationB4Text, new Dictionary<SystemLanguage, string>
+        {
+            {SystemLanguage.English, "Let's continue!"},
+            {SystemLanguage.Italian, "Ora continuiamo!"}
         });
 
         this.multiLanguageDictionary.Add(ActiveMeditationTitle, new Dictionary<SystemLanguage, string>
@@ -569,8 +576,8 @@ public class GlobalizationService  {
 
         this.multiLanguageDictionary.Add(ProgressiveMuscleRelaxationBText, new Dictionary<SystemLanguage, string>
         {
-            {SystemLanguage.English, "Now let's start the exercise!\n\nIt will consist of 3 parts and you will have to use your imagination too.\nPlease stand up."},
-            {SystemLanguage.Italian, "Ora iniziamo l'esercizio!\nSarà composto da 3 parti e dovrai usare anche la tua immaginazione.\nAlzati in piedi."}
+            {SystemLanguage.English, "Now let's start the exercise!\n\nIt will consist of 4 parts and you will have to use your imagination too.\nPlease stand up."},
+            {SystemLanguage.Italian, "Ora iniziamo l'esercizio!\nSarà composto da 4 parti e dovrai usare anche la tua immaginazione.\nAlzati in piedi."}
         });
 
         this.multiLanguageDictionary.Add(ProgressiveMuscleRelaxationC1Text, new Dictionary<SystemLanguage, string>

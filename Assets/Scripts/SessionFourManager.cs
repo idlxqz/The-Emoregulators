@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts;
+using UnityEngine;
 
 public class SessionFourManager : SessionManager {
 
@@ -148,7 +149,7 @@ public class SessionFourManager : SessionManager {
 
                     currentState = SessionState.MinuteForMyselfD;
                 };
-                customText.MinimumWaitTime = 10;
+                customText.MinimumWaitTime = 30;
                 customText.Setup("MinuteForMySelfC",setupNextPhaseCustomText, () => this.AlarmSound.Play(),GlobalizationService.Instance.Globalize(GlobalizationService.MinuteForMyselfCText));
                 customText.enabled = true;
                 currentState = SessionState.CustomText;
@@ -206,9 +207,8 @@ public class SessionFourManager : SessionManager {
                         };
                         customText.MinimumWaitTime = 10;
                         customText.Setup("FacialMindfulnessA",setupNextPhaseCustomText, 
-                            new []{
-                                GlobalizationService.Instance.Globalize(GlobalizationService.FacialMindfulnessA1Text),
-                                GlobalizationService.Instance.Globalize(GlobalizationService.FacialMindfulnessA2Text)
+                            new Instruction[]{ new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.FacialMindfulnessA1Text)),
+                                               new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.FacialMindfulnessA2Text))
                             });
                         customText.enabled = true;
                         currentState = SessionState.CustomText;
@@ -238,10 +238,10 @@ public class SessionFourManager : SessionManager {
                     currentState = SessionState.FacialMindfulnessD;
                 };
                 customText.Setup("FacialMindfullnessB",setupNextPhaseCustomText, 
-                    new[]
+                    new Instruction[]
                     {
-                        GlobalizationService.Instance.Globalize(GlobalizationService.FacialMindfulnessB1Text),
-                        GlobalizationService.Instance.Globalize(GlobalizationService.FacialMindfulnessB2Text)
+                        new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.FacialMindfulnessB1Text)),
+                        new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.FacialMindfulnessB2Text))
                     });
                 customText.enabled = true;
                 currentState = SessionState.CustomText;
@@ -262,11 +262,12 @@ public class SessionFourManager : SessionManager {
                         currentState = SessionState.BreathingRegulationB;
                         breathingRegulation.Avatar = this.GetPlayerAvatar;
                         breathingRegulation.Setup("BreathingRegulationA",null, () => SessionManager.PlayerScore += 5,
-                            new[]{GlobalizationService.Instance.Globalize(GlobalizationService.BreathingRegulationA1Text),
-                                GlobalizationService.Instance.Globalize(GlobalizationService.BreathingRegulationA2Text),
-                                GlobalizationService.Instance.Globalize(GlobalizationService.BreathingRegulationA3Text),
-                                GlobalizationService.Instance.Globalize(GlobalizationService.BreathingRegulationA4Text),
-                                GlobalizationService.Instance.Globalize(GlobalizationService.BreathingRegulationA5Text)});
+                            new []{
+                                new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.BreathingRegulationA1Text)),
+                                new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.BreathingRegulationA2Text)),
+                                new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.BreathingRegulationA3Text)),
+                                new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.BreathingRegulationA4Text)),
+                                new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.BreathingRegulationA5Text))});
                         breathingRegulation.enabled = true;
                     };
                     customTitleScript.Setup("BreathingRegulationTitle",setupNextPhaseCustomTitle, GlobalizationService.Instance.Globalize(GlobalizationService.BreathingRegulationTitle));
@@ -284,9 +285,12 @@ public class SessionFourManager : SessionManager {
                     //breathingRegulation.enabled = false;
                     log.LogInformation("Started Breathing Regulation B.");
                     breathingRegulation.Setup("BreathingRegulationB",null, () => SessionManager.PlayerScore += 5,
-                            new[]{GlobalizationService.Instance.Globalize(GlobalizationService.BreathingRegulationB1Text),
-                                GlobalizationService.Instance.Globalize(GlobalizationService.BreathingRegulationB2Text),
-                                GlobalizationService.Instance.Globalize(GlobalizationService.BreathingRegulationB3Text)});
+                            new []{
+                                new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.BreathingRegulationB1Text)),
+                                new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.BreathingRegulationB2Text)),
+                                new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.BreathingRegulationB3Text)),
+                                new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.BreathingRegulationB4Text),10)
+                         });
                     breathingRegulation.enabled = true;
                     currentState = SessionState.BreathingRegulationC;
                 }
@@ -310,10 +314,11 @@ public class SessionFourManager : SessionManager {
                         activeShakingMeditation.Avatar = this.GetPlayerAvatar;
                         activeShakingMeditation.enabled = true;
                         activeShakingMeditation.Setup("ActiveShakingMeditationA",null, 
-                            new[]{GlobalizationService.Instance.Globalize(GlobalizationService.ActiveMeditationA1Text),
-                                GlobalizationService.Instance.Globalize(GlobalizationService.ActiveMeditationA2Text),
-                                GlobalizationService.Instance.Globalize(GlobalizationService.ActiveMeditationA3Text),
-                                GlobalizationService.Instance.Globalize(GlobalizationService.ActiveMeditationA4Text)
+                            new[]{
+                                new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ActiveMeditationA1Text)),
+                                new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ActiveMeditationA2Text)),
+                                new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ActiveMeditationA3Text)),
+                                new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ActiveMeditationA4Text))
                             });
                         currentState = SessionState.ActiveShakingMeditation;
                     };
@@ -451,14 +456,14 @@ public class SessionFourManager : SessionManager {
                 progressiveMuscleRelaxation.Setup("PMRC",setupNextPhaseCustomText, () => SessionManager.PlayerScore += 2,
                     new []
                     {
-                        GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationC1Text),
-                        GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationC2Text),
-                        GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationC3Text),
-                        GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationC4Text),
-                        GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationC5Text),
-                        GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationC6Text),
-                        GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationC7Text),
-                        GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationC8Text)
+                        new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationC1Text),0), 
+                        new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationC2Text),3), 
+                        new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationC3Text),5), 
+                        new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationC4Text),5), 
+                        new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationC5Text),5), 
+                        new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationC6Text),5), 
+                        new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationC7Text),5), 
+                        new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationC8Text),5)
                     });
                 
                 currentState = SessionState.ProgressiveMuscleRelaxation;
@@ -473,7 +478,6 @@ public class SessionFourManager : SessionManager {
                     currentState = SessionState.ProgressiveMuscleRelaxationE;
                 };
 
-                progressiveMuscleRelaxation.delayBetweenInstructions = 7;
                 progressiveMuscleRelaxation.AnimationId = AnimatorControlerHashIDs.Instance.StreachingExerciseTrigger;
                 progressiveMuscleRelaxation.ExpectedMuscle = 2;
                 progressiveMuscleRelaxation.enabled = true;
@@ -482,13 +486,13 @@ public class SessionFourManager : SessionManager {
                 progressiveMuscleRelaxation.Setup("PMRD",setupNextPhaseCustomText, () => SessionManager.PlayerScore += 2,
                     new []
                     {
-                        GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationD1Text),
-                        GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationD2Text),
-                        GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationD3Text),
-                        GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationD4Text),
-                        GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationD5Text),
-                        GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationD6Text),
-                        GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationD7Text)
+                        new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationD1Text),0),
+                        new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationD2Text),3),
+                        new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationD3Text),7),
+                        new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationD4Text),7),
+                        new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationD5Text),7),
+                        new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationD6Text),7),
+                        new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationD7Text),7)
                     });
                 
                 currentState = SessionState.ProgressiveMuscleRelaxation;
@@ -503,7 +507,6 @@ public class SessionFourManager : SessionManager {
                     currentState = SessionState.ProgressiveMuscleRelaxationF;
                 };
 
-                progressiveMuscleRelaxation.delayBetweenInstructions = 6;
                 progressiveMuscleRelaxation.AnimationId = AnimatorControlerHashIDs.Instance.SnailExerciseTrigger;
                 progressiveMuscleRelaxation.enabled = true;
                 progressiveMuscleRelaxation.SetBackground(progressiveMuscleRelaxation.SnailBackground);
@@ -511,14 +514,14 @@ public class SessionFourManager : SessionManager {
                 progressiveMuscleRelaxation.Setup("PMRE",setupNextPhaseCustomText, () => SessionManager.PlayerScore += 2,
                     new[]
                     {
-                        GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationE1Text),
-                        GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationE2Text),
-                        GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationE3Text),
-                        GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationE4Text),
-                        GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationE5Text),
-                        GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationE6Text),
-                        GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationE7Text),
-                        GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationE8Text)
+                        new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationE1Text),0), 
+                        new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationE2Text),3), 
+                        new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationE3Text),6), 
+                        new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationE4Text),6), 
+                        new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationE5Text),6), 
+                        new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationE6Text),6), 
+                        new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationE7Text),6), 
+                        new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationE8Text),6)
                     });
 
                 currentState = SessionState.ProgressiveMuscleRelaxation;
@@ -536,7 +539,6 @@ public class SessionFourManager : SessionManager {
                     currentState = SessionState.HowDoesMyBodyFeelTitle;
                 };
 
-                progressiveMuscleRelaxation.delayBetweenInstructions = 7;
                 progressiveMuscleRelaxation.AnimationId = AnimatorControlerHashIDs.Instance.SandExerciseTrigger;
                 progressiveMuscleRelaxation.enabled = true;
                 progressiveMuscleRelaxation.SetBackground(progressiveMuscleRelaxation.SandBackground);
@@ -546,10 +548,10 @@ public class SessionFourManager : SessionManager {
                 progressiveMuscleRelaxation.Setup("PMRF",setupNextPhaseCustomText, () => SessionManager.PlayerScore += 1,
                     new[]
                     {
-                        GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationF1Text),
-                        GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationF2Text),
-                        GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationF3Text),
-                        GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationF4Text)
+                        new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationF1Text),0), 
+                        new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationF2Text),3), 
+                        new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationF3Text),7), 
+                        new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationF4Text),7)
                     });
 
                 currentState = SessionState.ProgressiveMuscleRelaxation;
@@ -734,9 +736,9 @@ public class SessionFourManager : SessionManager {
                 customText.Setup("ClosingOfSessionA",setupNextPhaseCustomText, 
                     new []
                     {
-                        GlobalizationService.Instance.Globalize(GlobalizationService.ClosingOfSessionA1Text),
-                        GlobalizationService.Instance.Globalize(GlobalizationService.ClosingOfSessionA2Text),
-                        GlobalizationService.Instance.Globalize(GlobalizationService.ClosingOfSessionA3Text)
+                        new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ClosingOfSessionA1Text)),
+                        new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ClosingOfSessionA2Text)),
+                        new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ClosingOfSessionA3Text))
                     });
                 customText.enabled = true;
                 currentState = SessionState.CustomText;
@@ -758,6 +760,7 @@ public class SessionFourManager : SessionManager {
                     };
 
                     CustomTextWithImage.Image = this.CupTexture;
+                    CustomTextWithImage.ImageScale = 1.0f;
                     CustomTextWithImage.ShowImageLabel = true;
                     CustomTextWithImage.ImageLabel = SessionManager.PlayerScore + "/100 Points";
                     CustomTextWithImage.Setup("ClosingOfSessionC",setupNextPhaseCustomText, () => this.ApplauseSound.Play(), GlobalizationService.Instance.Globalize(GlobalizationService.ClosingOfSessionCText));

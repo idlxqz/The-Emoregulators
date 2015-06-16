@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts;
+using UnityEngine;
 
 public class CustomTextWithImage : CustomTextScript {
 
@@ -43,7 +44,7 @@ public class CustomTextWithImage : CustomTextScript {
         GUI.Label(this.ImageLabelArea, this.ImageLabel,this.LabelFormat);
     }
 
-    public override void Setup(string description, System.Action nextPhaseSetup, string[] newInstructions)
+    public override void Setup(string description, System.Action nextPhaseSetup, Instruction[] newInstructions)
     {
         base.Setup(description, nextPhaseSetup, newInstructions);
         //dynamic positioning

@@ -19,11 +19,13 @@ public class BreathingRegulationScript : CustomTextScript {
         //check if the waiting time is elapsed
         if (moreInstructions)
         {
-            if ((Time.time - timeStart) >= delayBetweenInstructions)
+            var delay = this.instructions[this.instructionsPointer + 1].DelayTime;
+
+            if ((Time.time - timeStart) >= delay)
             {
                 timeStart = Time.time;
                 instructionsPointer++;
-                currentInstructions += "\n\n" + instructions[instructionsPointer];
+                currentInstructions += "\n\n" + instructions[instructionsPointer].Text;
 
                 if (instructionsPointer == 1)
                 {

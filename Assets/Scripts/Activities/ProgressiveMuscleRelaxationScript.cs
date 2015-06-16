@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts;
+using UnityEngine;
 
 public class ProgressiveMuscleRelaxationScript : CustomTextScript
 {
@@ -52,12 +53,12 @@ public class ProgressiveMuscleRelaxationScript : CustomTextScript
         //check if the waiting time is elapsed
         if (moreInstructions)
         {
-            var delay = (instructionsPointer == 0 ? this.firstDelayBetweenInstructions : this.delayBetweenInstructions);
+            var delay = instructions[instructionsPointer+1].DelayTime;
             if ((Time.time - timeStart) >= delay)
             {
                 timeStart = Time.time;
                 instructionsPointer++;
-                currentInstructions += "\n\n" + instructions[instructionsPointer];
+                currentInstructions += "\n\n" + instructions[instructionsPointer].Text;
 
                 if (instructionsPointer == 1 || instructionsPointer == 4)
                 {
@@ -91,7 +92,7 @@ public class ProgressiveMuscleRelaxationScript : CustomTextScript
         GUI.Label(this.Configurations.HalfTextArea, this.currentInstructions, this.Configurations.BoxFormat);
     }
 
-    public override void Setup(string description, System.Action nextPhaseSetup, string[] newInstructions)
+    public override void Setup(string description, System.Action nextPhaseSetup, Instruction[] newInstructions)
     {
         base.Setup(description, nextPhaseSetup, newInstructions);
         this.ExpectedMuscleRelaxed = false;
