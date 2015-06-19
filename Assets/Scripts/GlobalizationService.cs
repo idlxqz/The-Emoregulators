@@ -594,7 +594,7 @@ public class GlobalizationService  {
 
         this.multiLanguageDictionary.Add(ProgressiveMuscleRelaxationC3Text, new Dictionary<SystemLanguage, string>
         {
-            {SystemLanguage.English, "Feel the pressure in your hands and in your arms as you squeeze it"},
+            {SystemLanguage.English, "Feel the pressure in your hands and in your arms as you squeeze it."},
             {SystemLanguage.Italian, "Senti la pressione nelle tue mani e nelle tue braccia mentre la spremi."}
         });
 
@@ -636,8 +636,8 @@ public class GlobalizationService  {
 
         this.multiLanguageDictionary.Add(ProgressiveMuscleRelaxationD2Text, new Dictionary<SystemLanguage, string>
         {
-            {SystemLanguage.English, "It's morning and you just got up.\nYou want to stretch and to reach the sun with your hands"},
-            {SystemLanguage.Italian, "E' mattina e ti sei appena svegliato.\nVuoi fare streching e raggiungere il sole con le mani"}});
+            {SystemLanguage.English, "It's morning and you just got up.\nYou want to stretch and to reach the sun with your hands."},
+            {SystemLanguage.Italian, "E' mattina e ti sei appena svegliato.\nVuoi fare streching e raggiungere il sole con le mani."}});
 
         this.multiLanguageDictionary.Add(ProgressiveMuscleRelaxationD3Text, new Dictionary<SystemLanguage, string>
         {
@@ -778,7 +778,7 @@ public class GlobalizationService  {
 
         this.multiLanguageDictionary.Add(ClosingOfSessionA1Text, new Dictionary<SystemLanguage, string>
         {
-            {SystemLanguage.English, "We are arrived at the end of our journey today!"},
+            {SystemLanguage.English, "We have arrived at the end of our journey today!"},
             {SystemLanguage.Italian, "Siamo giunti alla fine del nostro percorso di oggi!"}
         });
 
