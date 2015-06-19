@@ -98,15 +98,9 @@ public class HowDoesMyBodyFeelScript : Activity {
             {
                 if (RectsOverlap(item.Value, draggedEmotionRect))
                 {
-                    if (!this.CanContinue)
-                    {
-                        this.CanContinue = true;
-                        UIManagerScript.EnableSkipping();
-                        SessionManager.PlayerScore += 10;
-                    }
-                   
                     //dropped on this item
                     bodyAreasOverlays[item.Key] = emotionColorTextures[emotionSelected];
+                    bodyEmotions[item.Key] = emotions[emotionSelected];
                     //special cases
                     if (item.Key == BodyArea.ArmLeft || item.Key == BodyArea.ArmRight)
                     {
@@ -122,6 +116,11 @@ public class HowDoesMyBodyFeelScript : Activity {
                         bodyEmotions[BodyArea.HandLeft] = emotions[emotionSelected];
                         bodyEmotions[BodyArea.HandRight] = emotions[emotionSelected];
                     }
+
+                    //check if the user is able to continue
+                    if (!this.CanContinue && IsPossibleToContinue())
+                        ActivateContinue();
+
                     //look no more so we can have priorities in when we have overlapping areas
                     break;
                 }
@@ -174,6 +173,12 @@ public class HowDoesMyBodyFeelScript : Activity {
         {
             bodyAreasOverlays[clearing] = null;
             bodyEmotions[clearing] = "None";
+        }
+
+        //Disable Continue if it was enabled and anything was cleared
+        if ((toClear.Count > 0) && this.CanContinue)
+        {
+            DisableContinue();
         }
 
         //draw the emotion options
@@ -345,6 +350,44 @@ public class HowDoesMyBodyFeelScript : Activity {
                         (r2.yMin >= r1.yMin) && (r2.yMin <= r1.yMax);
 
         return widthOverlap && heightOverlap;
+    }
+
+    private bool IsPossibleToContinue()
+    {
+        //Enable user to continue after having all emotions assigned
+        bool emotionsAssignedToBodyParts = true;
+        foreach (var bodyEmotion in bodyEmotions)
+        {
+            //Logger.Instance.LogInformation("BodyEmotionPart: " + bodyEmotion.Key.ToString() + " BodyEmotion: " + bodyEmotion.Value);
+            if (bodyEmotion.Value.Equals("None"))
+            {
+                emotionsAssignedToBodyParts = false;
+                break;
+            }
+        }
+
+        return emotionsAssignedToBodyParts;
+    }
+
+    private void ActivateContinue()
+    {
+        if (this.CanContinue == false)
+        {
+            this.CanContinue = true;
+            UIManagerScript.EnableSkipping();
+            SessionManager.PlayerScore += 10;
+        }
+
+    }
+
+    private void DisableContinue()
+    {
+        if (this.CanContinue == true)
+        {
+            this.CanContinue = false;
+            UIManagerScript.DisableSkipping();
+            SessionManager.PlayerScore -= 10;
+        }
     }
 
     public override void EndActivity()
