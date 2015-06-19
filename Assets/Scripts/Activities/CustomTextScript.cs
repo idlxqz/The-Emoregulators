@@ -37,7 +37,7 @@ public class CustomTextScript : Activity {
             {
                 this.timeStart = Time.time;
                 instructionsPointer++;
-                currentInstructions += "\n\n" + instructions[instructionsPointer];
+                currentInstructions += "\n\n" + instructions[instructionsPointer].Text;
                 //check if there are more to show
                 if (instructions.Length == instructionsPointer + 1)
                 {
