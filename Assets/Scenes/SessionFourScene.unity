@@ -469,7 +469,6 @@ MonoBehaviour:
   m_SubmitButton: Submit
   m_CancelButton: Cancel
   m_InputActionsPerSecond: 10
-  m_RepeatDelay: .5
   m_AllowActivationOnMobileDevice: 0
 --- !u!114 &281754123
 MonoBehaviour:
@@ -544,9 +543,6 @@ MonoBehaviour:
   CanContinue: 0
   Description: 
   MinimumWaitTime: 0
-  instructions: []
-  firstDelayBetweenInstructions: 3
-  delayBetweenInstructions: 3
   Avatar: {fileID: 0}
 --- !u!1 &303922266
 GameObject:
@@ -595,9 +591,6 @@ MonoBehaviour:
   CanContinue: 0
   Description: 
   MinimumWaitTime: 0
-  instructions: []
-  firstDelayBetweenInstructions: 3
-  delayBetweenInstructions: 3
 --- !u!1 &341060320
 GameObject:
   m_ObjectHideFlags: 0
@@ -737,7 +730,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: .0219999999
-  m_StereoMirrorMode: 0
 --- !u!4 &381334375
 Transform:
   m_ObjectHideFlags: 0
@@ -998,9 +990,6 @@ MonoBehaviour:
   CanContinue: 0
   Description: 
   MinimumWaitTime: 0
-  instructions: []
-  firstDelayBetweenInstructions: 3
-  delayBetweenInstructions: 3
   Avatar: {fileID: 0}
 --- !u!82 &693590938
 AudioSource:
@@ -1184,9 +1173,6 @@ MonoBehaviour:
   CanContinue: 0
   Description: 
   MinimumWaitTime: 0
-  instructions: []
-  firstDelayBetweenInstructions: 3
-  delayBetweenInstructions: 3
   emotionColorTextures: []
   howDoesMyBodyFeel: {fileID: 0}
 --- !u!1 &861568558
@@ -1799,9 +1785,6 @@ MonoBehaviour:
   CanContinue: 0
   Description: 
   MinimumWaitTime: 0
-  instructions: []
-  firstDelayBetweenInstructions: 3
-  delayBetweenInstructions: 3
   Image: {fileID: 2800000, guid: f75c8cffe17d68b4fa1cd5757d21caeb, type: 3}
   ImageScale: 1
   LabelFormat:
@@ -2168,7 +2151,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1717924602
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2834,9 +2817,6 @@ MonoBehaviour:
   CanContinue: 0
   Description: 
   MinimumWaitTime: 0
-  instructions: []
-  firstDelayBetweenInstructions: 3
-  delayBetweenInstructions: 5
   Avatar: {fileID: 0}
   AnimationId: 0
   ExpectedMuscle: 0

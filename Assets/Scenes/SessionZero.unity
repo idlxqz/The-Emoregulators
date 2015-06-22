@@ -249,9 +249,6 @@ MonoBehaviour:
   CanContinue: 0
   Description: 
   MinimumWaitTime: 0
-  instructions: []
-  firstDelayBetweenInstructions: 3
-  delayBetweenInstructions: 3
 --- !u!1 &860576901
 GameObject:
   m_ObjectHideFlags: 0
@@ -463,7 +460,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1234239930
 RectTransform:
   m_ObjectHideFlags: 0
@@ -634,7 +631,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: .0219999999
-  m_StereoMirrorMode: 0
 --- !u!4 &1411622768
 Transform:
   m_ObjectHideFlags: 0
@@ -804,7 +800,7 @@ MonoBehaviour:
   CanContinue: 0
   Description: 
   currentRenderer: {fileID: 0}
-  movTexture: {fileID: 15200000, guid: 0bc1cd3e754a9e645bb1af9e7afcc2c6, type: 3}
+  movTexture: {fileID: 15200000, guid: 8fb8cb75c29236c4aa7c225f00b5c378, type: 3}
   played: 0
 --- !u!23 &1834824335
 MeshRenderer:
@@ -907,7 +903,6 @@ MonoBehaviour:
   m_SubmitButton: Submit
   m_CancelButton: Cancel
   m_InputActionsPerSecond: 10
-  m_RepeatDelay: .5
   m_AllowActivationOnMobileDevice: 0
 --- !u!114 &1890689754
 MonoBehaviour:
