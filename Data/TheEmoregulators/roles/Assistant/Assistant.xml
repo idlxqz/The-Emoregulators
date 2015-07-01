@@ -1,0 +1,50 @@
+<Character role="Assistant">
+	
+	<EmotionalThresholds>
+		<!-- Well Being Emotions -->
+		<EmotionalThreshold emotion="Joy" threshold="1" decay="1"/>
+		<EmotionalThreshold emotion="Distress" threshold="1" decay="5"/>
+		
+		<!-- Attraction Emotions -->
+		<EmotionalThreshold emotion="Love" threshold="1" decay="5"/>
+		<EmotionalThreshold emotion="Hate" threshold="1" decay="5"/>
+		
+		<!-- Attribution Emotions -->
+		<EmotionalThreshold emotion="Pride" threshold="1" decay="5"/>
+		<EmotionalThreshold emotion="Shame" threshold="1" decay="5"/>
+		<EmotionalThreshold emotion="Admiration" threshold="1" decay="5"/>
+		<EmotionalThreshold emotion="Reproach" threshold="1" decay="5"/>
+		
+		<!-- FortuneOfOthers Emotions -->
+		<EmotionalThreshold emotion="Happy-For" threshold="1" decay="5"/>
+		<EmotionalThreshold emotion="Gloating" threshold="1" decay="5"/>
+		<EmotionalThreshold emotion="Resentment" threshold="1" decay="5"/>
+		<EmotionalThreshold emotion="Pitty" threshold="1" decay="5"/>
+	
+		<!-- Compound Emotions -->
+		<EmotionalThreshold emotion="Gratification" threshold="1" decay="5"/>
+		<EmotionalThreshold emotion="Gratitude" threshold="1" decay="5"/>
+		<EmotionalThreshold emotion="Remorse" threshold="1" decay="5"/>
+		<EmotionalThreshold emotion="Anger" threshold="1" decay="5"/>		
+		
+		<!-- Goal related Emotions -->
+		<EmotionalThreshold emotion="Hope" threshold="1" decay="5"/>
+		<EmotionalThreshold emotion="Fear" threshold="1" decay="5"/>
+		<EmotionalThreshold emotion="Satisfaction" threshold="1" decay="5"/>
+		<EmotionalThreshold emotion="Relief" threshold="1" decay="5"/>
+		<EmotionalThreshold emotion="Disappointment" threshold="1" decay="5"/>
+		<EmotionalThreshold emotion="Fears-Confirmed" threshold="1" decay="5"/>
+						  		
+	</EmotionalThresholds>
+
+	<Goals>
+		<Goal name="PassiveAssistance([TargetActivity])" importanceOfSuccess="5" importanceOfFailure="3" />
+	</Goals>
+
+	
+	<EventReactions>
+	</EventReactions>
+	
+	<ActionTendencies>
+	</ActionTendencies>
+</Character>

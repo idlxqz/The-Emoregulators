@@ -1,0 +1,26 @@
+<DomainActions>
+
+	<!-- PassiveAssistance -->
+	
+		<!-- Specific PassiveAssistanceCompleted Action
+			 (one for each screen) -->
+		<Action name="PassiveAssistanceCompleted(ScreenB)">
+			<PreConditions>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="ScreenB" parameters="ScreenBText1"/>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="ScreenB" parameters="ScreenBText2"/>
+			</PreConditions>
+		</Action>
+	
+		<!-- General PassiveAssistance Action Types -->
+		
+		<Action name="Write([Target],[Sentence])">
+		</Action>
+		
+		<Action name="Say([Target],[Sentence])">
+		</Action>
+		
+	<!-- Proactive Assistance -->
+	
+	
+
+</DomainActions>

@@ -1,0 +1,20 @@
+<GoalLibrary xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:noNamespaceSchemaLocation="./schemas/GoalLibrary.xsd">
+
+<!-- Passive Assistance Goal - related to writing/reading the activity screen -->
+	<ActivePursuitGoal name="PassiveAssistance([TargetActivity])">
+		<PreConditions>
+			<NewEvent occurred = "True" action="ActivityChanger" target="[TargetActivity]"/>
+		</PreConditions>
+		<SuccessConditions>
+			<NewEvent occurred="True" subject="SELF" action="PassiveAssistanceCompleted" target="[TargetActivity]"/>
+		</SuccessConditions>
+	</ActivePursuitGoal>
+	
+	<!-- TODO ActivePursuitGoal name="ProactiveAssistance([TargetActivity],[FinalActivitySentence])">
+		<SuccessConditions>
+			<NewEvent occurred="True" subject="SELF" action="ProactiveAssistanceCompleted" parameters="[FinalActivitySentence]"/>
+		</SuccessConditions>
+	</ActivePursuitGoal-->
+
+</GoalLibrary>

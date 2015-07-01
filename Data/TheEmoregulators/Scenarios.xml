@@ -1,0 +1,23 @@
+<Scenarios>  
+  
+	<Scenario name="TheEmoregulatorsScenario">
+		<!--WorldSimulator port="46874" scenery="TheEmoregulators"
+						actionsFile="Actions"
+						userOptionsFile="Options"
+						agentLanguageFile="language/agent/en/language-set-1"
+						simplifiedVersion="False">
+		</WorldSimulator>	
+		
+		<Agent name="TheEmoregulatorsAssistant" displayName="TheEmoregulatorsAssistant" role="Assistant" platform="WorldSim" host="localhost" 
+			   port="46874" debugMode="True" sex="M" actionsFile="Actions" 
+			   goalsFile="GoalLibrary">
+		</Agent-->
+		
+		<Agent name="TheEmoregulatorsAssistant" displayName="TheEmoregulatorsAssistant" role="Assistant" platform="ion" host="localhost" 
+			   port="46874" debugMode="False" sex="M" actionsFile="Actions" 
+			   goalsFile="GoalLibrary">
+		</Agent>
+		
+	</Scenario>
+	
+</Scenarios>
