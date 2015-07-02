@@ -11,28 +11,31 @@ using FAtiMA.RemoteAgent;
 public class Say : IONAction
 {
 	//Constants
-	private const int ActionUtteranceIndex = 0;
+	private const int ActionSentenceIndex = 0;
 
 
 	//Action attributes
 	private string _subject;
 	private string _target;
-	private string _actionName;
 	private string[] _parameters;
 
 
 	//Getters and Setters
 	protected string ActionSubject { get { return _subject; } }
-	protected override string ActionName { get { return _actionName; } }
+	protected override string ActionName { get { return "Say"; } }
 	protected string ActionTarget { get { return _target; } }
 	protected string[] ActionParameters { get { return _parameters; } }
-	protected string ActionUtterance { get { return this.ActionParameters [0]; } }
+	protected string ActionSentence { get { return this.ActionParameters [ActionSentenceIndex]; } }
 
-	
-	//Unity start method
-	public void Start ()
+
+	//Unity Methods
+	public void Start()
 	{
-
+	}
+	
+	public void Initialize()
+	{
+		base.Initialize ();
 	}
 
 
@@ -42,20 +45,21 @@ public class Say : IONAction
 		ActionParameters actionParameters = startEvt.Action.StartArguments;
 
 		_subject = actionParameters.Subject;
-		_actionName = actionParameters.ActionType;
 		_target = actionParameters.Target;
 
 		_parameters = actionParameters.Parameters.ToArray ();
 
-		Debug.Log("<OnStart> " + this.ActionSubject + " started " + this.ActionName.ToUpper() + " action on screen " + this.ActionTarget + " with utterance " + this.ActionUtterance + " </OnStart>");
+		FAtiMA.RemoteAgent.ApplicationLogger.Instance().WriteLine("<OnStart> " + this.ActionSubject + " started " + this.ActionName.ToUpper() + " action on screen " + this.ActionTarget + " with sentence " + this.ActionSentence + " </OnStart>");	
+		Debug.Log("<OnStart> " + this.ActionSubject + " started " + this.ActionName.ToUpper() + " action on screen " + this.ActionTarget + " with sentence " + this.ActionSentence + " </OnStart>");
 	}
 	
 	public override void OnStep(IStepped<EntityAnimationAction<ActionParameters>> steppedEvt){
-
+		this.Action.Stop(true);
 	}
 	
 	public override void OnStop(IStopped<EntityAnimationAction<ActionParameters>> stoppedEvt){
-		Debug.Log("<OnStopped> " + this.ActionSubject + " stopped " + this.ActionName.ToUpper() + " action on screen " + this.ActionTarget + " with utterance " + this.ActionUtterance + " </OnStart>");
+		FAtiMA.RemoteAgent.ApplicationLogger.Instance().WriteLine("<OnStopped> " + this.ActionSubject + " stopped " + this.ActionName.ToUpper() + " action on screen " + this.ActionTarget + " with sentence " + this.ActionSentence + " </OnStopped>");	
+		Debug.Log("<OnStopped> " + this.ActionSubject + " stopped " + this.ActionName.ToUpper() + " action on screen " + this.ActionTarget + " with sentence " + this.ActionSentence + " </OnStopped>");
 	}
 	#endregion
 }

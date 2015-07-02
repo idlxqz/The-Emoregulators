@@ -40,7 +40,7 @@ public class LoadingScreenScript : Activity {
         GUI.Label(this.Configurations.FullTextArea, "The Emoregulators", this.TitleFormat);
         GUI.Box(new Rect(this.Configurations.FullTextArea.x + 100, Screen.height / 2 + 100, (this.Configurations.FullTextArea.width - 200), 40), "");
         var width = (this.Configurations.FullTextArea.width-200)*this.completionRate;
-        Debug.Log(width);
+        //Debug.Log(width);
         GUI.DrawTexture(new Rect(this.Configurations.FullTextArea.x+100+1, Screen.height / 2 + 101, width-2, 40-2),this.LoadingBarTexture);
         GUI.Label(new Rect(this.Configurations.FullTextArea.x,Screen.height/2 + 140, this.Configurations.FullTextArea.width,40), "Loading session...", this.LoadingFormat);
     }

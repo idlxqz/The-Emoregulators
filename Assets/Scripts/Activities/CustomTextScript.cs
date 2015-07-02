@@ -22,15 +22,46 @@ public class CustomTextScript : Activity {
     {
         base.Awake();
         this.MinimumWaitTime = 5;
+
+		this.IsMultiLineSet = false;
+		this.IsMultiLine = false;
     }
 
+	//Getters and Setters
+	public bool IsMultiLineSet { get; set; }
+	public bool IsMultiLine { get; set; }
+
+	public string GetCurrentInstructions()
+	{
+		return currentInstructions;
+	}
+
+	public void SetCurrentInstructions(string newCurrentInstructions)
+	{
+		currentInstructions = newCurrentInstructions;
+	}
+
+	public string GetFullInstructions()
+	{
+		return fullInstructions;
+	}
 	
+	public void SetFullInstructions(string newFullInstructions)
+	{
+		fullInstructions = newFullInstructions;
+	}
+
+
 	// Update is called once per frame
 	public virtual void Update ()
 	{
         //check if the waiting time is elapsed
-        if (this.moreInstructions)
+       	if (this.moreInstructions)
         {
+			//TheEmoregulatorsAssistant - there are always more instructions unless the agent reports otherwise
+			if(StandardConfigurations.IsTheEmoregulatorsAssistantActive)
+				return;
+
             var delay = instructions[instructionsPointer + 1].DelayTime;
            
             if ((Time.time - this.timeStart) >= delay)
@@ -123,6 +154,39 @@ public class CustomTextScript : Activity {
         this.ExecuteOnFinish = executeOnFinish;
         this.Setup(description,nextPhaseSetup, newInstructions);
     }
+
+	//TheEmoregulatorsAssistant CustomText Setup
+	public void Setup(string description, System.Action nextPhaseSetup)
+	{
+
+		this.Description = description;
+		this.SensorManager.StartNewActivity();
+		
+		this.CanContinue = false;
+		setupNextPhase = nextPhaseSetup;
+
+		this.currentInstructions = "";
+		this.fullInstructions = "";
+		this.moreInstructions = true;
+
+		timeStart = Time.time;
+
+	}
+
+	// Define CustomText Configurations
+	public void DefineConfigurationAlignment(TextAnchor alignmentType)
+	{
+		this.Configurations.BoxFormat.alignment = alignmentType;
+	}
+
+	public void EnableEnd()
+	{
+		moreInstructions = false;
+		UIManagerScript.EnableSkipping();
+		this.OnFinish();
+	}
+
+
 
    
 }

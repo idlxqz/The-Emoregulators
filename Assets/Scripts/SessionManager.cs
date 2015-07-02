@@ -187,6 +187,9 @@ public class SessionManager : MonoBehaviour {
     public int helpButtonSize;
     public Texture2D helpButtonTexture;
 
+	//Active Activity
+	public static Activity ActiveActivity;
+
     // Use this for initialization
     void Start()
     {
@@ -223,6 +226,7 @@ public class SessionManager : MonoBehaviour {
         {
             SetBackground(selectedBackground);
         }
+
     }
 
     // Update is called once per frame

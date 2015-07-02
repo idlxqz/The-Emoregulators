@@ -17,6 +17,8 @@ public class StandardConfigurations : MonoBehaviour
     public GUIStyle ScoreFormat;
     public GUIStyle HelpFormat;
 
+	public static bool IsTheEmoregulatorsAssistantActive;
+
     public void Awake()
     {
         DontDestroyOnLoad(this);
@@ -30,8 +32,6 @@ public class StandardConfigurations : MonoBehaviour
 	// Use this for initialization
 	public void Start ()
 	{
-	    
-	
 	}
 
     public void OnGUI()

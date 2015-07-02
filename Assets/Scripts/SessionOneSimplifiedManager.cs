@@ -69,9 +69,18 @@ public class SessionOneSimplifiedManager : SessionManager
                     log.LogInformation("Ended Opening Screen A.");
                     currentState = SessionState.OpeningB;
                 };
-
-		        customText.Setup("OpeningA",setupNextPhaseCustomText, GlobalizationService.Instance.Globalize(GlobalizationService.OpeningAText));
-                customText.enabled = true;
+				
+				if(StandardConfigurations.IsTheEmoregulatorsAssistantActive)
+				{
+					Bridge.UpdateWorldActivityName(this.activityName, "OpeningA");
+					SessionManager.ActiveActivity = customText;
+					customText.Setup("OpeningA",setupNextPhaseCustomText);
+				}
+				else
+				{
+					customText.Setup("OpeningA",setupNextPhaseCustomText, GlobalizationService.Instance.Globalize(GlobalizationService.OpeningAText));
+				}
+				customText.enabled = true;
                 currentState = SessionState.CustomText;
 				
 			    break;
@@ -87,8 +96,17 @@ public class SessionOneSimplifiedManager : SessionManager
                     currentState = SessionState.OpeningC;
                 };
 
-                customText.Setup("OpeningB",setupNextPhaseCustomText, GlobalizationService.Instance.Globalize(GlobalizationService.OpeningBText));
-                customText.enabled = true;
+				if(StandardConfigurations.IsTheEmoregulatorsAssistantActive)
+				{
+					Bridge.UpdateWorldActivityName(this.activityName, "OpeningB");
+					SessionManager.ActiveActivity = customText;
+					customText.Setup("OpeningB",setupNextPhaseCustomText);
+				}
+				else
+				{
+					customText.Setup("OpeningB",setupNextPhaseCustomText, GlobalizationService.Instance.Globalize(GlobalizationService.OpeningBText));
+				}
+				customText.enabled = true;
                 currentState = SessionState.CustomText;
 
                 break;
@@ -102,10 +120,21 @@ public class SessionOneSimplifiedManager : SessionManager
                     log.LogInformation("Ended Opening Screen C.");            
                     currentState = SessionState.OpeningD;
                 };
+				
+				CustomTextWithImage.Image = this.heartTexture;
+				CustomTextWithImage.ImageScale = 0.2f;	
 
-                CustomTextWithImage.Image = this.heartTexture;
-		        CustomTextWithImage.ImageScale = 0.2f;
-                CustomTextWithImage.Setup("OpeningC",setupNextPhaseCustomText, GlobalizationService.Instance.Globalize(GlobalizationService.OpeningCText));
+				if(StandardConfigurations.IsTheEmoregulatorsAssistantActive)
+				{
+					Bridge.UpdateWorldActivityName(this.activityName, "OpeningC");
+					SessionManager.ActiveActivity = CustomTextWithImage;
+					CustomTextWithImage.Setup("OpeningC",setupNextPhaseCustomText);
+				}
+				else
+				{
+					CustomTextWithImage.Setup("OpeningC",setupNextPhaseCustomText, GlobalizationService.Instance.Globalize(GlobalizationService.OpeningCText));
+				}
+
                 CustomTextWithImage.enabled = true;
                 currentState = SessionState.CustomTextWithImage;
 
@@ -122,7 +151,16 @@ public class SessionOneSimplifiedManager : SessionManager
                     currentState = SessionState.OpeningF;
                 };
 
-		        customText.Setup("OpeningD",setupNextPhaseCustomText, GlobalizationService.Instance.Globalize(GlobalizationService.OpeningDText));
+				if(StandardConfigurations.IsTheEmoregulatorsAssistantActive)
+				{
+					Bridge.UpdateWorldActivityName(this.activityName, "OpeningD");
+					SessionManager.ActiveActivity = customText;
+					customText.Setup("OpeningD",setupNextPhaseCustomText);
+				}
+				else
+				{
+					customText.Setup("OpeningD",setupNextPhaseCustomText, GlobalizationService.Instance.Globalize(GlobalizationService.OpeningDText));
+				}
 
                 customText.enabled = true;
                 currentState = SessionState.CustomText;
@@ -161,10 +199,22 @@ public class SessionOneSimplifiedManager : SessionManager
 
 		        CustomTextWithImage.Image = this.helpButtonTexture;
                 CustomTextWithImage.ImageScale = 0.05f;
-                CustomTextWithImage.Setup("OpeningF",setupNextPhaseCustomText, GlobalizationService.Instance.Globalize(GlobalizationService.OpeningFText));
+
+				if(StandardConfigurations.IsTheEmoregulatorsAssistantActive)
+				{
+					Bridge.UpdateWorldActivityName(this.activityName, "OpeningF");
+					SessionManager.ActiveActivity = CustomTextWithImage;
+					CustomTextWithImage.Setup("OpeningF",setupNextPhaseCustomText);
+				}
+				else
+				{
+					CustomTextWithImage.Setup("OpeningF",setupNextPhaseCustomText, GlobalizationService.Instance.Globalize(GlobalizationService.OpeningFText));
+				}
+
                 CustomTextWithImage.enabled = true;
                 currentState = SessionState.CustomTextWithImage;
                 break;
+
             case SessionState.IntroducingOurselvesTitle:
                 log.LogInformation("Starting Introducing Ourselves Title");
 

@@ -4,23 +4,56 @@
 	
 		<!-- Specific PassiveAssistanceCompleted Action
 			 (one for each screen) -->
-		<Action name="PassiveAssistanceCompleted(ScreenB)">
+		
+		<Action name="PassiveAssistanceCompleted(OpeningA)">
 			<PreConditions>
-				<NewEvent occurred="True" subject="SELF" action="Write" target="ScreenB" parameters="ScreenBText1"/>
-				<NewEvent occurred="True" subject="SELF" action="Write" target="ScreenB" parameters="ScreenBText2"/>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="OpeningA" parameters="OpeningAText,false"/>
+			</PreConditions>
+		</Action>
+		
+		<Action name="PassiveAssistanceCompleted(OpeningB)">
+			<PreConditions>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="OpeningA" parameters="OpeningBText,false"/>
+			</PreConditions>
+		</Action>
+		
+		<Action name="PassiveAssistanceCompleted(OpeningC)">
+			<PreConditions>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="OpeningA" parameters="OpeningCText,false"/>
+			</PreConditions>
+		</Action>
+		
+		<Action name="PassiveAssistanceCompleted(OpeningD)">
+			<PreConditions>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="OpeningA" parameters="OpeningDText,false"/>
+			</PreConditions>
+		</Action>
+		
+		<Action name="PassiveAssistanceCompleted(OpeningE)">
+			<PreConditions>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="OpeningA" parameters="OpeningEText,false"/>
+			</PreConditions>
+		</Action>
+		
+		<Action name="PassiveAssistanceCompleted(OpeningF)">
+			<PreConditions>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="OpeningA" parameters="OpeningFText,false"/>
 			</PreConditions>
 		</Action>
 	
 		<!-- General PassiveAssistance Action Types -->
 		
-		<Action name="Write([Target],[Sentence])">
+		<Action name="Write([Target],[Sentence],[IsMultiLine])">
 		</Action>
 		
-		<Action name="Say([Target],[Sentence])">
+		<Action name="Say([Target],[Sentence],[IsMultiLine])">
 		</Action>
 		
 	<!-- Proactive Assistance -->
 	
 	
+	<!-- Other -->
+	<Action name="ActivityChanger(Activity,AvtivityName)">
+	</Action>
 
 </DomainActions>
