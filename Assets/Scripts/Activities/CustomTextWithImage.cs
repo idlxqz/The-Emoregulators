@@ -28,6 +28,11 @@ public class CustomTextWithImage : CustomTextScript {
         this.ImageLabelArea = new Rect(xcenterOfMediaArea, ycenterOfMediaArea + this.Image.height * this.ImageScale, this.Image.width * this.ImageScale, 50);
 	}
 
+	protected override void Awake()
+	{
+		base.Awake();
+	}
+
     public override void OnGUI()
     {
         

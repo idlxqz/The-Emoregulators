@@ -84,6 +84,7 @@ public class SessionOneSimplifiedManager : SessionManager
                 currentState = SessionState.CustomText;
 				
 			    break;
+
             case SessionState.OpeningB:
                 log.LogInformation("Starting Opening Screen B.");
 
@@ -110,6 +111,7 @@ public class SessionOneSimplifiedManager : SessionManager
                 currentState = SessionState.CustomText;
 
                 break;
+
             case SessionState.OpeningC:
                 log.LogInformation("Starting Opening Screen C.");
 
@@ -139,6 +141,7 @@ public class SessionOneSimplifiedManager : SessionManager
                 currentState = SessionState.CustomTextWithImage;
 
                 break;
+
             case SessionState.OpeningD:
                 log.LogInformation("Starting Opening Screen D.");
 
@@ -186,6 +189,7 @@ public class SessionOneSimplifiedManager : SessionManager
                 currentState = SessionState.CustomTextWithImage;
                 break;
              * */
+
             case SessionState.OpeningF:
                 log.LogInformation("Starting Opening Screen F.");
                 //prepare custom text
@@ -227,6 +231,7 @@ public class SessionOneSimplifiedManager : SessionManager
                 customTitleScript.Setup("IntroducingOuselvesTitle",setupNextPhaseCustomTitle, GlobalizationService.Instance.Globalize(GlobalizationService.IntroducingOurselvesTitle));
                 currentState = SessionState.CustomTitle;
 		        break;
+
             case SessionState.IntroducingOurselvesA:
 		        canSkip = false;
                 activityName = GlobalizationService.Instance.Globalize(GlobalizationService.IntroducingOurselvesTitle);
@@ -246,12 +251,23 @@ public class SessionOneSimplifiedManager : SessionManager
                     backgroundChooserScript.enabled = true;
                     UIManagerScript.EnableSkipping();
                 };
+				
+				if(StandardConfigurations.IsTheEmoregulatorsAssistantActive)
+				{
+					Bridge.UpdateWorldActivityName(this.activityName, "BackgroundSelectionDescription");
+					SessionManager.ActiveActivity = customText;
+					customText.Setup("BackgroundSelectionDescription",setupNextPhaseCustomText);
+				}
+				else
+				{
+					customText.Setup("BackgroundSelectionDescription",setupNextPhaseCustomText, GlobalizationService.Instance.Globalize(GlobalizationService.IntroducingOurselvesBackgroundText));
+				}
 
-                customText.Setup("BackgroundSelectionDescription",setupNextPhaseCustomText, GlobalizationService.Instance.Globalize(GlobalizationService.IntroducingOurselvesBackgroundText));
 		        customText.enabled = true;
 		        currentState = SessionState.CustomText;
                 
 		        break;
+
             case SessionState.IntroducingOurselvesBackground:
                 if (canSkip)
                 {
@@ -263,12 +279,24 @@ public class SessionOneSimplifiedManager : SessionManager
                     UIManagerScript.DisableSkipping();
                     proceed = false;
                     this.introducingOurselves.SetActive(true);
-                    this.introducingOurselvesScript.Setup("AvatarSelection",GlobalizationService.Instance.Globalize(GlobalizationService.IntroducingOurselvesAvatarText));
-                    this.introducingOurselvesScript.enabled = true;
+
+					if(StandardConfigurations.IsTheEmoregulatorsAssistantActive)
+					{
+						Bridge.UpdateWorldActivityName(this.activityName, "AvatarSelection");
+						SessionManager.ActiveActivity = introducingOurselvesScript;
+						introducingOurselvesScript.Setup("AvatarSelection",null);
+					}
+					else
+					{
+						this.introducingOurselvesScript.Setup("AvatarSelection",GlobalizationService.Instance.Globalize(GlobalizationService.IntroducingOurselvesAvatarText));
+					}
+                    
+					this.introducingOurselvesScript.enabled = true;
                     log.LogInformation("Started introducing Ourselves Avatar Selection");
                     currentState = SessionState.IntroducingOurselvesAvatar;
                 }
                 break;
+
             case SessionState.IntroducingOurselvesAvatar:
                 if (proceed)
                 {
@@ -297,6 +325,7 @@ public class SessionOneSimplifiedManager : SessionManager
                     }
                 }
 			    break;
+
             case SessionState.IBoxIntroductionTitle:
                 log.LogInformation("Started IBox Introduction Title");
                 //prepare custom title
@@ -314,6 +343,7 @@ public class SessionOneSimplifiedManager : SessionManager
                 customTitleScript.Setup("IBoxIntroductionTitle",setupNextPhaseCustomTitle, GlobalizationService.Instance.Globalize(GlobalizationService.IBoxIntroductionTitle));
                 currentState = SessionState.CustomTitle;
 		        break;
+
             case SessionState.IBoxIntroductionA:
                 if (canSkip)
                 {
@@ -327,6 +357,7 @@ public class SessionOneSimplifiedManager : SessionManager
                     this.currentState = SessionState.IBoxIntroductionB;
                 }
                 break;
+
             case SessionState.IBoxIntroductionB:
                 log.LogInformation("Started ibox introduction Screen B");
                 setupNextPhaseCustomText = () => {
@@ -343,10 +374,22 @@ public class SessionOneSimplifiedManager : SessionManager
                         log.LogInformation("Started ibox selection.");
                         
                     };
-                    customText.Setup("IBoxIntroductionB",setupNextPhaseCustomText, GlobalizationService.Instance.Globalize(GlobalizationService.IBoxIntroductionBText));
+
+					if(StandardConfigurations.IsTheEmoregulatorsAssistantActive)
+					{
+						Bridge.UpdateWorldActivityName(this.activityName, "IBoxIntroductionB");
+						SessionManager.ActiveActivity = customText;
+						customText.Setup("IBoxIntroductionB",setupNextPhaseCustomText);
+					}
+					else
+					{
+						customText.Setup("IBoxIntroductionB",setupNextPhaseCustomText, GlobalizationService.Instance.Globalize(GlobalizationService.IBoxIntroductionBText));
+					}		
+
                     customText.enabled = true;
                     currentState = SessionState.CustomText;
 		        break;
+
             case SessionState.InnerSensationsB:
                 if (canSkip)
                 {
@@ -360,6 +403,7 @@ public class SessionOneSimplifiedManager : SessionManager
                     
                 }
                 break;
+
             case SessionState.IBoxIntroductionC:
                 log.LogInformation("Started IBoxIntroduction Screen C");
 		        setupNextPhaseCustomText = () =>
@@ -369,10 +413,21 @@ public class SessionOneSimplifiedManager : SessionManager
 		            Application.LoadLevel("SessionFourScene");
 		        };
 
-                customText.Setup("IBoxIntroductionC",setupNextPhaseCustomText, GlobalizationService.Instance.Globalize(GlobalizationService.IBoxIntroductionCText));
+				if(StandardConfigurations.IsTheEmoregulatorsAssistantActive)
+				{
+					Bridge.UpdateWorldActivityName(this.activityName, "IBoxIntroductionC");
+					SessionManager.ActiveActivity = customText;
+					customText.Setup("IBoxIntroductionC",setupNextPhaseCustomText);
+				}
+				else
+				{
+					customText.Setup("IBoxIntroductionC",setupNextPhaseCustomText, GlobalizationService.Instance.Globalize(GlobalizationService.IBoxIntroductionCText));
+				}	
+
                 customText.enabled = true;
                 currentState = SessionState.CustomText;
 		        break;
+
             case SessionState.CustomText:
                 if (canSkip)
                 {
@@ -382,6 +437,7 @@ public class SessionOneSimplifiedManager : SessionManager
                     customText.setupNextPhase();
                 }
                 break;
+
             case SessionState.CustomTextWithImage:
                 if (canSkip)
                 {
@@ -391,6 +447,7 @@ public class SessionOneSimplifiedManager : SessionManager
                     CustomTextWithImage.setupNextPhase();
                 }
                 break;
+
             case SessionState.CustomTitle:
                 if (customTitleScript.CanContinue || canSkip)
                 {
@@ -400,6 +457,7 @@ public class SessionOneSimplifiedManager : SessionManager
                     customTitleScript.setupNextPhase();
                 }
                 break;
+
             case SessionState.LoadingScreen:
 		        if (loadingScreenScript.finished)
 		        {
@@ -407,6 +465,7 @@ public class SessionOneSimplifiedManager : SessionManager
 		            loadingScreenScript.setupNextPhase();
 		        }
 		        break;
+
 		    default:
 			    Debug.LogError("Unknown/unhandled session state for this session.");
 			    break;

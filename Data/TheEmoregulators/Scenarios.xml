@@ -14,7 +14,7 @@
 		</Agent-->
 		
 		<Agent name="TheEmoregulatorsAssistant" displayName="TheEmoregulatorsAssistant" role="Assistant" platform="ion" host="localhost" 
-			   port="46874" debugMode="False" sex="M" actionsFile="Actions" 
+			   port="46874" debugMode="True" sex="M" actionsFile="Actions" 
 			   goalsFile="GoalLibrary">
 		</Agent>
 		

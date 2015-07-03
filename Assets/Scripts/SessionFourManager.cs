@@ -85,6 +85,7 @@ public class SessionFourManager : SessionManager {
                 customTitleScript.Setup("CandleCeremonyTitle",setupNextPhaseCustomTitle, GlobalizationService.Instance.Globalize(GlobalizationService.CandleCeremonyTitle));
                 currentState = SessionState.CustomTitle;
                 break;
+
             case SessionState.CandleCeremony:
                 if (canSkip)
                 {
@@ -113,14 +114,27 @@ public class SessionFourManager : SessionManager {
                         };
                         CustomTextWithImage.Image = MemeterTexture;
                         CustomTextWithImage.ImageScale = 0.5f;
-                        CustomTextWithImage.Setup("MinuteForMySelfA",setupNextPhaseCustomText, GlobalizationService.Instance.Globalize(GlobalizationService.MinuteForMyselfAText));
+
+						/*if(StandardConfigurations.IsTheEmoregulatorsAssistantActive)
+						{
+							Bridge.UpdateWorldActivityName(this.activityName, "MinuteForMySelfA");
+							SessionManager.ActiveActivity = CustomTextWithImage;
+							CustomTextWithImage.Setup("MinuteForMySelfA",setupNextPhaseCustomText);
+						}
+						else
+						{*/
+							CustomTextWithImage.Setup("MinuteForMySelfA",setupNextPhaseCustomText, GlobalizationService.Instance.Globalize(GlobalizationService.MinuteForMyselfAText));
+						//}
+
                         CustomTextWithImage.enabled = true;
                         currentState = SessionState.CustomTextWithImage;
                     };
+
                     customTitleScript.Setup("MinuteForMySelfTitle",setupNextPhaseCustomTitle, GlobalizationService.Instance.Globalize(GlobalizationService.MinuteForMyselfTitle));
                     currentState = SessionState.CustomTitle;
                 }
                 break;
+
             case SessionState.MinuteForMyselfB:
                 //prepare custom text of introduction
                 setupNextPhaseCustomText = () =>
@@ -132,10 +146,22 @@ public class SessionFourManager : SessionManager {
 
                     currentState = SessionState.MinuteForMyselfC;
                 };
-                customText.Setup("MinuteForMySelfB",setupNextPhaseCustomText, GlobalizationService.Instance.Globalize(GlobalizationService.MinuteForMyselfBText));
+
+				/*if(StandardConfigurations.IsTheEmoregulatorsAssistantActive)
+				{
+					Bridge.UpdateWorldActivityName(this.activityName, "MinuteForMySelfB");
+					SessionManager.ActiveActivity = customText;
+					customText.Setup("MinuteForMySelfB",setupNextPhaseCustomText);
+				}
+				else
+				{*/
+					customText.Setup("MinuteForMySelfB",setupNextPhaseCustomText, GlobalizationService.Instance.Globalize(GlobalizationService.MinuteForMyselfBText));
+				//}
+
                 customText.enabled = true;
                 currentState = SessionState.CustomText;
                 break;
+
             case SessionState.MinuteForMyselfC:
                 log.LogInformation("Started A MinuteForMyselfC.");
                 //prepare custom text of introduction
@@ -150,10 +176,22 @@ public class SessionFourManager : SessionManager {
                     currentState = SessionState.MinuteForMyselfD;
                 };
                 customText.MinimumWaitTime = 30;
-                customText.Setup("MinuteForMySelfC",setupNextPhaseCustomText, () => this.AlarmSound.Play(),GlobalizationService.Instance.Globalize(GlobalizationService.MinuteForMyselfCText));
+
+				/*if(StandardConfigurations.IsTheEmoregulatorsAssistantActive)
+				{
+					Bridge.UpdateWorldActivityName(this.activityName, "MinuteForMySelfC");
+					SessionManager.ActiveActivity = customText;
+					customText.Setup("MinuteForMySelfC",setupNextPhaseCustomText,() => this.AlarmSound.Play());
+				}
+				else
+				{*/
+					customText.Setup("MinuteForMySelfC",setupNextPhaseCustomText, () => this.AlarmSound.Play(),GlobalizationService.Instance.Globalize(GlobalizationService.MinuteForMyselfCText));
+				//}
+
                 customText.enabled = true;
                 currentState = SessionState.CustomText;
                 break;
+
             case SessionState.MinuteForMyselfD:
                 log.LogInformation("Started A MinuteForMyselfD.");
                 //prepare custom text of introduction
@@ -180,6 +218,7 @@ public class SessionFourManager : SessionManager {
                 customText.enabled = true;
                 currentState = SessionState.CustomText;
                 break;
+
             case SessionState.MeMeter:
                 if (canSkip)
                 {

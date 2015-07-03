@@ -25,6 +25,7 @@ public class SessionZeroManager : MonoBehaviour
         System.Action setupNextPhase;
 		//coordinate the session state
 		switch (currentState) {
+
             case SessionState.PreBaseline:
 
                 Logger.Instance.LogInformation("Started PreBaseline Screen.");
@@ -35,7 +36,18 @@ public class SessionZeroManager : MonoBehaviour
                     Logger.Instance.LogInformation("Started GrossBaseLineDetection Screen");
                     this.currentState = SessionState.GrossBaselineDetection;
 	            };
-                this.CustomText.Setup("PreBaselineText",setupNextPhase, GlobalizationService.Instance.Globalize(GlobalizationService.PreBaselineText));
+				
+				if(StandardConfigurations.IsTheEmoregulatorsAssistantActive)
+				{
+					Bridge.UpdateWorldActivityName("Session Zero", "PreBaseline");
+					SessionManager.ActiveActivity = CustomText;
+					this.CustomText.Setup("PreBaseline",setupNextPhase);
+				}
+				else
+				{
+					this.CustomText.Setup("PreBaselineText",setupNextPhase, GlobalizationService.Instance.Globalize(GlobalizationService.PreBaselineText));
+				}
+
 	            this.CustomText.enabled = true;
 	            this.currentState = SessionState.CustomText;
 		        break;
@@ -49,6 +61,7 @@ public class SessionZeroManager : MonoBehaviour
 		            this.currentState = SessionState.PostBaseline;
 		        }
 			    break;
+
             case SessionState.PostBaseline:
                 Logger.Instance.LogInformation("Started PostBaseline Screen");
                 setupNextPhase = () =>
@@ -56,10 +69,22 @@ public class SessionZeroManager : MonoBehaviour
                     Logger.Instance.LogInformation("Ended PostBaseline Screen");
                     Application.LoadLevel("SessionOneSimplified");
 	            };
-                this.CustomText.Setup("PreBaselineText",setupNextPhase, GlobalizationService.Instance.Globalize(GlobalizationService.PostBaselineText));
+
+				if(StandardConfigurations.IsTheEmoregulatorsAssistantActive)
+				{
+					Bridge.UpdateWorldActivityName("Session Zero", "PostBaseline");
+					SessionManager.ActiveActivity = CustomText;
+					this.CustomText.Setup("PostBaseline",setupNextPhase);
+				}
+				else
+				{
+					this.CustomText.Setup("PostBaselineText",setupNextPhase, GlobalizationService.Instance.Globalize(GlobalizationService.PostBaselineText));
+				}
+
 	            this.CustomText.enabled = true;
 	            this.currentState = SessionState.CustomText;
 		        break;
+
             case SessionState.CustomText:
                 if (this.Continue)
                 {

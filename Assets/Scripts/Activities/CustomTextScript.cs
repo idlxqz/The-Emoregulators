@@ -18,6 +18,14 @@ public class CustomTextScript : Activity {
     protected string currentInstructions;
     protected string fullInstructions;
 
+
+	//Unity methods
+	public override void Start()
+	{
+		base.Start();
+	}
+
+
     protected override void Awake()
     {
         base.Awake();
@@ -30,6 +38,11 @@ public class CustomTextScript : Activity {
 	//Getters and Setters
 	public bool IsMultiLineSet { get; set; }
 	public bool IsMultiLine { get; set; }
+
+	public void SetTimeStart(float newTimeStart)
+	{
+		this.timeStart = newTimeStart;
+	}
 
 	public string GetCurrentInstructions()
 	{
@@ -49,6 +62,11 @@ public class CustomTextScript : Activity {
 	public void SetFullInstructions(string newFullInstructions)
 	{
 		fullInstructions = newFullInstructions;
+	}
+
+	public void SetMoreInstructions(bool isMoreInstructions)
+	{
+		this.moreInstructions = isMoreInstructions;
 	}
 
 
@@ -156,6 +174,12 @@ public class CustomTextScript : Activity {
     }
 
 	//TheEmoregulatorsAssistant CustomText Setup
+	public void Setup(string description, System.Action nextPhaseSetup, System.Action executeOnFinish)
+	{
+		this.ExecuteOnFinish = executeOnFinish;
+		this.Setup(description, nextPhaseSetup);
+	}
+
 	public void Setup(string description, System.Action nextPhaseSetup)
 	{
 

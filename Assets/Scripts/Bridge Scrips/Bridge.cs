@@ -49,9 +49,10 @@ public static class Bridge {
 
 			activeActivity.IsMultiLineSet = true;
 		}
-
+		
 		activeActivity.SetCurrentInstructions (activeActivity.GetCurrentInstructions () + GlobalizationService.Instance.Globalize(sentenceCode));
 		activeActivity.SetFullInstructions (activeActivity.GetCurrentInstructions ());
+		activeActivity.SetTimeStart (Time.time);
 	}
 
 	public static void Say(string activityName, string sentenceCode)
@@ -64,7 +65,10 @@ public static class Bridge {
 		//Enable the possibility of continue in the active activity
 		CustomTextScript activeActivity = (CustomTextScript)SessionManager.ActiveActivity;
 
-		activeActivity.EnableEnd ();
+		if (activeActivity.IsMultiLine)
+			activeActivity.EnableEnd ();
+		else
+			activeActivity.SetMoreInstructions (false);
 	}
 
 

@@ -4,7 +4,21 @@
 	
 		<!-- Specific PassiveAssistanceCompleted Action
 			 (one for each screen) -->
+			 
+		<!-- Session Zero -->
+		<Action name="PassiveAssistanceCompleted(PreBaseline)">
+			<PreConditions>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="PreBaseline" parameters="PreBaselineText,false"/>
+			</PreConditions>
+		</Action>
 		
+		<Action name="PassiveAssistanceCompleted(PostBaseline)">
+			<PreConditions>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="PostBaseline" parameters="PostBaselineText,false"/>
+			</PreConditions>
+		</Action>
+		
+		<!-- Session One -->
 		<Action name="PassiveAssistanceCompleted(OpeningA)">
 			<PreConditions>
 				<NewEvent occurred="True" subject="SELF" action="Write" target="OpeningA" parameters="OpeningAText,false"/>
@@ -40,7 +54,52 @@
 				<NewEvent occurred="True" subject="SELF" action="Write" target="OpeningA" parameters="OpeningFText,false"/>
 			</PreConditions>
 		</Action>
-	
+		
+		<Action name="PassiveAssistanceCompleted(BackgroundSelectionDescription)">
+			<PreConditions>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="BackgroundSelectionDescription" parameters="IntroducingOurselvesBackgroundText,false"/>
+			</PreConditions>
+		</Action>
+		
+		<Action name="PassiveAssistanceCompleted(AvatarSelection)">
+			<PreConditions>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="AvatarSelection" parameters="IntroducingOurselvesAvatarText,false"/>
+			</PreConditions>
+		</Action>
+		
+		<Action name="PassiveAssistanceCompleted(IBoxIntroductionB)">
+			<PreConditions>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="IBoxIntroductionB" parameters="IBoxIntroductionBText,false"/>
+			</PreConditions>
+		</Action>
+		
+		<Action name="PassiveAssistanceCompleted(IBoxIntroductionC)">
+			<PreConditions>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="IBoxIntroductionC" parameters="IBoxIntroductionCText,false"/>
+			</PreConditions>
+		</Action>
+		
+		<!-- Session Four -->
+		
+		<Action name="PassiveAssistanceCompleted(MinuteForMySelfA)">
+			<PreConditions>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="MinuteForMySelfA" parameters="MinuteForMySelfAText,false"/>
+			</PreConditions>
+		</Action>
+		
+		<Action name="PassiveAssistanceCompleted(MinuteForMySelfB)">
+			<PreConditions>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="MinuteForMySelfB" parameters="MinuteForMySelfBText,false"/>
+			</PreConditions>
+		</Action>
+		
+		<Action name="PassiveAssistanceCompleted(MinuteForMySelfC)">
+			<PreConditions>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="MinuteForMySelfC" parameters="MinuteForMySelfCText,false"/>
+			</PreConditions>
+		</Action>
+		
+		
 		<!-- General PassiveAssistance Action Types -->
 		
 		<Action name="Write([Target],[Sentence],[IsMultiLine])">
