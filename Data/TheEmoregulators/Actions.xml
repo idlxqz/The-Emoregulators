@@ -8,101 +8,301 @@
 		<!-- Session Zero -->
 		<Action name="PassiveAssistanceCompleted(PreBaseline)">
 			<PreConditions>
-				<NewEvent occurred="True" subject="SELF" action="Write" target="PreBaseline" parameters="PreBaselineText,false"/>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="PreBaseline" parameters="PreBaselineText,0,false"/>
 			</PreConditions>
 		</Action>
 		
 		<Action name="PassiveAssistanceCompleted(PostBaseline)">
 			<PreConditions>
-				<NewEvent occurred="True" subject="SELF" action="Write" target="PostBaseline" parameters="PostBaselineText,false"/>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="PostBaseline" parameters="PostBaselineText,0,false"/>
 			</PreConditions>
 		</Action>
 		
 		<!-- Session One -->
 		<Action name="PassiveAssistanceCompleted(OpeningA)">
 			<PreConditions>
-				<NewEvent occurred="True" subject="SELF" action="Write" target="OpeningA" parameters="OpeningAText,false"/>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="OpeningA" parameters="OpeningAText,0,false"/>
 			</PreConditions>
 		</Action>
 		
 		<Action name="PassiveAssistanceCompleted(OpeningB)">
 			<PreConditions>
-				<NewEvent occurred="True" subject="SELF" action="Write" target="OpeningA" parameters="OpeningBText,false"/>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="OpeningA" parameters="OpeningBText,0,false"/>
 			</PreConditions>
 		</Action>
 		
 		<Action name="PassiveAssistanceCompleted(OpeningC)">
 			<PreConditions>
-				<NewEvent occurred="True" subject="SELF" action="Write" target="OpeningA" parameters="OpeningCText,false"/>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="OpeningA" parameters="OpeningCText,0,false"/>
 			</PreConditions>
 		</Action>
 		
 		<Action name="PassiveAssistanceCompleted(OpeningD)">
 			<PreConditions>
-				<NewEvent occurred="True" subject="SELF" action="Write" target="OpeningA" parameters="OpeningDText,false"/>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="OpeningA" parameters="OpeningDText,0,false"/>
 			</PreConditions>
 		</Action>
 		
 		<Action name="PassiveAssistanceCompleted(OpeningE)">
 			<PreConditions>
-				<NewEvent occurred="True" subject="SELF" action="Write" target="OpeningA" parameters="OpeningEText,false"/>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="OpeningA" parameters="OpeningEText,0,false"/>
 			</PreConditions>
 		</Action>
 		
 		<Action name="PassiveAssistanceCompleted(OpeningF)">
 			<PreConditions>
-				<NewEvent occurred="True" subject="SELF" action="Write" target="OpeningA" parameters="OpeningFText,false"/>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="OpeningA" parameters="OpeningFText,0,false"/>
 			</PreConditions>
 		</Action>
 		
 		<Action name="PassiveAssistanceCompleted(BackgroundSelectionDescription)">
 			<PreConditions>
-				<NewEvent occurred="True" subject="SELF" action="Write" target="BackgroundSelectionDescription" parameters="IntroducingOurselvesBackgroundText,false"/>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="BackgroundSelectionDescription" parameters="IntroducingOurselvesBackgroundText,0,false"/>
 			</PreConditions>
 		</Action>
 		
 		<Action name="PassiveAssistanceCompleted(AvatarSelection)">
 			<PreConditions>
-				<NewEvent occurred="True" subject="SELF" action="Write" target="AvatarSelection" parameters="IntroducingOurselvesAvatarText,false"/>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="AvatarSelection" parameters="IntroducingOurselvesAvatarText,0,false"/>
+			</PreConditions>
+		</Action>
+		
+		<Action name="PassiveAssistanceCompleted(IBoxIntroductionA)">
+			<PreConditions>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="IBoxIntroductionA" parameters="IBoxIntroductionAText,0,false"/>
 			</PreConditions>
 		</Action>
 		
 		<Action name="PassiveAssistanceCompleted(IBoxIntroductionB)">
 			<PreConditions>
-				<NewEvent occurred="True" subject="SELF" action="Write" target="IBoxIntroductionB" parameters="IBoxIntroductionBText,false"/>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="IBoxIntroductionB" parameters="IBoxIntroductionBText,0,false"/>
 			</PreConditions>
 		</Action>
 		
 		<Action name="PassiveAssistanceCompleted(IBoxIntroductionC)">
 			<PreConditions>
-				<NewEvent occurred="True" subject="SELF" action="Write" target="IBoxIntroductionC" parameters="IBoxIntroductionCText,false"/>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="IBoxIntroductionC" parameters="IBoxIntroductionCText,0,false"/>
 			</PreConditions>
 		</Action>
 		
 		<!-- Session Four -->
 		
+		<Action name="PassiveAssistanceCompleted(CandleCeremony)">
+			<PreConditions>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="CandleCeremony" parameters="CandleCeremonyText,0,false"/>
+			</PreConditions>
+		</Action>
+		
 		<Action name="PassiveAssistanceCompleted(MinuteForMySelfA)">
 			<PreConditions>
-				<NewEvent occurred="True" subject="SELF" action="Write" target="MinuteForMySelfA" parameters="MinuteForMySelfAText,false"/>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="MinuteForMySelfA" parameters="MinuteForMyselfAText,0,false"/>
 			</PreConditions>
 		</Action>
 		
 		<Action name="PassiveAssistanceCompleted(MinuteForMySelfB)">
 			<PreConditions>
-				<NewEvent occurred="True" subject="SELF" action="Write" target="MinuteForMySelfB" parameters="MinuteForMySelfBText,false"/>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="MinuteForMySelfB" parameters="MinuteForMyselfBText,0,false"/>
 			</PreConditions>
 		</Action>
 		
 		<Action name="PassiveAssistanceCompleted(MinuteForMySelfC)">
 			<PreConditions>
-				<NewEvent occurred="True" subject="SELF" action="Write" target="MinuteForMySelfC" parameters="MinuteForMySelfCText,false"/>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="MinuteForMySelfC" parameters="MinuteForMyselfCText,0,false"/>
+			</PreConditions>
+		</Action>
+		
+		<Action name="PassiveAssistanceCompleted(MinuteForMySelfD)">
+			<PreConditions>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="MinuteForMySelfD" parameters="MinuteForMyselfDText,0,false"/>
+			</PreConditions>
+		</Action>
+		
+		<Action name="PassiveAssistanceCompleted(MeMeter)">
+			<PreConditions>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="MeMeter" parameters="MeMeterText,0,false"/>
+			</PreConditions>
+		</Action>
+		
+		<Action name="PassiveAssistanceCompleted(FacialMindfulnessA)">
+			<PreConditions>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="FacialMindfulnessA" parameters="FacialMindfulnessA1Text,0,true"/>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="FacialMindfulnessA" parameters="FacialMindfulnessA2Text,3,true"/>
+			</PreConditions>
+		</Action>
+		
+		<Action name="PassiveAssistanceCompleted(FacialMindfulnessB)">
+			<PreConditions>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="FacialMindfulnessB" parameters="FacialMindfulnessB1Text,0,true"/>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="FacialMindfulnessB" parameters="FacialMindfulnessB2Text,3,true"/>
+			</PreConditions>
+		</Action>
+		
+		<Action name="PassiveAssistanceCompleted(BreathingRegulationA)">
+			<PreConditions>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="BreathingRegulationA" parameters="BreathingRegulationA1Text,0,true"/>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="BreathingRegulationA" parameters="BreathingRegulationA2Text,3,true"/>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="BreathingRegulationA" parameters="BreathingRegulationA3Text,3,true"/>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="BreathingRegulationA" parameters="BreathingRegulationA4Text,3,true"/>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="BreathingRegulationA" parameters="BreathingRegulationA5Text,3,true"/>
+			</PreConditions>
+		</Action>
+		
+		<Action name="PassiveAssistanceCompleted(BreathingRegulationB)">
+			<PreConditions>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="BreathingRegulationB" parameters="BreathingRegulationB1Text,0,true"/>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="BreathingRegulationB" parameters="BreathingRegulationB2Text,3,true"/>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="BreathingRegulationB" parameters="BreathingRegulationB3Text,3,true"/>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="BreathingRegulationB" parameters="BreathingRegulationB4Text,10,true"/>
+			</PreConditions>
+		</Action>
+		
+		<Action name="PassiveAssistanceCompleted(ActiveShakingMeditationA)">
+			<PreConditions>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="ActiveShakingMeditationA" parameters="ActiveMeditationA1Text,0,true"/>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="ActiveShakingMeditationA" parameters="ActiveMeditationA2Text,3,true"/>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="ActiveShakingMeditationA" parameters="ActiveMeditationA3Text,3,true"/>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="ActiveShakingMeditationA" parameters="ActiveMeditationA4Text,3,true"/>
+			</PreConditions>
+		</Action>
+		
+		<Action name="PassiveAssistanceCompleted(ActiveShakingMeditationB)">
+			<PreConditions>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="ActiveShakingMeditationB" parameters="ActiveMeditationBText,0,false"/>
+			</PreConditions>
+		</Action>
+		
+		<Action name="PassiveAssistanceCompleted(ActiveShakingMeditationC)">
+			<PreConditions>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="ActiveShakingMeditationC" parameters="ActiveMeditationCText,0,false"/>
+			</PreConditions>
+		</Action>
+		
+		<Action name="PassiveAssistanceCompleted(ActiveShakingMeditationD)">
+			<PreConditions>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="ActiveShakingMeditationD" parameters="ActiveMeditationDText,0,false"/>
+			</PreConditions>
+		</Action>
+		
+		<Action name="PassiveAssistanceCompleted(PMRA)">
+			<PreConditions>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="PMRA" parameters="ProgressiveMuscleRelaxationAText,0,false"/>
+			</PreConditions>
+		</Action>
+		
+		<Action name="PassiveAssistanceCompleted(PMRB)">
+			<PreConditions>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="PMRB" parameters="ProgressiveMuscleRelaxationBText,0,false"/>
+			</PreConditions>
+		</Action>
+		
+		<Action name="PassiveAssistanceCompleted(PMRC)">
+			<PreConditions>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="PMRC" parameters="ProgressiveMuscleRelaxationC1Text,0,true"/>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="PMRC" parameters="ProgressiveMuscleRelaxationC2Text,3,true"/>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="PMRC" parameters="ProgressiveMuscleRelaxationC3Text,5,true"/>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="PMRC" parameters="ProgressiveMuscleRelaxationC4Text,5,true"/>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="PMRC" parameters="ProgressiveMuscleRelaxationC5Text,5,true"/>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="PMRC" parameters="ProgressiveMuscleRelaxationC6Text,5,true"/>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="PMRC" parameters="ProgressiveMuscleRelaxationC7Text,5,true"/>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="PMRC" parameters="ProgressiveMuscleRelaxationC8Text,5,true"/>
+			</PreConditions>
+		</Action>
+		
+		<Action name="PassiveAssistanceCompleted(PMRD)">
+			<PreConditions>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="PMRD" parameters="ProgressiveMuscleRelaxationD1Text,0,true"/>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="PMRD" parameters="ProgressiveMuscleRelaxationD2Text,3,true"/>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="PMRD" parameters="ProgressiveMuscleRelaxationD3Text,7,true"/>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="PMRD" parameters="ProgressiveMuscleRelaxationD4Text,7,true"/>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="PMRD" parameters="ProgressiveMuscleRelaxationD5Text,7,true"/>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="PMRD" parameters="ProgressiveMuscleRelaxationD6Text,7,true"/>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="PMRD" parameters="ProgressiveMuscleRelaxationD7Text,7,true"/>
+			</PreConditions>
+		</Action>
+		
+		<Action name="PassiveAssistanceCompleted(PMRE)">
+			<PreConditions>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="PMRE" parameters="ProgressiveMuscleRelaxationE1Text,0,true"/>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="PMRE" parameters="ProgressiveMuscleRelaxationE2Text,3,true"/>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="PMRE" parameters="ProgressiveMuscleRelaxationE3Text,6,true"/>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="PMRE" parameters="ProgressiveMuscleRelaxationE4Text,6,true"/>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="PMRE" parameters="ProgressiveMuscleRelaxationE5Text,6,true"/>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="PMRE" parameters="ProgressiveMuscleRelaxationE6Text,6,true"/>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="PMRE" parameters="ProgressiveMuscleRelaxationE7Text,6,true"/>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="PMRE" parameters="ProgressiveMuscleRelaxationE8Text,6,true"/>
+			</PreConditions>
+		</Action>
+		
+		<Action name="PassiveAssistanceCompleted(PMRF)">
+			<PreConditions>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="PMRF" parameters="ProgressiveMuscleRelaxationF1Text,0,true"/>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="PMRF" parameters="ProgressiveMuscleRelaxationF2Text,3,true"/>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="PMRF" parameters="ProgressiveMuscleRelaxationF3Text,7,true"/>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="PMRF" parameters="ProgressiveMuscleRelaxationF4Text,7,true"/>
+			</PreConditions>
+		</Action>
+		
+		<Action name="PassiveAssistanceCompleted(HowDoesMyBodyFeelA)">
+			<PreConditions>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="HowDoesMyBodyFeelA" parameters="HowDoesMyBodyFeelAText,0,false"/>
+			</PreConditions>
+		</Action>
+		
+		<Action name="PassiveAssistanceCompleted(HowDoesMyBodyFeelB)">
+			<PreConditions>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="HowDoesMyBodyFeelB" parameters="HowDoesMyBodyFeelBText,0,false"/>
+			</PreConditions>
+		</Action>
+		
+		<Action name="PassiveAssistanceCompleted(HowDoesMyBodyFeelC)">
+			<PreConditions>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="HowDoesMyBodyFeelC" parameters="HowDoesMyBodyFeelCText,0,false"/>
+			</PreConditions>
+		</Action>
+		
+		<Action name="PassiveAssistanceCompleted(HowDoesMyBodyFeelD)">
+			<PreConditions>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="HowDoesMyBodyFeelD" parameters="HowDoesMyBodyFeelDText,0,false"/>
+			</PreConditions>
+		</Action>
+		
+		<Action name="PassiveAssistanceCompleted(InnerSensationsA)">
+			<PreConditions>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="InnerSensationsA" parameters="InternalSensationsAText,0,false"/>
+			</PreConditions>
+		</Action>
+		
+		<Action name="PassiveAssistanceCompleted(MeMeterClosing)">
+			<PreConditions>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="MeMeterClosing" parameters="MeMeterClosingText,0,false"/>
+			</PreConditions>
+		</Action>
+		
+		<Action name="PassiveAssistanceCompleted(ClosingOfSessionCandle)">
+			<PreConditions>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="ClosingOfSessionCandle" parameters="ClosingOfSessionCandleText,0,false"/>
+			</PreConditions>
+		</Action>
+		
+		<Action name="PassiveAssistanceCompleted(ClosingOfSessionA)">
+			<PreConditions>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="ClosingOfSessionA" parameters="ClosingOfSessionA1Text,0,true"/>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="ClosingOfSessionA" parameters="ClosingOfSessionA2Text,3,true"/>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="ClosingOfSessionA" parameters="ClosingOfSessionA3Text,3,true"/>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="ClosingOfSessionA" parameters="ClosingOfSessionA4Text,3,true"/>
+			</PreConditions>
+		</Action>
+		
+		<Action name="PassiveAssistanceCompleted(ClosingOfSessionC)">
+			<PreConditions>
+				<NewEvent occurred="True" subject="SELF" action="Write" target="ClosingOfSessionC" parameters="ClosingOfSessionCText,0,false"/>
 			</PreConditions>
 		</Action>
 		
 		
 		<!-- General PassiveAssistance Action Types -->
 		
-		<Action name="Write([Target],[Sentence],[IsMultiLine])">
+		<Action name="Write([Target],[Sentence],[waitTime],[IsMultiLine])">
 		</Action>
 		
 		<Action name="Say([Target],[Sentence],[IsMultiLine])">

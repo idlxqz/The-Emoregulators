@@ -60,4 +60,28 @@ public class CustomTextWithImage : CustomTextScript {
         this.ImageArea = new Rect(xcenterOfMediaArea, ycenterOfMediaArea, this.Image.width * this.ImageScale, this.Image.height * this.ImageScale);
         this.ImageLabelArea = new Rect(xcenterOfMediaArea, ycenterOfMediaArea + this.Image.height * this.ImageScale, this.Image.width * this.ImageScale, 50);
     }
+
+	public void Setup(string description, System.Action nextPhaseSetup)
+	{
+		base.Setup(description, nextPhaseSetup);
+		//dynamic positioning
+		var xcenterOfMediaArea = this.Configurations.FullTextArea.x + this.Configurations.FullTextArea.width * 0.8f -
+			this.Image.width * this.ImageScale / 2;
+		var ycenterOfMediaArea = this.Configurations.FullTextArea.y + this.Configurations.FullTextArea.height / 2 -
+			this.Image.height * this.ImageScale / 2;
+		this.ImageArea = new Rect(xcenterOfMediaArea, ycenterOfMediaArea, this.Image.width * this.ImageScale, this.Image.height * this.ImageScale);
+		this.ImageLabelArea = new Rect(xcenterOfMediaArea, ycenterOfMediaArea + this.Image.height * this.ImageScale, this.Image.width * this.ImageScale, 50);
+	}
+
+	public void Setup(string description, System.Action nextPhaseSetup, System.Action executeOnFinish)
+	{
+		base.Setup(description, nextPhaseSetup, executeOnFinish);
+		//dynamic positioning
+		var xcenterOfMediaArea = this.Configurations.FullTextArea.x + this.Configurations.FullTextArea.width * 0.8f -
+			this.Image.width * this.ImageScale / 2;
+		var ycenterOfMediaArea = this.Configurations.FullTextArea.y + this.Configurations.FullTextArea.height / 2 -
+			this.Image.height * this.ImageScale / 2;
+		this.ImageArea = new Rect(xcenterOfMediaArea, ycenterOfMediaArea, this.Image.width * this.ImageScale, this.Image.height * this.ImageScale);
+		this.ImageLabelArea = new Rect(xcenterOfMediaArea, ycenterOfMediaArea + this.Image.height * this.ImageScale, this.Image.width * this.ImageScale, 50);
+	}
 }

@@ -107,6 +107,7 @@ public class SessionOneSimplifiedManager : SessionManager
 				{
 					customText.Setup("OpeningB",setupNextPhaseCustomText, GlobalizationService.Instance.Globalize(GlobalizationService.OpeningBText));
 				}
+
 				customText.enabled = true;
                 currentState = SessionState.CustomText;
 
@@ -337,8 +338,20 @@ public class SessionOneSimplifiedManager : SessionManager
                     activityName = GlobalizationService.Instance.Globalize(GlobalizationService.IBoxIntroductionTitle);
                     ibox.enabled = true;
                     ibox.Description = "IBoxIntroductionA";
-                    ibox.instructions = GlobalizationService.Instance.Globalize(GlobalizationService.IBoxIntroductionAText);
-                    currentState = SessionState.IBoxIntroductionA;
+
+					if(StandardConfigurations.IsTheEmoregulatorsAssistantActive)
+					{
+						ibox.Setup();
+						Bridge.UpdateWorldActivityName(this.activityName, "IBoxIntroductionA");
+						SessionManager.ActiveActivity = ibox;
+					}
+					else
+					{
+						ibox.instructions = GlobalizationService.Instance.Globalize(GlobalizationService.IBoxIntroductionAText);
+					}
+                    
+                    
+					currentState = SessionState.IBoxIntroductionA;
                 };
                 customTitleScript.Setup("IBoxIntroductionTitle",setupNextPhaseCustomTitle, GlobalizationService.Instance.Globalize(GlobalizationService.IBoxIntroductionTitle));
                 currentState = SessionState.CustomTitle;

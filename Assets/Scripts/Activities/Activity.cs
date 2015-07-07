@@ -7,6 +7,10 @@ public class Activity : MonoBehaviour
     public bool CanContinue;
     public string Description;
 
+	//Getters and Setters
+	public bool IsMultiLineSet { get; set; }
+	public bool IsMultiLine { get; set; }
+
     protected virtual void Awake()
     {
         this.Configurations = GameObject.FindObjectOfType<StandardConfigurations>();
@@ -18,6 +22,18 @@ public class Activity : MonoBehaviour
         this.CanContinue = false;
         this.SensorManager.StartNewActivity();
     }
+
+	//TheEmoregulators usage
+	public virtual void WriteInstruction(string instruction, bool isMultiLine)
+	{
+	}
+	
+	public virtual void EnableEnd()
+	{
+
+		Debug.Log ("EnableEnd Activity");
+	}
+	//TheEmoregulators usage
 
     public virtual void EndActivity()
     {

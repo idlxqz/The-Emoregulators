@@ -12,7 +12,8 @@ public class Write : IONAction
 {
 	//Constants
 	private const int ActionSentenceIndex = 0;
-	private const int MultiLineIndex = 1;
+	private const int WaitTimeIndex = 1;
+	private const int MultiLineIndex = 2;
 
 
 	//Action attributes
@@ -27,6 +28,7 @@ public class Write : IONAction
 	protected string ActionTarget { get { return _target; } }
 	protected string[] ActionParameters { get { return _parameters; } }
 	protected string ActionSentence { get { return this.ActionParameters [ActionSentenceIndex]; } }
+	protected int WaitTime { get { return Convert.ToInt32(this.ActionParameters [WaitTimeIndex]); } }
 	protected bool IsMultiLine { get { return Convert.ToBoolean(this.ActionParameters [MultiLineIndex]); } }
 	
 	
@@ -41,6 +43,15 @@ public class Write : IONAction
 	}
 	
 
+
+	IEnumerator WaitAndWrite()
+	{
+		yield return new WaitForSeconds(this.WaitTime);
+		Bridge.Write(this.ActionTarget, this.ActionSentence, this.WaitTime, this.IsMultiLine);
+		this.Action.Stop(true);
+		
+	}
+
 	//ION-FAtiMA methods
 	#region ION Event Handlers
 	public override void OnStart(IStarted<EntityAnimationAction<ActionParameters>> startEvt){
@@ -51,14 +62,14 @@ public class Write : IONAction
 		
 		_parameters = actionParameters.Parameters.ToArray ();
 
+		StartCoroutine (WaitAndWrite ());
+
 		FAtiMA.RemoteAgent.ApplicationLogger.Instance().WriteLine("<OnStart> " + this.ActionSubject + " started " + this.ActionName.ToUpper() + " action on screen " + this.ActionTarget + " with sentence " + this.ActionSentence + " </OnStart>");	
 		Debug.Log("<OnStart> " + this.ActionSubject + " started " + this.ActionName.ToUpper() + " action on screen " + this.ActionTarget + " with sentence " + this.ActionSentence + " </OnStart>");
 	}
 	
 	public override void OnStep(IStepped<EntityAnimationAction<ActionParameters>> steppedEvt){
-		Bridge.Write (this.ActionTarget, this.ActionSentence, this.IsMultiLine);
 
-		this.Action.Stop(true);
 	}
 	
 	public override void OnStop(IStopped<EntityAnimationAction<ActionParameters>> stoppedEvt){
@@ -66,5 +77,6 @@ public class Write : IONAction
 		Debug.Log("<OnStopped> " + this.ActionSubject + " stopped " + this.ActionName.ToUpper() + " action on screen " + this.ActionTarget + " with sentence " + this.ActionSentence + " </OnStopped>");
 	}
 	#endregion
+
 }
 

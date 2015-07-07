@@ -35,9 +35,6 @@ public class CustomTextScript : Activity {
 		this.IsMultiLine = false;
     }
 
-	//Getters and Setters
-	public bool IsMultiLineSet { get; set; }
-	public bool IsMultiLine { get; set; }
 
 	public void SetTimeStart(float newTimeStart)
 	{
@@ -173,6 +170,38 @@ public class CustomTextScript : Activity {
         this.Setup(description,nextPhaseSetup, newInstructions);
     }
 
+
+	//TheEmoregulators Actions on this activity
+	public override void WriteInstruction(string instruction, bool isMultiLine)
+	{
+		if (!this.IsMultiLineSet) 
+		{
+			this.IsMultiLine = isMultiLine;
+
+			if(isMultiLine)
+			{
+				this.DefineConfigurationAlignment(TextAnchor.UpperLeft);
+			}
+			else
+			{
+				this.DefineConfigurationAlignment(TextAnchor.MiddleLeft);
+			}
+
+			this.IsMultiLineSet = true;
+
+			this.currentInstructions += instruction;
+			this.fullInstructions += instruction;
+		}
+		else
+		{
+			this.currentInstructions += "\n\n" + instruction;
+			this.fullInstructions += "\n\n" + instruction;
+		}
+		
+		this.timeStart = Time.time;
+
+	}
+
 	//TheEmoregulatorsAssistant CustomText Setup
 	public void Setup(string description, System.Action nextPhaseSetup, System.Action executeOnFinish)
 	{
@@ -193,6 +222,9 @@ public class CustomTextScript : Activity {
 		this.fullInstructions = "";
 		this.moreInstructions = true;
 
+		this.IsMultiLineSet = false;
+
+		instructionsPointer = 0;
 		timeStart = Time.time;
 
 	}
@@ -203,11 +235,19 @@ public class CustomTextScript : Activity {
 		this.Configurations.BoxFormat.alignment = alignmentType;
 	}
 
-	public void EnableEnd()
+	public override void EnableEnd()
 	{
-		moreInstructions = false;
-		UIManagerScript.EnableSkipping();
-		this.OnFinish();
+		this.moreInstructions = false;
+
+		if (this.IsMultiLine)
+		{
+			UIManagerScript.EnableSkipping();
+			this.OnFinish();
+		}
+		else
+		{
+			this.timeStart = Time.time;
+		}
 	}
 
 

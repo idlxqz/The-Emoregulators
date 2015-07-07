@@ -16,6 +16,9 @@ public class BreathingRegulationScript : CustomTextScript {
 
     public override void Update()
     {
+		if(StandardConfigurations.IsTheEmoregulatorsAssistantActive)
+			return;
+
         //check if the waiting time is elapsed
         if (moreInstructions)
         {
@@ -49,5 +52,19 @@ public class BreathingRegulationScript : CustomTextScript {
         //draw the instructions text
         GUI.Label(this.Configurations.HalfTextArea, this.currentInstructions, this.Configurations.BoxFormat);
     }
+
+	//TheEmoregulatorsAssistant
+	public override void WriteInstruction(string instruction, bool isMultiLine)
+	{
+		if(!this.IsMultiLineSet)
+		{
+			Logger.Instance.LogInformation("Playing breathing animation");
+			this.Animator.SetTrigger(AnimatorControlerHashIDs.Instance.BreathingExerciseTrigger);
+		}
+
+		base.WriteInstruction(instruction,isMultiLine);
+	}
+
+
     
 }

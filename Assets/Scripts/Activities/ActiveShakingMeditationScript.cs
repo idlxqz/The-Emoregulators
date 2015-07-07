@@ -35,30 +35,33 @@ public class ActiveShakingMeditationScript : CustomTextScript {
     public override void Update()
     {
         this.heartRateSamples.Add(SensorManager.HeartRate);
-        //check if the waiting time is elapsed
-        if (moreInstructions)
-        {
-            var delay = instructions[instructionsPointer + 1].DelayTime;
-            if ((Time.time - timeStart) >= delay)
-            {
-                timeStart = Time.time;
-                instructionsPointer++;
-                currentInstructions += "\n\n" + instructions[instructionsPointer].Text;
-                //check if there are more to show
-                if (instructions.Length == instructionsPointer + 1)
-                {
-                    //calculate the heartRateBaseline for the relaxed state
-                    this.heartRateBaseline = heartRateSamples.Average();
-                    //reset the heartRateSamples to collect the heart rate data when dancing
-                    heartRateSamples = new List<int>();
-                    this.Animator.SetBool(AnimatorControlerHashIDs.Instance.DancingExerciseBool,true);
-                    moreInstructions = false;
-                    PlayOneShot();
-                    
-                    triggeredMusic = true;
-                }
-            }
-        }
+
+		if(!StandardConfigurations.IsTheEmoregulatorsAssistantActive)
+			//check if the waiting time is elapsed
+	        if (moreInstructions)
+	        {
+	            var delay = instructions[instructionsPointer + 1].DelayTime;
+	            if ((Time.time - timeStart) >= delay)
+	            {
+	                timeStart = Time.time;
+	                instructionsPointer++;
+	                currentInstructions += "\n\n" + instructions[instructionsPointer].Text;
+	                //check if there are more to show
+	                if (instructions.Length == instructionsPointer + 1)
+	                {
+	                    //calculate the heartRateBaseline for the relaxed state
+	                    this.heartRateBaseline = heartRateSamples.Average();
+	                    //reset the heartRateSamples to collect the heart rate data when dancing
+	                    heartRateSamples = new List<int>();
+	                    this.Animator.SetBool(AnimatorControlerHashIDs.Instance.DancingExerciseBool,true);
+	                    moreInstructions = false;
+	                    PlayOneShot();
+	                    
+	                    triggeredMusic = true;
+	                }
+	            }
+	        }
+
         if (this.triggeredMusic && !isPlaying())
         {
             Logger.Instance.LogInformation("Music stopped.");
@@ -105,4 +108,19 @@ public class ActiveShakingMeditationScript : CustomTextScript {
             return false;
         return true;
     }
+
+	public override void EnableEnd()
+	{
+		//calculate the heartRateBaseline for the relaxed state
+		this.heartRateBaseline = heartRateSamples.Average();
+		//reset the heartRateSamples to collect the heart rate data when dancing
+		heartRateSamples = new List<int>();
+		this.Animator.SetBool(AnimatorControlerHashIDs.Instance.DancingExerciseBool,true);
+		moreInstructions = false;
+		PlayOneShot();
+		
+		triggeredMusic = true;
+
+		base.EnableEnd ();
+	}
 }

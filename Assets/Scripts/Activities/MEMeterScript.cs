@@ -171,4 +171,31 @@ public class MEMeterScript : Activity {
         this.CanContinue = false;
         this.SensorManager.StartNewActivity();
     }
+
+	//TheEmoregulators usage
+	public void Setup()
+	{
+		this.instructions = "";
+		this.IsMultiLineSet = false;
+	}
+	
+	public override void WriteInstruction(string instruction, bool isMultiLine)
+	{
+		if (!this.IsMultiLineSet) 
+		{
+			this.IsMultiLine = isMultiLine;
+			this.IsMultiLineSet = true;
+			
+			this.instructions += instruction;
+		}
+		else
+		{
+			this.instructions += "\n\n" + instruction;
+		}
+		
+	}
+	
+	public override void EnableEnd()
+	{
+	}
 }

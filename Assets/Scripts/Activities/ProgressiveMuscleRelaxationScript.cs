@@ -50,37 +50,38 @@ public class ProgressiveMuscleRelaxationScript : CustomTextScript
             }
         }
 
-        //check if the waiting time is elapsed
-        if (moreInstructions)
-        {
-            var delay = instructions[instructionsPointer+1].DelayTime;
-            if ((Time.time - timeStart) >= delay)
-            {
-                timeStart = Time.time;
-                instructionsPointer++;
-                currentInstructions += "\n\n" + instructions[instructionsPointer].Text;
+		if(!StandardConfigurations.IsTheEmoregulatorsAssistantActive)
+	        //check if the waiting time is elapsed
+	        if (moreInstructions)
+	        {
+	            var delay = instructions[instructionsPointer+1].DelayTime;
+	            if ((Time.time - timeStart) >= delay)
+	            {
+	                timeStart = Time.time;
+	                instructionsPointer++;
+	                currentInstructions += "\n\n" + instructions[instructionsPointer].Text;
 
-                if (instructionsPointer == 1 || instructionsPointer == 4)
-                {
-                    Logger.Instance.LogInformation("Exercise Animation Started");
-                    if (this.AnimationId == AnimatorControlerHashIDs.Instance.SnailExerciseTrigger)
-                    {
-                        //simple hack to play the alarm sound in the snail exercise
-                        GameObject.Find("Alarm2 Audio Source").GetComponent<AudioSource>().Play();
-                    }
-                    this.Animator.SetTrigger(this.AnimationId);
-                    this.ExpectedMuscleTense = true;
-                }
-                //check if there are more to show
-                if (instructions.Length == instructionsPointer + 1)
-                {
-                    moreInstructions = false;
-                    //let the user skip from now on
-                    UIManagerScript.EnableSkipping();
-                    this.OnFinish();
-                }
-            }
-        }
+	                if (instructionsPointer == 1 || instructionsPointer == 4)
+	                {
+	                    Logger.Instance.LogInformation("Exercise Animation Started");
+	                    if (this.AnimationId == AnimatorControlerHashIDs.Instance.SnailExerciseTrigger)
+	                    {
+	                        //simple hack to play the alarm sound in the snail exercise
+	                        GameObject.Find("Alarm2 Audio Source").GetComponent<AudioSource>().Play();
+	                    }
+	                    this.Animator.SetTrigger(this.AnimationId);
+	                    this.ExpectedMuscleTense = true;
+	                }
+	                //check if there are more to show
+	                if (instructions.Length == instructionsPointer + 1)
+	                {
+	                    moreInstructions = false;
+	                    //let the user skip from now on
+	                    UIManagerScript.EnableSkipping();
+	                    this.OnFinish();
+	                }
+	            }
+	        }
     }
 
     public override void OnGUI()
@@ -98,6 +99,14 @@ public class ProgressiveMuscleRelaxationScript : CustomTextScript
         this.ExpectedMuscleRelaxed = false;
         this.ExpectedMuscleTense = false;
     }
+
+	public void Setup(string description, System.Action nextPhaseSetup, System.Action executeOnFinish)
+	{
+		base.Setup(description,  nextPhaseSetup, executeOnFinish);
+
+		this.ExpectedMuscleRelaxed = false;
+		this.ExpectedMuscleTense = false;
+	}
 
     public void SetBackground(Texture2D backgroundTexture)
     {
@@ -125,4 +134,24 @@ public class ProgressiveMuscleRelaxationScript : CustomTextScript
             sr.sprite = this.SelectedSprite;
         }
     }
+
+	//TheEmoregulatorsAssistant
+	public override void WriteInstruction(string instruction, bool isMultiLine)
+	{
+		instructionsPointer++;
+
+		if (instructionsPointer == 1 || instructionsPointer == 4)
+		{
+			Logger.Instance.LogInformation("Exercise Animation Started");
+			if (this.AnimationId == AnimatorControlerHashIDs.Instance.SnailExerciseTrigger)
+			{
+				//simple hack to play the alarm sound in the snail exercise
+				GameObject.Find("Alarm2 Audio Source").GetComponent<AudioSource>().Play();
+			}
+			this.Animator.SetTrigger(this.AnimationId);
+			this.ExpectedMuscleTense = true;
+		}
+		
+		base.WriteInstruction(instruction,isMultiLine);
+	}
 }

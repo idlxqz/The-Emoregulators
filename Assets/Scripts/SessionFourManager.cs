@@ -75,13 +75,25 @@ public class SessionFourManager : SessionManager {
                     //activate the candle cerimony
                     log.LogInformation("Started candle lighting cerimony.");
                     activityName = GlobalizationService.Instance.Globalize(GlobalizationService.CandleCeremonyTitle);
-                    this.candle.instructions = GlobalizationService.Instance.Globalize(GlobalizationService.CandleCeremonyText);
+					
+					if(StandardConfigurations.IsTheEmoregulatorsAssistantActive)
+					{
+						this.candle.Setup();
+						Bridge.UpdateWorldActivityName(this.activityName, "CandleCeremony");
+						SessionManager.ActiveActivity = candle;
+					}
+					else
+					{
+						this.candle.instructions = GlobalizationService.Instance.Globalize(GlobalizationService.CandleCeremonyText);
+					}
+
                     candle.enabled = true;
                     currentState = SessionState.CandleCeremony;
                     //re-enable interface
                     hideInterface = false;
                     displayIBox = true;
                 };
+
                 customTitleScript.Setup("CandleCeremonyTitle",setupNextPhaseCustomTitle, GlobalizationService.Instance.Globalize(GlobalizationService.CandleCeremonyTitle));
                 currentState = SessionState.CustomTitle;
                 break;
@@ -112,19 +124,20 @@ public class SessionFourManager : SessionManager {
                         
                             currentState = SessionState.MinuteForMyselfB;
                         };
+
                         CustomTextWithImage.Image = MemeterTexture;
                         CustomTextWithImage.ImageScale = 0.5f;
 
-						/*if(StandardConfigurations.IsTheEmoregulatorsAssistantActive)
+						if(StandardConfigurations.IsTheEmoregulatorsAssistantActive)
 						{
-							Bridge.UpdateWorldActivityName(this.activityName, "MinuteForMySelfA");
+							Bridge.UpdateWorldActivityName("MinuteForMySelf","MinuteForMySelfA"); //first argument is hack (doesnt accept this.activityName (name too large)
 							SessionManager.ActiveActivity = CustomTextWithImage;
 							CustomTextWithImage.Setup("MinuteForMySelfA",setupNextPhaseCustomText);
 						}
 						else
-						{*/
+						{
 							CustomTextWithImage.Setup("MinuteForMySelfA",setupNextPhaseCustomText, GlobalizationService.Instance.Globalize(GlobalizationService.MinuteForMyselfAText));
-						//}
+						}
 
                         CustomTextWithImage.enabled = true;
                         currentState = SessionState.CustomTextWithImage;
@@ -147,16 +160,16 @@ public class SessionFourManager : SessionManager {
                     currentState = SessionState.MinuteForMyselfC;
                 };
 
-				/*if(StandardConfigurations.IsTheEmoregulatorsAssistantActive)
+				if(StandardConfigurations.IsTheEmoregulatorsAssistantActive)
 				{
-					Bridge.UpdateWorldActivityName(this.activityName, "MinuteForMySelfB");
+					Bridge.UpdateWorldActivityName("MinuteForMySelf", "MinuteForMySelfB");
 					SessionManager.ActiveActivity = customText;
 					customText.Setup("MinuteForMySelfB",setupNextPhaseCustomText);
 				}
 				else
-				{*/
+				{
 					customText.Setup("MinuteForMySelfB",setupNextPhaseCustomText, GlobalizationService.Instance.Globalize(GlobalizationService.MinuteForMyselfBText));
-				//}
+				}
 
                 customText.enabled = true;
                 currentState = SessionState.CustomText;
@@ -177,16 +190,17 @@ public class SessionFourManager : SessionManager {
                 };
                 customText.MinimumWaitTime = 30;
 
-				/*if(StandardConfigurations.IsTheEmoregulatorsAssistantActive)
+				if(StandardConfigurations.IsTheEmoregulatorsAssistantActive)
 				{
-					Bridge.UpdateWorldActivityName(this.activityName, "MinuteForMySelfC");
+					Bridge.UpdateWorldActivityName("MinuteForMySelf", "MinuteForMySelfC");
 					SessionManager.ActiveActivity = customText;
 					customText.Setup("MinuteForMySelfC",setupNextPhaseCustomText,() => this.AlarmSound.Play());
 				}
 				else
-				{*/
+				{
 					customText.Setup("MinuteForMySelfC",setupNextPhaseCustomText, () => this.AlarmSound.Play(),GlobalizationService.Instance.Globalize(GlobalizationService.MinuteForMyselfCText));
-				//}
+				
+				}
 
                 customText.enabled = true;
                 currentState = SessionState.CustomText;
@@ -206,16 +220,39 @@ public class SessionFourManager : SessionManager {
                     this.showHelpButton = true;
                     this.helpTextContent =
                         GlobalizationService.Instance.Globalize(GlobalizationService.MinuteForMyselfDText);
-                    memeter.instructions = GlobalizationService.Instance.Globalize(GlobalizationService.MeMeterText);
-                    memeter.showInstructions = true;
+
+					if(StandardConfigurations.IsTheEmoregulatorsAssistantActive)
+					{
+						Bridge.UpdateWorldActivityName("MinuteForMySelf", "MeMeter");
+						SessionManager.ActiveActivity = memeter;
+						this.memeter.Setup();
+					}
+					else
+					{
+						memeter.instructions = GlobalizationService.Instance.Globalize(GlobalizationService.MeMeterText);
+					}                    
+
+					memeter.showInstructions = true;
                     memeter.enabled = true;
                     memeter.Description = "MeMeter";
                     currentState = SessionState.MeMeter;
                     proceed = false;
                 };
+
                 customText.MinimumWaitTime = 10;
-                customText.Setup("MinuteForMySelfD",setupNextPhaseCustomText, GlobalizationService.Instance.Globalize(GlobalizationService.MinuteForMyselfDText));
-                customText.enabled = true;
+				
+				if(StandardConfigurations.IsTheEmoregulatorsAssistantActive)
+				{
+					Bridge.UpdateWorldActivityName("MinuteForMySelf", "MinuteForMySelfD");
+					SessionManager.ActiveActivity = customText;
+					customText.Setup("MinuteForMySelfD",setupNextPhaseCustomText);
+				}
+				else
+				{
+					customText.Setup("MinuteForMySelfD",setupNextPhaseCustomText, GlobalizationService.Instance.Globalize(GlobalizationService.MinuteForMyselfDText));
+				}
+                
+				customText.enabled = true;
                 currentState = SessionState.CustomText;
                 break;
 
@@ -245,10 +282,21 @@ public class SessionFourManager : SessionManager {
                             currentState = SessionState.FacialMindfulnessB;
                         };
                         customText.MinimumWaitTime = 10;
-                        customText.Setup("FacialMindfulnessA",setupNextPhaseCustomText, 
-                            new Instruction[]{ new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.FacialMindfulnessA1Text)),
-                                               new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.FacialMindfulnessA2Text))
-                            });
+
+						if(StandardConfigurations.IsTheEmoregulatorsAssistantActive)
+						{
+							Bridge.UpdateWorldActivityName(this.activityName, "FacialMindfulnessA");
+							SessionManager.ActiveActivity = customText;
+							customText.Setup("FacialMindfulnessA",setupNextPhaseCustomText);
+						}
+						else
+						{
+							customText.Setup("FacialMindfulnessA",setupNextPhaseCustomText, 
+							                 new Instruction[]{ new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.FacialMindfulnessA1Text)),
+											 					new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.FacialMindfulnessA2Text))
+							});
+						} 
+
                         customText.enabled = true;
                         currentState = SessionState.CustomText;
                     };
@@ -256,6 +304,7 @@ public class SessionFourManager : SessionManager {
                     currentState = SessionState.CustomTitle;
                 }
                 break;
+
             case SessionState.FacialMindfulnessB:
                 log.LogInformation("Started FacialMindfullness B.");
                 //prepare custom text of introduction
@@ -272,19 +321,31 @@ public class SessionFourManager : SessionManager {
                         GlobalizationService.Instance.Globalize(GlobalizationService.FacialMindfulnessA2Text) + "\n\n"
                         + GlobalizationService.Instance.Globalize(GlobalizationService.FacialMindfulnessB1Text) + "\n\n"
                         + GlobalizationService.Instance.Globalize(GlobalizationService.FacialMindfulnessB2Text);
-                    facialMindfulness.Setup("FacialMindfullnessD",userGender);
+					facialMindfulness.Setup("FacialMindfullnessD",userGender);
                     facialMindfulness.enabled = true;
                     currentState = SessionState.FacialMindfulnessD;
                 };
-                customText.Setup("FacialMindfullnessB",setupNextPhaseCustomText, 
-                    new Instruction[]
-                    {
-                        new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.FacialMindfulnessB1Text)),
-                        new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.FacialMindfulnessB2Text))
-                    });
+
+				if(StandardConfigurations.IsTheEmoregulatorsAssistantActive)
+				{
+					Bridge.UpdateWorldActivityName(this.activityName, "FacialMindfulnessB");
+					SessionManager.ActiveActivity = customText;
+					customText.Setup("FacialMindfulnessB",setupNextPhaseCustomText);
+				}
+				else
+				{
+					customText.Setup("FacialMindfullnessB",setupNextPhaseCustomText, 
+					                 new Instruction[]
+					                 {
+						new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.FacialMindfulnessB1Text)),
+						new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.FacialMindfulnessB2Text))
+					});
+				} 
+
                 customText.enabled = true;
                 currentState = SessionState.CustomText;
                 break;
+
             case SessionState.FacialMindfulnessD:
                 if (canSkip)
                 {
@@ -300,13 +361,24 @@ public class SessionFourManager : SessionManager {
                         log.LogInformation("Started breathing regulation exercise");
                         currentState = SessionState.BreathingRegulationB;
                         breathingRegulation.Avatar = this.GetPlayerAvatar;
-                        breathingRegulation.Setup("BreathingRegulationA",null, () => SessionManager.PlayerScore += 5,
-                            new []{
-                                new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.BreathingRegulationA1Text)),
-                                new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.BreathingRegulationA2Text)),
-                                new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.BreathingRegulationA3Text)),
-                                new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.BreathingRegulationA4Text)),
-                                new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.BreathingRegulationA5Text))});
+
+						if(StandardConfigurations.IsTheEmoregulatorsAssistantActive)
+						{
+							Bridge.UpdateWorldActivityName(this.activityName, "BreathingRegulationA");
+							SessionManager.ActiveActivity = breathingRegulation;
+							breathingRegulation.Setup("BreathingRegulationA",null,() => SessionManager.PlayerScore += 5);
+						}
+						else
+						{
+							breathingRegulation.Setup("BreathingRegulationA",null, () => SessionManager.PlayerScore += 5,
+							                          new []{
+								new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.BreathingRegulationA1Text)),
+								new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.BreathingRegulationA2Text)),
+								new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.BreathingRegulationA3Text)),
+								new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.BreathingRegulationA4Text)),
+								new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.BreathingRegulationA5Text))});
+						}
+
                         breathingRegulation.enabled = true;
                     };
                     customTitleScript.Setup("BreathingRegulationTitle",setupNextPhaseCustomTitle, GlobalizationService.Instance.Globalize(GlobalizationService.BreathingRegulationTitle));
@@ -323,13 +395,24 @@ public class SessionFourManager : SessionManager {
                     //continue on the breathing regulation exercise
                     //breathingRegulation.enabled = false;
                     log.LogInformation("Started Breathing Regulation B.");
-                    breathingRegulation.Setup("BreathingRegulationB",null, () => SessionManager.PlayerScore += 5,
-                            new []{
-                                new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.BreathingRegulationB1Text)),
-                                new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.BreathingRegulationB2Text)),
-                                new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.BreathingRegulationB3Text)),
-                                new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.BreathingRegulationB4Text),10)
-                         });
+
+					if(StandardConfigurations.IsTheEmoregulatorsAssistantActive)
+					{
+						Bridge.UpdateWorldActivityName(this.activityName, "BreathingRegulationB");
+						SessionManager.ActiveActivity = breathingRegulation;
+						breathingRegulation.Setup("BreathingRegulationB",null,() => SessionManager.PlayerScore += 5);
+					}
+					else
+					{
+						breathingRegulation.Setup("BreathingRegulationB",null, () => SessionManager.PlayerScore += 5,
+						                          new []{
+							new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.BreathingRegulationB1Text)),
+							new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.BreathingRegulationB2Text)),
+							new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.BreathingRegulationB3Text)),
+							new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.BreathingRegulationB4Text),10)
+						});
+					}
+
                     breathingRegulation.enabled = true;
                     currentState = SessionState.BreathingRegulationC;
                 }
@@ -352,13 +435,25 @@ public class SessionFourManager : SessionManager {
                         activityName = GlobalizationService.Instance.Globalize(GlobalizationService.ActiveMeditationTitle);
                         activeShakingMeditation.Avatar = this.GetPlayerAvatar;
                         activeShakingMeditation.enabled = true;
-                        activeShakingMeditation.Setup("ActiveShakingMeditationA",null, 
-                            new[]{
-                                new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ActiveMeditationA1Text)),
-                                new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ActiveMeditationA2Text)),
-                                new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ActiveMeditationA3Text)),
-                                new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ActiveMeditationA4Text))
-                            });
+
+						if(StandardConfigurations.IsTheEmoregulatorsAssistantActive)
+						{
+							Bridge.UpdateWorldActivityName(this.activityName, "ActiveShakingMeditationA");
+							SessionManager.ActiveActivity = activeShakingMeditation;
+							activeShakingMeditation.Setup("ActiveShakingMeditationA",null);
+						}
+						else
+						{
+							activeShakingMeditation.Setup("ActiveShakingMeditationA",null, 
+							                              new[]{
+								new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ActiveMeditationA1Text)),
+								new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ActiveMeditationA2Text)),
+								new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ActiveMeditationA3Text)),
+								new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ActiveMeditationA4Text))
+							});
+						}
+
+
                         currentState = SessionState.ActiveShakingMeditation;
                     };
                     customTitleScript.Setup("ActiveShakingMeditationTitle",setupNextPhaseCustomTitle, GlobalizationService.Instance.Globalize(GlobalizationService.ActiveMeditationTitle));
@@ -390,11 +485,24 @@ public class SessionFourManager : SessionManager {
                     };
 
                     customText.MinimumWaitTime = 60;
-                    customText.Setup("ActiveShakingMeditationB",setupNextPhaseCustomText,() => { this.AlarmSound.Play(); SessionManager.PlayerScore += 5; }, GlobalizationService.Instance.Globalize(GlobalizationService.ActiveMeditationBText));
-                    customText.enabled = true;
+
+					if(StandardConfigurations.IsTheEmoregulatorsAssistantActive)
+					{
+						Bridge.UpdateWorldActivityName(this.activityName, "ActiveShakingMeditationB");
+						SessionManager.ActiveActivity = customText;
+						customText.Setup("ActiveShakingMeditationB",setupNextPhaseCustomText, () => { this.AlarmSound.Play(); SessionManager.PlayerScore += 5; });
+					}
+					else
+					{
+						customText.Setup("ActiveShakingMeditationB",setupNextPhaseCustomText,() => { this.AlarmSound.Play(); SessionManager.PlayerScore += 5; }, 
+										 GlobalizationService.Instance.Globalize(GlobalizationService.ActiveMeditationBText));
+					}
+                    
+					customText.enabled = true;
                     currentState = SessionState.CustomText;
                 }
                 break;
+
             case SessionState.ActiveShakingMeditationC:
                 log.LogInformation("Started ActiveShaking C");
 
@@ -405,11 +513,22 @@ public class SessionFourManager : SessionManager {
                     //disable the custom text and proceed to the next state
                     currentState = SessionState.ActiveShakingMeditationD;
                 };
-
-                customText.Setup("ActiveShakingMeditationC",setupNextPhaseCustomText, GlobalizationService.Instance.Globalize(GlobalizationService.ActiveMeditationCText));
-                customText.enabled = true;
+				
+				if(StandardConfigurations.IsTheEmoregulatorsAssistantActive)
+				{
+					Bridge.UpdateWorldActivityName(this.activityName, "ActiveShakingMeditationC");
+					SessionManager.ActiveActivity = customText;
+					customText.Setup("ActiveShakingMeditationC",setupNextPhaseCustomText);
+				}
+				else
+				{
+					customText.Setup("ActiveShakingMeditationC",setupNextPhaseCustomText, GlobalizationService.Instance.Globalize(GlobalizationService.ActiveMeditationCText));
+				}
+                
+				customText.enabled = true;
                 currentState = SessionState.CustomText;
                 break;
+
             case SessionState.ActiveShakingMeditationD:
                 log.LogInformation("Started ActiveShaking Meditation D.");
 
@@ -421,10 +540,21 @@ public class SessionFourManager : SessionManager {
                     currentState = SessionState.ProgressiveMuscleRelaxationTitle;
                 };
 
-                customText.Setup("ActiveShakingMeditationD",setupNextPhaseCustomText, GlobalizationService.Instance.Globalize(GlobalizationService.ActiveMeditationDText));
+				if(StandardConfigurations.IsTheEmoregulatorsAssistantActive)
+				{
+					Bridge.UpdateWorldActivityName(this.activityName, "ActiveShakingMeditationD");
+					SessionManager.ActiveActivity = customText;
+					customText.Setup("ActiveShakingMeditationD",setupNextPhaseCustomText);
+				}
+				else
+				{
+					customText.Setup("ActiveShakingMeditationD",setupNextPhaseCustomText, GlobalizationService.Instance.Globalize(GlobalizationService.ActiveMeditationDText));
+				}
+           
                 customText.enabled = true;
                 currentState = SessionState.CustomText;
                 break;
+
             case SessionState.ProgressiveMuscleRelaxationTitle:
                 log.LogInformation("Started ProgressiveMuscleRelaxation Title.");
                 canSkip = false;
@@ -439,6 +569,7 @@ public class SessionFourManager : SessionManager {
                 customTitleScript.Setup("PMRTitle",setupNextPhaseCustomTitle, GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationTitle));
                 currentState = SessionState.CustomTitle;
                 break;
+
             case SessionState.ProgressiveMuscleRelaxationA:
                 //start introducing progressive muscle relaxation
                 log.LogInformation("Started progressive muscle relaxation A.");
@@ -452,11 +583,22 @@ public class SessionFourManager : SessionManager {
                     //disable the custom text and proceed to the next state
                     currentState = SessionState.ProgressiveMuscleRelaxationB;
                 };
+				
+				if(StandardConfigurations.IsTheEmoregulatorsAssistantActive)
+				{
+					Bridge.UpdateWorldActivityName(this.activityName, "PMRA");
+					SessionManager.ActiveActivity = customText;
+					customText.Setup("PMRA",setupNextPhaseCustomText);
+				}
+				else
+				{
+					customText.Setup("PMRA",setupNextPhaseCustomText, GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationAText));
+				}
 
-                customText.Setup("PMRA",setupNextPhaseCustomText, GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationAText));
                 customText.enabled = true;
                 currentState = SessionState.CustomText;
                 break;
+
             case SessionState.ProgressiveMuscleRelaxationB:
                 log.LogInformation("Started progressive muscle relaxation B.");
                 setupNextPhaseCustomText = () =>
@@ -467,10 +609,21 @@ public class SessionFourManager : SessionManager {
                     currentState = SessionState.ProgressiveMuscleRelaxationC;
                 };
 
-                customText.Setup("PMRB",setupNextPhaseCustomText, GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationBText));
+				if(StandardConfigurations.IsTheEmoregulatorsAssistantActive)
+				{
+					Bridge.UpdateWorldActivityName(this.activityName, "PMRB");
+					SessionManager.ActiveActivity = customText;
+					customText.Setup("PMRB",setupNextPhaseCustomText);
+				}
+				else
+				{
+					customText.Setup("PMRB",setupNextPhaseCustomText, GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationBText));
+				}
+
                 customText.enabled = true;
                 currentState = SessionState.CustomText;
                 break;
+
             case SessionState.ProgressiveMuscleRelaxationC:
                 log.LogInformation("Started progressive muscle relaxation C.");
                 setupNextPhaseCustomText = () =>
@@ -492,21 +645,31 @@ public class SessionFourManager : SessionManager {
                 
                 this.GetPlayerBall.SetActive(true);
 
-                progressiveMuscleRelaxation.Setup("PMRC",setupNextPhaseCustomText, () => SessionManager.PlayerScore += 2,
-                    new []
-                    {
-                        new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationC1Text),0), 
-                        new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationC2Text),3), 
-                        new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationC3Text),5), 
-                        new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationC4Text),5), 
-                        new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationC5Text),5), 
-                        new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationC6Text),5), 
-                        new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationC7Text),5), 
-                        new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationC8Text),5)
-                    });
-                
+				if(StandardConfigurations.IsTheEmoregulatorsAssistantActive)
+				{
+					Bridge.UpdateWorldActivityName(this.activityName, "PMRC");
+					SessionManager.ActiveActivity = progressiveMuscleRelaxation;
+					progressiveMuscleRelaxation.Setup("PMRC",setupNextPhaseCustomText,() => SessionManager.PlayerScore += 2);
+				}
+				else
+				{
+					progressiveMuscleRelaxation.Setup("PMRC",setupNextPhaseCustomText, () => SessionManager.PlayerScore += 2,
+					                                  new []
+					                                  {
+						new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationC1Text),0), 
+						new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationC2Text),3), 
+						new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationC3Text),5), 
+						new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationC4Text),5), 
+						new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationC5Text),5), 
+						new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationC6Text),5), 
+						new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationC7Text),5), 
+						new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationC8Text),5)
+					});
+				}
+			    
                 currentState = SessionState.ProgressiveMuscleRelaxation;
                 break;
+
             case SessionState.ProgressiveMuscleRelaxationD:
                 log.LogInformation("Started progressive muscle relaxation D.");
                 setupNextPhaseCustomText = () =>
@@ -521,21 +684,32 @@ public class SessionFourManager : SessionManager {
                 progressiveMuscleRelaxation.ExpectedMuscle = 2;
                 progressiveMuscleRelaxation.enabled = true;
                 progressiveMuscleRelaxation.SetBackground(progressiveMuscleRelaxation.SunBackground);
+				
 
-                progressiveMuscleRelaxation.Setup("PMRD",setupNextPhaseCustomText, () => SessionManager.PlayerScore += 2,
-                    new []
-                    {
-                        new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationD1Text),0),
-                        new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationD2Text),3),
-                        new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationD3Text),7),
-                        new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationD4Text),7),
-                        new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationD5Text),7),
-                        new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationD6Text),7),
-                        new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationD7Text),7)
-                    });
+				if(StandardConfigurations.IsTheEmoregulatorsAssistantActive)
+				{
+					Bridge.UpdateWorldActivityName(this.activityName, "PMRD");
+					SessionManager.ActiveActivity = progressiveMuscleRelaxation;
+					progressiveMuscleRelaxation.Setup("PMRD",setupNextPhaseCustomText,() => SessionManager.PlayerScore += 2);
+				}
+				else
+				{
+					progressiveMuscleRelaxation.Setup("PMRD",setupNextPhaseCustomText, () => SessionManager.PlayerScore += 2,
+					                                  new []
+					                                  {
+						new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationD1Text),0),
+						new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationD2Text),3),
+						new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationD3Text),7),
+						new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationD4Text),7),
+						new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationD5Text),7),
+						new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationD6Text),7),
+						new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationD7Text),7)
+					});
+				}
                 
                 currentState = SessionState.ProgressiveMuscleRelaxation;
                 break;
+
             case SessionState.ProgressiveMuscleRelaxationE:
                 log.LogInformation("Started progressive muscle relaxation E.");
                 setupNextPhaseCustomText = () =>
@@ -549,22 +723,32 @@ public class SessionFourManager : SessionManager {
                 progressiveMuscleRelaxation.AnimationId = AnimatorControlerHashIDs.Instance.SnailExerciseTrigger;
                 progressiveMuscleRelaxation.enabled = true;
                 progressiveMuscleRelaxation.SetBackground(progressiveMuscleRelaxation.SnailBackground);
-
-                progressiveMuscleRelaxation.Setup("PMRE",setupNextPhaseCustomText, () => SessionManager.PlayerScore += 2,
-                    new[]
-                    {
-                        new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationE1Text),0), 
-                        new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationE2Text),3), 
-                        new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationE3Text),6), 
-                        new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationE4Text),6), 
-                        new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationE5Text),6), 
-                        new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationE6Text),6), 
-                        new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationE7Text),6), 
-                        new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationE8Text),6)
-                    });
+				
+				if(StandardConfigurations.IsTheEmoregulatorsAssistantActive)
+				{
+					Bridge.UpdateWorldActivityName(this.activityName, "PMRE");
+					SessionManager.ActiveActivity = progressiveMuscleRelaxation;
+					progressiveMuscleRelaxation.Setup("PMRE",setupNextPhaseCustomText,() => SessionManager.PlayerScore += 2);
+				}
+				else
+				{
+					progressiveMuscleRelaxation.Setup("PMRE",setupNextPhaseCustomText, () => SessionManager.PlayerScore += 2,
+					                                  new[]
+					                                  {
+						new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationE1Text),0), 
+						new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationE2Text),3), 
+						new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationE3Text),6), 
+						new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationE4Text),6), 
+						new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationE5Text),6), 
+						new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationE6Text),6), 
+						new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationE7Text),6), 
+						new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationE8Text),6)
+					});
+				}
 
                 currentState = SessionState.ProgressiveMuscleRelaxation;
                 break;
+
             case SessionState.ProgressiveMuscleRelaxationF:
                 log.LogInformation("Started progressive muscle relaxation F.");
                 setupNextPhaseCustomText = () =>
@@ -584,17 +768,27 @@ public class SessionFourManager : SessionManager {
                 SpringSound.Stop();
                 SeaSound.Play();
 
-                progressiveMuscleRelaxation.Setup("PMRF",setupNextPhaseCustomText, () => SessionManager.PlayerScore += 1,
-                    new[]
-                    {
-                        new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationF1Text),0), 
-                        new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationF2Text),3), 
-                        new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationF3Text),7), 
-                        new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationF4Text),7)
-                    });
+				if(StandardConfigurations.IsTheEmoregulatorsAssistantActive)
+				{
+					Bridge.UpdateWorldActivityName(this.activityName, "PMRF");
+					SessionManager.ActiveActivity = progressiveMuscleRelaxation;
+					progressiveMuscleRelaxation.Setup("PMRF",setupNextPhaseCustomText,() => SessionManager.PlayerScore += 1);
+				}
+				else
+				{
+					progressiveMuscleRelaxation.Setup("PMRF",setupNextPhaseCustomText, () => SessionManager.PlayerScore += 1,
+					                                  new[]
+					                                  {
+						new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationF1Text),0), 
+						new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationF2Text),3), 
+						new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationF3Text),7), 
+						new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ProgressiveMuscleRelaxationF4Text),7)
+					});
+				}
 
                 currentState = SessionState.ProgressiveMuscleRelaxation;
                 break;
+
             case SessionState.HowDoesMyBodyFeelTitle:
                 log.LogInformation("Started HowDoesMyBodyFeel Title");
                 canSkip = false;
@@ -610,6 +804,7 @@ public class SessionFourManager : SessionManager {
                 customTitleScript.Setup("HowDoesMyBodyFeelTitle",setupNextPhaseCustomTitle, GlobalizationService.Instance.Globalize(GlobalizationService.HowDoesMyBodyFeelTitle));
                 currentState = SessionState.CustomTitle;
                 break;
+
             case SessionState.HowDoesMyBodyFeelA:
                 log.LogInformation("Started HowDoesMyBodyFeel A");
                 setupNextPhaseCustomText = () =>
@@ -618,16 +813,40 @@ public class SessionFourManager : SessionManager {
                     log.LogInformation("Ended HowDoesMyBodyFeel A.");
                     currentState = SessionState.HowDoesMyBodyFeelB;
                 };
-                customText.Setup("HowDoesMyBodyFeelA",setupNextPhaseCustomText, GlobalizationService.Instance.Globalize(GlobalizationService.HowDoesMyBodyFeelAText));
+
+				if(StandardConfigurations.IsTheEmoregulatorsAssistantActive)
+				{
+					Bridge.UpdateWorldActivityName(this.activityName, "HowDoesMyBodyFeelA");
+					SessionManager.ActiveActivity = customText;
+					customText.Setup("HowDoesMyBodyFeelA",setupNextPhaseCustomText);
+				}
+				else
+				{
+					customText.Setup("HowDoesMyBodyFeelA",setupNextPhaseCustomText, GlobalizationService.Instance.Globalize(GlobalizationService.HowDoesMyBodyFeelAText));
+				}
+                
                 customText.enabled = true;
                 currentState = SessionState.CustomText;
                 break;
+
             case SessionState.HowDoesMyBodyFeelB:
                 log.LogInformation("Started HowDoesMyBodyFeel B");
-                emotionListScript.Setup("HowDoesMyBodyFeelB",null, GlobalizationService.Instance.Globalize(GlobalizationService.HowDoesMyBodyFeelBText));
-                emotionListScript.enabled = true;
+
+				if(StandardConfigurations.IsTheEmoregulatorsAssistantActive)
+				{
+					Bridge.UpdateWorldActivityName(this.activityName, "HowDoesMyBodyFeelB");
+					SessionManager.ActiveActivity = emotionListScript;
+					emotionListScript.Setup("HowDoesMyBodyFeelB",null);
+				}
+				else
+				{
+					emotionListScript.Setup("HowDoesMyBodyFeelB",null, GlobalizationService.Instance.Globalize(GlobalizationService.HowDoesMyBodyFeelBText));
+				}
+                
+				emotionListScript.enabled = true;
                 currentState = SessionState.EmotionList;
                 break;
+
             case SessionState.EmotionList:
                 if (canSkip)
                 {
@@ -637,6 +856,7 @@ public class SessionFourManager : SessionManager {
                     currentState = SessionState.HowDoesMyBodyFeelC;
                 }
                 break;
+
             case SessionState.HowDoesMyBodyFeelC:
                 log.LogInformation("Started HowDoesMyBodyFeel C");
                 setupNextPhaseCustomText = () =>
@@ -647,15 +867,29 @@ public class SessionFourManager : SessionManager {
                     this.helpTextContent =
                         GlobalizationService.Instance.Globalize(GlobalizationService.HowDoesMyBodyFeelBText) + "\n\n" +
                         GlobalizationService.Instance.Globalize(GlobalizationService.HowDoesMyBodyFeelCText);
-                    howDoesMyBodyFeel.Setup("HowDoesMyBodyFeelExercise",userGender);
+
+					howDoesMyBodyFeel.Setup("HowDoesMyBodyFeelExercise",userGender);
+
                     howDoesMyBodyFeel.enabled = true;
                     //prepare the inner sensations activity
                     currentState = SessionState.HowDoesMyBodyFeel;
                 };
-                customText.Setup("HowDoesMyBodyFeelC",setupNextPhaseCustomText, GlobalizationService.Instance.Globalize(GlobalizationService.HowDoesMyBodyFeelCText));
+
+				if(StandardConfigurations.IsTheEmoregulatorsAssistantActive)
+				{
+					Bridge.UpdateWorldActivityName(this.activityName, "HowDoesMyBodyFeelC");
+					SessionManager.ActiveActivity = customText;
+					customText.Setup("HowDoesMyBodyFeelC",setupNextPhaseCustomText);
+				}
+				else
+				{
+					customText.Setup("HowDoesMyBodyFeelC",setupNextPhaseCustomText, GlobalizationService.Instance.Globalize(GlobalizationService.HowDoesMyBodyFeelCText));
+				}
+
                 customText.enabled = true;
                 currentState = SessionState.CustomText;
                 break;
+
             case SessionState.HowDoesMyBodyFeel:
                 if (canSkip)
                 {
@@ -666,6 +900,7 @@ public class SessionFourManager : SessionManager {
                     currentState = SessionState.HowDoesMyBodyFeelD;
                 }
                 break;
+
             case SessionState.HowDoesMyBodyFeelD:
                 log.LogInformation("Started HowDoesMyBodyFeel D");
                 setupNextPhaseCustomText = () =>
@@ -674,10 +909,22 @@ public class SessionFourManager : SessionManager {
                     log.LogInformation("Ended HowDoesMyBodyFeel D.");
                     currentState = SessionState.InnerSensationsTitle;
                 };
-                customText.Setup("HowDoesMyBodyFeelD",setupNextPhaseCustomText, GlobalizationService.Instance.Globalize(GlobalizationService.HowDoesMyBodyFeelDText));
+
+				if(StandardConfigurations.IsTheEmoregulatorsAssistantActive)
+				{
+					Bridge.UpdateWorldActivityName(this.activityName, "HowDoesMyBodyFeelD");
+					SessionManager.ActiveActivity = customText;
+					customText.Setup("HowDoesMyBodyFeelD",setupNextPhaseCustomText);
+				}
+				else
+				{
+					customText.Setup("HowDoesMyBodyFeelD",setupNextPhaseCustomText, GlobalizationService.Instance.Globalize(GlobalizationService.HowDoesMyBodyFeelDText));
+				}
+
                 customText.enabled = true;
                 currentState = SessionState.CustomText;
                 break;
+
             case SessionState.InnerSensationsTitle:
                 log.LogInformation("Started InnerSensations Title");
                 canSkip = false;
@@ -690,6 +937,7 @@ public class SessionFourManager : SessionManager {
                 customTitleScript.Setup("InnterSensationsTitle",setupNextPhaseCustomTitle, GlobalizationService.Instance.Globalize(GlobalizationService.InternalSensationsTitle));
                 currentState = SessionState.CustomTitle;
                 break;
+
             case SessionState.InnerSensationsA:
                 //start IBOX inner sensations
                 log.LogInformation("Started ibox inner sensations A.");
@@ -707,10 +955,22 @@ public class SessionFourManager : SessionManager {
                     currentState = SessionState.InnerSensationsB;
                     log.LogInformation("Started ibox inner sensations B.");
                 };
-                customText.Setup("InnerSensationsA",setupNextPhaseCustomText, GlobalizationService.Instance.Globalize(GlobalizationService.InternalSensationsAText));
+
+				if(StandardConfigurations.IsTheEmoregulatorsAssistantActive)
+				{
+					Bridge.UpdateWorldActivityName(this.activityName, "InnerSensationsA");
+					SessionManager.ActiveActivity = customText;
+					customText.Setup("InnerSensationsA",setupNextPhaseCustomText);
+				}
+				else
+				{
+					customText.Setup("InnerSensationsA",setupNextPhaseCustomText, GlobalizationService.Instance.Globalize(GlobalizationService.InternalSensationsAText));
+				}
+                
                 customText.enabled = true;
                 currentState = SessionState.CustomText;
                 break;
+
             case SessionState.InnerSensationsB:
                 if (canSkip)
                 {
@@ -724,6 +984,7 @@ public class SessionFourManager : SessionManager {
 
                 }
                 break;
+
             case SessionState.ClosingSessionTitle:
                 UIManagerScript.DisableSkipping();
                 log.LogInformation("Started ClosingSession Title.");
@@ -734,7 +995,18 @@ public class SessionFourManager : SessionManager {
                     canSkip = false;
                     UIManagerScript.EnableSkipping();
                     log.LogInformation("Started Closing MeMeter");
-                    memeter.instructions = GlobalizationService.Instance.Globalize(GlobalizationService.MeMeterClosingText);
+
+					if(StandardConfigurations.IsTheEmoregulatorsAssistantActive)
+					{
+					Bridge.UpdateWorldActivityName(this.activityName, "MeMeterClosing");
+						SessionManager.ActiveActivity = memeter;
+						this.memeter.Setup();
+					}
+					else
+					{
+						memeter.instructions = GlobalizationService.Instance.Globalize(GlobalizationService.MeMeterClosingText);
+					} 
+
                     memeter.showInstructions = true;
                     memeter.Setup("ClosingMeMeter");
                     memeter.enabled = true;
@@ -744,6 +1016,7 @@ public class SessionFourManager : SessionManager {
                 customTitleScript.Setup("ClosingOfSessionTitle",setupNextPhaseCustomTitle, GlobalizationService.Instance.Globalize(GlobalizationService.ClosingOfSessionTitle));
                 currentState = SessionState.CustomTitle;
                 break;
+
             case SessionState.ClosingMeMeter:
                 if (canSkip)
                 {
@@ -755,6 +1028,7 @@ public class SessionFourManager : SessionManager {
                     currentState = SessionState.ClosingSessionA;
                 }
                 break;
+
             case SessionState.ClosingSessionA:
                 log.LogInformation("Started Closing Session A");
 
@@ -766,22 +1040,45 @@ public class SessionFourManager : SessionManager {
                     log.LogInformation("Started Closing Candle activity");
                     candle.waitClickToClose = true;
                     candle.noInstructions = false;
-                    candle.instructions = GlobalizationService.Instance.Globalize(GlobalizationService.ClosingOfSessionCandleText);
+
+					if(StandardConfigurations.IsTheEmoregulatorsAssistantActive)
+					{
+						Bridge.UpdateWorldActivityName(this.activityName, "ClosingOfSessionCandle");
+						this.candle.Setup();
+						SessionManager.ActiveActivity = candle;
+					}
+					else
+					{
+						candle.instructions = GlobalizationService.Instance.Globalize(GlobalizationService.ClosingOfSessionCandleText);
+					}
+
                     candle.isClosing = true;
                     candle.Setup("ClosingCandle");
                     candle.enabled = true;
                     currentState = SessionState.ClosingCandle;
                 };
-                customText.Setup("ClosingOfSessionA",setupNextPhaseCustomText, 
-                    new []
-                    {
-                        new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ClosingOfSessionA1Text)),
-                        new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ClosingOfSessionA2Text)),
-                        new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ClosingOfSessionA3Text))
-                    });
+
+				if(StandardConfigurations.IsTheEmoregulatorsAssistantActive)
+				{
+					Bridge.UpdateWorldActivityName(this.activityName, "ClosingOfSessionA");
+					SessionManager.ActiveActivity = customText;
+					customText.Setup("ClosingOfSessionA",setupNextPhaseCustomText);
+				}
+				else
+				{
+					customText.Setup("ClosingOfSessionA",setupNextPhaseCustomText, 
+					                 new []
+					                 {
+						new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ClosingOfSessionA1Text)),
+						new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ClosingOfSessionA2Text)),
+						new Instruction(GlobalizationService.Instance.Globalize(GlobalizationService.ClosingOfSessionA3Text))
+					});
+				}
+                
                 customText.enabled = true;
                 currentState = SessionState.CustomText;
                 break;
+
             case SessionState.ClosingCandle:
                 if (candle.CanContinue)
                 {
@@ -802,12 +1099,24 @@ public class SessionFourManager : SessionManager {
                     CustomTextWithImage.ImageScale = 1.0f;
                     CustomTextWithImage.ShowImageLabel = true;
                     CustomTextWithImage.ImageLabel = SessionManager.PlayerScore + "/100 Points";
-                    CustomTextWithImage.Setup("ClosingOfSessionC",setupNextPhaseCustomText, () => this.ApplauseSound.Play(), GlobalizationService.Instance.Globalize(GlobalizationService.ClosingOfSessionCText));
-                    CustomTextWithImage.MinimumWaitTime = 0;
+
+					if(StandardConfigurations.IsTheEmoregulatorsAssistantActive)
+					{
+						Bridge.UpdateWorldActivityName(this.activityName, "ClosingOfSessionC");
+						SessionManager.ActiveActivity = CustomTextWithImage;
+						CustomTextWithImage.Setup("ClosingOfSessionC",setupNextPhaseCustomText,() => this.ApplauseSound.Play());
+					}
+					else
+					{
+						CustomTextWithImage.Setup("ClosingOfSessionC",setupNextPhaseCustomText, () => this.ApplauseSound.Play(), GlobalizationService.Instance.Globalize(GlobalizationService.ClosingOfSessionCText));
+					}                   
+
+					CustomTextWithImage.MinimumWaitTime = 0;
                     CustomTextWithImage.enabled = true;
                     currentState = SessionState.CustomTextWithImage;
                 }
                 break;
+
             case SessionState.ProgressiveMuscleRelaxation:
                 if (canSkip)
                 {

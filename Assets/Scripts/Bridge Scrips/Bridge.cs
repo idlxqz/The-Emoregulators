@@ -7,11 +7,23 @@ using ION.Core.Extensions;
 using ION.Meta;
 using FAtiMA.RemoteAgent;
 
-public static class Bridge {
+using System.ComponentModel;
+
+public class Bridge : MonoBehaviour {
 
 	//Dataflow objects
 	//public SessionManager SessionManager { get; set; }
 	//public GameObject TheEmoregulatorsAssistant { get; set; }
+
+	//Workflow variables
+
+	//Write
+	//Say
+
+	//Unity Methods
+	public void Start()
+	{
+	}
 
 	//Dataflow from SessionManager to FAtiMA
 
@@ -29,30 +41,13 @@ public static class Bridge {
 
 	//Dataflow from FAtiMA to SessionManager
 
-	public static void Write(string activityName, string sentenceCode, bool isMultiLine)
+	public static void Write(string activityName, string sentenceCode, int waitTime, bool isMultiLine)
 	{
 		//Inform SessionManager to write a specific string on board
-		CustomTextScript activeActivity = (CustomTextScript)SessionManager.ActiveActivity;
+		//StartCoroutine((new Bridge()).WaitAndWrite(sentenceCode,waitTime,isMultiLine));
+		Activity activeActivity = SessionManager.ActiveActivity;
+		activeActivity.WriteInstruction (GlobalizationService.Instance.Globalize (sentenceCode), isMultiLine);
 
-		if (!activeActivity.IsMultiLineSet) 
-		{
-			activeActivity.IsMultiLine = isMultiLine;
-
-			if(isMultiLine)
-			{
-				activeActivity.DefineConfigurationAlignment(TextAnchor.UpperLeft);
-			}
-			else
-			{
-				activeActivity.DefineConfigurationAlignment(TextAnchor.MiddleLeft);
-			}
-
-			activeActivity.IsMultiLineSet = true;
-		}
-		
-		activeActivity.SetCurrentInstructions (activeActivity.GetCurrentInstructions () + GlobalizationService.Instance.Globalize(sentenceCode));
-		activeActivity.SetFullInstructions (activeActivity.GetCurrentInstructions ());
-		activeActivity.SetTimeStart (Time.time);
 	}
 
 	public static void Say(string activityName, string sentenceCode)
@@ -63,12 +58,10 @@ public static class Bridge {
 	public static void PassiveAssistanceCompleted(string activityName)
 	{
 		//Enable the possibility of continue in the active activity
-		CustomTextScript activeActivity = (CustomTextScript)SessionManager.ActiveActivity;
+		Activity activeActivity = SessionManager.ActiveActivity;
 
-		if (activeActivity.IsMultiLine)
-			activeActivity.EnableEnd ();
-		else
-			activeActivity.SetMoreInstructions (false);
+		activeActivity.EnableEnd ();
+	
 	}
 
 
