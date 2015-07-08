@@ -121,6 +121,7 @@ public class ActiveShakingMeditationScript : CustomTextScript {
 		
 		triggeredMusic = true;
 
-		base.EnableEnd ();
+		moreInstructions = false;
+		//base.EnableEnd ();
 	}
 }

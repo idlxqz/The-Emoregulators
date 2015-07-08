@@ -289,7 +289,6 @@
 				<NewEvent occurred="True" subject="SELF" action="Write" target="ClosingOfSessionA" parameters="ClosingOfSessionA1Text,0,true"/>
 				<NewEvent occurred="True" subject="SELF" action="Write" target="ClosingOfSessionA" parameters="ClosingOfSessionA2Text,3,true"/>
 				<NewEvent occurred="True" subject="SELF" action="Write" target="ClosingOfSessionA" parameters="ClosingOfSessionA3Text,3,true"/>
-				<NewEvent occurred="True" subject="SELF" action="Write" target="ClosingOfSessionA" parameters="ClosingOfSessionA4Text,3,true"/>
 			</PreConditions>
 		</Action>
 		

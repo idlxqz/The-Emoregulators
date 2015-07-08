@@ -998,7 +998,7 @@ public class SessionFourManager : SessionManager {
 
 					if(StandardConfigurations.IsTheEmoregulatorsAssistantActive)
 					{
-					Bridge.UpdateWorldActivityName(this.activityName, "MeMeterClosing");
+						Bridge.UpdateWorldActivityName(this.activityName, "MeMeterClosing");
 						SessionManager.ActiveActivity = memeter;
 						this.memeter.Setup();
 					}
@@ -1043,9 +1043,11 @@ public class SessionFourManager : SessionManager {
 
 					if(StandardConfigurations.IsTheEmoregulatorsAssistantActive)
 					{
-						Bridge.UpdateWorldActivityName(this.activityName, "ClosingOfSessionCandle");
-						this.candle.Setup();
 						SessionManager.ActiveActivity = candle;
+						this.candle.Setup();	
+						Bridge.UpdateWorldActivityName(this.activityName, "ClosingOfSessionCandle");
+						
+						
 					}
 					else
 					{
