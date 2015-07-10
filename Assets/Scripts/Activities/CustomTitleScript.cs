@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class CustomTitleScript : Activity {
@@ -59,7 +59,7 @@ public class CustomTitleScript : Activity {
     public void Setup(string description, System.Action _nextPhase, string _title)
     {
         SensorManager.StartNewActivity();
-        this.Description = description;
+        this.Name = description;
         setupNextPhase = _nextPhase;
         this.CanContinue = false;
         title = _title;

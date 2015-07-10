@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 public class GrossBaselineDetection : Activity {
 
@@ -12,7 +12,7 @@ public class GrossBaselineDetection : Activity {
 	// Use this for initialization
 	public override void Start ()
 	{
-	    this.Description = "GrossBaselineDetection";
+	    this.Name = "GrossBaselineDetection";
         currentRenderer = GetComponent<Renderer>();
         played = false;
         this.CanContinue = false;

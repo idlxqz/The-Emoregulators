@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 public class LoadingScreenScript : Activity {
 
@@ -16,7 +16,7 @@ public class LoadingScreenScript : Activity {
 	// Use this for initialization
 	public override void Start ()
 	{
-	    this.Description = "LoadingScreen";
+	    this.Name = "LoadingScreen";
 	    this.loadingScreenDuration = 3;
 	    this.finished = false;
         this.startTime = Time.time;

@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class CandleScript : Activity {
@@ -234,7 +234,7 @@ public class CandleScript : Activity {
 
     public void Setup(string description)
     {
-        this.Description = description;
+        this.Name = description;
         isLit = false;
         previousFrameTimestamp = Time.time;
         lightingUp = true;

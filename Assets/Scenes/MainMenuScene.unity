@@ -2029,10 +2029,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1058638499}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62a3d21807352104195431d15fdd5ee7, type: 3}
+  m_Script: {fileID: 11500000, guid: 811ff3bfd101f824caaa0d2dbccdb485, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ActiveAssistant: 1
+  ActiveAssistant: 0
   TheEmoregulatorsAssistant: {fileID: 2055861824}
   Bridge: {fileID: 162937159}
 --- !u!114 &1058638501
@@ -2695,7 +2695,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1539071724}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f3f828d34cedfc4d97264f526be738c, type: 3}
+  m_Script: {fileID: 11500000, guid: b04eeb8ccc7ee8c4a89f19ffb2c4f59c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1682104515
@@ -2726,7 +2726,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CanContinue: 0
-  Description: 
+  Name: 
+  ScreenName: 
   endlessTitle: 1
   titleDuration: 2
   charLoadInterval: .100000001

@@ -247,7 +247,7 @@ public class SessionOneSimplifiedManager : SessionManager
                     this.helpTextContent =
                         GlobalizationService.Instance.Globalize(GlobalizationService.IntroducingOurselvesBackgroundText);
                     currentState = SessionState.IntroducingOurselvesBackground;
-                    backgroundChooserScript.Description = "BackgroundSelection";
+                    backgroundChooserScript.Name = "BackgroundSelection";
                     backgroundChooserScript.backgroundSetter = SetBackground;
                     backgroundChooserScript.enabled = true;
                     UIManagerScript.EnableSkipping();
@@ -337,7 +337,7 @@ public class SessionOneSimplifiedManager : SessionManager
                     log.LogInformation("Started IBox introduction A.");
                     activityName = GlobalizationService.Instance.Globalize(GlobalizationService.IBoxIntroductionTitle);
                     ibox.enabled = true;
-                    ibox.Description = "IBoxIntroductionA";
+                    ibox.Name = "IBoxIntroductionA";
 
 					if(StandardConfigurations.IsTheEmoregulatorsAssistantActive)
 					{
@@ -382,7 +382,7 @@ public class SessionOneSimplifiedManager : SessionManager
                         this.helpTextContent = GlobalizationService.Instance.Globalize(GlobalizationService.IBoxIntroductionBText);
                         //prepare the inner sensations activity
                         this.innerSensationsScript.enabled = true;
-                        this.innerSensationsScript.Description = "IBoxSelection";
+                        this.innerSensationsScript.Name = "IBoxSelection";
                         currentState = SessionState.InnerSensationsB;
                         log.LogInformation("Started ibox selection.");
                         

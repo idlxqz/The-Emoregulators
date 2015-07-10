@@ -234,7 +234,7 @@ public class SessionFourManager : SessionManager {
 
 					memeter.showInstructions = true;
                     memeter.enabled = true;
-                    memeter.Description = "MeMeter";
+                    memeter.Name = "MeMeter";
                     currentState = SessionState.MeMeter;
                     proceed = false;
                 };
@@ -951,7 +951,7 @@ public class SessionFourManager : SessionManager {
                     this.helpTextContent = GlobalizationService.Instance.Globalize(GlobalizationService.InternalSensationsAText);
                     //prepare the inner sensations activity
                     innerSensations.enabled = true;
-                    innerSensations.Description = "InnerSensationsB";
+                    innerSensations.Name = "InnerSensationsB";
                     currentState = SessionState.InnerSensationsB;
                     log.LogInformation("Started ibox inner sensations B.");
                 };

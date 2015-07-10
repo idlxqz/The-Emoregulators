@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using Assets.Scripts;
 using UnityEngine;
 
@@ -123,7 +123,7 @@ public class CustomTextScript : Activity {
 
     public virtual void Setup(string description, System.Action nextPhaseSetup,  Instruction[] newInstructions)
     {
-        this.Description = description;
+        this.Name = description;
         this.SensorManager.StartNewActivity();
 
         this.CanContinue = false;
@@ -212,7 +212,7 @@ public class CustomTextScript : Activity {
 	public void Setup(string description, System.Action nextPhaseSetup)
 	{
 
-		this.Description = description;
+		this.Name = description;
 		this.SensorManager.StartNewActivity();
 		
 		this.CanContinue = false;

@@ -242,7 +242,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 83131277}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f3f828d34cedfc4d97264f526be738c, type: 3}
+  m_Script: {fileID: 11500000, guid: b04eeb8ccc7ee8c4a89f19ffb2c4f59c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &115987126
@@ -290,7 +290,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CanContinue: 0
-  Description: 
+  Name: 
+  ScreenName: 
   MinimumWaitTime: 0
   Image: {fileID: 2800000, guid: f6dfc4850a078db4c8e6f9f1e42f1878, type: 3}
   ImageScale: .5
@@ -1142,7 +1143,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CanContinue: 0
-  Description: 
+  Name: 
+  ScreenName: 
   MinimumWaitTime: 0
 --- !u!1 &854702300
 GameObject:
@@ -1748,7 +1750,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CanContinue: 0
-  Description: 
+  Name: 
+  ScreenName: 
   isLit: 0
   simpleCandleAnimation: 0
   noInstructions: 0
@@ -1902,7 +1905,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CanContinue: 0
-  Description: 
+  Name: 
+  ScreenName: 
   swatches:
   - {fileID: 2800000, guid: 97cca27d87445e54eafbbc3b086140f1, type: 3}
   - {fileID: 2800000, guid: 7afa94f86b9a7e647b4566fb7be0ffbf, type: 3}
@@ -1970,7 +1974,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CanContinue: 0
-  Description: 
+  Name: 
+  ScreenName: 
   secondsToCloseSession: 20
   ibox: {fileID: 2800000, guid: 9f73edbd988684848a66a114908d0bc6, type: 3}
   heartRate: {fileID: 2800000, guid: ddba6e58929b6754584f725ecc9abc47, type: 3}
@@ -2111,7 +2116,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CanContinue: 0
-  Description: 
+  Name: 
+  ScreenName: 
   finished: 0
   loadingScreenDuration: 2
   TitleFormat:
@@ -2517,7 +2523,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CanContinue: 0
-  Description: 
+  Name: 
+  ScreenName: 
   backgrounds: []
   lateraOffset: 50
   itemSpacing: 10
@@ -2683,7 +2690,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CanContinue: 0
-  Description: 
+  Name: 
+  ScreenName: 
   MinimumWaitTime: 5
 --- !u!1 &1826750123
 GameObject:
@@ -2796,7 +2804,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CanContinue: 0
-  Description: 
+  Name: 
+  ScreenName: 
   endlessTitle: 0
   titleDuration: 2
   charLoadInterval: .100000001

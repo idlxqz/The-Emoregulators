@@ -165,7 +165,7 @@ public class MEMeterScript : Activity {
 
     public void Setup(string description)
     {
-        this.Description = description;
+		this.Name = description;
         finalWaitStart = 0;
         isSelected = false;
         this.CanContinue = false;

@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 public class IntroducingOurselvesScript : CustomTextScript
 {
@@ -15,7 +15,7 @@ public class IntroducingOurselvesScript : CustomTextScript
 
     public void Setup(string description, string _instructions)
     {
-        this.Description = description;
+        this.Name = description;
         UIManagerScript.DisableSkipping();
         this.currentInstructions = _instructions;
         this.SensorManager.StartNewActivity();

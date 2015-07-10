@@ -247,7 +247,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CanContinue: 0
-  Description: 
+  Name: 
+  ScreenName: 
   MinimumWaitTime: 0
 --- !u!1 &860576901
 GameObject:
@@ -651,7 +652,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1411622763}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f3f828d34cedfc4d97264f526be738c, type: 3}
+  m_Script: {fileID: 11500000, guid: b04eeb8ccc7ee8c4a89f19ffb2c4f59c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1524352615
@@ -761,7 +762,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1661126520}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a97063887d6aea349af281c2bb30bf39, type: 3}
+  m_Script: {fileID: 11500000, guid: 399e137028eaf3f44951484b68f9d2a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   GrossBaselineScript: {fileID: 1834824334}
@@ -798,7 +799,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CanContinue: 0
-  Description: 
+  Name: 
+  ScreenName: 
   currentRenderer: {fileID: 0}
   movTexture: {fileID: 15200000, guid: 8fb8cb75c29236c4aa7c225f00b5c378, type: 3}
   played: 0
