@@ -17,7 +17,8 @@ public class StandardConfigurations : MonoBehaviour
     public GUIStyle ScoreFormat;
     public GUIStyle HelpFormat;
 
-	public static bool IsTheEmoregulatorsAssistantActive;
+	public static bool IsTheEmoregulatorsAssistantActive; 
+	
 
     public void Awake()
     {
