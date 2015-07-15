@@ -11,6 +11,15 @@ public class DebugScript : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
+		//Enable or disable Active Debug
+		ForwardButton.SetActive(ActivateForwardDebug);
+
+		if (!ActivateForwardDebug) 
+		{
+			return;
+		}		
+
+
 		//Change ForwardButton to an instance of the actual button (so that it doesn't die between scenes
 		ForwardButton = Instantiate (ForwardButton, ForwardButton.transform.localPosition, ForwardButton.transform.rotation) as GameObject;
 		ForwardButton.transform.parent = null;
